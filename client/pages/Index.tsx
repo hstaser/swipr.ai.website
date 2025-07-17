@@ -21,6 +21,7 @@ import {
   Settings,
   Sparkles,
   Zap,
+  Smartphone,
 } from "lucide-react";
 import {
   ContactRequest,
