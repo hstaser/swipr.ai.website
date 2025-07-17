@@ -1,0 +1,76 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  ArrowLeft,
+  Search,
+  CheckCircle,
+  Clock,
+  Eye,
+  Users,
+  X,
+  UserCheck,
+  Mail,
+  Phone,
+  Calendar,
+  Briefcase,
+  Loader2,
+} from "lucide-react";
+
+const STATUS_INFO = {
+  pending: {
+    icon: Clock,
+    color: "text-yellow-600",
+    bgColor: "bg-yellow-50",
+    borderColor: "border-yellow-200",
+    title: "Application Received",
+    description:
+      "We've received your application and it's in our review queue. We'll start reviewing it soon!",
+  },
+  reviewing: {
+    icon: Eye,
+    color: "text-blue-600",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200",
+    title: "Under Review",
+    description:
+      "Our team is currently reviewing your application and qualifications. This usually takes 3-5 business days.",
+  },
+  interviewing: {
+    icon: Users,
+    color: "text-purple-600",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200",
+    title: "Interview Process",
+    description:
+      "Congratulations! You've moved to the interview stage. Someone from our team will contact you soon.",
+  },
+  rejected: {
+    icon: X,
+    color: "text-red-600",
+    bgColor: "bg-red-50",
+    borderColor: "border-red-200",
+    title: "Not Selected",
+    description:
+      "Thank you for your interest. While we won't be moving forward with your application at this time, we encourage you to apply for future openings.",
+  },
+  hired: {
+    icon: UserCheck,
+    color: "text-green-600",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-200",
+    title: "Congratulations!",
+    description:
+      "We're excited to offer you a position at swipr.ai! Someone from our team will contact you with next steps.",
+  },
+};
+
+export default function TrackApplication() {\n  const [applicationId, setApplicationId] = useState(\"\");\n  const [application, setApplication] = useState<any>(null);\n  const [isLoading, setIsLoading] = useState(false);\n  const [error, setError] = useState(\"\");\n\n  const searchApplication = async () => {\n    if (!applicationId.trim()) {\n      setError(\"Please enter an application ID\");\n      return;\n    }\n\n    setIsLoading(true);\n    setError(\"\");\n    setApplication(null);\n\n    try {\n      // Simulate API call (in a real app, you'd have a backend endpoint for this)\n      // For demo purposes, we'll simulate finding an application\n      setTimeout(() => {\n        if (applicationId.startsWith(\"APP-\")) {\n          setApplication({\n            id: applicationId,\n            firstName: \"John\",\n            lastName: \"Doe\",\n            email: \"john.doe@example.com\",\n            phone: \"+1 (555) 123-4567\",\n            position: \"backend-engineer\",\n            status: \"reviewing\",\n            appliedAt: new Date().toISOString(),\n            experience: \"3-4 years\",\n          });\n        } else {\n          setError(\"Application ID not found. Please check your ID and try again.\");\n        }\n        setIsLoading(false);\n      }, 1500);\n    } catch (err) {\n      setError(\"Something went wrong. Please try again later.\");\n      setIsLoading(false);\n    }\n  };\n\n  const handleKeyPress = (e: React.KeyboardEvent) => {\n    if (e.key === \"Enter\") {\n      searchApplication();\n    }\n  };\n\n  return (\n    <div className=\"min-h-screen bg-gradient-to-br from-slate-50 to-slate-100\">\n      {/* Header */}\n      <header className=\"bg-white shadow-sm\">\n        <div className=\"container mx-auto px-6 py-4\">\n          <div className=\"flex items-center justify-between\">\n            <Link to=\"/\" className=\"text-2xl font-bold text-blue-600\">\n              swipr.ai\n            </Link>\n            <Link to=\"/\">\n              <Button variant=\"ghost\">\n                <ArrowLeft className=\"h-4 w-4 mr-2\" />\n                Back to Home\n              </Button>\n            </Link>\n          </div>\n        </div>\n      </header>\n\n      <div className=\"container mx-auto px-6 py-12\">\n        <div className=\"max-w-2xl mx-auto\">\n          {/* Header */}\n          <div className=\"text-center mb-12\">\n            <h1 className=\"text-4xl font-bold text-slate-800 mb-4\">\n              Track Your Application\n            </h1>\n            <p className=\"text-xl text-slate-600\">\n              Enter your application ID to check the status of your job application\n            </p>\n          </div>\n\n          {/* Search */}\n          <Card className=\"border-0 shadow-lg mb-8\">\n            <CardHeader>\n              <CardTitle className=\"flex items-center\">\n                <Search className=\"h-5 w-5 mr-2 text-blue-600\" />\n                Application Lookup\n              </CardTitle>\n              <CardDescription>\n                Your application ID was provided when you submitted your application (e.g., APP-1234567890-abc123)\n              </CardDescription>\n            </CardHeader>\n            <CardContent className=\"space-y-4\">\n              <div className=\"flex space-x-4\">\n                <Input\n                  placeholder=\"Enter your application ID\"\n                  value={applicationId}\n                  onChange={(e) => setApplicationId(e.target.value)}\n                  onKeyPress={handleKeyPress}\n                  className=\"h-12\"\n                />\n                <Button\n                  onClick={searchApplication}\n                  disabled={isLoading}\n                  className=\"bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 px-8\"\n                >\n                  {isLoading ? (\n                    <Loader2 className=\"h-4 w-4 animate-spin\" />\n                  ) : (\n                    <>Search</>\n                  )}\n                </Button>\n              </div>\n              {error && (\n                <p className=\"text-red-600 text-sm bg-red-50 p-3 rounded\">\n                  {error}\n                </p>\n              )}\n            </CardContent>\n          </Card>\n\n          {/* Application Results */}\n          {application && (\n            <div className=\"space-y-6\">\n              {/* Status Card */}\n              <Card className={`border-2 ${STATUS_INFO[application.status as keyof typeof STATUS_INFO].borderColor} ${STATUS_INFO[application.status as keyof typeof STATUS_INFO].bgColor}`}>\n                <CardContent className=\"p-6\">\n                  <div className=\"flex items-center space-x-4\">\n                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${STATUS_INFO[application.status as keyof typeof STATUS_INFO].bgColor} border-2 ${STATUS_INFO[application.status as keyof typeof STATUS_INFO].borderColor}`}>\n                      {React.createElement(\n                        STATUS_INFO[application.status as keyof typeof STATUS_INFO].icon,\n                        {\n                          className: `h-8 w-8 ${STATUS_INFO[application.status as keyof typeof STATUS_INFO].color}`,\n                        },\n                      )}\n                    </div>\n                    <div className=\"flex-1\">\n                      <h3 className={`text-xl font-bold ${STATUS_INFO[application.status as keyof typeof STATUS_INFO].color} mb-2`}>\n                        {STATUS_INFO[application.status as keyof typeof STATUS_INFO].title}\n                      </h3>\n                      <p className=\"text-slate-700\">\n                        {STATUS_INFO[application.status as keyof typeof STATUS_INFO].description}\n                      </p>\n                    </div>\n                  </div>\n                </CardContent>\n              </Card>\n\n              {/* Application Details */}\n              <Card className=\"border-0 shadow-lg\">\n                <CardHeader>\n                  <CardTitle>Application Details</CardTitle>\n                </CardHeader>\n                <CardContent className=\"space-y-4\">\n                  <div className=\"grid md:grid-cols-2 gap-4\">\n                    <div className=\"flex items-center space-x-3\">\n                      <div className=\"w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center\">\n                        <span className=\"text-white font-bold text-sm\">\n                          {application.firstName[0]}{application.lastName[0]}\n                        </span>\n                      </div>\n                      <div>\n                        <p className=\"font-medium\">\n                          {application.firstName} {application.lastName}\n                        </p>\n                        <p className=\"text-sm text-slate-500\">Applicant</p>\n                      </div>\n                    </div>\n                    <div className=\"flex items-center space-x-3\">\n                      <Briefcase className=\"h-5 w-5 text-slate-500\" />\n                      <div>\n                        <p className=\"font-medium\">\n                          {application.position\n                            .replace(\"-\", \" \")\n                            .replace(/\\b\\w/g, (l: string) => l.toUpperCase())}\n                        </p>\n                        <p className=\"text-sm text-slate-500\">Position</p>\n                      </div>\n                    </div>\n                    <div className=\"flex items-center space-x-3\">\n                      <Mail className=\"h-5 w-5 text-slate-500\" />\n                      <div>\n                        <p className=\"font-medium\">{application.email}</p>\n                        <p className=\"text-sm text-slate-500\">Email</p>\n                      </div>\n                    </div>\n                    <div className=\"flex items-center space-x-3\">\n                      <Calendar className=\"h-5 w-5 text-slate-500\" />\n                      <div>\n                        <p className=\"font-medium\">\n                          {new Date(application.appliedAt).toLocaleDateString()}\n                        </p>\n                        <p className=\"text-sm text-slate-500\">Applied Date</p>\n                      </div>\n                    </div>\n                  </div>\n                  \n                  <div className=\"bg-slate-50 p-4 rounded-lg\">\n                    <p className=\"text-sm text-slate-600 mb-2\">Application ID</p>\n                    <p className=\"font-mono text-sm bg-white p-2 rounded border\">\n                      {application.id}\n                    </p>\n                  </div>\n                </CardContent>\n              </Card>\n\n              {/* Next Steps */}\n              <Card className=\"border-0 shadow-lg\">\n                <CardHeader>\n                  <CardTitle>What's Next?</CardTitle>\n                </CardHeader>\n                <CardContent>\n                  {application.status === \"pending\" && (\n                    <p className=\"text-slate-600\">\n                      We'll start reviewing your application soon. You'll receive an email update when the status changes.\n                    </p>\n                  )}\n                  {application.status === \"reviewing\" && (\n                    <p className=\"text-slate-600\">\n                      Our hiring team is carefully reviewing your qualifications. This process typically takes 3-5 business days. You'll hear from us soon!\n                    </p>\n                  )}\n                  {application.status === \"interviewing\" && (\n                    <p className=\"text-slate-600\">\n                      Congratulations on advancing to the interview stage! A member of our team will contact you via email or phone to schedule your interview.\n                    </p>\n                  )}\n                  {application.status === \"rejected\" && (\n                    <div className=\"space-y-3\">\n                      <p className=\"text-slate-600\">\n                        While we won't be moving forward with your application for this position, we encourage you to apply for other roles that match your skills.\n                      </p>\n                      <Link to=\"/#open-roles\">\n                        <Button variant=\"outline\">\n                          View Other Open Positions\n                        </Button>\n                      </Link>\n                    </div>\n                  )}\n                  {application.status === \"hired\" && (\n                    <p className=\"text-slate-600\">\n                      Welcome to the swipr.ai team! Our HR team will contact you within 24 hours with your offer details and next steps.\n                    </p>\n                  )}\n                </CardContent>\n              </Card>\n\n              {/* Contact */}\n              <Card className=\"border-0 shadow-lg\">\n                <CardHeader>\n                  <CardTitle>Have Questions?</CardTitle>\n                </CardHeader>\n                <CardContent>\n                  <p className=\"text-slate-600 mb-4\">\n                    If you have any questions about your application or the hiring process, feel free to reach out to us.\n                  </p>\n                  <Link to=\"/#contact\">\n                    <Button variant=\"outline\">\n                      <Mail className=\"h-4 w-4 mr-2\" />\n                      Contact Us\n                    </Button>\n                  </Link>\n                </CardContent>\n              </Card>\n            </div>\n          )}\n\n          {/* Help Section */}\n          {!application && !isLoading && (\n            <Card className=\"border-0 shadow-lg\">\n              <CardHeader>\n                <CardTitle>Need Help?</CardTitle>\n              </CardHeader>\n              <CardContent className=\"space-y-4\">\n                <div>\n                  <h4 className=\"font-medium text-slate-800 mb-2\">\n                    Can't find your application ID?\n                  </h4>\n                  <p className=\"text-slate-600 text-sm\">\n                    Your application ID was sent to your email when you submitted your application. \n                    It starts with \"APP-\" followed by numbers and letters.\n                  </p>\n                </div>\n                <div>\n                  <h4 className=\"font-medium text-slate-800 mb-2\">\n                    Haven't applied yet?\n                  </h4>\n                  <p className=\"text-slate-600 text-sm mb-3\">\n                    Check out our open positions and submit your application.\n                  </p>\n                  <Link to=\"/#open-roles\">\n                    <Button variant=\"outline\" size=\"sm\">\n                      View Open Positions\n                    </Button>\n                  </Link>\n                </div>\n              </CardContent>\n            </Card>\n          )}\n        </div>\n      </div>\n    </div>\n  );\n}
