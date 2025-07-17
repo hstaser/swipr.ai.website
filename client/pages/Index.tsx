@@ -288,12 +288,12 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Architect high-performance infrastructure for our algorithmic
-                  trading platform. Expertise in Python/Go, distributed systems,
-                  and financial data processing.
+                  Build scalable, high-performance systems that power our
+                  investment platform. Work with cutting-edge technology to help
+                  users make better investment decisions.
                 </p>
                 <div className="text-sm text-blue-600 bg-blue-50 p-3 rounded mb-6">
-                  • Competitive equity package
+                  • Competitive equity package with significant upside
                 </div>
                 <Link to="/apply?position=backend-engineer">
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200">
