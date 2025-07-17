@@ -66,6 +66,7 @@ const JobApplicationSchema = z.object({
     "backend-engineer",
     "ai-developer",
     "quantitative-analyst",
+    "mobile-app-developer",
   ]),
   experience: z.string().min(1, "Experience level is required"),
   coverLetter: z.string().optional(),
