@@ -1,7 +1,11 @@
 // Utility to suppress ResizeObserver loop warnings
 // These warnings are typically harmless and caused by rapid DOM changes
+// Common in React apps with charts, responsive components, or strict mode
 
 let isErrorHandlerSetup = false;
+
+// Debounce ResizeObserver callbacks to prevent loops
+let resizeObserverTimeout: number | null = null;
 
 export function setupResizeObserverErrorHandler() {
   if (isErrorHandlerSetup) return;
