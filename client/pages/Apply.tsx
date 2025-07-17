@@ -342,39 +342,29 @@ export default function Apply() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-blue-600">
-              swipr.ai
-            </Link>
-            <div className="flex items-center space-x-4">
-              {saveStatus && (
-                <span className="text-sm text-slate-500 flex items-center">
-                  {saveStatus === "saving" ? (
-                    <>
-                      <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
-                      Draft saved
-                    </>
-                  )}
-                </span>
+      {/* Navigation */}
+      <Navigation />
+
+      {/* Save Status Bar */}
+      {saveStatus && (
+        <div className="bg-white border-b">
+          <div className="container mx-auto px-6 py-2">
+            <span className="text-sm text-slate-500 flex items-center justify-center">
+              {saveStatus === "saving" ? (
+                <>
+                  <Loader2 className="h-3 w-3 animate-spin mr-1" />
+                  Saving draft...
+                </>
+              ) : (
+                <>
+                  <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
+                  Draft saved automatically
+                </>
               )}
-              <Link to="/">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back
-                </Button>
-              </Link>
-            </div>
+            </span>
           </div>
         </div>
-      </header>
+      )}
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600">
