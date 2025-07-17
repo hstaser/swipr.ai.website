@@ -293,9 +293,7 @@ export default function Index() {
                   investment platform. Work with cutting-edge technology to help
                   users make better investment decisions.
                 </p>
-                <div className="text-sm text-blue-600 bg-blue-50 p-3 rounded mb-6">
-                  • Competitive equity package with significant upside
-                </div>
+
                 <Link to="/apply?position=backend-engineer">
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
@@ -320,9 +318,7 @@ export default function Index() {
                   portfolios. Use machine learning to make complex financial
                   data simple and actionable.
                 </p>
-                <div className="text-sm text-purple-600 bg-purple-50 p-3 rounded mb-6">
-                  • Significant equity package with performance incentives
-                </div>
+
                 <Link to="/apply?position=ai-developer">
                   <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
@@ -347,9 +343,7 @@ export default function Index() {
                   risk. Help users achieve better returns while keeping their
                   investments safe.
                 </p>
-                <div className="text-sm text-teal-600 bg-teal-50 p-3 rounded mb-6">
-                  • Equity-focused compensation with performance bonuses
-                </div>
+
                 <Link to="/apply?position=quantitative-analyst">
                   <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
@@ -374,9 +368,7 @@ export default function Index() {
                   management intuitive and accessible. Build complex financial
                   apps with smooth performance.
                 </p>
-                <div className="text-sm text-orange-600 bg-orange-50 p-3 rounded mb-6">
-                  • Significant equity package with mobile performance bonuses
-                </div>
+
                 <Link to="/apply?position=mobile-app-developer">
                   <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
