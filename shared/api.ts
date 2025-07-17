@@ -52,7 +52,6 @@ export interface JobApplicationRequest {
   linkedinUrl?: string;
   portfolioUrl?: string;
   startDate: string;
-  salary?: string;
 }
 
 export interface JobApplicationResponse {
