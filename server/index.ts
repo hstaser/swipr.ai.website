@@ -29,5 +29,13 @@ export function createServer() {
   app.post("/api/contact", handleContact);
   app.post("/api/waitlist", handleWaitlistSignup);
 
+  // Job application routes
+  app.post("/api/jobs/apply", upload.single("resume"), handleJobApplication);
+  app.get("/api/jobs/applications", getApplications);
+  app.patch(
+    "/api/jobs/applications/:applicationId/status",
+    updateApplicationStatus,
+  );
+
   return app;
 }
