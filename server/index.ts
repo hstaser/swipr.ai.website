@@ -9,6 +9,7 @@ import {
   getApplicationDetails,
   updateApplicationStatus,
   downloadResume,
+  lookupApplication,
   upload,
 } from "./routes/jobs";
 import {
