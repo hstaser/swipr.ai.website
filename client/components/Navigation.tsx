@@ -188,7 +188,13 @@ export function Navigation({
                 <a
                   href="#open-roles"
                   className={`block px-4 py-2 ${textColor} ${hoverColor} ${isTransparent ? "hover:bg-white/10" : "hover:bg-slate-50"} rounded-lg transition-colors font-medium`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMobileMenuOpen(false);
+                    document
+                      .getElementById("open-roles")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
                   <div className="flex items-center space-x-3">
                     <Users className="h-4 w-4" />
