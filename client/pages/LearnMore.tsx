@@ -38,18 +38,21 @@ export default function LearnMore() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-800 mb-6">
-              The Future of Stock Investing
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600">
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="relative container mx-auto px-6 py-20 text-center text-white">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+              The Future of Intelligent Investing
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed mb-8">
-              Discover how swipr.ai is revolutionizing investment decisions
-              through AI-powered analysis and intuitive design.
+            <p className="text-xl text-blue-100 leading-relaxed mb-8 max-w-3xl mx-auto">
+              Discover how swipr.ai democratizes institutional-grade investment
+              strategies through AI-powered portfolio optimization and risk
+              management.
             </p>
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-50 to-transparent" />
       </section>
 
       {/* Problem & Solution */}
