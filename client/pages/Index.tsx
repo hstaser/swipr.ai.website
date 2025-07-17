@@ -48,7 +48,6 @@ export default function Index() {
   const [isSubmittingWaitlist, setIsSubmittingWaitlist] = useState(false);
   const [contactMessage, setContactMessage] = useState("");
   const [waitlistMessage, setWaitlistMessage] = useState("");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const {
     trackApplyClick,
