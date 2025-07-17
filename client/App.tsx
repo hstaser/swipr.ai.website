@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import LearnMore from "./pages/LearnMore";
 import Apply from "./pages/Apply";
 import TrackApplication from "./pages/TrackApplication";
+import Privacy from "./pages/Privacy";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
