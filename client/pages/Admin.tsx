@@ -480,6 +480,9 @@ export default function Admin() {
               <option value="backend-engineer">Backend Engineer</option>
               <option value="ai-developer">AI Developer</option>
               <option value="quantitative-analyst">Quantitative Analyst</option>
+              <option value="mobile-app-developer">
+                Senior Mobile App Developer
+              </option>
             </select>
           </CardContent>
         </Card>
