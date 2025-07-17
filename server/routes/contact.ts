@@ -19,22 +19,15 @@ export const handleContact: RequestHandler = async (req, res) => {
     // Validate the request body
     const validatedData = ContactSchema.parse(req.body);
 
-    // Store message in admin dashboard (call the analytics route)
+    // Store message in admin dashboard (import and call directly to avoid fetch loop)
     try {
-      const storeResponse = await fetch(
-        `${req.protocol}://${req.get("host")}/api/admin/messages`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(validatedData),
-        },
-      );
+      // Import the store function directly to avoid self-referencing fetch
+      const { storeContactMessage } = await import("./analytics");
+      const mockReq = { body: validatedData } as any;
+      const mockRes = { json: () => {} } as any;
 
-      if (storeResponse.ok) {
-        console.log("📧 Contact message stored in admin dashboard");
-      }
+      storeContactMessage(mockReq, mockRes, () => {});
+      console.log("📧 Contact message stored in admin dashboard");
     } catch (storeError) {
       console.error("Failed to store contact message:", storeError);
       // Don't fail the contact form if storage fails
