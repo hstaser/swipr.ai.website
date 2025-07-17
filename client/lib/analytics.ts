@@ -43,8 +43,12 @@ class Analytics {
       });
       this.isEnabled = true;
     } catch (error) {
-      console.debug("Analytics endpoint not available, disabling tracking");
-      this.isEnabled = false;
+      // For serverless functions, we'll assume they're available
+      // and let individual requests handle failures gracefully
+      console.debug(
+        "Analytics endpoint check failed, but continuing with tracking",
+      );
+      this.isEnabled = true;
     }
   }
 
