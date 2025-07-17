@@ -18,6 +18,9 @@ import {
   Mail,
   MapPin,
   Loader2,
+  Settings,
+  Sparkles,
+  Zap,
 } from "lucide-react";
 import {
   ContactRequest,
@@ -202,9 +205,9 @@ export default function Index() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
               <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <TrendingUp className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-2xl text-slate-800">
@@ -219,9 +222,9 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
               <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Brain className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-2xl text-slate-800">
@@ -236,9 +239,9 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
               <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Users className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-2xl text-slate-800">
@@ -271,7 +274,7 @@ export default function Index() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-xl text-slate-800">
                   Backend Engineer
@@ -287,14 +290,15 @@ export default function Index() {
                   services required.
                 </p>
                 <Link to="/apply?position=backend-engineer">
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
+                    <Sparkles className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-xl text-slate-800">
                   AI Developer
@@ -310,14 +314,15 @@ export default function Index() {
                   markets.
                 </p>
                 <Link to="/apply?position=ai-developer">
-                  <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                  <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
+                    <Zap className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-xl text-slate-800">
                   Quantitative Analyst
@@ -333,8 +338,9 @@ export default function Index() {
                   engineering.
                 </p>
                 <Link to="/apply?position=quantitative-analyst">
-                  <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700">
+                  <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
+                    <TrendingUp className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
@@ -497,6 +503,17 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Admin Access Button */}
+      <Link to="/admin">
+        <Button
+          className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+          size="icon"
+          title="Admin Dashboard"
+        >
+          <Settings className="h-6 w-6" />
+        </Button>
+      </Link>
     </div>
   );
 }
