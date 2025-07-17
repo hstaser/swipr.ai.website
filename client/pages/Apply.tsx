@@ -234,6 +234,11 @@ export default function Apply() {
               business days.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <Link to="/track" className="flex-1">
+                <Button variant="outline" className="w-full">
+                  Track This Application
+                </Button>
+              </Link>
               <Link to="/" className="flex-1">
                 <Button variant="outline" className="w-full">
                   Back to Homepage
