@@ -23,6 +23,11 @@ import {
   Sparkles,
   Zap,
   Smartphone,
+  Menu,
+  X,
+  FileText,
+  BarChart3,
+  Shield,
 } from "lucide-react";
 import {
   ContactRequest,
