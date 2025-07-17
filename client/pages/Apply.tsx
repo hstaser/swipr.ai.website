@@ -21,7 +21,6 @@ import {
   Mail,
   Phone,
   Calendar,
-  DollarSign,
   Briefcase,
   ExternalLink,
 } from "lucide-react";
