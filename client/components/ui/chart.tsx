@@ -44,6 +44,22 @@ const ChartContainer = React.forwardRef<
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
 
+  // Add ResizeObserver error suppression for charts
+  React.useEffect(() => {
+    const handleResizeObserverError = (e: ErrorEvent) => {
+      if (
+        e.message ===
+        "ResizeObserver loop completed with undelivered notifications."
+      ) {
+        e.stopImmediatePropagation();
+        return false;
+      }
+    };
+
+    window.addEventListener("error", handleResizeObserverError);
+    return () => window.removeEventListener("error", handleResizeObserverError);
+  }, []);
+
   return (
     <ChartContext.Provider value={{ config }}>
       <div
@@ -53,6 +69,7 @@ const ChartContainer = React.forwardRef<
           "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
           className,
         )}
+        style={{ contain: "layout style" }} // Prevent layout thrashing
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
