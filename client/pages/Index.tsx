@@ -199,10 +199,10 @@ export default function Index() {
             </h2>
             <p className="text-xl text-slate-600 leading-relaxed">
               swipr.ai transforms complex investment research into streamlined,
-              data-driven decisions. Our AI platform synthesizes fundamental
-              analysis, technical indicators, and market sentiment to deliver
-              personalized investment recommendations tailored to your risk
-              profile and objectives.
+              data-driven decisions. Our AI platform combines fundamental
+              analysis, risk assessment, and market dynamics to deliver
+              personalized investment recommendations that help you build
+              intelligent portfolios.
             </p>
           </div>
 
