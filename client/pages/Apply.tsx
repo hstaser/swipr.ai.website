@@ -101,7 +101,6 @@ export default function Apply() {
     linkedinUrl: "",
     portfolioUrl: "",
     startDate: "",
-    salary: "",
   });
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -332,12 +331,45 @@ export default function Apply() {
             <h1 className="text-4xl font-bold text-slate-800 mb-4">
               Apply for {POSITIONS[position].title}
             </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-6">
               {POSITIONS[position].description}
             </p>
-            <div className="inline-flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-full mt-4">
-              <Briefcase className="h-4 w-4 mr-2" />
-              Full-time • Remote/NYC
+            <div className="space-y-4 max-w-4xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-blue-50 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold text-blue-900 mb-3 flex items-center">
+                    <Briefcase className="h-5 w-5 mr-2" />
+                    Position Details
+                  </h3>
+                  <div className="space-y-2 text-sm text-blue-700">
+                    <p>• Full-time position</p>
+                    <p>• Remote/NYC hybrid</p>
+                    <p>• {POSITIONS[position].compensation}</p>
+                  </div>
+                </div>
+                <div className="bg-teal-50 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold text-teal-900 mb-3">
+                    Key Requirements
+                  </h3>
+                  <div className="space-y-1 text-sm text-teal-700">
+                    {POSITIONS[position].skills
+                      .slice(0, 3)
+                      .map((skill, index) => (
+                        <p key={index}>• {skill}</p>
+                      ))}
+                  </div>
+                </div>
+              </div>
+              <div className="bg-slate-50 p-6 rounded-lg">
+                <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                  Technical Skills & Experience
+                </h3>
+                <div className="grid md:grid-cols-2 gap-2 text-sm text-slate-700">
+                  {POSITIONS[position].skills.map((skill, index) => (
+                    <p key={index}>• {skill}</p>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -445,9 +477,13 @@ export default function Apply() {
                       name="startDate"
                       value={formData.startDate}
                       onChange={handleInputChange}
+                      min={new Date().toISOString().split("T")[0]}
                       required
                       className="h-12"
                     />
+                    <p className="text-xs text-slate-500 mt-1">
+                      Please select a future date
+                    </p>
                   </div>
                 </div>
 
@@ -479,20 +515,6 @@ export default function Apply() {
                       className="h-12"
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    <DollarSign className="h-4 w-4 inline mr-1" />
-                    Expected Salary (Optional)
-                  </label>
-                  <Input
-                    name="salary"
-                    value={formData.salary}
-                    onChange={handleInputChange}
-                    placeholder="e.g., $120,000 - $150,000"
-                    className="h-12"
-                  />
                 </div>
               </CardContent>
             </Card>
