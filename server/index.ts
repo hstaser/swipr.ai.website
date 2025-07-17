@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleContact } from "./routes/contact";
+import { handleWaitlistSignup } from "./routes/waitlist";
 
 export function createServer() {
   const app = express();
