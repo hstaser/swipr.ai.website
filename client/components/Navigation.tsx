@@ -103,6 +103,12 @@ export function Navigation({
               <a
                 href="#contact"
                 className={`${textColor} ${hoverColor} transition-colors font-medium`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
               >
                 Contact
               </a>
