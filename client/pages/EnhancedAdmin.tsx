@@ -904,12 +904,35 @@ export default function EnhancedAdmin() {
                         >
                           {application.status}
                         </div>
-                        {application.resumeFilename && (
-                          <div className="flex items-center text-sm text-slate-500">
-                            <CheckCircle className="h-4 w-4 mr-1 text-green-600" />
-                            Resume uploaded
-                          </div>
-                        )}
+                        <div className="flex flex-col space-y-2">
+                          {application.resumeFilename && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => downloadResume(application.id)}
+                              className="text-xs"
+                            >
+                              <Download className="h-3 w-3 mr-1" />
+                              Download Resume
+                            </Button>
+                          )}
+                          <select
+                            value={application.status}
+                            onChange={(e) =>
+                              updateApplicationStatus(
+                                application.id,
+                                e.target.value,
+                              )
+                            }
+                            className="text-xs px-2 py-1 border rounded"
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="reviewing">Reviewing</option>
+                            <option value="interviewing">Interviewing</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="hired">Hired</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
