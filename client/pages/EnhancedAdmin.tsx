@@ -92,8 +92,8 @@ export default function EnhancedAdmin() {
 
   const loadData = async (key: string) => {
     try {
-      // Load applications
-      const appsResponse = await fetch("/api/jobs/applications", {
+      // Load applications with full details for admin
+      const appsResponse = await fetch("/api/jobs/applications/details", {
         headers: { "x-admin-key": key },
       });
       if (appsResponse.ok) {
