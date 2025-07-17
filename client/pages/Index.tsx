@@ -519,18 +519,12 @@ export default function Index() {
                 >
                   Contact
                 </a>
-                <a
-                  href="#"
+                <Link
+                  to="/privacy"
                   className="text-slate-400 hover:text-white transition-colors"
                 >
                   Privacy
-                </a>
-                <a
-                  href="#"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Terms
-                </a>
+                </Link>
               </div>
             </div>
             <div className="border-t border-slate-700 mt-8 pt-8 text-center">
