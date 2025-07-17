@@ -539,7 +539,25 @@ export default function Index() {
                   The future of intelligent investing
                 </p>
               </div>
-              <div className="flex items-center space-x-8">
+              <div className="flex flex-wrap items-center gap-6">
+                <Link
+                  to="/learn-more"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Learn More
+                </Link>
+                <a
+                  href="#open-roles"
+                  className="text-slate-400 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("open-roles")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  Careers
+                </a>
                 <Link
                   to="/track"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -547,8 +565,14 @@ export default function Index() {
                   Track Application
                 </Link>
                 <a
-                  href="mailto:team@swipr.ai"
+                  href="#contact"
                   className="text-slate-400 hover:text-white transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("contact")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
                   Contact
                 </a>
