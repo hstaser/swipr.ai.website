@@ -136,7 +136,7 @@ export default function Index() {
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
               Democratizing institutional-grade investment strategies through
-              intelligent decision-making powered by AI and quantitative
+              intelligent portfolio construction powered by AI and quantitative
               analysis
             </p>
             <div className="space-y-4">
