@@ -215,30 +215,35 @@ export default function Apply() {
     setSubmitMessage("");
 
     try {
-      const formDataToSend = new FormData();
-
-      // Append all form fields
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value) {
-          formDataToSend.append(key, value);
-        }
-      });
-
-      // Append resume file if provided
-      if (resumeFile) {
-        formDataToSend.append("resume", resumeFile);
-      }
+      // Prepare application data (without file for now - files need special handling in serverless)
+      const applicationData: JobApplicationRequest = {
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        position,
+        experience: formData.experience,
+        coverLetter: formData.coverLetter?.trim(),
+        linkedinUrl: formData.linkedinUrl?.trim(),
+        portfolioUrl: formData.portfolioUrl?.trim(),
+        startDate: formData.startDate,
+      };
 
       const response = await fetch("/api/jobs/apply", {
         method: "POST",
-        body: formDataToSend,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(applicationData),
       });
 
       const result: JobApplicationResponse = await response.json();
 
-      if (result.success) {
+      if (response.ok && result.success) {
         setIsSuccess(true);
-        setSubmitMessage(result.message);
+        setSubmitMessage(
+          result.message || "Application submitted successfully!",
+        );
         setApplicationId(result.applicationId || "");
 
         // Clear saved draft
@@ -248,12 +253,16 @@ export default function Apply() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         setSubmitMessage(
-          result.message || "Something went wrong. Please try again.",
+          result.message ||
+            result.error ||
+            "Something went wrong. Please try again.",
         );
       }
     } catch (error) {
       console.error("Application submission error:", error);
-      setSubmitMessage("Network error. Please try again later.");
+      setSubmitMessage(
+        "Network error. Please check your connection and try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
