@@ -44,5 +44,12 @@ export function createServer() {
     updateApplicationStatus,
   );
 
+  // Analytics and messages routes
+  app.post("/api/analytics/track", trackAnalyticsEvent);
+  app.get("/api/admin/analytics", getAnalyticsDashboard);
+  app.post("/api/admin/messages", storeContactMessage);
+  app.get("/api/admin/messages", getContactMessages);
+  app.patch("/api/admin/messages/:messageId/status", updateMessageStatus);
+
   return app;
 }
