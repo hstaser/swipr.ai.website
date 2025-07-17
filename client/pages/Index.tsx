@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,9 +16,15 @@ import {
   TrendingUp,
   Users,
   Mail,
-  Phone,
   MapPin,
+  Loader2,
 } from "lucide-react";
+import {
+  ContactRequest,
+  ContactResponse,
+  WaitlistRequest,
+  WaitlistResponse,
+} from "@shared/api";
 
 export default function Index() {
   const [formData, setFormData] = useState({
@@ -25,11 +32,84 @@ export default function Index() {
     email: "",
     message: "",
   });
+  const [waitlistEmail, setWaitlistEmail] = useState("");
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
+  const [isSubmittingWaitlist, setIsSubmittingWaitlist] = useState(false);
+  const [contactMessage, setContactMessage] = useState("");
+  const [waitlistMessage, setWaitlistMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoLink = `mailto:team@swipr.ai?subject=Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.name} (${formData.email})`;
-    window.location.href = mailtoLink;
+    setIsSubmittingContact(true);
+    setContactMessage("");
+
+    try {
+      const contactData: ContactRequest = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      };
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contactData),
+      });
+
+      const result: ContactResponse = await response.json();
+
+      if (result.success) {
+        setContactMessage(result.message);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setContactMessage(
+          result.message || "Something went wrong. Please try again.",
+        );
+      }
+    } catch (error) {
+      console.error("Contact form error:", error);
+      setContactMessage("Network error. Please try again later.");
+    } finally {
+      setIsSubmittingContact(false);
+    }
+  };
+
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingWaitlist(true);
+    setWaitlistMessage("");
+
+    try {
+      const waitlistData: WaitlistRequest = {
+        email: waitlistEmail,
+      };
+
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(waitlistData),
+      });
+
+      const result: WaitlistResponse = await response.json();
+
+      if (result.success) {
+        setWaitlistMessage(result.message);
+        setWaitlistEmail("");
+      } else {
+        setWaitlistMessage(
+          result.message || "Something went wrong. Please try again.",
+        );
+      }
+    } catch (error) {
+      console.error("Waitlist signup error:", error);
+      setWaitlistMessage("Network error. Please try again later.");
+    } finally {
+      setIsSubmittingWaitlist(false);
+    }
   };
 
   const handleInputChange = (
@@ -49,27 +129,57 @@ export default function Index() {
         <div className="relative container mx-auto px-6 py-24 text-center text-white">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-              Swipr.ai
+              swipr.ai
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
               Revolutionizing stock investing through intelligent swipe-based
               decisions powered by AI and portfolio optimization
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6"
+            <div className="space-y-4">
+              <form
+                onSubmit={handleWaitlistSubmit}
+                className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
               >
-                Join the Waitlist
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10 text-lg px-8 py-6"
-              >
-                Learn More
-              </Button>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={waitlistEmail}
+                  onChange={(e) => setWaitlistEmail(e.target.value)}
+                  required
+                  className="bg-white/90 border-0 text-slate-800 placeholder-slate-500 h-12"
+                />
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmittingWaitlist}
+                  className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-3 h-12 whitespace-nowrap"
+                >
+                  {isSubmittingWaitlist ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      Join Waitlist
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
+                </Button>
+              </form>
+              {waitlistMessage && (
+                <p className="text-blue-100 text-center mt-4">
+                  {waitlistMessage}
+                </p>
+              )}
+              <div className="flex justify-center mt-6">
+                <Link to="/learn-more">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-white text-white hover:bg-white/10 text-lg px-8 py-3"
+                  >
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -277,22 +387,14 @@ export default function Index() {
                         <p className="text-slate-600">team@swipr.ai</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                        <Phone className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-slate-800">Phone</p>
-                        <p className="text-slate-600">Coming Soon</p>
-                      </div>
-                    </div>
+
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-500 rounded-full flex items-center justify-center">
                         <MapPin className="h-6 w-6 text-white" />
                       </div>
                       <div>
                         <p className="font-semibold text-slate-800">Location</p>
-                        <p className="text-slate-600">San Francisco, CA</p>
+                        <p className="text-slate-600">New York City, NY</p>
                       </div>
                     </div>
                   </CardContent>
@@ -307,7 +409,7 @@ export default function Index() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleContactSubmit} className="space-y-6">
                       <div>
                         <Input
                           name="name"
@@ -341,11 +443,22 @@ export default function Index() {
                       </div>
                       <Button
                         type="submit"
+                        disabled={isSubmittingContact}
                         className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 h-12"
                       >
+                        {isSubmittingContact ? (
+                          <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                        ) : null}
                         Send Message
                       </Button>
                     </form>
+                    {contactMessage && (
+                      <p
+                        className={`text-center mt-4 ${contactMessage.includes("Thank you") ? "text-green-600" : "text-red-600"}`}
+                      >
+                        {contactMessage}
+                      </p>
+                    )}
                   </CardContent>
                 </Card>
               </div>
@@ -361,7 +474,7 @@ export default function Index() {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-6 md:mb-0">
                 <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
-                  Swipr.ai
+                  swipr.ai
                 </h3>
                 <p className="text-slate-400 mt-2">
                   The future of intelligent investing
@@ -390,7 +503,7 @@ export default function Index() {
             </div>
             <div className="border-t border-slate-700 mt-8 pt-8 text-center">
               <p className="text-slate-400">
-                © 2024 Swipr.ai. All rights reserved.
+                © 2024 swipr.ai. All rights reserved.
               </p>
             </div>
           </div>
