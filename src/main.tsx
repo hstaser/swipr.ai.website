@@ -1,24 +1,5 @@
 import "../client/global.css";
-
-// Handle ResizeObserver loop errors - these are typically non-critical
-const resizeObserverErrorHandler = (e: ErrorEvent) => {
-  if (
-    e.message ===
-    "ResizeObserver loop completed with undelivered notifications."
-  ) {
-    e.stopImmediatePropagation();
-    return false;
-  }
-};
-
-window.addEventListener("error", resizeObserverErrorHandler);
-
-// Also handle unhandled promise rejections from ResizeObserver
-window.addEventListener("unhandledrejection", (e) => {
-  if (e.reason?.message?.includes("ResizeObserver loop")) {
-    e.preventDefault();
-  }
-});
+import "../client/lib/resize-observer-fix";
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
