@@ -268,3 +268,26 @@ export const getApplicationDetails: RequestHandler = (req, res) => {
     total: applications.length,
   });
 };
+
+export const lookupApplication: RequestHandler = (req, res) => {
+  const { applicationId } = req.params;
+
+  const application = applications.find((app) => app.id === applicationId);
+
+  if (!application) {
+    return res.status(404).json({ error: "Application not found" });
+  }
+
+  // Return application data without sensitive information
+  res.json({
+    id: application.id,
+    firstName: application.firstName,
+    lastName: application.lastName,
+    email: application.email,
+    phone: application.phone,
+    position: application.position,
+    status: application.status,
+    appliedAt: application.appliedAt,
+    experience: application.experience,
+  });
+};
