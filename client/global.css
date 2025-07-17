@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent ResizeObserver loops by adding transform hardware acceleration */
-* {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* Prevent ResizeObserver loops by stabilizing layouts */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Ensure consistent box-sizing */
@@ -15,13 +14,36 @@
   box-sizing: border-box;
 }
 
+/* Optimize rendering for complex components */
+.recharts-wrapper,
+.recharts-responsive-container {
+  contain: layout style;
+  transform: translateZ(0);
+}
+
 /* Prevent layout thrashing on interactive elements */
 button,
 input,
 textarea,
 select {
+  contain: layout;
+}
+
+/* Stable navigation positioning */
+nav[class*="sticky"] {
+  contain: layout style;
   transform: translateZ(0);
-  will-change: transform;
+}
+
+/* Optimize form elements that might trigger resize */
+textarea {
+  resize: vertical;
+  contain: layout;
+}
+
+/* Optimize card components */
+[class*="card"] {
+  contain: layout style;
 }
 
 @layer base {
