@@ -205,54 +205,82 @@ class Analytics {
 
   // Public methods for specific tracking
   trackPageView() {
-    this.trackEvent({
-      eventType: "page_view",
-      page: window.location.pathname,
-      element: document.title,
-    });
+    try {
+      this.trackEvent({
+        eventType: "page_view",
+        page: window.location.pathname,
+        element: document.title.substring(0, 100), // Limit title length
+      });
+    } catch (error) {
+      console.debug("Failed to track page view:", error);
+    }
   }
 
   trackApplyClick(position: string) {
-    this.trackEvent({
-      eventType: "apply_button_click",
-      page: window.location.pathname,
-      element: position,
-      value: `Apply for ${position}`,
-    });
+    try {
+      if (position && typeof position === "string") {
+        this.trackEvent({
+          eventType: "apply_button_click",
+          page: window.location.pathname,
+          element: position.substring(0, 50),
+          value: `Apply for ${position}`.substring(0, 100),
+        });
+      }
+    } catch (error) {
+      console.debug("Failed to track apply click:", error);
+    }
   }
 
   trackWaitlistSignup(email: string) {
-    this.trackEvent({
-      eventType: "waitlist_signup_attempt",
-      page: window.location.pathname,
-      element: "waitlist-form",
-      value: "signup_attempt",
-    });
+    try {
+      this.trackEvent({
+        eventType: "waitlist_signup_attempt",
+        page: window.location.pathname,
+        element: "waitlist-form",
+        value: "signup_attempt",
+      });
+    } catch (error) {
+      console.debug("Failed to track waitlist signup:", error);
+    }
   }
 
   trackFormSubmit(formType: string, success: boolean) {
-    this.trackEvent({
-      eventType: "form_submit",
-      page: window.location.pathname,
-      element: formType,
-      value: success ? "success" : "error",
-    });
+    try {
+      if (formType && typeof formType === "string") {
+        this.trackEvent({
+          eventType: "form_submit",
+          page: window.location.pathname,
+          element: formType.substring(0, 50),
+          value: success ? "success" : "error",
+        });
+      }
+    } catch (error) {
+      console.debug("Failed to track form submit:", error);
+    }
   }
 
   trackContactFormOpen() {
-    this.trackEvent({
-      eventType: "contact_form_open",
-      page: window.location.pathname,
-      element: "contact-form",
-    });
+    try {
+      this.trackEvent({
+        eventType: "contact_form_open",
+        page: window.location.pathname,
+        element: "contact-form",
+      });
+    } catch (error) {
+      console.debug("Failed to track contact form open:", error);
+    }
   }
 
   trackLearnMoreClick() {
-    this.trackEvent({
-      eventType: "learn_more_click",
-      page: window.location.pathname,
-      element: "learn-more-button",
-    });
+    try {
+      this.trackEvent({
+        eventType: "learn_more_click",
+        page: window.location.pathname,
+        element: "learn-more-button",
+      });
+    } catch (error) {
+      console.debug("Failed to track learn more click:", error);
+    }
   }
 }
 
