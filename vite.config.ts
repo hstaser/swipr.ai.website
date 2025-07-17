@@ -5,14 +5,15 @@ import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "./", // Fix relative paths for deployment
   server: {
     host: "::",
     port: 8080,
   },
   build: {
-    outDir: "dist/spa",
+    outDir: "dist", // Change output directory to standard dist for Vercel
   },
-  plugins: [react(), expressPlugin()],
+  plugins: [react(), ...(mode === "development" ? [expressPlugin()] : [])],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
