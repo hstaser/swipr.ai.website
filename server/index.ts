@@ -9,6 +9,13 @@ import {
   updateApplicationStatus,
   upload,
 } from "./routes/jobs";
+import {
+  trackAnalyticsEvent,
+  getAnalyticsDashboard,
+  storeContactMessage,
+  getContactMessages,
+  updateMessageStatus,
+} from "./routes/analytics";
 
 export function createServer() {
   const app = express();
