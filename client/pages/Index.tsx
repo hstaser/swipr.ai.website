@@ -94,6 +94,9 @@ export default function Index() {
     setIsSubmittingWaitlist(true);
     setWaitlistMessage("");
 
+    // Track waitlist signup attempt
+    trackWaitlistSignup(waitlistEmail);
+
     try {
       const waitlistData: WaitlistRequest = {
         email: waitlistEmail,
@@ -112,10 +115,12 @@ export default function Index() {
       if (result.success) {
         setWaitlistMessage(result.message);
         setWaitlistEmail("");
+        trackFormSubmit("waitlist", true);
       } else {
         setWaitlistMessage(
           result.message || "Something went wrong. Please try again.",
         );
+        trackFormSubmit("waitlist", false);
       }
     } catch (error) {
       console.error("Waitlist signup error:", error);
