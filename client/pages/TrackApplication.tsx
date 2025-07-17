@@ -143,19 +143,25 @@ export default function TrackApplication() {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-12">
-        <div className="max-w-2xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-slate-800 mb-4">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600">
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="relative container mx-auto px-6 py-16 text-center text-white">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
               Track Your Application
             </h1>
-            <p className="text-xl text-slate-600">
-              Enter your application ID to check the status of your job
-              application
+            <p className="text-xl text-blue-100 leading-relaxed mb-8 max-w-3xl mx-auto">
+              Monitor your application status and stay updated on your journey
+              to join swipr.ai
             </p>
           </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-50 to-transparent" />
+      </section>
 
+      <div className="container mx-auto px-6 py-12">
+        <div className="max-w-2xl mx-auto">
           {/* Search */}
           <Card className="border-0 shadow-lg mb-8">
             <CardHeader>
