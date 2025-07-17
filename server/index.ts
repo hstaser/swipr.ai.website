@@ -6,7 +6,9 @@ import { handleWaitlistSignup } from "./routes/waitlist";
 import {
   handleJobApplication,
   getApplications,
+  getApplicationDetails,
   updateApplicationStatus,
+  downloadResume,
   upload,
 } from "./routes/jobs";
 import {
