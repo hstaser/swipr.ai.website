@@ -76,6 +76,12 @@ export function Navigation({
               <a
                 href="#open-roles"
                 className={`${textColor} ${hoverColor} transition-colors font-medium`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById("open-roles")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
               >
                 Careers
               </a>
