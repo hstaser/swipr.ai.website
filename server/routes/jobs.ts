@@ -72,7 +72,6 @@ const JobApplicationSchema = z.object({
   linkedinUrl: z.string().url().optional().or(z.literal("")),
   portfolioUrl: z.string().url().optional().or(z.literal("")),
   startDate: z.string().min(1, "Start date is required"),
-  salary: z.string().optional(),
 });
 
 export type JobApplication = z.infer<typeof JobApplicationSchema> & {
