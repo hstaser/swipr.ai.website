@@ -63,16 +63,19 @@ export default function LearnMore() {
                 </h2>
                 <div className="space-y-4 text-lg text-slate-600">
                   <p>
-                    Traditional investing platforms overwhelm users with complex
-                    charts, confusing metrics, and endless data points.
+                    Traditional investment platforms present overwhelming
+                    amounts of unstructured data, making it difficult for
+                    investors to identify actionable opportunities.
                   </p>
                   <p>
-                    Most people want to invest but don't know where to start or
-                    how to analyze thousands of available stocks.
+                    Retail investors lack access to institutional-grade research
+                    and quantitative analysis tools, creating an uneven playing
+                    field.
                   </p>
                   <p>
-                    Financial advisors are expensive and portfolio optimization
-                    tools are built for professionals, not everyday investors.
+                    Professional portfolio management is expensive and
+                    inaccessible, while DIY approaches often lead to suboptimal
+                    allocation decisions.
                   </p>
                 </div>
               </div>
@@ -82,16 +85,18 @@ export default function LearnMore() {
                 </h2>
                 <div className="space-y-4 text-lg text-slate-600">
                   <p>
-                    swipr.ai transforms complex investment research into simple,
-                    intuitive swipe-based decisions.
+                    swipr.ai democratizes institutional-grade investment
+                    research through streamlined decision-making interfaces.
                   </p>
                   <p>
-                    Our AI analyzes thousands of data points and presents
-                    personalized stock recommendations that match your goals.
+                    Our quantitative engine processes multi-dimensional data to
+                    generate evidence-based investment recommendations aligned
+                    with your objectives.
                   </p>
                   <p>
-                    Automatically optimize your portfolio for the best
-                    risk-adjusted returns using advanced quantitative methods.
+                    Systematic portfolio optimization using modern portfolio
+                    theory and risk management frameworks to maximize
+                    risk-adjusted returns.
                   </p>
                 </div>
               </div>
@@ -136,13 +141,15 @@ export default function LearnMore() {
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl font-bold text-white">2</span>
                   </div>
-                  <CardTitle className="text-xl">Swipe on Stocks</CardTitle>
+                  <CardTitle className="text-xl">
+                    Portfolio Construction
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base leading-relaxed">
-                    Browse curated stock recommendations. Swipe right on
-                    companies you love, left on ones you don't. Each swipe
-                    teaches our AI more about your preferences.
+                    Review algorithmically-curated investment opportunities.
+                    Binary preference feedback trains our models to better
+                    understand your investment thesis and risk preferences.
                   </CardDescription>
                 </CardContent>
               </Card>
