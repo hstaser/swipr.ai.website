@@ -46,7 +46,11 @@ export interface JobApplicationRequest {
   lastName: string;
   email: string;
   phone: string;
-  position: "backend-engineer" | "ai-developer" | "quantitative-analyst";
+  position:
+    | "backend-engineer"
+    | "ai-developer"
+    | "quantitative-analyst"
+    | "mobile-app-developer";
   experience: string;
   coverLetter?: string;
   linkedinUrl?: string;
