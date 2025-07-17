@@ -37,3 +37,33 @@ export interface WaitlistResponse {
   success: boolean;
   message: string;
 }
+
+/**
+ * Job application interfaces
+ */
+export interface JobApplicationRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  position: "backend-engineer" | "ai-developer" | "quantitative-analyst";
+  experience: string;
+  coverLetter?: string;
+  linkedinUrl?: string;
+  portfolioUrl?: string;
+  startDate: string;
+  salary?: string;
+}
+
+export interface JobApplicationResponse {
+  success: boolean;
+  message: string;
+  applicationId?: string;
+}
+
+export interface JobApplication extends JobApplicationRequest {
+  id: string;
+  resumeFilename?: string;
+  appliedAt: string;
+  status: "pending" | "reviewing" | "interviewing" | "rejected" | "hired";
+}
