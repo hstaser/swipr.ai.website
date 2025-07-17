@@ -41,6 +41,7 @@ class Analytics {
       AnalyticsEvent,
       "sessionId" | "timestamp" | "userAgent" | "referrer"
     >,
+    useBeacon: boolean = false,
   ) {
     try {
       const fullEvent: AnalyticsEvent = {
@@ -52,21 +53,40 @@ class Analytics {
         location: window.location.href,
       };
 
+      const payload = JSON.stringify(fullEvent);
+
+      // Use navigator.sendBeacon for page unload events (more reliable)
+      if (useBeacon && navigator.sendBeacon) {
+        const blob = new Blob([payload], { type: "application/json" });
+        navigator.sendBeacon("/api/analytics/track", blob);
+        console.log("📊 Analytics beacon sent:", event.eventType);
+        return;
+      }
+
+      // Use regular fetch for other events
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
       await fetch("/api/analytics/track", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(fullEvent),
+        body: payload,
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
       console.log(
         "📊 Analytics tracked:",
         event.eventType,
         event.element || event.page,
       );
     } catch (error) {
-      console.error("Analytics tracking failed:", error);
+      // Silently fail for analytics to not disrupt user experience
+      if (error instanceof Error && error.name !== "AbortError") {
+        console.debug("Analytics tracking failed:", error.message);
+      }
     }
   }
 
