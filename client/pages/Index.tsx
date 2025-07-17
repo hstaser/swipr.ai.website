@@ -107,7 +107,7 @@ export default function Index() {
 
     try {
       const waitlistData: WaitlistRequest = {
-        email: waitlistEmail,
+        email: waitlistEmail.trim(),
       };
 
       const response = await fetch("/api/waitlist", {
@@ -120,19 +120,26 @@ export default function Index() {
 
       const result: WaitlistResponse = await response.json();
 
-      if (result.success) {
-        setWaitlistMessage(result.message);
+      if (response.ok && result.success) {
+        setWaitlistMessage(
+          result.message || "Thanks for joining our waitlist!",
+        );
         setWaitlistEmail("");
         trackFormSubmit("waitlist", true);
       } else {
         setWaitlistMessage(
-          result.message || "Something went wrong. Please try again.",
+          result.message ||
+            result.error ||
+            "Something went wrong. Please try again.",
         );
         trackFormSubmit("waitlist", false);
       }
     } catch (error) {
       console.error("Waitlist signup error:", error);
-      setWaitlistMessage("Network error. Please try again later.");
+      setWaitlistMessage(
+        "Network error. Please check your connection and try again.",
+      );
+      trackFormSubmit("waitlist", false);
     } finally {
       setIsSubmittingWaitlist(false);
     }
