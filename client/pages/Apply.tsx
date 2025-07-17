@@ -252,33 +252,54 @@ export default function Apply() {
               {submitMessage}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="bg-slate-50 p-4 rounded-lg">
-              <p className="text-sm text-slate-600 mb-2">Application ID</p>
-              <p className="font-mono text-sm bg-white p-2 rounded border">
-                {applicationId}
+          <CardContent className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-slate-50 p-4 rounded-lg">
+                <p className="text-sm text-slate-600 mb-2">Application ID</p>
+                <p className="font-mono text-sm bg-white p-2 rounded border break-all">
+                  {applicationId}
+                </p>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-sm text-blue-600 mb-2">Timeline</p>
+                <p className="text-sm text-blue-800">
+                  Review: 3-5 business days
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-teal-50 p-4 rounded-lg">
+              <h4 className="font-medium text-teal-900 mb-2">
+                About Compensation
+              </h4>
+              <p className="text-sm text-teal-700">
+                swipr.ai offers equity-based compensation packages with
+                significant upside potential. Compensation details will be
+                discussed during the interview process.
               </p>
             </div>
-            <p className="text-slate-600">
-              We'll review your application and get back to you within 3-5
-              business days.
+
+            <p className="text-slate-600 text-center">
+              We'll review your application carefully and get back to you with
+              next steps. Keep an eye on your email for updates!
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 pt-4">
-              <Link to="/track" className="flex-1">
+
+            <div className="grid sm:grid-cols-3 gap-3 pt-4">
+              <Link to="/track">
                 <Button variant="outline" className="w-full">
-                  Track This Application
+                  Track Application
                 </Button>
               </Link>
-              <Link to="/" className="flex-1">
+              <Link to="/">
                 <Button variant="outline" className="w-full">
-                  Back to Homepage
+                  Back Home
                 </Button>
               </Link>
               <Button
                 onClick={() => window.location.reload()}
-                className="flex-1 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700"
+                className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700"
               >
-                Apply for Another Position
+                Apply Again
               </Button>
             </div>
           </CardContent>
