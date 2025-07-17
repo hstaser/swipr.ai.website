@@ -58,9 +58,9 @@ export default function Index() {
 
     try {
       const contactData: ContactRequest = {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
       };
 
       const response = await fetch("/api/contact", {
@@ -73,17 +73,25 @@ export default function Index() {
 
       const result: ContactResponse = await response.json();
 
-      if (result.success) {
-        setContactMessage(result.message);
+      if (response.ok && result.success) {
+        setContactMessage(result.message || "Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
+        // Track successful form submission
+        trackFormSubmit("contact", true);
       } else {
         setContactMessage(
-          result.message || "Something went wrong. Please try again.",
+          result.message ||
+            result.error ||
+            "Something went wrong. Please try again.",
         );
+        trackFormSubmit("contact", false);
       }
     } catch (error) {
       console.error("Contact form error:", error);
-      setContactMessage("Network error. Please try again later.");
+      setContactMessage(
+        "Network error. Please check your connection and try again.",
+      );
+      trackFormSubmit("contact", false);
     } finally {
       setIsSubmittingContact(false);
     }
