@@ -323,12 +323,6 @@ export default function Admin() {
                   </p>
                   <p className="text-sm text-slate-500">Available Start Date</p>
                 </div>
-                {selectedApplication.salary && (
-                  <div>
-                    <p className="font-medium">{selectedApplication.salary}</p>
-                    <p className="text-sm text-slate-500">Expected Salary</p>
-                  </div>
-                )}
               </CardContent>
             </Card>
 
