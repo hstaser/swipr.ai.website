@@ -152,41 +152,55 @@ class Analytics {
     window.addEventListener("beforeunload", trackTimeOnPage, { passive: true });
     window.addEventListener("pagehide", trackTimeOnPage, { passive: true });
 
-    // Track clicks on buttons and links
-    document.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
+    // Track clicks on buttons and links with debouncing
+    let lastClickTime = 0;
+    document.addEventListener(
+      "click",
+      (event) => {
+        const now = Date.now();
+        // Debounce rapid clicks (prevent tracking within 500ms)
+        if (now - lastClickTime < 500) return;
+        lastClickTime = now;
 
-      // Track button clicks
-      if (target.tagName === "BUTTON" || target.closest("button")) {
-        const button =
-          target.tagName === "BUTTON" ? target : target.closest("button");
-        const buttonText = button?.textContent?.trim() || "";
-        const buttonId = button?.id || "";
-        const elementId =
-          buttonId || buttonText.toLowerCase().replace(/\s+/g, "-");
+        const target = event.target as HTMLElement;
 
-        this.trackEvent({
-          eventType: "button_click",
-          page: window.location.pathname,
-          element: elementId,
-          value: buttonText,
-        });
-      }
+        // Track button clicks
+        if (target.tagName === "BUTTON" || target.closest("button")) {
+          const button =
+            target.tagName === "BUTTON" ? target : target.closest("button");
+          const buttonText = button?.textContent?.trim() || "";
+          const buttonId = button?.id || "";
+          const elementId =
+            buttonId ||
+            buttonText.toLowerCase().replace(/\s+/g, "-").substring(0, 50);
 
-      // Track link clicks
-      if (target.tagName === "A" || target.closest("a")) {
-        const link = target.tagName === "A" ? target : target.closest("a");
-        const linkText = link?.textContent?.trim() || "";
-        const linkHref = link?.getAttribute("href") || "";
+          this.trackEvent({
+            eventType: "button_click",
+            page: window.location.pathname,
+            element: elementId,
+            value: buttonText.substring(0, 100), // Limit text length
+          });
+        }
 
-        this.trackEvent({
-          eventType: "link_click",
-          page: window.location.pathname,
-          element: linkText.toLowerCase().replace(/\s+/g, "-"),
-          value: linkHref,
-        });
-      }
-    });
+        // Track link clicks
+        if (target.tagName === "A" || target.closest("a")) {
+          const link = target.tagName === "A" ? target : target.closest("a");
+          const linkText = link?.textContent?.trim() || "";
+          const linkHref = link?.getAttribute("href") || "";
+
+          this.trackEvent({
+            eventType: "link_click",
+            page: window.location.pathname,
+            element: linkText
+              .toLowerCase()
+              .replace(/\s+/g, "-")
+              .substring(0, 50),
+            value: linkHref.substring(0, 200), // Limit URL length
+          });
+        }
+      },
+      { passive: true },
+    );
   }
 
   // Public methods for specific tracking
