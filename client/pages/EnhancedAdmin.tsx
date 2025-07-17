@@ -514,28 +514,46 @@ export default function EnhancedAdmin() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {messages?.messages.slice(0, 5).map((msg) => (
-                      <div
-                        key={msg.id}
-                        className="flex items-start justify-between p-3 bg-slate-50 rounded-lg"
-                      >
-                        <div className="flex-1">
-                          <p className="font-medium">{msg.name}</p>
-                          <p className="text-sm text-slate-600 truncate">
-                            {msg.message.substring(0, 80)}...
-                          </p>
-                        </div>
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs ${
-                            msg.status === "new"
-                              ? "bg-red-100 text-red-800"
-                              : "bg-green-100 text-green-800"
-                          }`}
+                    {messages?.messages && messages.messages.length > 0 ? (
+                      messages.messages.slice(0, 5).map((msg) => (
+                        <div
+                          key={msg.id}
+                          className="flex items-start justify-between p-3 bg-slate-50 rounded-lg"
                         >
-                          {msg.status}
-                        </span>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{msg.name}</p>
+                            <p className="text-sm text-slate-600 break-words">
+                              {msg.message.length > 80
+                                ? `${msg.message.substring(0, 80)}...`
+                                : msg.message}
+                            </p>
+                          </div>
+                          <div className="flex-shrink-0 ml-3">
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs whitespace-nowrap ${
+                                msg.status === "new"
+                                  ? "bg-red-100 text-red-800"
+                                  : msg.status === "read"
+                                    ? "bg-blue-100 text-blue-800"
+                                    : msg.status === "replied"
+                                      ? "bg-green-100 text-green-800"
+                                      : "bg-gray-100 text-gray-800"
+                              }`}
+                            >
+                              {msg.status}
+                            </span>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-8 text-slate-500">
+                        <MessageSquare className="h-8 w-8 mx-auto mb-2 text-slate-300" />
+                        <p>No messages yet</p>
+                        <p className="text-sm">
+                          Contact messages will appear here
+                        </p>
                       </div>
-                    ))}
+                    )}
                   </div>
                 </CardContent>
               </Card>
