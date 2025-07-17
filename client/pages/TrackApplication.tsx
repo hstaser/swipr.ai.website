@@ -90,30 +90,24 @@ export default function TrackApplication() {
     setApplication(null);
 
     try {
-      // Simulate API call (in a real app, you'd have a backend endpoint for this)
-      // For demo purposes, we'll simulate finding an application
-      setTimeout(() => {
-        if (applicationId.startsWith("APP-")) {
-          setApplication({
-            id: applicationId,
-            firstName: "John",
-            lastName: "Doe",
-            email: "john.doe@example.com",
-            phone: "+1 (555) 123-4567",
-            position: "backend-engineer",
-            status: "reviewing",
-            appliedAt: new Date().toISOString(),
-            experience: "3-4 years",
-          });
-        } else {
-          setError(
-            "Application ID not found. Please check your ID and try again.",
-          );
-        }
-        setIsLoading(false);
-      }, 1500);
+      const response = await fetch(
+        `/api/jobs/lookup/${encodeURIComponent(applicationId)}`,
+      );
+
+      if (response.ok) {
+        const appData = await response.json();
+        setApplication(appData);
+      } else if (response.status === 404) {
+        setError(
+          "Application ID not found. Please check your ID and try again.",
+        );
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
     } catch (err) {
-      setError("Something went wrong. Please try again later.");
+      console.error("Application lookup error:", err);
+      setError("Network error. Please try again later.");
+    } finally {
       setIsLoading(false);
     }
   };
