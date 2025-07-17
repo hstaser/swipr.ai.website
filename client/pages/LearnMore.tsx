@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Navigation } from "@/components/Navigation";
 import {
   Card,
   CardContent,
