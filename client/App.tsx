@@ -11,7 +11,7 @@ import LearnMore from "./pages/LearnMore";
 import Apply from "./pages/Apply";
 import TrackApplication from "./pages/TrackApplication";
 import Privacy from "./pages/Privacy";
-import Admin from "./pages/Admin";
+import EnhancedAdmin from "./pages/EnhancedAdmin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
