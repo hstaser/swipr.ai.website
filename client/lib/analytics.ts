@@ -122,19 +122,25 @@ class Analytics {
 
     window.addEventListener("scroll", trackScroll, { passive: true });
 
-    // Track time on page when leaving
+    // Track time on page when leaving (use beacon for reliability)
     const trackTimeOnPage = () => {
       const timeSpent = Math.round((Date.now() - this.startTime) / 1000);
-      this.trackEvent({
-        eventType: "time_on_page",
-        page: window.location.pathname,
-        element: "page",
-        value: timeSpent,
-      });
+      // Only track if user spent more than 5 seconds on page
+      if (timeSpent > 5) {
+        this.trackEvent(
+          {
+            eventType: "time_on_page",
+            page: window.location.pathname,
+            element: "page",
+            value: timeSpent,
+          },
+          true,
+        ); // Use beacon for page unload
+      }
     };
 
-    window.addEventListener("beforeunload", trackTimeOnPage);
-    window.addEventListener("pagehide", trackTimeOnPage);
+    window.addEventListener("beforeunload", trackTimeOnPage, { passive: true });
+    window.addEventListener("pagehide", trackTimeOnPage, { passive: true });
 
     // Track clicks on buttons and links
     document.addEventListener("click", (event) => {
