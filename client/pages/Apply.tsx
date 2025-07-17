@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
