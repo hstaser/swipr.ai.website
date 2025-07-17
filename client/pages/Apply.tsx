@@ -344,16 +344,29 @@ export default function Apply() {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-12">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-slate-800 mb-4">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600">
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="relative container mx-auto px-6 py-16 text-center text-white">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
               Apply for {POSITIONS[position].title}
             </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-6">
+            <p className="text-xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
               {POSITIONS[position].description}
             </p>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-50 to-transparent" />
+      </section>
+
+      <div className="container mx-auto px-6 py-12">
+        <div className="max-w-4xl mx-auto">
+          {/* Position Details */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-800 mb-6">
+              Position Overview
+            </h2>
             <div className="space-y-4 max-w-4xl mx-auto">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-blue-50 p-6 rounded-lg">
