@@ -18,14 +18,59 @@ export function setupResizeObserverErrorHandler() {
     // Suppress ResizeObserver loop warnings
     if (
       typeof errorMessage === "string" &&
-      errorMessage.includes("ResizeObserver loop")
+      (errorMessage.includes("ResizeObserver loop") ||
+        errorMessage.includes("ResizeObserver loop completed"))
     ) {
       return; // Don't log this error
+    }
+
+    // Also suppress React strict mode ResizeObserver warnings
+    if (
+      typeof errorMessage === "string" &&
+      errorMessage.includes("Warning") &&
+      errorMessage.includes("ResizeObserver")
+    ) {
+      return;
     }
 
     // Log all other errors normally
     originalConsoleError.apply(console, args);
   };
+
+  // Override ResizeObserver to add debouncing
+  if (typeof window !== "undefined" && window.ResizeObserver) {
+    const OriginalResizeObserver = window.ResizeObserver;
+
+    window.ResizeObserver = class extends OriginalResizeObserver {
+      constructor(callback: ResizeObserverCallback) {
+        const debouncedCallback: ResizeObserverCallback = (
+          entries,
+          observer,
+        ) => {
+          if (resizeObserverTimeout) {
+            clearTimeout(resizeObserverTimeout);
+          }
+
+          resizeObserverTimeout = setTimeout(() => {
+            try {
+              callback(entries, observer);
+            } catch (error) {
+              // Suppress ResizeObserver errors silently
+              if (
+                error instanceof Error &&
+                error.message.includes("ResizeObserver loop")
+              ) {
+                return;
+              }
+              throw error;
+            }
+          }, 0) as any;
+        };
+
+        super(debouncedCallback);
+      }
+    };
+  }
 
   // Handle global error events
   const handleGlobalError = (event: ErrorEvent) => {
