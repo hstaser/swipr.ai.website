@@ -3,6 +3,12 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleContact } from "./routes/contact";
 import { handleWaitlistSignup } from "./routes/waitlist";
+import {
+  handleJobApplication,
+  getApplications,
+  updateApplicationStatus,
+  upload,
+} from "./routes/jobs";
 
 export function createServer() {
   const app = express();
