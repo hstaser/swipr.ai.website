@@ -287,11 +287,14 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Build scalable APIs and infrastructure for our trading
-                  platform. Experience with Python, PostgreSQL, and cloud
-                  services required.
+                <p className="text-slate-600 mb-4 leading-relaxed">
+                  Architect high-performance infrastructure for our algorithmic
+                  trading platform. Expertise in Python/Go, distributed systems,
+                  and financial data processing.
                 </p>
+                <div className="text-sm text-blue-600 bg-blue-50 p-3 rounded mb-6">
+                  • Competitive equity package
+                </div>
                 <Link to="/apply?position=backend-engineer">
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
@@ -311,11 +314,14 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Develop machine learning models for stock analysis and
-                  recommendation systems. Deep knowledge of ML/AI and financial
-                  markets.
+                <p className="text-slate-600 mb-4 leading-relaxed">
+                  Design cutting-edge ML systems for financial market analysis.
+                  Advanced Python, deep learning, and quantitative finance
+                  expertise.
                 </p>
+                <div className="text-sm text-purple-600 bg-purple-50 p-3 rounded mb-6">
+                  • Significant equity with performance vesting
+                </div>
                 <Link to="/apply?position=ai-developer">
                   <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
@@ -335,11 +341,14 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Design portfolio optimization algorithms and risk models.
-                  Strong background in mathematics, statistics, and financial
-                  engineering.
+                <p className="text-slate-600 mb-4 leading-relaxed">
+                  Develop sophisticated mathematical models for portfolio
+                  optimization and risk management. Advanced degree in
+                  Mathematics, Physics, or Finance.
                 </p>
+                <div className="text-sm text-teal-600 bg-teal-50 p-3 rounded mb-6">
+                  • Equity-heavy compensation with performance incentives
+                </div>
                 <Link to="/apply?position=quantitative-analyst">
                   <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
