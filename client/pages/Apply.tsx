@@ -31,16 +31,48 @@ const POSITIONS = {
   "backend-engineer": {
     title: "Backend Engineer",
     description:
-      "Build scalable APIs and infrastructure for our trading platform",
+      "Architect and build high-performance, scalable infrastructure for our algorithmic trading platform",
+    skills: [
+      "Python, Go, or Rust expertise",
+      "Distributed systems and microservices",
+      "PostgreSQL, Redis, and time-series databases",
+      "Docker, Kubernetes, and cloud infrastructure (AWS/GCP)",
+      "WebSocket APIs and real-time data processing",
+      "Financial data APIs and market data feeds",
+      "Experience with trading systems or fintech platforms",
+    ],
+    compensation:
+      "Competitive equity package with significant upside potential",
   },
   "ai-developer": {
-    title: "AI Developer",
+    title: "AI/ML Engineer",
     description:
-      "Develop machine learning models for stock analysis and recommendation systems",
+      "Design and implement cutting-edge machine learning systems for financial market analysis and algorithmic trading",
+    skills: [
+      "Advanced Python with ML frameworks (PyTorch, TensorFlow, scikit-learn)",
+      "Deep learning, NLP, and time series forecasting",
+      "Financial modeling and quantitative analysis",
+      "MLOps pipelines and model deployment at scale",
+      "Experience with financial data (market data, fundamental data, alternative data)",
+      "Statistical analysis and hypothesis testing",
+      "PhD in ML/AI, Mathematics, or Finance preferred",
+    ],
+    compensation: "Significant equity stake with performance-based vesting",
   },
   "quantitative-analyst": {
-    title: "Quantitative Analyst",
-    description: "Design portfolio optimization algorithms and risk models",
+    title: "Quantitative Researcher",
+    description:
+      "Develop sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
+    skills: [
+      "Advanced degree in Mathematics, Physics, Statistics, or Financial Engineering",
+      "Python/R for quantitative analysis and backtesting",
+      "Modern portfolio theory and factor modeling",
+      "Options pricing, derivatives, and fixed income modeling",
+      "Risk management frameworks and stress testing",
+      "Statistical arbitrage and market microstructure",
+      "Experience with portfolio optimization libraries (cvxpy, cvxopt)",
+    ],
+    compensation: "Equity-heavy compensation with performance incentives",
   },
 } as const;
 
