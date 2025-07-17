@@ -42,6 +42,7 @@ export function Navigation({
   return (
     <nav
       className={`shadow-sm border-b sticky top-0 z-50 ${navClasses} ${className}`}
+      style={{ contain: "layout style" }}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
