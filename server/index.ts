@@ -19,5 +19,9 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Contact and waitlist routes
+  app.post("/api/contact", handleContact);
+  app.post("/api/waitlist", handleWaitlistSignup);
+
   return app;
 }
