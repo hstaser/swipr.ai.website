@@ -592,6 +592,9 @@ export default function Apply() {
                 </CardTitle>
                 <CardDescription>
                   Upload your resume in PDF, DOC, DOCX, or TXT format (max 5MB)
+                  <br />
+                  <span className="text-blue-600 font-medium">Note:</span>{" "}
+                  Resume will be handled via email follow-up
                 </CardDescription>
               </CardHeader>
               <CardContent>
