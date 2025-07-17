@@ -342,12 +342,12 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Develop sophisticated mathematical models for portfolio
-                  optimization and risk management. Advanced degree in
-                  Mathematics, Physics, or Finance.
+                  Design smart algorithms that optimize portfolios and manage
+                  risk. Help users achieve better returns while keeping their
+                  investments safe.
                 </p>
                 <div className="text-sm text-teal-600 bg-teal-50 p-3 rounded mb-6">
-                  • Equity-heavy compensation with performance incentives
+                  • Equity-focused compensation with performance bonuses
                 </div>
                 <Link to="/apply?position=quantitative-analyst">
                   <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 hover:scale-105 transition-transform duration-200">
