@@ -241,30 +241,62 @@ export default function TrackApplication() {
               </Card>
 
               {/* Application Details */}
-              <Card className="border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle>Application Details</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-lg">
+                      Personal Information
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center">
+                        <span className="text-white font-bold">
                           {application.firstName[0]}
                           {application.lastName[0]}
                         </span>
                       </div>
                       <div>
-                        <p className="font-medium">
+                        <p className="font-semibold text-slate-800">
                           {application.firstName} {application.lastName}
                         </p>
                         <p className="text-sm text-slate-500">Applicant</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <Briefcase className="h-5 w-5 text-slate-500" />
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-3">
+                        <Mail className="h-4 w-4 text-slate-500" />
+                        <div>
+                          <p className="text-sm text-slate-500">Email</p>
+                          <p className="font-medium">{application.email}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Calendar className="h-4 w-4 text-slate-500" />
+                        <div>
+                          <p className="text-sm text-slate-500">Applied Date</p>
+                          <p className="font-medium">
+                            {new Date(
+                              application.appliedAt,
+                            ).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Position Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                        <Briefcase className="h-6 w-6 text-white" />
+                      </div>
                       <div>
-                        <p className="font-medium">
+                        <p className="font-semibold text-slate-800">
                           {application.position
                             .replace("-", " ")
                             .replace(/\b\w/g, (l: string) => l.toUpperCase())}
@@ -272,102 +304,120 @@ export default function TrackApplication() {
                         <p className="text-sm text-slate-500">Position</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <Mail className="h-5 w-5 text-slate-500" />
-                      <div>
-                        <p className="font-medium">{application.email}</p>
-                        <p className="text-sm text-slate-500">Email</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Calendar className="h-5 w-5 text-slate-500" />
-                      <div>
-                        <p className="font-medium">
-                          {new Date(application.appliedAt).toLocaleDateString()}
-                        </p>
-                        <p className="text-sm text-slate-500">Applied Date</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-slate-50 p-4 rounded-lg">
-                    <p className="text-sm text-slate-600 mb-2">
-                      Application ID
-                    </p>
-                    <p className="font-mono text-sm bg-white p-2 rounded border">
-                      {application.id}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Next Steps */}
-              <Card className="border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle>What's Next?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {application.status === "pending" && (
-                    <p className="text-slate-600">
-                      We'll start reviewing your application soon. You'll
-                      receive an email update when the status changes.
-                    </p>
-                  )}
-                  {application.status === "reviewing" && (
-                    <p className="text-slate-600">
-                      Our hiring team is carefully reviewing your
-                      qualifications. This process typically takes 3-5 business
-                      days. You'll hear from us soon!
-                    </p>
-                  )}
-                  {application.status === "interviewing" && (
-                    <p className="text-slate-600">
-                      Congratulations on advancing to the interview stage! A
-                      member of our team will contact you via email or phone to
-                      schedule your interview.
-                    </p>
-                  )}
-                  {application.status === "rejected" && (
-                    <div className="space-y-3">
-                      <p className="text-slate-600">
-                        While we won't be moving forward with your application
-                        for this position, we encourage you to apply for other
-                        roles that match your skills.
+                    <div className="bg-slate-50 p-4 rounded-lg">
+                      <p className="text-sm text-slate-600 mb-2">
+                        Application ID
                       </p>
-                      <Link to="/#open-roles">
-                        <Button variant="outline">
-                          View Other Open Positions
+                      <p className="font-mono text-sm bg-white p-2 rounded border break-all">
+                        {application.id}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Next Steps and Contact */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle>What's Next?</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {application.status === "pending" && (
+                      <div className="space-y-3">
+                        <p className="text-slate-600">
+                          We'll start reviewing your application soon. You'll
+                          receive an email update when the status changes.
+                        </p>
+                        <div className="text-sm text-slate-500 bg-slate-50 p-3 rounded">
+                          • Initial review: 1-2 business days
+                          <br />
+                          • Technical assessment: 3-5 business days
+                          <br />• Interview process: 1-2 weeks
+                        </div>
+                      </div>
+                    )}
+                    {application.status === "reviewing" && (
+                      <div className="space-y-3">
+                        <p className="text-slate-600">
+                          Our hiring team is carefully reviewing your
+                          qualifications. This process typically takes 3-5
+                          business days. You'll hear from us soon!
+                        </p>
+                        <div className="text-sm text-slate-500 bg-slate-50 p-3 rounded">
+                          Our team reviews: technical skills, experience fit,
+                          and cultural alignment
+                        </div>
+                      </div>
+                    )}
+                    {application.status === "interviewing" && (
+                      <div className="space-y-3">
+                        <p className="text-slate-600">
+                          Congratulations on advancing to the interview stage! A
+                          member of our team will contact you via email or phone
+                          to schedule your interview.
+                        </p>
+                        <div className="text-sm text-slate-500 bg-slate-50 p-3 rounded">
+                          Interview format: Technical discussion + culture fit
+                        </div>
+                      </div>
+                    )}
+                    {application.status === "rejected" && (
+                      <div className="space-y-3">
+                        <p className="text-slate-600">
+                          While we won't be moving forward with your application
+                          for this position, we encourage you to apply for other
+                          roles that match your skills.
+                        </p>
+                        <Link to="/#open-roles">
+                          <Button variant="outline" size="sm">
+                            View Other Open Positions
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
+                    {application.status === "hired" && (
+                      <div className="space-y-3">
+                        <p className="text-slate-600">
+                          Welcome to the swipr.ai team! Our HR team will contact
+                          you within 24 hours with your offer details and next
+                          steps.
+                        </p>
+                        <div className="text-sm text-slate-500 bg-green-50 p-3 rounded">
+                          • Offer details and equity package
+                          <br />
+                          • Onboarding timeline
+                          <br />• Equipment and setup information
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+
+                <Card className="border-0 shadow-lg">
+                  <CardHeader>
+                    <CardTitle>Need Assistance?</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-slate-600">
+                      If you have any questions about your application or the
+                      hiring process, our team is here to help.
+                    </p>
+                    <div className="space-y-3">
+                      <Link to="/#contact">
+                        <Button variant="outline" className="w-full">
+                          <Mail className="h-4 w-4 mr-2" />
+                          Contact Our Team
                         </Button>
                       </Link>
+                      <div className="text-sm text-slate-500 bg-slate-50 p-3 rounded">
+                        <strong>Response time:</strong> We typically respond
+                        within 24 hours during business days
+                      </div>
                     </div>
-                  )}
-                  {application.status === "hired" && (
-                    <p className="text-slate-600">
-                      Welcome to the swipr.ai team! Our HR team will contact you
-                      within 24 hours with your offer details and next steps.
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Contact */}
-              <Card className="border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle>Have Questions?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-slate-600 mb-4">
-                    If you have any questions about your application or the
-                    hiring process, feel free to reach out to us.
-                  </p>
-                  <Link to="/#contact">
-                    <Button variant="outline">
-                      <Mail className="h-4 w-4 mr-2" />
-                      Contact Us
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           )}
 
