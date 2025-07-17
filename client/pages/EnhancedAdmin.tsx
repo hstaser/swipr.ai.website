@@ -170,6 +170,73 @@ export default function EnhancedAdmin() {
     }
   };
 
+  const updateApplicationStatus = async (
+    applicationId: string,
+    status: string,
+  ) => {
+    try {
+      const response = await fetch(
+        `/api/jobs/applications/${applicationId}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "x-admin-key": localStorage.getItem("admin-key") || "",
+          },
+          body: JSON.stringify({ status }),
+        },
+      );
+
+      if (response.ok) {
+        await refreshData();
+      }
+    } catch (error) {
+      console.error("Failed to update application status:", error);
+    }
+  };
+
+  const downloadResume = async (applicationId: string) => {
+    try {
+      const response = await fetch(
+        `/api/jobs/applications/${applicationId}/download`,
+        {
+          headers: {
+            "x-admin-key": localStorage.getItem("admin-key") || "",
+          },
+        },
+      );
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+
+        // Get filename from response headers or use default
+        const contentDisposition = response.headers.get("content-disposition");
+        let filename = "resume.pdf";
+        if (contentDisposition) {
+          const matches = /filename="(.+)"/.exec(contentDisposition);
+          if (matches != null && matches[1]) {
+            filename = matches[1];
+          }
+        }
+
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        alert("Failed to download resume");
+      }
+    } catch (error) {
+      console.error("Failed to download resume:", error);
+      alert("Error downloading resume");
+    }
+  };
+
   const exportData = (type: string) => {
     let data: any = [];
     let filename = "";
