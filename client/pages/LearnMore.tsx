@@ -66,19 +66,19 @@ export default function LearnMore() {
                 </h2>
                 <div className="space-y-4 text-lg text-slate-600">
                   <p>
-                    Traditional investment platforms present overwhelming
-                    amounts of unstructured data, making it difficult for
-                    investors to identify actionable opportunities.
+                    Traditional investment platforms overwhelm users with
+                    complex data, making it difficult to identify the best
+                    investment opportunities.
                   </p>
                   <p>
-                    Retail investors lack access to institutional-grade research
-                    and quantitative analysis tools, creating an uneven playing
-                    field.
+                    Individual investors lack access to professional-grade
+                    research and portfolio optimization tools, creating an
+                    uneven playing field.
                   </p>
                   <p>
-                    Professional portfolio management is expensive and
-                    inaccessible, while DIY approaches often lead to suboptimal
-                    allocation decisions.
+                    Professional portfolio management is expensive and hard to
+                    access, while self-directed investing often leads to poor
+                    outcomes.
                   </p>
                 </div>
               </div>
