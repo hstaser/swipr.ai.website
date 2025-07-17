@@ -174,7 +174,7 @@ export default function Index() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-white text-white hover:bg-white/10 text-lg px-8 py-3"
+                    className="border-white text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm text-lg px-8 py-3"
                   >
                     Learn More
                   </Button>
@@ -277,7 +277,7 @@ export default function Index() {
                   Backend Engineer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Full-time • Remote/SF
+                  Full-time • Remote/NYC
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -304,7 +304,7 @@ export default function Index() {
                   AI Developer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Full-time • Remote/SF
+                  Full-time • Remote/NYC
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -331,7 +331,7 @@ export default function Index() {
                   Quantitative Analyst
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Full-time • Remote/SF
+                  Full-time • Remote/NYC
                 </CardDescription>
               </CardHeader>
               <CardContent>
