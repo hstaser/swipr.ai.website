@@ -41,6 +41,8 @@ export function createServer() {
   // Job application routes
   app.post("/api/jobs/apply", upload.single("resume"), handleJobApplication);
   app.get("/api/jobs/applications", getApplications);
+  app.get("/api/jobs/applications/details", getApplicationDetails);
+  app.get("/api/jobs/applications/:applicationId/download", downloadResume);
   app.patch(
     "/api/jobs/applications/:applicationId/status",
     updateApplicationStatus,
