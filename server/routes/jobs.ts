@@ -207,3 +207,64 @@ export const updateApplicationStatus: RequestHandler = (req, res) => {
 
   res.json({ success: true, message: "Status updated successfully" });
 };
+
+export const downloadResume: RequestHandler = (req, res) => {
+  const adminKey = req.headers["x-admin-key"];
+  if (adminKey !== "swipr-admin-2024") {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const { applicationId } = req.params;
+  const application = applications.find((app) => app.id === applicationId);
+
+  if (!application) {
+    return res.status(404).json({ error: "Application not found" });
+  }
+
+  if (!application.resumeFilename) {
+    return res
+      .status(404)
+      .json({ error: "No resume file found for this application" });
+  }
+
+  const filePath = path.join(uploadsDir, application.resumeFilename);
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: "Resume file not found on server" });
+  }
+
+  // Set appropriate headers for file download
+  const originalName =
+    application.resumeFilename.split("-").slice(2).join("-") ||
+    application.resumeFilename;
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="${application.firstName}_${application.lastName}_resume_${originalName}"`,
+  );
+  res.setHeader("Content-Type", "application/octet-stream");
+
+  // Stream the file to the response
+  const fileStream = fs.createReadStream(filePath);
+  fileStream.pipe(res);
+
+  fileStream.on("error", (error) => {
+    console.error("File streaming error:", error);
+    res.status(500).json({ error: "Error downloading file" });
+  });
+};
+
+export const getApplicationDetails: RequestHandler = (req, res) => {
+  const adminKey = req.headers["x-admin-key"];
+  if (adminKey !== "swipr-admin-2024") {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  res.json({
+    applications: applications.map((app) => ({
+      ...app,
+      // Include the actual filename for download functionality
+      resumeFilename: app.resumeFilename,
+    })),
+    total: applications.length,
+  });
+};
