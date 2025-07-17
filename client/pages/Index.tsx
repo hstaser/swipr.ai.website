@@ -357,6 +357,33 @@ export default function Index() {
                 </Link>
               </CardContent>
             </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-xl text-slate-800">
+                  Senior Mobile App Developer
+                </CardTitle>
+                <CardDescription className="text-slate-600">
+                  Full-time • Remote/NYC
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-slate-600 mb-4 leading-relaxed">
+                  Create world-class mobile experiences that make portfolio
+                  management intuitive and accessible. Build complex financial
+                  apps with smooth performance.
+                </p>
+                <div className="text-sm text-orange-600 bg-orange-50 p-3 rounded mb-6">
+                  • Significant equity package with mobile performance bonuses
+                </div>
+                <Link to="/apply?position=mobile-app-developer">
+                  <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200">
+                    Apply Now
+                    <Smartphone className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
