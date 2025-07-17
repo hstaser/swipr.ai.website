@@ -135,8 +135,9 @@ export default function Index() {
               swipr.ai
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Revolutionizing stock investing through intelligent swipe-based
-              decisions powered by AI and portfolio optimization
+              Democratizing institutional-grade investment strategies through
+              intelligent decision-making powered by AI and quantitative
+              analysis
             </p>
             <div className="space-y-4">
               <form
@@ -197,10 +198,11 @@ export default function Index() {
               The Future of Investing
             </h2>
             <p className="text-xl text-slate-600 leading-relaxed">
-              Swipr.ai transforms complex investment decisions into simple,
-              intuitive swipes. Our AI-powered platform analyzes thousands of
-              data points to present you with personalized stock recommendations
-              that match your risk profile and investment goals.
+              swipr.ai transforms complex investment research into streamlined,
+              data-driven decisions. Our AI platform synthesizes fundamental
+              analysis, technical indicators, and market sentiment to deliver
+              personalized investment recommendations tailored to your risk
+              profile and objectives.
             </p>
           </div>
 
@@ -211,13 +213,14 @@ export default function Index() {
                   <TrendingUp className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-2xl text-slate-800">
-                  Smart Swipe Interface
+                  Intelligent Decision Engine
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base text-slate-600 leading-relaxed">
-                  Swipe right on stocks you love, left on ones you don't. Our
-                  intuitive interface makes investing as easy as social media.
+                  Streamlined binary decision framework for rapid portfolio
+                  construction. Our intuitive interface distills complex
+                  analysis into clear investment choices.
                 </CardDescription>
               </CardContent>
             </Card>
