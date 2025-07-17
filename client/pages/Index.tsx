@@ -475,6 +475,12 @@ export default function Index() {
                 </p>
               </div>
               <div className="flex items-center space-x-8">
+                <Link
+                  to="/track"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Track Application
+                </Link>
                 <a
                   href="mailto:team@swipr.ai"
                   className="text-slate-400 hover:text-white transition-colors"
