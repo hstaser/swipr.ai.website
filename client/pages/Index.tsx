@@ -286,15 +286,11 @@ export default function Index() {
                   platform. Experience with Python, PostgreSQL, and cloud
                   services required.
                 </p>
-                <Button
-                  className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700"
-                  onClick={() =>
-                    (window.location.href =
-                      "mailto:team@swipr.ai?subject=Backend Engineer Application")
-                  }
-                >
-                  Apply Now
-                </Button>
+                <Link to="/apply?position=backend-engineer">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700">
+                    Apply Now
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -313,15 +309,11 @@ export default function Index() {
                   recommendation systems. Deep knowledge of ML/AI and financial
                   markets.
                 </p>
-                <Button
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                  onClick={() =>
-                    (window.location.href =
-                      "mailto:team@swipr.ai?subject=AI Developer Application")
-                  }
-                >
-                  Apply Now
-                </Button>
+                <Link to="/apply?position=ai-developer">
+                  <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                    Apply Now
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -340,15 +332,11 @@ export default function Index() {
                   Strong background in mathematics, statistics, and financial
                   engineering.
                 </p>
-                <Button
-                  className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700"
-                  onClick={() =>
-                    (window.location.href =
-                      "mailto:team@swipr.ai?subject=Quantitative Analyst Application")
-                  }
-                >
-                  Apply Now
-                </Button>
+                <Link to="/apply?position=quantitative-analyst">
+                  <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700">
+                    Apply Now
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
