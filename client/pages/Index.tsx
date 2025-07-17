@@ -43,6 +43,14 @@ export default function Index() {
   const [contactMessage, setContactMessage] = useState("");
   const [waitlistMessage, setWaitlistMessage] = useState("");
 
+  const {
+    trackApplyClick,
+    trackWaitlistSignup,
+    trackFormSubmit,
+    trackContactFormOpen,
+    trackLearnMoreClick,
+  } = useAnalytics();
+
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingContact(true);
