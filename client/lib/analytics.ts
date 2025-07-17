@@ -25,11 +25,27 @@ class Analytics {
   private sessionId: string;
   private startTime: number;
   private lastScrollDepth: number = 0;
+  private isEnabled: boolean = true;
 
   constructor() {
     this.sessionId = this.generateSessionId();
     this.startTime = Date.now();
+    this.checkAnalyticsAvailability();
     this.initializeTracking();
+  }
+
+  private async checkAnalyticsAvailability() {
+    try {
+      // Quick health check for analytics endpoint
+      const response = await fetch("/api/analytics/track", {
+        method: "OPTIONS",
+        signal: AbortSignal.timeout(3000),
+      });
+      this.isEnabled = true;
+    } catch (error) {
+      console.debug("Analytics endpoint not available, disabling tracking");
+      this.isEnabled = false;
+    }
   }
 
   private generateSessionId(): string {
