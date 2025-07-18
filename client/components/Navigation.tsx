@@ -94,12 +94,7 @@ export function Navigation({
                 Join Our Team
               </Link>
             )}
-            <Link
-              to="/track"
-              className={`${textColor} ${hoverColor} transition-colors font-medium ${isActive("/track") ? "text-blue-600" : ""}`}
-            >
-              Track Application
-            </Link>
+
             {location.pathname === "/" ? (
               <a
                 href="#contact"
@@ -214,16 +209,7 @@ export function Navigation({
                   </div>
                 </Link>
               )}
-              <Link
-                to="/track"
-                className={`block px-4 py-2 ${textColor} ${hoverColor} ${isTransparent ? "hover:bg-white/10" : "hover:bg-slate-50"} rounded-lg transition-colors font-medium ${isActive("/track") ? "text-blue-600" : ""}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <div className="flex items-center space-x-3">
-                  <BarChart3 className="h-4 w-4" />
-                  <span>Track Application</span>
-                </div>
-              </Link>
+
               {location.pathname === "/" ? (
                 <a
                   href="#contact"
