@@ -1,0 +1,175 @@
+import {
+  ApplicationStorage,
+  ContactStorage,
+  WaitlistStorage,
+} from "../lib/storage.js";
+
+export default async function handler(req, res) {
+  // Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  // Simple authentication check (in production, use proper auth)
+  const authHeader = req.headers.authorization;
+  if (!authHeader || authHeader !== "Bearer admin-token") {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized",
+    });
+  }
+
+  try {
+    if (req.method === "GET") {
+      const { type, id } = req.query;
+
+      switch (type) {
+        case "stats":
+          const stats = ApplicationStorage.getStats();
+          const waitlistCount = WaitlistStorage.getCount();
+          const contacts = ContactStorage.getAll();
+
+          return res.status(200).json({
+            success: true,
+            data: {
+              applications: stats,
+              waitlist: { count: waitlistCount },
+              contacts: {
+                total: contacts.length,
+                unread: contacts.filter((c) => c.status === "new").length,
+              },
+            },
+          });
+
+        case "applications":
+          if (id) {
+            const application = ApplicationStorage.getById(id);
+            if (!application) {
+              return res.status(404).json({
+                success: false,
+                message: "Application not found",
+              });
+            }
+            return res.status(200).json({
+              success: true,
+              data: application,
+            });
+          } else {
+            const applications = ApplicationStorage.getAll();
+            // Sort by most recent first
+            applications.sort(
+              (a, b) => new Date(b.appliedAt) - new Date(a.appliedAt),
+            );
+            return res.status(200).json({
+              success: true,
+              data: applications,
+            });
+          }
+
+        case "contacts":
+          const allContacts = ContactStorage.getAll();
+          // Sort by most recent first
+          allContacts.sort(
+            (a, b) => new Date(b.submittedAt) - new Date(a.submittedAt),
+          );
+          return res.status(200).json({
+            success: true,
+            data: allContacts,
+          });
+
+        case "waitlist":
+          const waitlist = WaitlistStorage.getAll();
+          // Sort by most recent first
+          waitlist.sort((a, b) => new Date(b.joinedAt) - new Date(a.joinedAt));
+          return res.status(200).json({
+            success: true,
+            data: waitlist,
+          });
+
+        default:
+          return res.status(400).json({
+            success: false,
+            message: "Invalid type parameter",
+          });
+      }
+    }
+
+    if (req.method === "PUT") {
+      const { type, id } = req.query;
+      const { status, notes } = req.body;
+
+      if (type === "application" && id) {
+        const validStatuses = [
+          "pending",
+          "reviewing",
+          "interviewing",
+          "rejected",
+          "hired",
+        ];
+
+        if (!validStatuses.includes(status)) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid status",
+          });
+        }
+
+        const updatedApplication = ApplicationStorage.updateStatus(
+          id,
+          status,
+          notes,
+        );
+
+        if (!updatedApplication) {
+          return res.status(404).json({
+            success: false,
+            message: "Application not found",
+          });
+        }
+
+        return res.status(200).json({
+          success: true,
+          data: updatedApplication,
+          message: "Application status updated successfully",
+        });
+      }
+
+      if (type === "contact" && id) {
+        const updatedContact = ContactStorage.markAsRead(id);
+
+        if (!updatedContact) {
+          return res.status(404).json({
+            success: false,
+            message: "Contact not found",
+          });
+        }
+
+        return res.status(200).json({
+          success: true,
+          data: updatedContact,
+          message: "Contact marked as read",
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        message: "Invalid request parameters",
+      });
+    }
+
+    return res.status(405).json({
+      success: false,
+      message: `Method ${req.method} not allowed`,
+    });
+  } catch (error) {
+    console.error("Admin dashboard error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+}
