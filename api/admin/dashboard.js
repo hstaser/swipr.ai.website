@@ -1,6 +1,6 @@
-import { ApplicationService } from "../../server/services/applicationService.ts";
-import { ContactService } from "../../server/services/contactService.ts";
-import { WaitlistService } from "../../server/services/waitlistService.ts";
+import { ApplicationService } from "../lib/applicationService.js";
+import { ContactService } from "../lib/contactService.js";
+import { WaitlistService } from "../lib/waitlistService.js";
 
 export default async function handler(req, res) {
   // Set CORS headers
