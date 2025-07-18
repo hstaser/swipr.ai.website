@@ -1,10 +1,22 @@
 import { getCollection, COLLECTIONS, MongoContact } from "../lib/mongodb.js";
 
+// Fallback in-memory storage
+const fallbackContacts: MongoContact[] = [];
+
 export class ContactService {
   static async create(contactData: Omit<MongoContact, "_id">) {
     try {
       const collection = await getCollection(COLLECTIONS.CONTACTS);
-      const result = await collection.insertOne(contactData);
+
+      let result;
+      if (collection) {
+        result = await collection.insertOne(contactData);
+        console.log("🔸 Contact stored in MongoDB");
+      } else {
+        fallbackContacts.push(contactData as MongoContact);
+        result = { insertedId: `fallback-${Date.now()}` };
+        console.log("💾 Contact stored in memory");
+      }
 
       console.log("💬 NEW CONTACT MESSAGE RECEIVED");
       console.log("=================================");
@@ -25,12 +37,19 @@ export class ContactService {
   static async getAll() {
     try {
       const collection = await getCollection(COLLECTIONS.CONTACTS);
-      const contacts = await collection
-        .find({})
-        .sort({ timestamp: -1 })
-        .toArray();
 
-      console.log(`📊 Fetching ${contacts.length} contacts from MongoDB`);
+      let contacts;
+      if (collection) {
+        contacts = await collection.find({}).sort({ timestamp: -1 }).toArray();
+        console.log(`📊 Fetching ${contacts.length} contacts from MongoDB`);
+      } else {
+        contacts = [...fallbackContacts].sort(
+          (a, b) =>
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+        );
+        console.log(`📊 Fetching ${contacts.length} contacts from memory`);
+      }
+
       return contacts;
     } catch (error) {
       console.error("❌ Error fetching contacts:", error);
@@ -70,7 +89,13 @@ export class ContactService {
   static async getStats() {
     try {
       const collection = await getCollection(COLLECTIONS.CONTACTS);
-      const contacts = await collection.find({}).toArray();
+
+      let contacts;
+      if (collection) {
+        contacts = await collection.find({}).toArray();
+      } else {
+        contacts = fallbackContacts;
+      }
 
       return {
         total: contacts.length,
