@@ -67,19 +67,9 @@ const POSITIONS = {
     description:
       "Work on our mobile application that brings sophisticated portfolio management to users' fingertips",
     skills: [
-      "Expert-level React Native or Flutter with 5+ years of complex app development",
-      "Native iOS (Swift/SwiftUI) and Android (Kotlin/Jetpack Compose) development",
-      "Advanced state management (Redux Toolkit, Zustand, or MobX)",
-      "Real-time data synchronization and WebSocket integration",
-      "Complex animations, gestures, and custom UI components",
-      "Biometric authentication, secure storage, and encryption",
-      "Financial data visualization and interactive charting (D3.js, Victory, Recharts)",
-      "Offline-first architecture with data synchronization",
-      "Performance optimization for large datasets and smooth animations",
-      "CI/CD pipelines, automated testing, and App Store deployment",
-      "Push notifications, deep linking, and background processing",
-      "Accessibility standards and internationalization",
-      "Experience with fintech or trading apps preferred",
+      "1+ years of college or bootcamp experience",
+      "Interest in mobile app development",
+      "Basic React, Flutter, or mobile development experience",
     ],
     compensation:
       "Significant equity package with mobile app performance bonuses",
