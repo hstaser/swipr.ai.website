@@ -307,7 +307,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-xl text-slate-800">
@@ -403,54 +403,6 @@ export default function Index() {
                   <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200">
                     Apply Now
                     <Smartphone className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
-              <CardHeader>
-                <CardTitle className="text-xl text-slate-800">
-                  Machine Learning Engineer
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  Part-time • Remote/NYC
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600 mb-4 leading-relaxed">
-                  Build and deploy ML models that power our investment
-                  recommendations and portfolio optimization algorithms.
-                </p>
-
-                <Link to="/apply?position=machine-learning-engineer">
-                  <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 transition-transform duration-200">
-                    Apply Now
-                    <Brain className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
-              <CardHeader>
-                <CardTitle className="text-xl text-slate-800">
-                  Product Designer
-                </CardTitle>
-                <CardDescription className="text-slate-600">
-                  Part-time • Remote/NYC
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600 mb-4 leading-relaxed">
-                  Design intuitive user experiences that make investing
-                  accessible and engaging for Gen Z and first-time investors.
-                </p>
-
-                <Link to="/apply?position=product-designer">
-                  <Button className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 hover:scale-105 transition-transform duration-200">
-                    Apply Now
-                    <Users className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
@@ -603,12 +555,7 @@ export default function Index() {
                 >
                   Join Our Team
                 </a>
-                <Link
-                  to="/track"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Track Application
-                </Link>
+
                 <a
                   href="#contact"
                   className="text-slate-400 hover:text-white transition-colors"
