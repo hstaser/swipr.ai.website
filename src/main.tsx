@@ -1,5 +1,6 @@
 import "../client/global.css";
 import "../client/lib/resize-observer-fix";
+import "../client/lib/analytics";
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
