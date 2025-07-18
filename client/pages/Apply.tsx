@@ -56,13 +56,9 @@ const POSITIONS = {
     description:
       "Work on sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
     skills: [
-      "Advanced degree in Mathematics, Physics, Statistics, or Financial Engineering",
-      "Python/R for quantitative analysis and backtesting",
-      "Modern portfolio theory and factor modeling",
-      "Options pricing, derivatives, and fixed income modeling",
-      "Risk management frameworks and stress testing",
-      "Statistical arbitrage and market microstructure",
-      "Experience with portfolio optimization libraries (cvxpy, cvxopt)",
+      "1+ years of college in math, statistics, or related field",
+      "Interest in finance and quantitative analysis",
+      "Basic understanding of statistics or willingness to learn",
     ],
     compensation: "Equity-heavy compensation with performance incentives",
   },
