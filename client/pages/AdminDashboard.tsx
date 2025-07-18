@@ -355,8 +355,8 @@ export default function AdminDashboard() {
               </h1>
             </div>
             <div className="flex gap-2 items-center">
-              {stats && (
-                <div className="text-sm text-slate-600 mr-3">
+              <div className="text-sm text-slate-600 mr-3">
+                {stats ? (
                   <span className="inline-flex items-center">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
                     {stats.applications.total +
@@ -364,8 +364,13 @@ export default function AdminDashboard() {
                       stats.waitlist.count}{" "}
                     total records
                   </span>
-                </div>
-              )}
+                ) : (
+                  <span className="inline-flex items-center">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full mr-1"></div>
+                    Loading data...
+                  </span>
+                )}
+              </div>
               <Button
                 onClick={fetchData}
                 variant="outline"
