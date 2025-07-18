@@ -12,7 +12,7 @@ import LearnMore from "../client/pages/LearnMore";
 import Apply from "../client/pages/Apply";
 
 import Privacy from "../client/pages/Privacy";
-import EnhancedAdmin from "../client/pages/EnhancedAdmin";
+import AdminDashboard from "../client/pages/AdminDashboard";
 import NotFound from "../client/pages/NotFound";
 
 const queryClient = new QueryClient();
