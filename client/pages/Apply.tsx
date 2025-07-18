@@ -513,36 +513,6 @@ export default function Apply() {
                     </p>
                   </div>
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      <ExternalLink className="h-4 w-4 inline mr-1" />
-                      LinkedIn Profile
-                    </label>
-                    <Input
-                      type="url"
-                      name="linkedinUrl"
-                      value={formData.linkedinUrl}
-                      onChange={handleInputChange}
-                      placeholder="https://linkedin.com/in/yourprofile"
-                      className="h-12"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Portfolio/Website
-                    </label>
-                    <Input
-                      type="url"
-                      name="portfolioUrl"
-                      value={formData.portfolioUrl}
-                      onChange={handleInputChange}
-                      placeholder="https://yourportfolio.com"
-                      className="h-12"
-                    />
-                  </div>
-                </div>
               </CardContent>
             </Card>
 
