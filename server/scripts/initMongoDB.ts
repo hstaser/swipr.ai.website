@@ -1,7 +1,7 @@
-import { ApplicationService } from "../services/applicationService.js";
-import { ContactService } from "../services/contactService.js";
-import { WaitlistService } from "../services/waitlistService.js";
-import { connectToMongoDB } from "../lib/mongodb.js";
+import { ApplicationService } from "../services/applicationService.ts";
+import { ContactService } from "../services/contactService.ts";
+import { WaitlistService } from "../services/waitlistService.ts";
+import { connectToMongoDB } from "../lib/mongodb.ts";
 
 async function initializeData() {
   try {
