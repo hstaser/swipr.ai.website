@@ -13,26 +13,54 @@ export interface WaitlistResponse {
   message: string;
 }
 
+interface WaitlistEntry {
+  id: string;
+  email: string;
+  name?: string;
+  joinedAt: string;
+}
+
+// In-memory storage for demo (in production, use a database)
+export const waitlistEntries: WaitlistEntry[] = [];
+
 export const handleWaitlistSignup: RequestHandler = async (req, res) => {
   try {
     // Validate the request body
     const validatedData = WaitlistSchema.parse(req.body);
 
-    // In a production environment, you would:
-    // 1. Store the email in a database (PostgreSQL, MongoDB, etc.)
-    // 2. Send a confirmation email
-    // 3. Add to email marketing platform (Mailchimp, ConvertKit, etc.)
+    // Check if email already exists
+    const existingEntry = waitlistEntries.find(
+      (entry) =>
+        entry.email.toLowerCase() === validatedData.email.toLowerCase(),
+    );
 
-    console.log("🚀 New waitlist signup:");
-    console.log(`Email: ${validatedData.email}`);
-    if (validatedData.name) {
-      console.log(`Name: ${validatedData.name}`);
+    if (existingEntry) {
+      return res.status(409).json({
+        success: false,
+        message: "This email is already on our waitlist!",
+      });
     }
-    console.log("---");
-    console.log("Would send notification to: team@swipr.ai");
-    console.log("Would send confirmation email to user");
 
-    // Simulate database storage and email sending
+    // Create waitlist entry
+    const waitlistEntry: WaitlistEntry = {
+      id: `WAITLIST-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      email: validatedData.email.toLowerCase(),
+      name: validatedData.name || "",
+      joinedAt: new Date().toISOString(),
+    };
+
+    // Store the entry
+    waitlistEntries.push(waitlistEntry);
+
+    console.log("📝 NEW WAITLIST SIGNUP");
+    console.log("=======================");
+    console.log(`📧 Email: ${waitlistEntry.email}`);
+    console.log(`👤 Name: ${waitlistEntry.name || "Anonymous"}`);
+    console.log(`🆔 Entry ID: ${waitlistEntry.id}`);
+    console.log(`⏰ Joined At: ${waitlistEntry.joinedAt}`);
+    console.log(`📊 Total Waitlist: ${waitlistEntries.length}`);
+    console.log("=======================");
+
     const response: WaitlistResponse = {
       success: true,
       message:
