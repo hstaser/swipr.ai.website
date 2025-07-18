@@ -116,17 +116,6 @@ export function Navigation({
                 Contact
               </Link>
             )}
-            <div className="flex items-center space-x-3">
-              <Link to="/apply">
-                <Button
-                  size="sm"
-                  className={`${isTransparent ? "bg-white/20 hover:bg-white/30 text-white border-white/30" : "bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700"}`}
-                  variant={isTransparent ? "outline" : "default"}
-                >
-                  Apply Now
-                </Button>
-              </Link>
-            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -240,20 +229,6 @@ export function Navigation({
                   <span>Privacy Policy</span>
                 </div>
               </Link>
-              <div
-                className={`border-t pt-3 mt-3 ${isTransparent ? "border-white/20" : "border-slate-200"}`}
-              >
-                <div className="px-4 space-y-2">
-                  <Link to="/apply" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button
-                      className={`w-full ${isTransparent ? "bg-white/20 hover:bg-white/30 text-white border-white/30" : "bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700"}`}
-                      variant={isTransparent ? "outline" : "default"}
-                    >
-                      Apply Now
-                    </Button>
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         )}
