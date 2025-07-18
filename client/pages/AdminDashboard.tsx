@@ -394,6 +394,36 @@ export default function AdminDashboard() {
                 Debug
               </Button>
               <Button
+                onClick={async () => {
+                  const token = localStorage.getItem("adminToken");
+                  console.log("🧪 Testing API directly...");
+                  try {
+                    const response = await fetch(
+                      "/api/admin/dashboard?type=stats",
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                        },
+                      },
+                    );
+                    console.log("API Test Response Status:", response.status);
+                    const data = await response.json();
+                    console.log("API Test Response Data:", data);
+                    alert(
+                      `API Test: ${response.status} - Check console for details`,
+                    );
+                  } catch (error) {
+                    console.error("API Test Error:", error);
+                    alert(`API Test Failed: ${error}`);
+                  }
+                }}
+                variant="outline"
+                size="sm"
+              >
+                Test API
+              </Button>
+              <Button
                 onClick={handleLogout}
                 variant="outline"
                 size="sm"
