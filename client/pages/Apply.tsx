@@ -77,7 +77,7 @@ const POSITIONS = {
   "mobile-app-developer": {
     title: "Senior Mobile App Developer",
     description:
-      "Join our mobile team to enhance our world-class mobile application that brings sophisticated portfolio management to users' fingertips",
+      "Work on our mobile application that brings sophisticated portfolio management to users' fingertips",
     skills: [
       "Expert-level React Native or Flutter with 5+ years of complex app development",
       "Native iOS (Swift/SwiftUI) and Android (Kotlin/Jetpack Compose) development",
