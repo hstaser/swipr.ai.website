@@ -24,10 +24,6 @@ export const ApplicationStorage = {
         email: application.email,
         phone: application.phone,
         position: application.position,
-        experience: application.experience,
-        linkedinUrl: application.linkedinUrl || "",
-        portfolioUrl: application.portfolioUrl || "",
-        startDate: application.startDate,
         status: "pending",
         appliedAt: new Date().toISOString(),
         lastUpdated: new Date().toISOString(),
@@ -45,13 +41,7 @@ export const ApplicationStorage = {
       console.log(`📧 Email: ${newApplication.email}`);
       console.log(`📞 Phone: ${newApplication.phone}`);
       console.log(`💼 Position: ${newApplication.position}`);
-      console.log(`🎯 Experience: ${newApplication.experience}`);
-      console.log(`📅 Start Date: ${newApplication.startDate}`);
       console.log(`🆔 Application ID: ${newApplication.id}`);
-      if (newApplication.linkedinUrl)
-        console.log(`🔗 LinkedIn: ${newApplication.linkedinUrl}`);
-      if (newApplication.portfolioUrl)
-        console.log(`🌐 Portfolio: ${newApplication.portfolioUrl}`);
       console.log(`⏰ Applied At: ${newApplication.appliedAt}`);
       console.log(
         `📊 Total Applications: ${global.swiprData.applications.length}`,
@@ -368,10 +358,6 @@ if (global.swiprData.applications.length === 0) {
     email: "test@example.com",
     phone: "+1-555-0123",
     position: "backend-engineer",
-    experience: "2-3 years",
-    linkedinUrl: "https://linkedin.com/in/test",
-    portfolioUrl: "https://testportfolio.com",
-    startDate: "2025-02-01",
     status: "pending",
     appliedAt: new Date().toISOString(),
     lastUpdated: new Date().toISOString(),
