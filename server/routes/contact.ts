@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { z } from "zod";
+import { ContactService } from "../services/contactService.js";
 
 const ContactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -19,15 +20,26 @@ export const handleContact: RequestHandler = async (req, res) => {
     // Validate the request body
     const validatedData = ContactSchema.parse(req.body);
 
-    // Store message in admin dashboard (import and call directly to avoid fetch loop)
+    // Store message in MongoDB
     try {
-      // Import the store function directly to avoid self-referencing fetch
+      const contactData = {
+        id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        name: validatedData.name,
+        email: validatedData.email,
+        message: validatedData.message,
+        timestamp: new Date().toISOString(),
+        status: "new" as const,
+        source: "contact_form" as const,
+      };
+
+      await ContactService.create(contactData);
+      console.log("📧 Contact message stored in MongoDB");
+
+      // Also store in analytics for backwards compatibility
       const { storeContactMessage } = await import("./analytics");
       const mockReq = { body: validatedData } as any;
       const mockRes = { json: () => {} } as any;
-
       storeContactMessage(mockReq, mockRes, () => {});
-      console.log("📧 Contact message stored in admin dashboard");
     } catch (storeError) {
       console.error("Failed to store contact message:", storeError);
       // Don't fail the contact form if storage fails
