@@ -184,20 +184,20 @@ export default function AdminDashboard() {
         "/api/admin/dashboard?type=applications",
         { headers },
       );
-      console.log("📱 Applications response status:", appsResponse.status);
+      safeLog("📱 Applications response status:", appsResponse.status);
       if (appsResponse.ok) {
         const appsResult = await appsResponse.json();
-        console.log("📱 Applications data received:", appsResult);
+        safeLog("📱 Applications data received:", appsResult);
         if (appsResult.success && Array.isArray(appsResult.data)) {
           setApplications(appsResult.data);
-          console.log(`✅ Loaded ${appsResult.data.length} applications`);
+          safeLog(`✅ Loaded ${appsResult.data.length} applications`);
         } else {
-          console.error("❌ Applications data invalid:", appsResult);
+          safeError("❌ Applications data invalid:", appsResult);
           setApplications([]);
         }
       } else {
         const errorText = await appsResponse.text();
-        console.error(
+        safeError(
           "❌ Applications fetch failed:",
           appsResponse.status,
           errorText,
@@ -209,20 +209,20 @@ export default function AdminDashboard() {
         "/api/admin/dashboard?type=contacts",
         { headers },
       );
-      console.log("📧 Contacts response status:", contactsResponse.status);
+      safeLog("📧 Contacts response status:", contactsResponse.status);
       if (contactsResponse.ok) {
         const contactsResult = await contactsResponse.json();
-        console.log("📧 Contacts data received:", contactsResult);
+        safeLog("📧 Contacts data received:", contactsResult);
         if (contactsResult.success && Array.isArray(contactsResult.data)) {
           setContacts(contactsResult.data);
-          console.log(`✅ Loaded ${contactsResult.data.length} contacts`);
+          safeLog(`✅ Loaded ${contactsResult.data.length} contacts`);
         } else {
-          console.error("❌ Contacts data invalid:", contactsResult);
+          safeError("❌ Contacts data invalid:", contactsResult);
           setContacts([]);
         }
       } else {
         const errorText = await contactsResponse.text();
-        console.error(
+        safeError(
           "❌ Contacts fetch failed:",
           contactsResponse.status,
           errorText,
