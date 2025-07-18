@@ -369,7 +369,7 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Work on smart algorithms that optimize portfolios and manage
+                  Create smart algorithms that optimize portfolios and manage
                   risk. Help users achieve better returns while keeping their
                   investments safe.
                 </p>
