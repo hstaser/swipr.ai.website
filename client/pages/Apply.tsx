@@ -335,7 +335,6 @@ export default function Apply() {
         position,
         experience: formData.experience,
         startDate: formData.startDate,
-        coverLetter: formData.coverLetter?.trim() || "",
         linkedinUrl: formData.linkedinUrl?.trim() || "",
         portfolioUrl: formData.portfolioUrl?.trim() || "",
       };
