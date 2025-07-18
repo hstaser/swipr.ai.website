@@ -146,7 +146,12 @@ export default function AdminDashboard() {
       if (statsResponse.ok) {
         const statsResult = await statsResponse.json();
         console.log("📊 Stats data received:", statsResult);
-        setStats(statsResult.data);
+        if (statsResult.success && statsResult.data) {
+          setStats(statsResult.data);
+        } else {
+          console.error("❌ Stats data invalid:", statsResult);
+          setError("Invalid stats data received");
+        }
       } else {
         const errorText = await statsResponse.text();
         console.error(
@@ -166,8 +171,13 @@ export default function AdminDashboard() {
       if (appsResponse.ok) {
         const appsResult = await appsResponse.json();
         console.log("📱 Applications data received:", appsResult);
-        setApplications(appsResult.data || []);
-        console.log(`✅ Loaded ${appsResult.data?.length || 0} applications`);
+        if (appsResult.success && Array.isArray(appsResult.data)) {
+          setApplications(appsResult.data);
+          console.log(`✅ Loaded ${appsResult.data.length} applications`);
+        } else {
+          console.error("❌ Applications data invalid:", appsResult);
+          setApplications([]);
+        }
       } else {
         const errorText = await appsResponse.text();
         console.error(
@@ -186,8 +196,13 @@ export default function AdminDashboard() {
       if (contactsResponse.ok) {
         const contactsResult = await contactsResponse.json();
         console.log("📧 Contacts data received:", contactsResult);
-        setContacts(contactsResult.data || []);
-        console.log(`✅ Loaded ${contactsResult.data?.length || 0} contacts`);
+        if (contactsResult.success && Array.isArray(contactsResult.data)) {
+          setContacts(contactsResult.data);
+          console.log(`✅ Loaded ${contactsResult.data.length} contacts`);
+        } else {
+          console.error("❌ Contacts data invalid:", contactsResult);
+          setContacts([]);
+        }
       } else {
         const errorText = await contactsResponse.text();
         console.error(
@@ -206,10 +221,15 @@ export default function AdminDashboard() {
       if (waitlistResponse.ok) {
         const waitlistResult = await waitlistResponse.json();
         console.log("📝 Waitlist data received:", waitlistResult);
-        setWaitlist(waitlistResult.data || []);
-        console.log(
-          `✅ Loaded ${waitlistResult.data?.length || 0} waitlist entries`,
-        );
+        if (waitlistResult.success && Array.isArray(waitlistResult.data)) {
+          setWaitlist(waitlistResult.data);
+          console.log(
+            `✅ Loaded ${waitlistResult.data.length} waitlist entries`,
+          );
+        } else {
+          console.error("❌ Waitlist data invalid:", waitlistResult);
+          setWaitlist([]);
+        }
       } else {
         const errorText = await waitlistResponse.text();
         console.error(
