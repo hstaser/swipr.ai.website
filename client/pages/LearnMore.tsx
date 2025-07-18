@@ -36,9 +36,9 @@ export default function LearnMore() {
               The Future of Intelligent Investing
             </h1>
             <p className="text-xl text-blue-100 leading-relaxed mb-8 max-w-3xl mx-auto">
-              Discover how swipr.ai democratizes institutional-grade investment
-              strategies through AI-powered portfolio optimization and risk
-              management.
+              Discover how swipr.ai makes professional-grade investment tools
+              accessible to everyone with AI-powered portfolio optimization and
+              risk management.
             </p>
           </div>
         </div>
