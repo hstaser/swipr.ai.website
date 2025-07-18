@@ -301,17 +301,27 @@ export default function AdminDashboard() {
                 Admin Dashboard
               </h1>
             </div>
-            <Button
-              onClick={fetchData}
-              variant="outline"
-              size="sm"
-              disabled={loading}
-            >
-              <RefreshCw
-                className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`}
-              />
-              Refresh
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                onClick={fetchData}
+                variant="outline"
+                size="sm"
+                disabled={loading}
+              >
+                <RefreshCw
+                  className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`}
+                />
+                Refresh
+              </Button>
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                size="sm"
+                className="text-red-600 hover:text-red-700"
+              >
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </div>
