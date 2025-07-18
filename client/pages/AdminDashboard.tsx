@@ -378,6 +378,22 @@ export default function AdminDashboard() {
                 Refresh
               </Button>
               <Button
+                onClick={() => {
+                  console.log("🔍 DEBUG INFO:");
+                  console.log("- Token:", localStorage.getItem("adminToken"));
+                  console.log("- Stats:", stats);
+                  console.log("- Applications:", applications);
+                  console.log("- Contacts:", contacts);
+                  console.log("- Waitlist:", waitlist);
+                  console.log("- URL:", window.location.href);
+                  alert("Debug info logged to console (F12)");
+                }}
+                variant="outline"
+                size="sm"
+              >
+                Debug
+              </Button>
+              <Button
                 onClick={handleLogout}
                 variant="outline"
                 size="sm"
