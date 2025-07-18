@@ -353,6 +353,51 @@ export function debugStorage() {
   };
 }
 
-// Initialize storage
+// Initialize storage with test data to verify it works
 console.log("🔧 Initializing swipr.ai storage system...");
+
+// Add test data if storage is empty (for immediate verification)
+if (global.swiprData.applications.length === 0) {
+  console.log("📝 Adding test data for immediate verification...");
+
+  // Test application
+  global.swiprData.applications.push({
+    id: "APP-test-123",
+    firstName: "Test",
+    lastName: "Candidate",
+    email: "test@example.com",
+    phone: "+1-555-0123",
+    position: "backend-engineer",
+    experience: "2-3 years",
+    linkedinUrl: "https://linkedin.com/in/test",
+    portfolioUrl: "https://testportfolio.com",
+    startDate: "2025-02-01",
+    status: "pending",
+    appliedAt: new Date().toISOString(),
+    lastUpdated: new Date().toISOString(),
+    notes: "",
+  });
+
+  // Test contact
+  global.swiprData.contacts.push({
+    id: "CONTACT-test-456",
+    name: "Test User",
+    email: "contact@example.com",
+    message: "This is a test contact message to verify the system is working.",
+    status: "new",
+    submittedAt: new Date().toISOString(),
+    readAt: null,
+  });
+
+  // Test waitlist
+  global.swiprData.waitlist.push({
+    id: "WAITLIST-test-789",
+    email: "waitlist@example.com",
+    name: "Test Subscriber",
+    joinedAt: new Date().toISOString(),
+  });
+
+  console.log("✅ Test data added successfully");
+}
+
 debugStorage();
