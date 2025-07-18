@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   ArrowLeft,
   Upload,
@@ -24,6 +25,8 @@ import {
   Calendar,
   Briefcase,
   ExternalLink,
+  AlertCircle,
+  Info,
 } from "lucide-react";
 import { JobApplicationRequest, JobApplicationResponse } from "@shared/api";
 
@@ -31,7 +34,7 @@ const POSITIONS = {
   "backend-engineer": {
     title: "Backend Engineer",
     description:
-      "Work on high-performance, scalable infrastructure for our algorithmic trading platform",
+      "Help build scalable, high-performance systems that power our investment platform. Use cutting-edge technology to help users make better investment decisions.",
     skills: [
       "1+ years of college or bootcamp experience",
       "Interest in backend development and APIs",
@@ -41,7 +44,7 @@ const POSITIONS = {
   "ai-developer": {
     title: "AI/ML Engineer",
     description:
-      "Work on cutting-edge machine learning systems for financial market analysis and algorithmic trading",
+      "Develop intelligent systems that help users build better portfolios. Apply machine learning to make complex financial data simple and actionable.",
     skills: [
       "1+ years of college or relevant coursework",
       "Interest in AI/ML and data science",
@@ -51,7 +54,7 @@ const POSITIONS = {
   "quantitative-analyst": {
     title: "Quantitative Researcher",
     description:
-      "Work on sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
+      "Create smart algorithms that optimize portfolios and manage risk. Help users achieve better returns while keeping their investments safe.",
     skills: [
       "1+ years of college in math, statistics, or related field",
       "Interest in finance and quantitative analysis",
@@ -61,7 +64,7 @@ const POSITIONS = {
   "mobile-app-developer": {
     title: "Mobile App Developer",
     description:
-      "Work on our mobile application that brings sophisticated portfolio management to users' fingertips",
+      "Work on world-class mobile experiences that make portfolio management intuitive and accessible. Build complex financial apps with smooth performance.",
     skills: [
       "1+ years of college or bootcamp experience",
       "Interest in mobile app development",
@@ -78,6 +81,16 @@ const EXPERIENCE_LEVELS = [
   "9+ years",
 ];
 
+interface ValidationErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  experience?: string;
+  startDate?: string;
+  general?: string;
+}
+
 export default function Apply() {
   const [searchParams] = useSearchParams();
   const position =
@@ -92,6 +105,9 @@ export default function Apply() {
     position,
     experience: "",
     startDate: "",
+    coverLetter: "",
+    linkedinUrl: "",
+    portfolioUrl: "",
   });
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -101,6 +117,9 @@ export default function Apply() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"saved" | "saving" | "">("");
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
+    {},
+  );
 
   // Auto-save draft functionality
   useEffect(() => {
@@ -130,15 +149,109 @@ export default function Apply() {
     return () => clearTimeout(timer);
   }, [formData, position]);
 
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case "firstName":
+      case "lastName":
+        if (!value.trim()) return "This field is required";
+        if (value.trim().length < 2)
+          return "Must be at least 2 characters long";
+        if (!/^[a-zA-Z\s\-']+$/.test(value))
+          return "Only letters, spaces, hyphens, and apostrophes allowed";
+        break;
+
+      case "email":
+        if (!value.trim()) return "Email is required";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value))
+          return "Please enter a valid email address";
+        break;
+
+      case "phone":
+        if (!value.trim()) return "Phone number is required";
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        const cleanPhone = value.replace(/[\s\-\(\)\.]/g, "");
+        if (!phoneRegex.test(cleanPhone))
+          return "Please enter a valid phone number";
+        break;
+
+      case "experience":
+        if (!value) return "Please select your experience level";
+        break;
+
+      case "startDate":
+        if (!value) return "Please select your available start date";
+        const selectedDate = new Date(value);
+        const today = new Date();
+        if (selectedDate < today) return "Start date cannot be in the past";
+        break;
+
+      case "linkedinUrl":
+      case "portfolioUrl":
+        if (value && !/^https?:\/\/.+/.test(value))
+          return "Please enter a valid URL (starting with http:// or https://)";
+        break;
+
+      default:
+        break;
+    }
+    return undefined;
+  };
+
+  const validateForm = (): boolean => {
+    const errors: ValidationErrors = {};
+
+    // Validate required fields
+    errors.firstName = validateField("firstName", formData.firstName);
+    errors.lastName = validateField("lastName", formData.lastName);
+    errors.email = validateField("email", formData.email);
+    errors.phone = validateField("phone", formData.phone);
+    errors.experience = validateField("experience", formData.experience);
+    errors.startDate = validateField("startDate", formData.startDate);
+
+    // Validate optional URL fields
+    if (formData.linkedinUrl) {
+      const linkedinError = validateField("linkedinUrl", formData.linkedinUrl);
+      if (linkedinError) errors.general = linkedinError;
+    }
+
+    if (formData.portfolioUrl) {
+      const portfolioError = validateField(
+        "portfolioUrl",
+        formData.portfolioUrl,
+      );
+      if (portfolioError) errors.general = portfolioError;
+    }
+
+    // Remove undefined errors
+    Object.keys(errors).forEach((key) => {
+      if (!errors[key as keyof ValidationErrors]) {
+        delete errors[key as keyof ValidationErrors];
+      }
+    });
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    // Clear validation error when user starts typing
+    if (validationErrors[name as keyof ValidationErrors]) {
+      setValidationErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+    }
   };
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -166,16 +279,35 @@ export default function Apply() {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
         file.type === "text/plain")
     ) {
+      if (file.size > 5 * 1024 * 1024) {
+        setValidationErrors((prev) => ({
+          ...prev,
+          general: "File size must be less than 5MB",
+        }));
+        return;
+      }
       setResumeFile(file);
+      setValidationErrors((prev) => ({ ...prev, general: undefined }));
     } else {
-      alert("Please upload a PDF, DOC, DOCX, or TXT file.");
+      setValidationErrors((prev) => ({
+        ...prev,
+        general: "Please upload a PDF, DOC, DOCX, or TXT file.",
+      }));
     }
   }, []);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        setValidationErrors((prev) => ({
+          ...prev,
+          general: "File size must be less than 5MB",
+        }));
+        return;
+      }
       setResumeFile(file);
+      setValidationErrors((prev) => ({ ...prev, general: undefined }));
     }
   };
 
@@ -183,17 +315,30 @@ export default function Apply() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage("");
+    setValidationErrors({});
+
+    // Validate form
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      setValidationErrors((prev) => ({
+        ...prev,
+        general: "Please fix the errors above before submitting.",
+      }));
+      return;
+    }
 
     try {
-      // Prepare application data (without file for now - files need special handling in serverless)
       const applicationData: JobApplicationRequest = {
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
-        email: formData.email.trim(),
+        email: formData.email.trim().toLowerCase(),
         phone: formData.phone.trim(),
         position,
         experience: formData.experience,
         startDate: formData.startDate,
+        coverLetter: formData.coverLetter?.trim() || "",
+        linkedinUrl: formData.linkedinUrl?.trim() || "",
+        portfolioUrl: formData.portfolioUrl?.trim() || "",
       };
 
       const response = await fetch("/api/jobs/apply", {
@@ -220,15 +365,13 @@ export default function Apply() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         setSubmitMessage(
-          result.message ||
-            result.error ||
-            "Something went wrong. Please try again.",
+          result.message || "Something went wrong. Please try again later.",
         );
       }
     } catch (error) {
       console.error("Application submission error:", error);
       setSubmitMessage(
-        "Network error. Please check your connection and try again.",
+        "Network error. Please check your internet connection and try again.",
       );
     } finally {
       setIsSubmitting(false);
@@ -266,25 +409,18 @@ export default function Apply() {
               </div>
             </div>
 
-            <div className="bg-teal-50 p-4 rounded-lg">
-              <h4 className="font-medium text-teal-900 mb-2">
-                About Compensation
-              </h4>
-              <p className="text-sm text-teal-700">
-                swipr.ai offers equity-based compensation packages with
-                significant upside potential. Compensation details will be
-                discussed during the interview process.
-              </p>
-            </div>
+            <Alert className="bg-teal-50 border-teal-200">
+              <Info className="h-4 w-4 text-teal-600" />
+              <AlertDescription className="text-teal-700">
+                We'll review your application carefully and get back to you with
+                next steps. Keep an eye on your email for updates!
+              </AlertDescription>
+            </Alert>
 
-            <p className="text-slate-600 text-center">
-              We'll review your application carefully and get back to you with
-              next steps. Keep an eye on your email for updates!
-            </p>
-
-            <div className="grid sm:grid-cols-3 gap-3 pt-4">
+            <div className="grid sm:grid-cols-2 gap-3 pt-4">
               <Link to="/">
                 <Button variant="outline" className="w-full">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
                   Back Home
                 </Button>
               </Link>
@@ -360,6 +496,7 @@ export default function Apply() {
                   <div className="space-y-2 text-sm text-blue-700">
                     <p>• Part-time position</p>
                     <p>• Remote/NYC hybrid</p>
+                    <p>• Equity-based compensation</p>
                   </div>
                 </div>
                 <div className="bg-teal-50 p-6 rounded-lg">
@@ -375,18 +512,18 @@ export default function Apply() {
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-50 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold text-slate-900 mb-3">
-                  Technical Skills & Experience
-                </h3>
-                <div className="grid md:grid-cols-2 gap-2 text-sm text-slate-700">
-                  {POSITIONS[position].skills.map((skill, index) => (
-                    <p key={index}>• {skill}</p>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
+
+          {/* Global Validation Errors */}
+          {validationErrors.general && (
+            <Alert className="mb-6 border-red-200 bg-red-50">
+              <AlertCircle className="h-4 w-4 text-red-600" />
+              <AlertDescription className="text-red-700">
+                {validationErrors.general}
+              </AlertDescription>
+            </Alert>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Personal Information */}
@@ -407,8 +544,14 @@ export default function Apply() {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className="h-12"
+                    className={`h-12 ${validationErrors.firstName ? "border-red-500" : ""}`}
+                    placeholder="Enter your first name"
                   />
+                  {validationErrors.firstName && (
+                    <p className="text-red-600 text-sm mt-1">
+                      {validationErrors.firstName}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -419,8 +562,14 @@ export default function Apply() {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="h-12"
+                    className={`h-12 ${validationErrors.lastName ? "border-red-500" : ""}`}
+                    placeholder="Enter your last name"
                   />
+                  {validationErrors.lastName && (
+                    <p className="text-red-600 text-sm mt-1">
+                      {validationErrors.lastName}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -433,8 +582,14 @@ export default function Apply() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="h-12"
+                    className={`h-12 ${validationErrors.email ? "border-red-500" : ""}`}
+                    placeholder="your.email@example.com"
                   />
+                  {validationErrors.email && (
+                    <p className="text-red-600 text-sm mt-1">
+                      {validationErrors.email}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -447,8 +602,14 @@ export default function Apply() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="h-12"
+                    className={`h-12 ${validationErrors.phone ? "border-red-500" : ""}`}
+                    placeholder="+1 (555) 123-4567"
                   />
+                  {validationErrors.phone && (
+                    <p className="text-red-600 text-sm mt-1">
+                      {validationErrors.phone}
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -472,7 +633,7 @@ export default function Apply() {
                       value={formData.experience}
                       onChange={handleInputChange}
                       required
-                      className="w-full h-12 px-3 py-2 border border-input rounded-md bg-background"
+                      className={`w-full h-12 px-3 py-2 border rounded-md bg-background ${validationErrors.experience ? "border-red-500" : "border-input"}`}
                     >
                       <option value="">Select experience level</option>
                       {EXPERIENCE_LEVELS.map((level) => (
@@ -481,6 +642,11 @@ export default function Apply() {
                         </option>
                       ))}
                     </select>
+                    {validationErrors.experience && (
+                      <p className="text-red-600 text-sm mt-1">
+                        {validationErrors.experience}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -494,11 +660,43 @@ export default function Apply() {
                       onChange={handleInputChange}
                       min={new Date().toISOString().split("T")[0]}
                       required
-                      className="h-12"
+                      className={`h-12 ${validationErrors.startDate ? "border-red-500" : ""}`}
                     />
-                    <p className="text-xs text-slate-500 mt-1">
-                      Please select a future date
-                    </p>
+                    {validationErrors.startDate && (
+                      <p className="text-red-600 text-sm mt-1">
+                        {validationErrors.startDate}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Optional fields */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      LinkedIn Profile (Optional)
+                    </label>
+                    <Input
+                      type="url"
+                      name="linkedinUrl"
+                      value={formData.linkedinUrl}
+                      onChange={handleInputChange}
+                      className="h-12"
+                      placeholder="https://linkedin.com/in/yourprofile"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Portfolio/Website (Optional)
+                    </label>
+                    <Input
+                      type="url"
+                      name="portfolioUrl"
+                      value={formData.portfolioUrl}
+                      onChange={handleInputChange}
+                      className="h-12"
+                      placeholder="https://yourportfolio.com"
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -509,13 +707,13 @@ export default function Apply() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                  Resume/CV
+                  Resume/CV (Optional)
                 </CardTitle>
                 <CardDescription>
                   Upload your resume in PDF, DOC, DOCX, or TXT format (max 5MB)
                   <br />
                   <span className="text-blue-600 font-medium">Note:</span>{" "}
-                  Resume will be handled via email follow-up
+                  Resume can also be sent via email if preferred
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -582,7 +780,7 @@ export default function Apply() {
                 <CardTitle>Cover Letter (Optional)</CardTitle>
                 <CardDescription>
                   Tell us why you're excited about this role and what you'd
-                  bring to swipr.ai
+                  bring to swipr.ai (recommended but not required)
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -590,7 +788,7 @@ export default function Apply() {
                   name="coverLetter"
                   value={formData.coverLetter}
                   onChange={handleInputChange}
-                  placeholder="Write your cover letter here..."
+                  placeholder="I'm excited about this opportunity because..."
                   className="min-h-[150px] resize-none"
                 />
               </CardContent>
@@ -616,11 +814,12 @@ export default function Apply() {
             </div>
 
             {submitMessage && !isSuccess && (
-              <div className="text-center">
-                <p className="text-red-600 bg-red-50 p-4 rounded-lg">
+              <Alert className="border-red-200 bg-red-50">
+                <AlertCircle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-700">
                   {submitMessage}
-                </p>
-              </div>
+                </AlertDescription>
+              </Alert>
             )}
           </form>
         </div>
