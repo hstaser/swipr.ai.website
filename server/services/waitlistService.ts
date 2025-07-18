@@ -1,4 +1,4 @@
-import { getCollection, COLLECTIONS, MongoWaitlist } from "../lib/mongodb.js";
+import { getCollection, COLLECTIONS, MongoWaitlist } from "../lib/mongodb.ts";
 
 // Fallback in-memory storage
 const fallbackWaitlist: MongoWaitlist[] = [];
