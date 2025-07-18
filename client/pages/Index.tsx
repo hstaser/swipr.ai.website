@@ -319,9 +319,9 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Work on scalable, high-performance systems that power our
-                  investment platform. Build with cutting-edge technology to
-                  help users make better investment decisions.
+                  Help build scalable, high-performance systems that power our
+                  investment platform. Use cutting-edge technology to help users
+                  make better investment decisions.
                 </p>
 
                 <Link to="/apply?position=backend-engineer">
