@@ -68,26 +68,6 @@ const POSITIONS = {
       "Basic React, Flutter, or mobile development experience",
     ],
   },
-  "machine-learning-engineer": {
-    title: "Machine Learning Engineer",
-    description:
-      "Build and deploy ML models that power our investment recommendations and portfolio optimization",
-    skills: [
-      "1+ years of college in CS, math, or related field",
-      "Interest in machine learning and data science",
-      "Basic Python or programming experience",
-    ],
-  },
-  "product-designer": {
-    title: "Product Designer",
-    description:
-      "Design intuitive user experiences that make investing accessible and engaging for everyone",
-    skills: [
-      "1+ years of college or design bootcamp",
-      "Interest in UX/UI design and user research",
-      "Basic design tools experience (Figma, Sketch, etc.)",
-    ],
-  },
 } as const;
 
 const EXPERIENCE_LEVELS = [
@@ -303,11 +283,6 @@ export default function Apply() {
             </p>
 
             <div className="grid sm:grid-cols-3 gap-3 pt-4">
-              <Link to="/track">
-                <Button variant="outline" className="w-full">
-                  Track Application
-                </Button>
-              </Link>
               <Link to="/">
                 <Button variant="outline" className="w-full">
                   Back Home
@@ -383,9 +358,8 @@ export default function Apply() {
                     Position Details
                   </h3>
                   <div className="space-y-2 text-sm text-blue-700">
-                    <p>• Full-time position</p>
+                    <p>• Part-time position</p>
                     <p>• Remote/NYC hybrid</p>
-                    <p>• {POSITIONS[position].compensation}</p>
                   </div>
                 </div>
                 <div className="bg-teal-50 p-6 rounded-lg">
