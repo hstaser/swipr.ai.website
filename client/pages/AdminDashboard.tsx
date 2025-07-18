@@ -112,13 +112,27 @@ export default function AdminDashboard() {
   const [selectedApplication, setSelectedApplication] =
     useState<Application | null>(null);
 
+  useEffect(() => {
+    // Check authentication
+    const token = localStorage.getItem("adminToken");
+    if (token === "admin-swipr-2025") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    setIsAuthenticated(false);
+  };
+
   const fetchData = async () => {
     try {
       setLoading(true);
       setError("");
 
+      const token = localStorage.getItem("adminToken");
       const headers = {
-        Authorization: "Bearer admin-token",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       };
 
