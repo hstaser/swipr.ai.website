@@ -347,9 +347,9 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Create intelligent systems that help users build better
-                  portfolios. Use machine learning to make complex financial
-                  data simple and actionable.
+                  Work with our AI team on intelligent systems that help users
+                  build better portfolios. Use machine learning to make complex
+                  financial data simple and actionable.
                 </p>
 
                 <Link to="/apply?position=ai-developer">
