@@ -389,7 +389,7 @@ export default function Index() {
                   Mobile App Developer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Remote/NYC
+                  Part-time • Remote/NYC
                 </CardDescription>
               </CardHeader>
               <CardContent>
