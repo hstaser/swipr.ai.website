@@ -53,29 +53,10 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     try {
-      const {
-        firstName,
-        lastName,
-        email,
-        phone,
-        position,
-        experience,
-        coverLetter,
-        linkedinUrl,
-        portfolioUrl,
-        startDate,
-      } = req.body;
+      const { firstName, lastName, email, phone, position } = req.body;
 
       // Validate required fields
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        !phone ||
-        !position ||
-        !experience ||
-        !startDate
-      ) {
+      if (!firstName || !lastName || !email || !phone || !position) {
         return res.status(400).json({
           success: false,
           message:
@@ -114,11 +95,6 @@ export default async function handler(req, res) {
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
         position,
-        experience,
-        coverLetter: coverLetter?.trim() || "",
-        linkedinUrl: linkedinUrl?.trim() || "",
-        portfolioUrl: portfolioUrl?.trim() || "",
-        startDate,
       });
 
       if (!application) {
