@@ -68,11 +68,6 @@ const JobApplicationSchema = z.object({
     "quantitative-analyst",
     "mobile-app-developer",
   ]),
-  experience: z.string().min(1, "Experience level is required"),
-  coverLetter: z.string().optional(),
-  linkedinUrl: z.string().url().optional().or(z.literal("")),
-  portfolioUrl: z.string().url().optional().or(z.literal("")),
-  startDate: z.string().min(1, "Start date is required"),
 });
 
 export type JobApplication = z.infer<typeof JobApplicationSchema> & {
