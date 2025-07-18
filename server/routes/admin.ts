@@ -1,6 +1,9 @@
 import { RequestHandler } from "express";
+import { ApplicationService } from "../services/applicationService.js";
+import { ContactService } from "../services/contactService.js";
+import { WaitlistService } from "../services/waitlistService.js";
 
-// Import the existing storage from other routes
+// Import the existing storage from other routes for backwards compatibility
 import { applications } from "./jobs";
 import { contactMessages } from "./analytics";
 import { waitlistEntries } from "./waitlist";
@@ -34,43 +37,23 @@ export const getAdminDashboard: RequestHandler = (req, res) => {
   try {
     switch (type) {
       case "stats":
-        // Calculate application stats
-        const appStats = {
-          total: applications.length,
-          pending: applications.filter((app) => app.status === "pending")
-            .length,
-          reviewing: applications.filter((app) => app.status === "reviewing")
-            .length,
-          interviewing: applications.filter(
-            (app) => app.status === "interviewing",
-          ).length,
-          rejected: applications.filter((app) => app.status === "rejected")
-            .length,
-          hired: applications.filter((app) => app.status === "hired").length,
-          byPosition: {} as Record<string, number>,
-        };
-
-        // Count by position
-        applications.forEach((app) => {
-          appStats.byPosition[app.position] =
-            (appStats.byPosition[app.position] || 0) + 1;
-        });
+        // Get stats from MongoDB
+        const appStats = await ApplicationService.getStats();
+        const contactStats = await ContactService.getStats();
+        const waitlistCount = await WaitlistService.getCount();
 
         return res.status(200).json({
           success: true,
           data: {
             applications: appStats,
-            waitlist: { count: waitlistEntries.length },
-            contacts: {
-              total: contactMessages.length,
-              unread: contactMessages.filter((c) => c.status === "new").length,
-            },
+            waitlist: { count: waitlistCount },
+            contacts: contactStats,
           },
         });
 
       case "applications":
         if (id) {
-          const application = applications.find((app) => app.id === id);
+          const application = await ApplicationService.getById(id);
           if (!application) {
             return res.status(404).json({
               success: false,
@@ -82,26 +65,20 @@ export const getAdminDashboard: RequestHandler = (req, res) => {
             data: application,
           });
         } else {
-          // Return all applications sorted by most recent
-          const sortedApps = [...applications].sort(
-            (a, b) =>
-              new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime(),
-          );
+          // Return all applications from MongoDB
+          const applications = await ApplicationService.getAll();
           return res.status(200).json({
             success: true,
-            data: sortedApps,
+            data: applications,
           });
         }
 
       case "contacts":
-        // Return all contacts sorted by most recent
-        const sortedContacts = [...contactMessages].sort(
-          (a, b) =>
-            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
-        );
+        // Return all contacts from MongoDB
+        const contacts = await ContactService.getAll();
         return res.status(200).json({
           success: true,
-          data: sortedContacts.map((contact) => ({
+          data: contacts.map((contact) => ({
             id: contact.id,
             name: contact.name,
             email: contact.email,
@@ -113,14 +90,11 @@ export const getAdminDashboard: RequestHandler = (req, res) => {
         });
 
       case "waitlist":
-        // Return all waitlist entries sorted by most recent
-        const sortedWaitlist = [...waitlistEntries].sort(
-          (a, b) =>
-            new Date(b.joinedAt).getTime() - new Date(a.joinedAt).getTime(),
-        );
+        // Return all waitlist entries from MongoDB
+        const waitlist = await WaitlistService.getAll();
         return res.status(200).json({
           success: true,
-          data: sortedWaitlist,
+          data: waitlist,
         });
 
       default:
@@ -167,44 +141,39 @@ export const updateAdminDashboard: RequestHandler = (req, res) => {
         });
       }
 
-      const applicationIndex = applications.findIndex((app) => app.id === id);
-      if (applicationIndex === -1) {
+      const updatedApplication = await ApplicationService.updateStatus(
+        id,
+        status,
+        notes,
+      );
+
+      if (!updatedApplication) {
         return res.status(404).json({
           success: false,
           message: "Application not found",
         });
       }
 
-      // Update application
-      applications[applicationIndex].status = status;
-
-      console.log(`✅ Updated application ${id} status to: ${status}`);
-
       return res.status(200).json({
         success: true,
-        data: applications[applicationIndex],
+        data: updatedApplication,
         message: "Application status updated successfully",
       });
     }
 
     if (type === "contact" && id) {
-      const contactIndex = contactMessages.findIndex(
-        (contact) => contact.id === id,
-      );
-      if (contactIndex === -1) {
+      const updatedContact = await ContactService.markAsRead(id);
+
+      if (!updatedContact) {
         return res.status(404).json({
           success: false,
           message: "Contact not found",
         });
       }
 
-      contactMessages[contactIndex].status = "read";
-
-      console.log(`✅ Marked contact ${id} as read`);
-
       return res.status(200).json({
         success: true,
-        data: contactMessages[contactIndex],
+        data: updatedContact,
         message: "Contact marked as read",
       });
     }
