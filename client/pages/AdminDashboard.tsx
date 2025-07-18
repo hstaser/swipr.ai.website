@@ -256,8 +256,8 @@ export default function AdminDashboard() {
     } catch (err) {
       const errorMessage = `Failed to load dashboard data: ${err instanceof Error ? err.message : "Unknown error"}`;
       setError(errorMessage);
-      console.error("🚨 Dashboard fetch error:", err);
-      console.error("🚨 Error details:", {
+      safeError("🚨 Dashboard fetch error:", err);
+      safeError("🚨 Error details:", {
         message: err instanceof Error ? err.message : "Unknown error",
         stack: err instanceof Error ? err.stack : undefined,
         token: localStorage.getItem("adminToken"),
