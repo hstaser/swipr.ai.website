@@ -44,7 +44,7 @@ export type ContactMessage = z.infer<typeof ContactMessageSchema> & {
 
 // In-memory storage (in production, use a database)
 const analyticsEvents: (AnalyticsEvent & { id: string })[] = [];
-const contactMessages: ContactMessage[] = [];
+export const contactMessages: ContactMessage[] = [];
 
 // Sample data for demonstration
 const initializeSampleData = () => {
