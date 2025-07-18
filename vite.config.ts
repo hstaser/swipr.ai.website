@@ -47,7 +47,9 @@ export default defineConfig(({ mode }) => ({
       // Ensure CSP compliance
       jsxRuntime: "automatic",
     }),
-    ...(mode === "development" ? [expressPlugin()] : []),
+    ...(mode === "development" && process.env.NODE_ENV !== "production"
+      ? [expressPlugin()]
+      : []),
   ],
   resolve: {
     alias: {
