@@ -429,13 +429,7 @@ export default function AdminDashboard() {
                     url: window.location.href,
                   };
                   // CSP-safe logging
-                  try {
-                    if (typeof console !== "undefined" && console.log) {
-                      console.log("🔍 DEBUG INFO:", debugInfo);
-                    }
-                  } catch (e) {
-                    // Ignore console errors
-                  }
+                  safeLog("🔍 DEBUG INFO:", debugInfo);
                   alert("Debug info logged to console (F12)");
                 }}
                 variant="outline"
