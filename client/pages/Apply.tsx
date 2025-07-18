@@ -561,17 +561,6 @@ export default function Apply() {
               </CardContent>
             </Card>
 
-            {/* Professional Information */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Briefcase className="h-5 w-5 mr-2 text-blue-600" />
-                  Professional Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6"></CardContent>
-            </Card>
-
             {/* Resume Upload */}
             <Card className="border-0 shadow-lg">
               <CardHeader>
