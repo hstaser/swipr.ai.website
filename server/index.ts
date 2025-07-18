@@ -19,6 +19,7 @@ import {
   getContactMessages,
   updateMessageStatus,
 } from "./routes/analytics";
+import { getAdminDashboard, updateAdminDashboard } from "./routes/admin";
 
 export function createServer() {
   const app = express();
@@ -56,6 +57,10 @@ export function createServer() {
   app.post("/api/admin/messages", storeContactMessage);
   app.get("/api/admin/messages", getContactMessages);
   app.patch("/api/admin/messages/:messageId/status", updateMessageStatus);
+
+  // Admin dashboard routes
+  app.get("/api/admin/dashboard", getAdminDashboard);
+  app.put("/api/admin/dashboard", updateAdminDashboard);
 
   return app;
 }
