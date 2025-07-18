@@ -27,7 +27,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/apply" element={<Apply />} />
-          <Route path="/track" element={<TrackApplication />} />
+
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/admin" element={<EnhancedAdmin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
