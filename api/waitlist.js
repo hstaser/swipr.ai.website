@@ -1,4 +1,4 @@
-import { WaitlistService } from "../server/services/waitlistService.ts";
+import { WaitlistService } from "./lib/waitlistService.js";
 
 export default async function handler(req, res) {
   // Set CORS headers
