@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { z } from "zod";
+import { WaitlistService } from "../services/waitlistService.js";
 
 const WaitlistSchema = z.object({
   email: z.string().email("Valid email is required"),
@@ -28,19 +29,6 @@ export const handleWaitlistSignup: RequestHandler = async (req, res) => {
     // Validate the request body
     const validatedData = WaitlistSchema.parse(req.body);
 
-    // Check if email already exists
-    const existingEntry = waitlistEntries.find(
-      (entry) =>
-        entry.email.toLowerCase() === validatedData.email.toLowerCase(),
-    );
-
-    if (existingEntry) {
-      return res.status(409).json({
-        success: false,
-        message: "This email is already on our waitlist!",
-      });
-    }
-
     // Create waitlist entry
     const waitlistEntry: WaitlistEntry = {
       id: `WAITLIST-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -49,7 +37,17 @@ export const handleWaitlistSignup: RequestHandler = async (req, res) => {
       joinedAt: new Date().toISOString(),
     };
 
-    // Store the entry
+    // Store in MongoDB
+    const result = await WaitlistService.create(waitlistEntry);
+
+    if (result && result.error && result.existing) {
+      return res.status(409).json({
+        success: false,
+        message: "This email is already on our waitlist!",
+      });
+    }
+
+    // Also store in memory for backwards compatibility
     waitlistEntries.push(waitlistEntry);
 
     console.log("📝 NEW WAITLIST SIGNUP");
