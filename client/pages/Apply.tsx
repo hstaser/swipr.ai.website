@@ -221,9 +221,6 @@ export default function Apply() {
         phone: formData.phone.trim(),
         position,
         experience: formData.experience,
-        coverLetter: formData.coverLetter?.trim(),
-        linkedinUrl: formData.linkedinUrl?.trim(),
-        portfolioUrl: formData.portfolioUrl?.trim(),
         startDate: formData.startDate,
       };
 
