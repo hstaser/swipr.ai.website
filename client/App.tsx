@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import LearnMore from "./pages/LearnMore";
 import Apply from "./pages/Apply";
-import TrackApplication from "./pages/TrackApplication";
+
 import Privacy from "./pages/Privacy";
 import EnhancedAdmin from "./pages/EnhancedAdmin";
 import NotFound from "./pages/NotFound";
@@ -26,7 +26,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/apply" element={<Apply />} />
-          <Route path="/track" element={<TrackApplication />} />
+
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/admin" element={<EnhancedAdmin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
