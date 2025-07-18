@@ -36,8 +36,9 @@ export default function LearnMore() {
               The Future of Intelligent Investing
             </h1>
             <p className="text-xl text-blue-100 leading-relaxed mb-8 max-w-3xl mx-auto">
-              Discover how swipr.ai makes investing simple through AI-powered
-              portfolio optimization and an intuitive swiping experience.
+              Discover how swipr.ai makes investing accessible for everyone
+              through an intuitive swiping experience and smart portfolio
+              optimization.
             </p>
           </div>
         </div>
