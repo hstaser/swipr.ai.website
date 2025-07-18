@@ -126,15 +126,6 @@ export function Navigation({
                   Apply Now
                 </Button>
               </Link>
-              <Link to="/admin">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={`${isTransparent ? "text-white/80 hover:text-white hover:bg-white/10" : "text-slate-600 hover:text-slate-800"}`}
-                >
-                  <Settings className="h-4 w-4" />
-                </Button>
-              </Link>
             </div>
           </div>
 
