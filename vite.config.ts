@@ -12,6 +12,24 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist", // Change output directory to standard dist for Vercel
+    sourcemap: false, // Disable source maps to avoid CSP issues
+    minify: "terser", // Use terser for better CSP compliance
+    rollupOptions: {
+      output: {
+        // Ensure no eval usage in production
+        format: "es",
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+        },
+      },
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console logs in production
+        drop_debugger: true,
+      },
+    },
   },
   plugins: [react(), ...(mode === "development" ? [expressPlugin()] : [])],
   resolve: {
