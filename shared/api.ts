@@ -52,7 +52,6 @@ export interface JobApplicationRequest {
     | "quantitative-analyst"
     | "mobile-app-developer";
   experience: string;
-  coverLetter?: string;
   linkedinUrl?: string;
   portfolioUrl?: string;
   startDate: string;
