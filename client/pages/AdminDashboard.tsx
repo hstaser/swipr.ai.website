@@ -135,6 +135,8 @@ export default function AdminDashboard() {
         "Content-Type": "application/json",
       };
 
+      console.log("🔄 Fetching admin dashboard data...");
+
       // Fetch stats
       const statsResponse = await fetch("/api/admin/dashboard?type=stats", {
         headers,
