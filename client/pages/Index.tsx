@@ -210,7 +210,7 @@ export default function Index() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-white text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm text-lg px-8 py-3"
+                    className="border-white border-2 text-white hover:bg-white hover:text-slate-800 bg-white/10 backdrop-blur-sm text-lg px-8 py-3 font-semibold"
                   >
                     Learn More
                   </Button>
