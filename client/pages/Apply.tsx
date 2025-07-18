@@ -31,7 +31,7 @@ const POSITIONS = {
   "backend-engineer": {
     title: "Backend Engineer",
     description:
-      "Join our engineering team to work on high-performance, scalable infrastructure for our algorithmic trading platform",
+      "Work on high-performance, scalable infrastructure for our algorithmic trading platform",
     skills: [
       "Python, Go, or Rust expertise",
       "Distributed systems and microservices",
