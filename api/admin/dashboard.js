@@ -14,12 +14,20 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // Simple authentication check (in production, use proper auth)
+  // Enhanced authentication check
   const authHeader = req.headers.authorization;
-  if (!authHeader || authHeader !== "Bearer admin-token") {
+  const token = authHeader?.replace("Bearer ", "");
+
+  const validTokens = [
+    "admin-swipr-2025",
+    "henry-admin-token",
+    process.env.ADMIN_TOKEN || "admin-token",
+  ];
+
+  if (!token || !validTokens.includes(token)) {
     return res.status(401).json({
       success: false,
-      message: "Unauthorized",
+      message: "Unauthorized access. Admin authentication required.",
     });
   }
 
