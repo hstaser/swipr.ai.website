@@ -45,6 +45,8 @@ export default async function handler(req, res) {
         "ai-developer",
         "quantitative-analyst",
         "mobile-app-developer",
+        "machine-learning-engineer",
+        "product-designer",
       ];
 
       if (!validPositions.includes(position)) {
