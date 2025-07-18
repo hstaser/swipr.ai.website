@@ -81,9 +81,7 @@ export default function Index() {
         trackFormSubmit("contact", true);
       } else {
         setContactMessage(
-          result.message ||
-            result.error ||
-            "Something went wrong. Please try again.",
+          result.message || "Something went wrong. Please try again.",
         );
         trackFormSubmit("contact", false);
       }
