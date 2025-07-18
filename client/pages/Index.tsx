@@ -553,7 +553,7 @@ export default function Index() {
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
-                  Careers
+                  Join Our Team
                 </a>
                 <Link
                   to="/track"
