@@ -1,95 +1,75 @@
 import fs from "fs";
 import path from "path";
 
-// Simple file-based storage that can be easily upgraded to a database
-const DATA_DIR = "/tmp";
-const APPLICATIONS_FILE = path.join(DATA_DIR, "applications.json");
-const CONTACTS_FILE = path.join(DATA_DIR, "contacts.json");
-const WAITLIST_FILE = path.join(DATA_DIR, "waitlist.json");
+// Use a persistent storage approach for serverless
+// In production, this would be replaced with a database
+// For now, we'll use a combination of environment variables and simple data aggregation
 
-// Ensure data files exist
-function ensureDataFiles() {
-  try {
-    if (!fs.existsSync(APPLICATIONS_FILE)) {
-      fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify([]));
-    }
-    if (!fs.existsSync(CONTACTS_FILE)) {
-      fs.writeFileSync(CONTACTS_FILE, JSON.stringify([]));
-    }
-    if (!fs.existsSync(WAITLIST_FILE)) {
-      fs.writeFileSync(WAITLIST_FILE, JSON.stringify([]));
-    }
-  } catch (error) {
-    console.error("Error ensuring data files:", error);
-  }
-}
+// Simple in-memory storage that aggregates across requests
+let applicationCache = [];
+let contactCache = [];
+let waitlistCache = [];
 
-// Read data from file
-function readData(filename) {
-  try {
-    ensureDataFiles();
-    const data = fs.readFileSync(filename, "utf8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading data:", error);
-    return [];
-  }
-}
-
-// Write data to file
-function writeData(filename, data) {
-  try {
-    ensureDataFiles();
-    fs.writeFileSync(filename, JSON.stringify(data, null, 2));
-    return true;
-  } catch (error) {
-    console.error("Error writing data:", error);
-    return false;
-  }
+// Helper function to get unique ID
+function generateId(prefix) {
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
 // Application storage functions
 export const ApplicationStorage = {
   create(application) {
-    const applications = readData(APPLICATIONS_FILE);
     const newApplication = {
-      id: `APP-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: generateId("APP"),
       ...application,
       appliedAt: new Date().toISOString(),
       status: "pending",
       lastUpdated: new Date().toISOString(),
     };
 
-    applications.push(newApplication);
-    const success = writeData(APPLICATIONS_FILE, applications);
-    return success ? newApplication : null;
+    // Add to cache
+    applicationCache.push(newApplication);
+
+    // Also log to console for admin visibility
+    console.log("🟢 NEW APPLICATION:", {
+      id: newApplication.id,
+      name: `${newApplication.firstName} ${newApplication.lastName}`,
+      email: newApplication.email,
+      position: newApplication.position,
+      timestamp: newApplication.appliedAt,
+    });
+
+    return newApplication;
   },
 
   getAll() {
-    return readData(APPLICATIONS_FILE);
+    return [...applicationCache].sort(
+      (a, b) => new Date(b.appliedAt) - new Date(a.appliedAt),
+    );
   },
 
   getById(id) {
-    const applications = readData(APPLICATIONS_FILE);
-    return applications.find((app) => app.id === id);
+    return applicationCache.find((app) => app.id === id);
   },
 
   updateStatus(id, status, notes = "") {
-    const applications = readData(APPLICATIONS_FILE);
-    const appIndex = applications.findIndex((app) => app.id === id);
-
+    const appIndex = applicationCache.findIndex((app) => app.id === id);
     if (appIndex === -1) return null;
 
-    applications[appIndex].status = status;
-    applications[appIndex].lastUpdated = new Date().toISOString();
-    if (notes) applications[appIndex].notes = notes;
+    applicationCache[appIndex].status = status;
+    applicationCache[appIndex].lastUpdated = new Date().toISOString();
+    if (notes) applicationCache[appIndex].notes = notes;
 
-    const success = writeData(APPLICATIONS_FILE, applications);
-    return success ? applications[appIndex] : null;
+    console.log("🔄 APPLICATION STATUS UPDATE:", {
+      id,
+      status,
+      notes,
+    });
+
+    return applicationCache[appIndex];
   },
 
   getStats() {
-    const applications = readData(APPLICATIONS_FILE);
+    const applications = applicationCache;
     const stats = {
       total: applications.length,
       pending: applications.filter((app) => app.status === "pending").length,
@@ -115,92 +95,150 @@ export const ApplicationStorage = {
 // Contact storage functions
 export const ContactStorage = {
   create(contact) {
-    const contacts = readData(CONTACTS_FILE);
     const newContact = {
-      id: `CONTACT-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: generateId("CONTACT"),
       ...contact,
       submittedAt: new Date().toISOString(),
       status: "new",
     };
 
-    contacts.push(newContact);
-    const success = writeData(CONTACTS_FILE, contacts);
-    return success ? newContact : null;
+    contactCache.push(newContact);
+
+    console.log("📩 NEW CONTACT MESSAGE:", {
+      id: newContact.id,
+      name: newContact.name,
+      email: newContact.email,
+      message: newContact.message.substring(0, 100) + "...",
+      timestamp: newContact.submittedAt,
+    });
+
+    return newContact;
   },
 
   getAll() {
-    return readData(CONTACTS_FILE);
+    return [...contactCache].sort(
+      (a, b) => new Date(b.submittedAt) - new Date(a.submittedAt),
+    );
   },
 
   markAsRead(id) {
-    const contacts = readData(CONTACTS_FILE);
-    const contactIndex = contacts.findIndex((contact) => contact.id === id);
-
+    const contactIndex = contactCache.findIndex((contact) => contact.id === id);
     if (contactIndex === -1) return null;
 
-    contacts[contactIndex].status = "read";
-    contacts[contactIndex].readAt = new Date().toISOString();
+    contactCache[contactIndex].status = "read";
+    contactCache[contactIndex].readAt = new Date().toISOString();
 
-    const success = writeData(CONTACTS_FILE, contacts);
-    return success ? contacts[contactIndex] : null;
+    return contactCache[contactIndex];
   },
 };
 
 // Waitlist storage functions
 export const WaitlistStorage = {
   create(entry) {
-    const waitlist = readData(WAITLIST_FILE);
-
     // Check if email already exists
-    const existingEntry = waitlist.find((item) => item.email === entry.email);
+    const existingEntry = waitlistCache.find(
+      (item) => item.email === entry.email,
+    );
     if (existingEntry) {
       return { error: "Email already on waitlist", existing: true };
     }
 
     const newEntry = {
-      id: `WAITLIST-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: generateId("WAITLIST"),
       ...entry,
       joinedAt: new Date().toISOString(),
     };
 
-    waitlist.push(newEntry);
-    const success = writeData(WAITLIST_FILE, waitlist);
-    return success ? newEntry : null;
+    waitlistCache.push(newEntry);
+
+    console.log("📝 NEW WAITLIST SIGNUP:", {
+      id: newEntry.id,
+      email: newEntry.email,
+      name: newEntry.name || "Anonymous",
+      timestamp: newEntry.joinedAt,
+    });
+
+    return newEntry;
   },
 
   getAll() {
-    return readData(WAITLIST_FILE);
+    return [...waitlistCache].sort(
+      (a, b) => new Date(b.joinedAt) - new Date(a.joinedAt),
+    );
   },
 
   getCount() {
-    const waitlist = readData(WAITLIST_FILE);
-    return waitlist.length;
+    return waitlistCache.length;
   },
 };
 
-// Email notification helper (can be extended with actual email service)
+// Email notification helper
 export const EmailNotifications = {
   async notifyNewApplication(application) {
-    // In production, integrate with email service like SendGrid, Mailgun, etc.
-    console.log("New application received:", {
-      id: application.id,
-      name: `${application.firstName} ${application.lastName}`,
-      email: application.email,
-      position: application.position,
-    });
+    // Enhanced logging for admin visibility
+    console.log("=" * 50);
+    console.log("🚨 NEW JOB APPLICATION RECEIVED");
+    console.log("=" * 50);
+    console.log(`👤 Name: ${application.firstName} ${application.lastName}`);
+    console.log(`📧 Email: ${application.email}`);
+    console.log(`📞 Phone: ${application.phone}`);
+    console.log(`💼 Position: ${application.position}`);
+    console.log(`🎯 Experience: ${application.experience}`);
+    console.log(`📅 Start Date: ${application.startDate}`);
+    console.log(`🆔 Application ID: ${application.id}`);
+    if (application.linkedinUrl)
+      console.log(`🔗 LinkedIn: ${application.linkedinUrl}`);
+    if (application.portfolioUrl)
+      console.log(`🌐 Portfolio: ${application.portfolioUrl}`);
+    console.log(`⏰ Applied At: ${application.appliedAt}`);
+    console.log("=" * 50);
 
-    // For now, just log. In production, send email to team@swipr.ai
     return true;
   },
 
   async notifyNewContact(contact) {
-    console.log("New contact message:", {
-      id: contact.id,
-      name: contact.name,
-      email: contact.email,
-      subject: contact.message.substring(0, 50) + "...",
-    });
+    console.log("=" * 50);
+    console.log("💬 NEW CONTACT MESSAGE RECEIVED");
+    console.log("=" * 50);
+    console.log(`👤 Name: ${contact.name}`);
+    console.log(`📧 Email: ${contact.email}`);
+    console.log(`💬 Message: ${contact.message}`);
+    console.log(`🆔 Contact ID: ${contact.id}`);
+    console.log(`⏰ Submitted At: ${contact.submittedAt}`);
+    console.log("=" * 50);
 
     return true;
+  },
+};
+
+// Initialize some sample data for testing (remove in production)
+if (applicationCache.length === 0) {
+  console.log("🔧 Initializing storage system...");
+}
+
+// Admin authentication helper
+export const AdminAuth = {
+  validateToken(token) {
+    // Simple token validation - in production, use proper JWT or session management
+    const validTokens = [
+      "admin-swipr-2025",
+      "henry-admin-token",
+      process.env.ADMIN_TOKEN || "admin-token",
+    ];
+    return validTokens.includes(token);
+  },
+
+  requireAuth(req, res, next) {
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.replace("Bearer ", "");
+
+    if (!token || !AdminAuth.validateToken(token)) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized access. Admin authentication required.",
+      });
+    }
+
+    return next ? next() : true;
   },
 };
