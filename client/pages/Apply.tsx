@@ -37,8 +37,6 @@ const POSITIONS = {
       "Interest in backend development and APIs",
       "Basic programming skills (any language)",
     ],
-    compensation:
-      "Competitive equity package with significant upside potential",
   },
   "ai-developer": {
     title: "AI/ML Engineer",
