@@ -84,7 +84,7 @@ export function Navigation({
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Careers
+                Join Our Team
               </a>
             ) : (
               <Link
