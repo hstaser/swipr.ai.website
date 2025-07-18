@@ -33,13 +33,9 @@ const POSITIONS = {
     description:
       "Work on high-performance, scalable infrastructure for our algorithmic trading platform",
     skills: [
-      "Python, Go, or Rust expertise",
-      "Distributed systems and microservices",
-      "PostgreSQL, Redis, and time-series databases",
-      "Docker, Kubernetes, and cloud infrastructure (AWS/GCP)",
-      "WebSocket APIs and real-time data processing",
-      "Financial data APIs and market data feeds",
-      "Experience with trading systems or fintech platforms",
+      "1+ years of college or bootcamp experience",
+      "Interest in backend development and APIs",
+      "Basic programming skills (any language)",
     ],
     compensation:
       "Competitive equity package with significant upside potential",
