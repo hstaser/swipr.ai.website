@@ -200,12 +200,13 @@ export default function AdminDashboard() {
     notes: string = "",
   ) => {
     try {
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(
         `/api/admin/dashboard?type=application&id=${id}`,
         {
           method: "PUT",
           headers: {
-            Authorization: "Bearer admin-token",
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ status, notes }),
@@ -226,12 +227,13 @@ export default function AdminDashboard() {
 
   const markContactAsRead = async (id: string) => {
     try {
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(
         `/api/admin/dashboard?type=contact&id=${id}`,
         {
           method: "PUT",
           headers: {
-            Authorization: "Bearer admin-token",
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         },
