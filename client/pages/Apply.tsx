@@ -468,7 +468,7 @@ export default function Apply() {
         <div className="absolute inset-0 bg-black/20" />
         <div className="relative container mx-auto px-6 py-16 text-center text-white">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent leading-tight pb-2">
               Apply for {POSITIONS[position].title}
             </h1>
             <p className="text-xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
