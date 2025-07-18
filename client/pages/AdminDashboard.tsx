@@ -240,9 +240,7 @@ export default function AdminDashboard() {
         console.log("📝 Waitlist data received:", waitlistResult);
         if (waitlistResult.success && Array.isArray(waitlistResult.data)) {
           setWaitlist(waitlistResult.data);
-          console.log(
-            `✅ Loaded ${waitlistResult.data.length} waitlist entries`,
-          );
+          safeLog(`✅ Loaded ${waitlistResult.data.length} waitlist entries`);
         } else {
           console.error("❌ Waitlist data invalid:", waitlistResult);
           setWaitlist([]);
