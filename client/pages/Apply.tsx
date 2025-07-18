@@ -63,7 +63,7 @@ const POSITIONS = {
     compensation: "Equity-heavy compensation with performance incentives",
   },
   "mobile-app-developer": {
-    title: "Senior Mobile App Developer",
+    title: "Mobile App Developer",
     description:
       "Work on our mobile application that brings sophisticated portfolio management to users' fingertips",
     skills: [
@@ -71,8 +71,6 @@ const POSITIONS = {
       "Interest in mobile app development",
       "Basic React, Flutter, or mobile development experience",
     ],
-    compensation:
-      "Significant equity package with mobile app performance bonuses",
   },
 } as const;
 
