@@ -407,6 +407,54 @@ export default function Index() {
                 </Link>
               </CardContent>
             </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-xl text-slate-800">
+                  Machine Learning Engineer
+                </CardTitle>
+                <CardDescription className="text-slate-600">
+                  Part-time • Remote/NYC
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-slate-600 mb-4 leading-relaxed">
+                  Build and deploy ML models that power our investment
+                  recommendations and portfolio optimization algorithms.
+                </p>
+
+                <Link to="/apply?position=machine-learning-engineer">
+                  <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:scale-105 transition-transform duration-200">
+                    Apply Now
+                    <Brain className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-xl text-slate-800">
+                  Product Designer
+                </CardTitle>
+                <CardDescription className="text-slate-600">
+                  Part-time • Remote/NYC
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-slate-600 mb-4 leading-relaxed">
+                  Design intuitive user experiences that make investing
+                  accessible and engaging for Gen Z and first-time investors.
+                </p>
+
+                <Link to="/apply?position=product-designer">
+                  <Button className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 hover:scale-105 transition-transform duration-200">
+                    Apply Now
+                    <Users className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
