@@ -210,7 +210,7 @@ export function Navigation({
                 >
                   <div className="flex items-center space-x-3">
                     <Users className="h-4 w-4" />
-                    <span>Careers</span>
+                    <span>Join Our Team</span>
                   </div>
                 </Link>
               )}
