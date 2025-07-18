@@ -35,6 +35,13 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  esbuild: {
+    // Ensure CSP compliance
+    legalComments: "none",
+    minifyIdentifiers: true,
+    minifySyntax: true,
+    minifyWhitespace: true,
+  },
   plugins: [
     react({
       // Ensure CSP compliance
