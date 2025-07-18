@@ -153,7 +153,10 @@ export default function AdminDashboard() {
       );
       if (appsResponse.ok) {
         const appsResult = await appsResponse.json();
-        setApplications(appsResult.data);
+        setApplications(appsResult.data || []);
+        console.log(`✅ Loaded ${appsResult.data?.length || 0} applications`);
+      } else {
+        console.warn("⚠️ Failed to fetch applications");
       }
 
       // Fetch contacts
