@@ -83,7 +83,7 @@ export type JobApplication = z.infer<typeof JobApplicationSchema> & {
 };
 
 // In-memory storage for demo (in production, use a database)
-const applications: JobApplication[] = [];
+export const applications: JobApplication[] = [];
 
 export interface JobApplicationResponse {
   success: boolean;
