@@ -99,6 +99,7 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [applications, setApplications] = useState<Application[]>([]);
