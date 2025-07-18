@@ -452,16 +452,10 @@ export default function AdminDashboard() {
                     );
                     const data = await response.json();
                     // CSP-safe logging
-                    try {
-                      if (typeof console !== "undefined" && console.log) {
-                        console.log("API Test:", {
-                          status: response.status,
-                          data,
-                        });
-                      }
-                    } catch (e) {
-                      // Ignore console errors
-                    }
+                    safeLog("API Test:", {
+                      status: response.status,
+                      data,
+                    });
                     alert(
                       `API Test: ${response.status} - ${data.success ? "Success" : "Failed"}`,
                     );
