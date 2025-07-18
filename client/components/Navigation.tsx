@@ -91,7 +91,7 @@ export function Navigation({
                 to="/#open-roles"
                 className={`${textColor} ${hoverColor} transition-colors font-medium`}
               >
-                Careers
+                Join Our Team
               </Link>
             )}
             <Link
