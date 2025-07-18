@@ -119,9 +119,6 @@ export default function Apply() {
     phone: "",
     position,
     experience: "",
-    coverLetter: "",
-    linkedinUrl: "",
-    portfolioUrl: "",
     startDate: "",
   });
 
