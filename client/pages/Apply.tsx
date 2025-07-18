@@ -86,8 +86,6 @@ interface ValidationErrors {
   lastName?: string;
   email?: string;
   phone?: string;
-  experience?: string;
-  startDate?: string;
   general?: string;
 }
 
@@ -103,10 +101,6 @@ export default function Apply() {
     email: "",
     phone: "",
     position,
-    experience: "",
-    startDate: "",
-    linkedinUrl: "",
-    portfolioUrl: "",
   });
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -174,23 +168,6 @@ export default function Apply() {
           return "Please enter a valid phone number";
         break;
 
-      case "experience":
-        if (!value) return "Please select your experience level";
-        break;
-
-      case "startDate":
-        if (!value) return "Please select your available start date";
-        const selectedDate = new Date(value);
-        const today = new Date();
-        if (selectedDate < today) return "Start date cannot be in the past";
-        break;
-
-      case "linkedinUrl":
-      case "portfolioUrl":
-        if (value && !/^https?:\/\/.+/.test(value))
-          return "Please enter a valid URL (starting with http:// or https://)";
-        break;
-
       default:
         break;
     }
@@ -205,22 +182,6 @@ export default function Apply() {
     errors.lastName = validateField("lastName", formData.lastName);
     errors.email = validateField("email", formData.email);
     errors.phone = validateField("phone", formData.phone);
-    errors.experience = validateField("experience", formData.experience);
-    errors.startDate = validateField("startDate", formData.startDate);
-
-    // Validate optional URL fields
-    if (formData.linkedinUrl) {
-      const linkedinError = validateField("linkedinUrl", formData.linkedinUrl);
-      if (linkedinError) errors.general = linkedinError;
-    }
-
-    if (formData.portfolioUrl) {
-      const portfolioError = validateField(
-        "portfolioUrl",
-        formData.portfolioUrl,
-      );
-      if (portfolioError) errors.general = portfolioError;
-    }
 
     // Remove undefined errors
     Object.keys(errors).forEach((key) => {
@@ -333,10 +294,6 @@ export default function Apply() {
         email: formData.email.trim().toLowerCase(),
         phone: formData.phone.trim(),
         position,
-        experience: formData.experience,
-        startDate: formData.startDate,
-        linkedinUrl: formData.linkedinUrl?.trim() || "",
-        portfolioUrl: formData.portfolioUrl?.trim() || "",
       };
 
       const response = await fetch("/api/jobs/apply", {
