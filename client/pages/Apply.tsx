@@ -68,6 +68,26 @@ const POSITIONS = {
       "Basic React, Flutter, or mobile development experience",
     ],
   },
+  "machine-learning-engineer": {
+    title: "Machine Learning Engineer",
+    description:
+      "Build and deploy ML models that power our investment recommendations and portfolio optimization",
+    skills: [
+      "1+ years of college in CS, math, or related field",
+      "Interest in machine learning and data science",
+      "Basic Python or programming experience",
+    ],
+  },
+  "product-designer": {
+    title: "Product Designer",
+    description:
+      "Design intuitive user experiences that make investing accessible and engaging for everyone",
+    skills: [
+      "1+ years of college or design bootcamp",
+      "Interest in UX/UI design and user research",
+      "Basic design tools experience (Figma, Sketch, etc.)",
+    ],
+  },
 } as const;
 
 const EXPERIENCE_LEVELS = [
