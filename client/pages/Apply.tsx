@@ -73,14 +73,6 @@ const POSITIONS = {
   },
 } as const;
 
-const EXPERIENCE_LEVELS = [
-  "0-1 years",
-  "2-3 years",
-  "4-5 years",
-  "6-8 years",
-  "9+ years",
-];
-
 interface ValidationErrors {
   firstName?: string;
   lastName?: string;
