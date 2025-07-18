@@ -493,7 +493,7 @@ export default function Apply() {
                   </h3>
                   <div className="space-y-2 text-sm text-blue-700">
                     <p>• Part-time position</p>
-                    <p>• Remote/NYC hybrid</p>
+                    <p>• Remote</p>
                     <p>• Equity-based compensation</p>
                   </div>
                 </div>
