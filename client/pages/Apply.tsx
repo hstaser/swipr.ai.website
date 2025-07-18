@@ -47,7 +47,7 @@ const POSITIONS = {
   "ai-developer": {
     title: "AI/ML Engineer",
     description:
-      "Work alongside our AI team to enhance cutting-edge machine learning systems for financial market analysis and algorithmic trading",
+      "Work on cutting-edge machine learning systems for financial market analysis and algorithmic trading",
     skills: [
       "Advanced Python with ML frameworks (PyTorch, TensorFlow, scikit-learn)",
       "Deep learning, NLP, and time series forecasting",
