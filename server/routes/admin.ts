@@ -23,7 +23,7 @@ const validateAdminAuth = (req: any) => {
   return validTokens.includes(token);
 };
 
-export const getAdminDashboard: RequestHandler = (req, res) => {
+export const getAdminDashboard: RequestHandler = async (req, res) => {
   // Check authentication
   if (!validateAdminAuth(req)) {
     return res.status(401).json({
@@ -112,7 +112,7 @@ export const getAdminDashboard: RequestHandler = (req, res) => {
   }
 };
 
-export const updateAdminDashboard: RequestHandler = (req, res) => {
+export const updateAdminDashboard: RequestHandler = async (req, res) => {
   // Check authentication
   if (!validateAdminAuth(req)) {
     return res.status(401).json({
