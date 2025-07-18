@@ -364,7 +364,7 @@ export default function Index() {
                   Quantitative Analyst
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Full-time • Remote/NYC
+                  Remote/NYC
                 </CardDescription>
               </CardHeader>
               <CardContent>
