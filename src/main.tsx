@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "../client/pages/Index";
 import LearnMore from "../client/pages/LearnMore";
 import Apply from "../client/pages/Apply";
-import TrackApplication from "../client/pages/TrackApplication";
+
 import Privacy from "../client/pages/Privacy";
 import EnhancedAdmin from "../client/pages/EnhancedAdmin";
 import NotFound from "../client/pages/NotFound";
