@@ -127,9 +127,7 @@ export default function Index() {
         trackFormSubmit("waitlist", true);
       } else {
         setWaitlistMessage(
-          result.message ||
-            result.error ||
-            "Something went wrong. Please try again.",
+          result.message || "Something went wrong. Please try again.",
         );
         trackFormSubmit("waitlist", false);
       }
