@@ -138,12 +138,23 @@ export default function AdminDashboard() {
       console.log("🔄 Fetching admin dashboard data...");
 
       // Fetch stats
+      console.log("🔄 Fetching stats with token:", token);
       const statsResponse = await fetch("/api/admin/dashboard?type=stats", {
         headers,
       });
+      console.log("📊 Stats response status:", statsResponse.status);
       if (statsResponse.ok) {
         const statsResult = await statsResponse.json();
+        console.log("📊 Stats data received:", statsResult);
         setStats(statsResult.data);
+      } else {
+        const errorText = await statsResponse.text();
+        console.error(
+          "❌ Stats fetch failed:",
+          statsResponse.status,
+          errorText,
+        );
+        setError(`Failed to fetch stats: ${statsResponse.status}`);
       }
 
       // Fetch applications
@@ -151,12 +162,19 @@ export default function AdminDashboard() {
         "/api/admin/dashboard?type=applications",
         { headers },
       );
+      console.log("📱 Applications response status:", appsResponse.status);
       if (appsResponse.ok) {
         const appsResult = await appsResponse.json();
+        console.log("📱 Applications data received:", appsResult);
         setApplications(appsResult.data || []);
         console.log(`✅ Loaded ${appsResult.data?.length || 0} applications`);
       } else {
-        console.warn("⚠️ Failed to fetch applications");
+        const errorText = await appsResponse.text();
+        console.error(
+          "❌ Applications fetch failed:",
+          appsResponse.status,
+          errorText,
+        );
       }
 
       // Fetch contacts
@@ -164,12 +182,19 @@ export default function AdminDashboard() {
         "/api/admin/dashboard?type=contacts",
         { headers },
       );
+      console.log("📧 Contacts response status:", contactsResponse.status);
       if (contactsResponse.ok) {
         const contactsResult = await contactsResponse.json();
+        console.log("📧 Contacts data received:", contactsResult);
         setContacts(contactsResult.data || []);
         console.log(`✅ Loaded ${contactsResult.data?.length || 0} contacts`);
       } else {
-        console.warn("⚠️ Failed to fetch contacts");
+        const errorText = await contactsResponse.text();
+        console.error(
+          "❌ Contacts fetch failed:",
+          contactsResponse.status,
+          errorText,
+        );
       }
 
       // Fetch waitlist
@@ -177,14 +202,21 @@ export default function AdminDashboard() {
         "/api/admin/dashboard?type=waitlist",
         { headers },
       );
+      console.log("📝 Waitlist response status:", waitlistResponse.status);
       if (waitlistResponse.ok) {
         const waitlistResult = await waitlistResponse.json();
+        console.log("📝 Waitlist data received:", waitlistResult);
         setWaitlist(waitlistResult.data || []);
         console.log(
           `✅ Loaded ${waitlistResult.data?.length || 0} waitlist entries`,
         );
       } else {
-        console.warn("⚠️ Failed to fetch waitlist");
+        const errorText = await waitlistResponse.text();
+        console.error(
+          "❌ Waitlist fetch failed:",
+          waitlistResponse.status,
+          errorText,
+        );
       }
     } catch (err) {
       setError("Failed to load dashboard data");
