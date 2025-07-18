@@ -580,17 +580,6 @@ export default function Index() {
           </div>
         </div>
       </footer>
-
-      {/* Floating Admin Access Button */}
-      <Link to="/admin">
-        <Button
-          className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-          size="icon"
-          title="Admin Dashboard"
-        >
-          <Settings className="h-6 w-6" />
-        </Button>
-      </Link>
     </div>
   );
 }
