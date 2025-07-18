@@ -52,7 +52,6 @@ interface Application {
   phone: string;
   position: string;
   experience: string;
-  coverLetter?: string;
   linkedinUrl?: string;
   portfolioUrl?: string;
   startDate: string;
