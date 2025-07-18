@@ -1,4 +1,4 @@
-import { ApplicationStorage, EmailNotifications } from "../lib/storage.js";
+import { ApplicationService } from "../lib/applicationService.js";
 
 export default async function handler(req, res) {
   // Set CORS headers
