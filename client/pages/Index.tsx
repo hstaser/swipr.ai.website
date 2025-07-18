@@ -314,7 +314,7 @@ export default function Index() {
                   Backend Engineer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Remote/NYC
+                  Part-time • Remote/NYC
                 </CardDescription>
               </CardHeader>
               <CardContent>
