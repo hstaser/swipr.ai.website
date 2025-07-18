@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const application = ApplicationStorage.getById(id);
+      const application = await ApplicationService.getById(id);
 
       if (!application) {
         return res.status(404).json({
