@@ -6,6 +6,10 @@ import { createServer } from "./server";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   base: "./", // Fix relative paths for deployment
+  define: {
+    // Ensure no eval usage in production
+    global: "globalThis",
+  },
   server: {
     host: "::",
     port: 8080,
