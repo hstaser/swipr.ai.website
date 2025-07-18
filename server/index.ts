@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { connectToMongoDB } from "./lib/mongodb.js";
-import { initializeData } from "./scripts/initMongoDB.js";
+import { connectToMongoDB } from "./lib/mongodb.ts";
+import { initializeData } from "./scripts/initMongoDB.ts";
 import { handleDemo } from "./routes/demo";
 import { handleContact } from "./routes/contact";
 import { handleWaitlistSignup } from "./routes/waitlist";

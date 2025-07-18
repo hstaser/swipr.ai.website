@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import { ApplicationService } from "../services/applicationService.js";
-import { ContactService } from "../services/contactService.js";
-import { WaitlistService } from "../services/waitlistService.js";
+import { ApplicationService } from "../services/applicationService.ts";
+import { ContactService } from "../services/contactService.ts";
+import { WaitlistService } from "../services/waitlistService.ts";
 
 // Import the existing storage from other routes for backwards compatibility
 import { applications } from "./jobs";

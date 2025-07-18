@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { z } from "zod";
-import { WaitlistService } from "../services/waitlistService.js";
+import { WaitlistService } from "../services/waitlistService.ts";
 
 const WaitlistSchema = z.object({
   email: z.string().email("Valid email is required"),
