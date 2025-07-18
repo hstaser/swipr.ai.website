@@ -1,4 +1,4 @@
-import { ContactStorage, EmailNotifications } from "./lib/storage.js";
+import { ContactService } from "./lib/contactService.js";
 
 export default async function handler(req, res) {
   // Set CORS headers for cross-origin requests
