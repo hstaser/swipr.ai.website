@@ -89,13 +89,20 @@ export default async function handler(req, res) {
       }
 
       // Create application record
-      const application = ApplicationStorage.create({
+      const applicationData = {
+        id: `APP-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
         position,
-      });
+        status: "pending",
+        appliedAt: new Date().toISOString(),
+        lastUpdated: new Date().toISOString(),
+        notes: "",
+      };
+
+      const application = await ApplicationService.create(applicationData);
 
       if (!application) {
         return res.status(500).json({
