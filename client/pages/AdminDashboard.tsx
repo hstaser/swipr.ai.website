@@ -313,7 +313,18 @@ export default function AdminDashboard() {
                 Admin Dashboard
               </h1>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
+              {stats && (
+                <div className="text-sm text-slate-600 mr-3">
+                  <span className="inline-flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                    {stats.applications.total +
+                      stats.contacts.total +
+                      stats.waitlist.count}{" "}
+                    total records
+                  </span>
+                </div>
+              )}
               <Button
                 onClick={fetchData}
                 variant="outline"
