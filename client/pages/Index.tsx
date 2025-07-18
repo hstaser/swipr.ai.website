@@ -322,7 +322,7 @@ export default function Index() {
 
                 <Link to="/apply?position=backend-engineer">
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200">
-                    Apply Now
+                    Join Us
                     <Sparkles className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -347,7 +347,7 @@ export default function Index() {
 
                 <Link to="/apply?position=ai-developer">
                   <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200">
-                    Apply Now
+                    Join Us
                     <Zap className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -372,7 +372,7 @@ export default function Index() {
 
                 <Link to="/apply?position=quantitative-analyst">
                   <Button className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 hover:scale-105 transition-transform duration-200">
-                    Apply Now
+                    Join Us
                     <TrendingUp className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -397,7 +397,7 @@ export default function Index() {
 
                 <Link to="/apply?position=mobile-app-developer">
                   <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200">
-                    Apply Now
+                    Join Us
                     <Smartphone className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
