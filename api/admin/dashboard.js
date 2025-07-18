@@ -1,8 +1,6 @@
-import {
-  ApplicationStorage,
-  ContactStorage,
-  WaitlistStorage,
-} from "../lib/storage.js";
+import { ApplicationService } from "../../server/services/applicationService.ts";
+import { ContactService } from "../../server/services/contactService.ts";
+import { WaitlistService } from "../../server/services/waitlistService.ts";
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -37,9 +35,9 @@ export default async function handler(req, res) {
 
       switch (type) {
         case "stats":
-          const stats = ApplicationStorage.getStats();
-          const waitlistCount = WaitlistStorage.getCount();
-          const contacts = ContactStorage.getAll();
+          const stats = await ApplicationService.getStats();
+          const waitlistCount = await WaitlistService.getCount();
+          const contacts = await ContactService.getAll();
 
           return res.status(200).json({
             success: true,
@@ -55,7 +53,7 @@ export default async function handler(req, res) {
 
         case "applications":
           if (id) {
-            const application = ApplicationStorage.getById(id);
+            const application = await ApplicationService.getById(id);
             if (!application) {
               return res.status(404).json({
                 success: false,
@@ -67,7 +65,7 @@ export default async function handler(req, res) {
               data: application,
             });
           } else {
-            const applications = ApplicationStorage.getAll();
+            const applications = await ApplicationService.getAll();
             // Sort by most recent first
             applications.sort(
               (a, b) => new Date(b.appliedAt) - new Date(a.appliedAt),
@@ -79,7 +77,7 @@ export default async function handler(req, res) {
           }
 
         case "contacts":
-          const allContacts = ContactStorage.getAll();
+          const allContacts = await ContactService.getAll();
           // Sort by most recent first
           allContacts.sort(
             (a, b) => new Date(b.submittedAt) - new Date(a.submittedAt),
@@ -90,7 +88,7 @@ export default async function handler(req, res) {
           });
 
         case "waitlist":
-          const waitlist = WaitlistStorage.getAll();
+          const waitlist = await WaitlistService.getAll();
           // Sort by most recent first
           waitlist.sort((a, b) => new Date(b.joinedAt) - new Date(a.joinedAt));
           return res.status(200).json({
@@ -126,7 +124,7 @@ export default async function handler(req, res) {
           });
         }
 
-        const updatedApplication = ApplicationStorage.updateStatus(
+        const updatedApplication = await ApplicationService.updateStatus(
           id,
           status,
           notes,
@@ -147,7 +145,7 @@ export default async function handler(req, res) {
       }
 
       if (type === "contact" && id) {
-        const updatedContact = ContactStorage.markAsRead(id);
+        const updatedContact = await ContactService.markAsRead(id);
 
         if (!updatedContact) {
           return res.status(404).json({
