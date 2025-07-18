@@ -50,7 +50,9 @@ export interface JobApplicationRequest {
     | "backend-engineer"
     | "ai-developer"
     | "quantitative-analyst"
-    | "mobile-app-developer";
+    | "mobile-app-developer"
+    | "machine-learning-engineer"
+    | "product-designer";
   experience: string;
   coverLetter?: string;
   linkedinUrl?: string;
