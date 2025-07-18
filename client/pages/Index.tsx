@@ -372,9 +372,9 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Design smart algorithms that optimize portfolios and manage
-                  risk. Help users achieve better returns while keeping their
-                  investments safe.
+                  Join our quant research team working on smart algorithms that
+                  optimize portfolios and manage risk. Help users achieve better
+                  returns while keeping their investments safe.
                 </p>
 
                 <Link to="/apply?position=quantitative-analyst">
