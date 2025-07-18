@@ -42,11 +42,17 @@ export default async function handler(req, res) {
       }
 
       // Store contact message
-      const contact = ContactStorage.create({
+      const contactData = {
+        id: `CONTACT-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         name: name.trim(),
         email: email.trim().toLowerCase(),
         message: message.trim(),
-      });
+        status: "new",
+        timestamp: new Date().toISOString(),
+        readAt: null,
+      };
+
+      const contact = await ContactService.create(contactData);
 
       if (!contact) {
         return res.status(500).json({
