@@ -1,4 +1,4 @@
-import { WaitlistStorage } from "./lib/storage.js";
+import { WaitlistService } from "../server/services/waitlistService.ts";
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     // Return waitlist count for public display
     try {
-      const count = WaitlistStorage.getCount();
+      const count = await WaitlistService.getCount();
       return res.status(200).json({
         success: true,
         count,
@@ -48,9 +48,11 @@ export default async function handler(req, res) {
       }
 
       // Store waitlist entry
-      const entry = WaitlistStorage.create({
+      const entry = await WaitlistService.create({
+        id: `waitlist-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         email: email.trim().toLowerCase(),
         name: name?.trim() || "",
+        joinedAt: new Date().toISOString(),
       });
 
       if (entry && entry.error && entry.existing) {
