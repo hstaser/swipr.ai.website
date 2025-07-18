@@ -404,13 +404,23 @@ export default function AdminDashboard() {
               </Button>
               <Button
                 onClick={() => {
-                  console.log("🔍 DEBUG INFO:");
-                  console.log("- Token:", localStorage.getItem("adminToken"));
-                  console.log("- Stats:", stats);
-                  console.log("- Applications:", applications);
-                  console.log("- Contacts:", contacts);
-                  console.log("- Waitlist:", waitlist);
-                  console.log("- URL:", window.location.href);
+                  // Safe debug function for production
+                  const debugInfo = {
+                    token: localStorage.getItem("adminToken"),
+                    stats,
+                    applications,
+                    contacts,
+                    waitlist,
+                    url: window.location.href,
+                  };
+                  // CSP-safe logging
+                  try {
+                    if (typeof console !== "undefined" && console.log) {
+                      console.log("🔍 DEBUG INFO:", debugInfo);
+                    }
+                  } catch (e) {
+                    // Ignore console errors
+                  }
                   alert("Debug info logged to console (F12)");
                 }}
                 variant="outline"
@@ -421,7 +431,6 @@ export default function AdminDashboard() {
               <Button
                 onClick={async () => {
                   const token = localStorage.getItem("adminToken");
-                  console.log("🧪 Testing API directly...");
                   try {
                     const response = await fetch(
                       "/api/admin/dashboard?type=stats",
@@ -432,15 +441,25 @@ export default function AdminDashboard() {
                         },
                       },
                     );
-                    console.log("API Test Response Status:", response.status);
                     const data = await response.json();
-                    console.log("API Test Response Data:", data);
+                    // CSP-safe logging
+                    try {
+                      if (typeof console !== "undefined" && console.log) {
+                        console.log("API Test:", {
+                          status: response.status,
+                          data,
+                        });
+                      }
+                    } catch (e) {
+                      // Ignore console errors
+                    }
                     alert(
-                      `API Test: ${response.status} - Check console for details`,
+                      `API Test: ${response.status} - ${data.success ? "Success" : "Failed"}`,
                     );
                   } catch (error) {
-                    console.error("API Test Error:", error);
-                    alert(`API Test Failed: ${error}`);
+                    const errorMsg =
+                      error instanceof Error ? error.message : "Unknown error";
+                    alert(`API Test Failed: ${errorMsg}`);
                   }
                 }}
                 variant="outline"
