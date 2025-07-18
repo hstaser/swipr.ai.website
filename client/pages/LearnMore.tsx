@@ -354,7 +354,7 @@ export default function LearnMore() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-white text-white hover:bg-white/10 text-lg px-8 py-6"
+                  className="border-white text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm text-lg px-8 py-6"
                 >
                   Back to Home
                 </Button>
