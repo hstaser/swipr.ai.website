@@ -668,17 +668,6 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {selectedApplication.coverLetter && (
-                <div>
-                  <label className="text-sm font-medium text-gray-600">
-                    Cover Letter
-                  </label>
-                  <p className="mt-1 p-3 bg-gray-50 rounded-lg">
-                    {selectedApplication.coverLetter}
-                  </p>
-                </div>
-              )}
-
               {(selectedApplication.linkedinUrl ||
                 selectedApplication.portfolioUrl) && (
                 <div className="space-y-2">
