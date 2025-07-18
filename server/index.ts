@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import { connectToMongoDB } from "./lib/mongodb.js";
+import { initializeData } from "./scripts/initMongoDB.js";
 import { handleDemo } from "./routes/demo";
 import { handleContact } from "./routes/contact";
 import { handleWaitlistSignup } from "./routes/waitlist";
@@ -23,6 +25,16 @@ import { getAdminDashboard, updateAdminDashboard } from "./routes/admin";
 
 export function createServer() {
   const app = express();
+
+  // Initialize MongoDB connection and sample data
+  connectToMongoDB()
+    .then(() => {
+      console.log("📚 MongoDB connected, initializing sample data...");
+      return initializeData();
+    })
+    .catch((error) => {
+      console.error("❌ MongoDB initialization failed:", error);
+    });
 
   // Middleware
   app.use(cors());
