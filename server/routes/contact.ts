@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { z } from "zod";
-import { ContactService } from "../services/contactService.js";
+import { ContactService } from "../services/contactService.ts";
 
 const ContactSchema = z.object({
   name: z.string().min(1, "Name is required"),

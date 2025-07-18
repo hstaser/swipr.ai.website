@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { z } from "zod";
-import { ApplicationService } from "../services/applicationService.js";
+import { ApplicationService } from "../services/applicationService.ts";
 
 // Ensure uploads directory exists
 const uploadsDir = path.join(process.cwd(), "uploads", "resumes");
