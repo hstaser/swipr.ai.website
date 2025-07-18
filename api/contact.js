@@ -1,3 +1,5 @@
+import { ContactStorage, EmailNotifications } from "./lib/storage.js";
+
 export default async function handler(req, res) {
   // Set CORS headers for cross-origin requests
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -17,7 +19,7 @@ export default async function handler(req, res) {
       if (!name || !email || !message) {
         return res.status(400).json({
           success: false,
-          error: "Missing required fields",
+          message: "Please fill in all required fields.",
         });
       }
 
@@ -26,40 +28,53 @@ export default async function handler(req, res) {
       if (!emailRegex.test(email)) {
         return res.status(400).json({
           success: false,
-          error: "Invalid email format",
+          message: "Please enter a valid email address.",
         });
       }
 
-      // Log the form submission (in production, you'd save to database or send email)
-      console.log("New contact form submission:", {
-        name,
-        email,
-        message,
-        timestamp: new Date().toISOString(),
+      // Validate message length
+      if (message.trim().length < 10) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Please provide a more detailed message (minimum 10 characters).",
+        });
+      }
+
+      // Store contact message
+      const contact = ContactStorage.create({
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        message: message.trim(),
       });
 
-      // Here you would typically:
-      // - Save to database
-      // - Send email notification
-      // - Integrate with CRM
-      // - etc.
+      if (!contact) {
+        return res.status(500).json({
+          success: false,
+          message: "Failed to save your message. Please try again.",
+        });
+      }
+
+      // Send notification
+      await EmailNotifications.notifyNewContact(contact);
 
       return res.status(200).json({
         success: true,
-        message: "Thank you for your message! We'll get back to you soon.",
+        message:
+          "Thank you for your message! We'll get back to you within 24 hours.",
       });
     } catch (error) {
       console.error("Contact form submission error:", error);
       return res.status(500).json({
         success: false,
-        error: "Internal Server Error",
+        message: "Something went wrong. Please try again later.",
       });
     }
   } else {
     res.setHeader("Allow", ["POST"]);
     return res.status(405).json({
       success: false,
-      error: `Method ${req.method} Not Allowed`,
+      message: `Method ${req.method} Not Allowed`,
     });
   }
 }
