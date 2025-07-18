@@ -97,6 +97,27 @@ interface DashboardStats {
   };
 }
 
+// CSP-safe logging function
+const safeLog = (...args: any[]) => {
+  try {
+    if (typeof console !== "undefined" && console.log) {
+      console.log(...args);
+    }
+  } catch (e) {
+    // Ignore console errors in production
+  }
+};
+
+const safeError = (...args: any[]) => {
+  try {
+    if (typeof console !== "undefined" && console.error) {
+      console.error(...args);
+    }
+  } catch (e) {
+    // Ignore console errors in production
+  }
+};
+
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
@@ -138,27 +159,23 @@ export default function AdminDashboard() {
       console.log("🔄 Fetching admin dashboard data...");
 
       // Fetch stats
-      console.log("🔄 Fetching stats with token:", token);
+      safeLog("🔄 Fetching stats with token:", token);
       const statsResponse = await fetch("/api/admin/dashboard?type=stats", {
         headers,
       });
-      console.log("📊 Stats response status:", statsResponse.status);
+      safeLog("📊 Stats response status:", statsResponse.status);
       if (statsResponse.ok) {
         const statsResult = await statsResponse.json();
-        console.log("📊 Stats data received:", statsResult);
+        safeLog("📊 Stats data received:", statsResult);
         if (statsResult.success && statsResult.data) {
           setStats(statsResult.data);
         } else {
-          console.error("❌ Stats data invalid:", statsResult);
+          safeError("❌ Stats data invalid:", statsResult);
           setError("Invalid stats data received");
         }
       } else {
         const errorText = await statsResponse.text();
-        console.error(
-          "❌ Stats fetch failed:",
-          statsResponse.status,
-          errorText,
-        );
+        safeError("❌ Stats fetch failed:", statsResponse.status, errorText);
         setError(`Failed to fetch stats: ${statsResponse.status}`);
       }
 
