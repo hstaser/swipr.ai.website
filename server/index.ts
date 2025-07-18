@@ -41,6 +41,21 @@ export function createServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // Serve static files from dist in production
+  if (process.env.NODE_ENV === "production") {
+    // Import path and serve static files
+    const path = require("path");
+    app.use(express.static(path.join(__dirname, "../..")));
+
+    // Handle client-side routing - send index.html for non-API routes
+    app.get("*", (req, res, next) => {
+      if (req.path.startsWith("/api/")) {
+        return next();
+      }
+      res.sendFile(path.join(__dirname, "../../index.html"));
+    });
+  }
+
   // Example API routes
   app.get("/api/ping", (_req, res) => {
     res.json({ message: "Hello from Express server v2!" });
