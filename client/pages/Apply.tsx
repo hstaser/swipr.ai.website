@@ -47,7 +47,6 @@ const POSITIONS = {
       "Interest in AI/ML and data science",
       "Basic Python or programming experience",
     ],
-    compensation: "Significant equity stake with performance-based vesting",
   },
   "quantitative-analyst": {
     title: "Quantitative Researcher",
@@ -58,7 +57,6 @@ const POSITIONS = {
       "Interest in finance and quantitative analysis",
       "Basic understanding of statistics or willingness to learn",
     ],
-    compensation: "Equity-heavy compensation with performance incentives",
   },
   "mobile-app-developer": {
     title: "Mobile App Developer",
