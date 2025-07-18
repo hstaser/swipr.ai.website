@@ -25,11 +25,11 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.38.0",
     "@types/multer": "^2.0.0",
     "express": "^4.18.2",
     "multer": "^2.0.1",
-    "zod": "^3.23.8",
-    "@supabase/supabase-js": "^2.38.0"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.9.0",
