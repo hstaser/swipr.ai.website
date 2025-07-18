@@ -111,7 +111,7 @@ export default function AdminDashboard() {
   const [selectedApplication, setSelectedApplication] =
     useState<Application | null>(null);
 
-  useEffect(() => {
+    useEffect(() => {
     // Check authentication
     const token = localStorage.getItem("adminToken");
     if (token === "admin-swipr-2025") {
@@ -124,7 +124,7 @@ export default function AdminDashboard() {
     setIsAuthenticated(false);
   };
 
-  const fetchData = async () => {
+    const fetchData = async () => {
     try {
       setLoading(true);
       setError("");
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
         setStats(statsResult.data);
       }
 
-      // Fetch applications
+            // Fetch applications
       const appsResponse = await fetch(
         "/api/admin/dashboard?type=applications",
         { headers },
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
         console.warn("⚠️ Failed to fetch applications");
       }
 
-      // Fetch contacts
+            // Fetch contacts
       const contactsResponse = await fetch(
         "/api/admin/dashboard?type=contacts",
         { headers },
@@ -180,9 +180,7 @@ export default function AdminDashboard() {
       if (waitlistResponse.ok) {
         const waitlistResult = await waitlistResponse.json();
         setWaitlist(waitlistResult.data || []);
-        console.log(
-          `✅ Loaded ${waitlistResult.data?.length || 0} waitlist entries`,
-        );
+        console.log(`✅ Loaded ${waitlistResult.data?.length || 0} waitlist entries`);
       } else {
         console.warn("⚠️ Failed to fetch waitlist");
       }
@@ -245,7 +243,7 @@ export default function AdminDashboard() {
     }
   };
 
-  useEffect(() => {
+    useEffect(() => {
     if (isAuthenticated) {
       fetchData();
     }
@@ -313,15 +311,12 @@ export default function AdminDashboard() {
                 Admin Dashboard
               </h1>
             </div>
-            <div className="flex gap-2 items-center">
+                                    <div className="flex gap-2 items-center">
               {stats && (
                 <div className="text-sm text-slate-600 mr-3">
                   <span className="inline-flex items-center">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                    {stats.applications.total +
-                      stats.contacts.total +
-                      stats.waitlist.count}{" "}
-                    total records
+                    {stats.applications.total + stats.contacts.total + stats.waitlist.count} total records
                   </span>
                 </div>
               )}
@@ -517,9 +512,22 @@ export default function AdminDashboard() {
               </CardContent>
             </Card>
 
-            {/* Applications List */}
+                        {/* Applications List */}
             <div className="space-y-4">
-              {filteredApplications.map((app) => (
+              {filteredApplications.length === 0 ? (
+                <Card>
+                  <CardContent className="text-center py-12">
+                    <Users className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-slate-700 mb-2">
+                      No Applications Yet
+                    </h3>
+                    <p className="text-slate-500">
+                      Applications will appear here when candidates apply through your website.
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : (
+                filteredApplications.map((app) => (
                 <Card
                   key={app.id}
                   className="cursor-pointer hover:shadow-md transition-shadow"
@@ -691,6 +699,8 @@ export default function AdminDashboard() {
                   </p>
                 </div>
               </div>
+
+              
 
               {(selectedApplication.linkedinUrl ||
                 selectedApplication.portfolioUrl) && (
