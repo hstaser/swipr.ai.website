@@ -2,13 +2,28 @@ import {
   getCollection,
   COLLECTIONS,
   MongoApplication,
+  isMongoAvailable,
 } from "../lib/mongodb.js";
+
+// Fallback in-memory storage
+const fallbackApplications: MongoApplication[] = [];
 
 export class ApplicationService {
   static async create(applicationData: Omit<MongoApplication, "_id">) {
     try {
       const collection = await getCollection(COLLECTIONS.APPLICATIONS);
-      const result = await collection.insertOne(applicationData);
+
+      let result;
+      if (collection) {
+        // Use MongoDB
+        result = await collection.insertOne(applicationData);
+        console.log("🔸 Stored in MongoDB");
+      } else {
+        // Fallback to in-memory
+        fallbackApplications.push(applicationData as MongoApplication);
+        result = { insertedId: `fallback-${Date.now()}` };
+        console.log("💾 Stored in memory (MongoDB unavailable)");
+      }
 
       console.log("🚨 NEW JOB APPLICATION RECEIVED");
       console.log("=====================================");
@@ -32,14 +47,26 @@ export class ApplicationService {
   static async getAll() {
     try {
       const collection = await getCollection(COLLECTIONS.APPLICATIONS);
-      const applications = await collection
-        .find({})
-        .sort({ appliedAt: -1 })
-        .toArray();
 
-      console.log(
-        `📊 Fetching ${applications.length} applications from MongoDB`,
-      );
+      let applications;
+      if (collection) {
+        applications = await collection
+          .find({})
+          .sort({ appliedAt: -1 })
+          .toArray();
+        console.log(
+          `📊 Fetching ${applications.length} applications from MongoDB`,
+        );
+      } else {
+        applications = [...fallbackApplications].sort(
+          (a, b) =>
+            new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime(),
+        );
+        console.log(
+          `📊 Fetching ${applications.length} applications from memory`,
+        );
+      }
+
       return applications;
     } catch (error) {
       console.error("❌ Error fetching applications:", error);
@@ -50,7 +77,13 @@ export class ApplicationService {
   static async getById(id: string) {
     try {
       const collection = await getCollection(COLLECTIONS.APPLICATIONS);
-      const application = await collection.findOne({ id });
+
+      let application;
+      if (collection) {
+        application = await collection.findOne({ id });
+      } else {
+        application = fallbackApplications.find((app) => app.id === id) || null;
+      }
 
       if (application) {
         console.log(`✅ Found application: ${id}`);
@@ -77,11 +110,20 @@ export class ApplicationService {
         updateData.notes = notes;
       }
 
-      const result = await collection.updateOne({ id }, { $set: updateData });
-
-      if (result.matchedCount === 0) {
-        console.log(`❌ Application not found for update: ${id}`);
-        return null;
+      let result;
+      if (collection) {
+        result = await collection.updateOne({ id }, { $set: updateData });
+        if (result.matchedCount === 0) {
+          console.log(`❌ Application not found for update: ${id}`);
+          return null;
+        }
+      } else {
+        const appIndex = fallbackApplications.findIndex((app) => app.id === id);
+        if (appIndex === -1) {
+          console.log(`❌ Application not found for update: ${id}`);
+          return null;
+        }
+        Object.assign(fallbackApplications[appIndex], updateData);
       }
 
       console.log(`✅ Updated application ${id} status to: ${status}`);
@@ -97,7 +139,13 @@ export class ApplicationService {
   static async getStats() {
     try {
       const collection = await getCollection(COLLECTIONS.APPLICATIONS);
-      const applications = await collection.find({}).toArray();
+
+      let applications;
+      if (collection) {
+        applications = await collection.find({}).toArray();
+      } else {
+        applications = fallbackApplications;
+      }
 
       const stats = {
         total: applications.length,
@@ -119,8 +167,9 @@ export class ApplicationService {
           (stats.byPosition[app.position] || 0) + 1;
       });
 
+      const source = collection ? "MongoDB" : "memory";
       console.log(
-        `📊 Application Stats from MongoDB - Total: ${stats.total}, Pending: ${stats.pending}`,
+        `📊 Application Stats from ${source} - Total: ${stats.total}, Pending: ${stats.pending}`,
       );
       return stats;
     } catch (error) {
