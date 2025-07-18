@@ -252,15 +252,6 @@ export function Navigation({
                       Apply Now
                     </Button>
                   </Link>
-                  <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button
-                      variant="outline"
-                      className={`w-full ${isTransparent ? "border-white/30 text-white hover:bg-white/10" : ""}`}
-                    >
-                      <Settings className="h-4 w-4 mr-2" />
-                      Admin
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
