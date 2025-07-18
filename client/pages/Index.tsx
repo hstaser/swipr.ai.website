@@ -169,7 +169,7 @@ export default function Index() {
               swipr.ai
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              AI-powered investing that makes stock selection as easy as swiping
+              Investing, simplified. Swipe through stocks like social media.
             </p>
             <div className="space-y-4">
               <form
