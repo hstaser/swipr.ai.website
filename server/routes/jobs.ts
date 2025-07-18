@@ -3,6 +3,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { z } from "zod";
+import { ApplicationService } from "../services/applicationService.js";
 
 // Ensure uploads directory exists
 const uploadsDir = path.join(process.cwd(), "uploads", "resumes");
@@ -77,7 +78,8 @@ export type JobApplication = z.infer<typeof JobApplicationSchema> & {
   status: "pending" | "reviewing" | "interviewing" | "rejected" | "hired";
 };
 
-// In-memory storage for demo (in production, use a database)
+// MongoDB storage is now handled by ApplicationService
+// Keep this export for backwards compatibility with admin routes
 export const applications: JobApplication[] = [];
 
 export interface JobApplicationResponse {
@@ -103,7 +105,10 @@ export const handleJobApplication: RequestHandler = async (req, res) => {
       status: "pending",
     };
 
-    // Store application (in production, save to database)
+    // Store application in MongoDB
+    await ApplicationService.create(application);
+
+    // Also add to in-memory array for backwards compatibility
     applications.push(application);
 
     // Log application for team notification
