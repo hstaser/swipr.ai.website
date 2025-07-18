@@ -51,10 +51,6 @@ export interface JobApplicationRequest {
     | "ai-developer"
     | "quantitative-analyst"
     | "mobile-app-developer";
-  experience: string;
-  linkedinUrl?: string;
-  portfolioUrl?: string;
-  startDate: string;
 }
 
 export interface JobApplicationResponse {
