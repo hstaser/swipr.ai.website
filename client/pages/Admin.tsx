@@ -343,22 +343,6 @@ export default function Admin() {
               </Card>
             )}
 
-            {/* Cover Letter */}
-            {selectedApplication.coverLetter && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Cover Letter</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="bg-slate-50 p-4 rounded-lg">
-                    <p className="whitespace-pre-wrap">
-                      {selectedApplication.coverLetter}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
             {/* Status Update */}
             <Card>
               <CardHeader>
