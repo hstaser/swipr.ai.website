@@ -219,8 +219,15 @@ export default function AdminDashboard() {
         );
       }
     } catch (err) {
-      setError("Failed to load dashboard data");
-      console.error("Dashboard fetch error:", err);
+      const errorMessage = `Failed to load dashboard data: ${err instanceof Error ? err.message : "Unknown error"}`;
+      setError(errorMessage);
+      console.error("🚨 Dashboard fetch error:", err);
+      console.error("🚨 Error details:", {
+        message: err instanceof Error ? err.message : "Unknown error",
+        stack: err instanceof Error ? err.stack : undefined,
+        token: localStorage.getItem("adminToken"),
+        url: window.location.href,
+      });
     } finally {
       setLoading(false);
     }
@@ -388,7 +395,17 @@ export default function AdminDashboard() {
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
             <div className="flex items-center">
               <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
-              <p className="text-red-700">{error}</p>
+              <div>
+                <p className="text-red-700 font-medium">{error}</p>
+                <p className="text-red-600 text-sm mt-1">
+                  Check the browser console (F12) for detailed error
+                  information.
+                </p>
+                <p className="text-red-600 text-sm">
+                  If you continue to see this error, try refreshing the page or
+                  logging out and back in.
+                </p>
+              </div>
             </div>
           </div>
         </div>
