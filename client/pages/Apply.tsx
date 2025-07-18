@@ -774,26 +774,6 @@ export default function Apply() {
               </CardContent>
             </Card>
 
-            {/* Cover Letter */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle>Cover Letter (Optional)</CardTitle>
-                <CardDescription>
-                  Tell us why you're excited about this role and what you'd
-                  bring to swipr.ai (recommended but not required)
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Textarea
-                  name="coverLetter"
-                  value={formData.coverLetter}
-                  onChange={handleInputChange}
-                  placeholder="I'm excited about this opportunity because..."
-                  className="min-h-[150px] resize-none"
-                />
-              </CardContent>
-            </Card>
-
             {/* Submit */}
             <div className="flex justify-center">
               <Button
