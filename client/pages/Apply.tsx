@@ -45,13 +45,9 @@ const POSITIONS = {
     description:
       "Work on cutting-edge machine learning systems for financial market analysis and algorithmic trading",
     skills: [
-      "Advanced Python with ML frameworks (PyTorch, TensorFlow, scikit-learn)",
-      "Deep learning, NLP, and time series forecasting",
-      "Financial modeling and quantitative analysis",
-      "MLOps pipelines and model deployment at scale",
-      "Experience with financial data (market data, fundamental data, alternative data)",
-      "Statistical analysis and hypothesis testing",
-      "PhD in ML/AI, Mathematics, or Finance preferred",
+      "1+ years of college or relevant coursework",
+      "Interest in AI/ML and data science",
+      "Basic Python or programming experience",
     ],
     compensation: "Significant equity stake with performance-based vesting",
   },
