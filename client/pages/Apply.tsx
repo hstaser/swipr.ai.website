@@ -105,7 +105,6 @@ export default function Apply() {
     position,
     experience: "",
     startDate: "",
-    coverLetter: "",
     linkedinUrl: "",
     portfolioUrl: "",
   });
