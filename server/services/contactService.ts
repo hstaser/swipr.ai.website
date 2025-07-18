@@ -1,4 +1,4 @@
-import { getCollection, COLLECTIONS, MongoContact } from "../lib/mongodb.js";
+import { getCollection, COLLECTIONS, MongoContact } from "../lib/mongodb.ts";
 
 // Fallback in-memory storage
 const fallbackContacts: MongoContact[] = [];

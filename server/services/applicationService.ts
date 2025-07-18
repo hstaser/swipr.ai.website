@@ -3,7 +3,7 @@ import {
   COLLECTIONS,
   MongoApplication,
   isMongoAvailable,
-} from "../lib/mongodb.js";
+} from "../lib/mongodb.ts";
 
 // Fallback in-memory storage
 const fallbackApplications: MongoApplication[] = [];
