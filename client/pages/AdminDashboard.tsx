@@ -234,8 +234,14 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (isAuthenticated) {
+      fetchData();
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/admin" replace />;
+  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
