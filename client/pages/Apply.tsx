@@ -62,7 +62,7 @@ const POSITIONS = {
   "quantitative-analyst": {
     title: "Quantitative Researcher",
     description:
-      "Contribute to our quantitative research team working on sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
+      "Work on sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
     skills: [
       "Advanced degree in Mathematics, Physics, Statistics, or Financial Engineering",
       "Python/R for quantitative analysis and backtesting",
