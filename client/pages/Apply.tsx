@@ -31,7 +31,7 @@ const POSITIONS = {
   "backend-engineer": {
     title: "Backend Engineer",
     description:
-      "Architect and build high-performance, scalable infrastructure for our algorithmic trading platform",
+      "Join our engineering team to work on high-performance, scalable infrastructure for our algorithmic trading platform",
     skills: [
       "Python, Go, or Rust expertise",
       "Distributed systems and microservices",
@@ -47,7 +47,7 @@ const POSITIONS = {
   "ai-developer": {
     title: "AI/ML Engineer",
     description:
-      "Design and implement cutting-edge machine learning systems for financial market analysis and algorithmic trading",
+      "Work alongside our AI team to enhance cutting-edge machine learning systems for financial market analysis and algorithmic trading",
     skills: [
       "Advanced Python with ML frameworks (PyTorch, TensorFlow, scikit-learn)",
       "Deep learning, NLP, and time series forecasting",
@@ -62,7 +62,7 @@ const POSITIONS = {
   "quantitative-analyst": {
     title: "Quantitative Researcher",
     description:
-      "Develop sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
+      "Contribute to our quantitative research team working on sophisticated mathematical models for portfolio optimization, risk management, and alpha generation",
     skills: [
       "Advanced degree in Mathematics, Physics, Statistics, or Financial Engineering",
       "Python/R for quantitative analysis and backtesting",
@@ -77,7 +77,7 @@ const POSITIONS = {
   "mobile-app-developer": {
     title: "Senior Mobile App Developer",
     description:
-      "Build a world-class mobile application that brings sophisticated portfolio management to users' fingertips",
+      "Join our mobile team to enhance our world-class mobile application that brings sophisticated portfolio management to users' fingertips",
     skills: [
       "Expert-level React Native or Flutter with 5+ years of complex app development",
       "Native iOS (Swift/SwiftUI) and Android (Kotlin/Jetpack Compose) development",
