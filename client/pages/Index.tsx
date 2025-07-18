@@ -386,7 +386,7 @@ export default function Index() {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-xl text-slate-800">
-                  Senior Mobile App Developer
+                  Mobile App Developer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
                   Remote/NYC
