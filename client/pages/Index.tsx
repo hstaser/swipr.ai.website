@@ -397,9 +397,9 @@ export default function Index() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-600 mb-4 leading-relaxed">
-                  Create world-class mobile experiences that make portfolio
-                  management intuitive and accessible. Build complex financial
-                  apps with smooth performance.
+                  Join our mobile team working on world-class mobile experiences
+                  that make portfolio management intuitive and accessible. Work
+                  on complex financial apps with smooth performance.
                 </p>
 
                 <Link to="/apply?position=mobile-app-developer">
