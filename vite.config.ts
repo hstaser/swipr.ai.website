@@ -31,7 +31,13 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-  plugins: [react(), ...(mode === "development" ? [expressPlugin()] : [])],
+  plugins: [
+    react({
+      // Ensure CSP compliance
+      jsxRuntime: "automatic",
+    }),
+    ...(mode === "development" ? [expressPlugin()] : []),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
