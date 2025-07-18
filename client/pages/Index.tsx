@@ -310,7 +310,7 @@ export default function Index() {
                   Backend Engineer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Part-time • Remote/NYC
+                  Part-time • Remote
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -335,7 +335,7 @@ export default function Index() {
                   AI Developer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Part-time • Remote/NYC
+                  Part-time • Remote
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -360,7 +360,7 @@ export default function Index() {
                   Quantitative Analyst
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Part-time • Remote/NYC
+                  Part-time • Remote
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -385,7 +385,7 @@ export default function Index() {
                   Mobile App Developer
                 </CardTitle>
                 <CardDescription className="text-slate-600">
-                  Part-time • Remote/NYC
+                  Part-time • Remote
                 </CardDescription>
               </CardHeader>
               <CardContent>
