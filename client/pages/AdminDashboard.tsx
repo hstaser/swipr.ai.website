@@ -166,7 +166,10 @@ export default function AdminDashboard() {
       );
       if (contactsResponse.ok) {
         const contactsResult = await contactsResponse.json();
-        setContacts(contactsResult.data);
+        setContacts(contactsResult.data || []);
+        console.log(`✅ Loaded ${contactsResult.data?.length || 0} contacts`);
+      } else {
+        console.warn("⚠️ Failed to fetch contacts");
       }
 
       // Fetch waitlist
@@ -176,7 +179,12 @@ export default function AdminDashboard() {
       );
       if (waitlistResponse.ok) {
         const waitlistResult = await waitlistResponse.json();
-        setWaitlist(waitlistResult.data);
+        setWaitlist(waitlistResult.data || []);
+        console.log(
+          `✅ Loaded ${waitlistResult.data?.length || 0} waitlist entries`,
+        );
+      } else {
+        console.warn("⚠️ Failed to fetch waitlist");
       }
     } catch (err) {
       setError("Failed to load dashboard data");
