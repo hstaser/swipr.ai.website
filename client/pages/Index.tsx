@@ -939,7 +939,7 @@ export default function Index() {
                 {" "}Before You Sign Up
               </span>
             </h2>
-            <p className="text-xl text-white/80 leading-relaxed">
+            <p className="text-xl text-slate-200 leading-relaxed">
               Take a full walkthrough of our platform with this interactive demo
             </p>
           </div>
