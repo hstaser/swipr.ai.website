@@ -2266,9 +2266,9 @@ export default function Index() {
       <footer className="bg-slate-950/50 backdrop-blur-lg border-t border-white/10 py-16 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {/* About */}
-              <div>
+              <div className="flex-1">
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent mb-4">
                   About
                 </h3>
@@ -2293,7 +2293,7 @@ export default function Index() {
               </div>
 
               {/* Product */}
-              <div>
+              <div className="flex-1">
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
                   Product
                 </h3>
@@ -2326,7 +2326,7 @@ export default function Index() {
               </div>
 
               {/* Legal */}
-              <div>
+              <div className="flex-1">
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-4">
                   Legal
                 </h3>
