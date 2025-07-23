@@ -609,55 +609,55 @@ export default function Index() {
       </section>
 
       {/* Enhanced Features Section */}
-      <section id="features" className="py-32 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+      <section id="features" className="py-16 md:py-24 lg:py-32 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16 lg:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-8">
               Revolutionary
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 {" "}
                 Features
               </span>
             </h2>
-            <p className="text-xl text-slate-200 leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-200 leading-relaxed px-4">
               Experience the next generation of intelligent investing
             </p>
           </div>
 
-          <div className="space-y-20 max-w-7xl mx-auto">
+          <div className="space-y-12 md:space-y-16 lg:space-y-20 max-w-7xl mx-auto">
             {/* Feature 1: Swipe to Invest */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="order-2 lg:order-1">
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-cyan-400/50 transition-all duration-500 group">
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-cyan-500/25">
-                      <Smartphone className="h-8 w-8 text-white" />
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20 hover:border-cyan-400/50 transition-all duration-500 group">
+                  <div className="flex flex-col sm:flex-row sm:items-center mb-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-cyan-500/25">
+                      <Smartphone className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
                       Swipe to Invest
                     </h3>
                   </div>
-                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
+                  <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-6">
                     Make investing as intuitive as swiping right. Explore
                     stocks, ETFs, and AI-picked assets with the familiar gesture
                     you know and love.
                   </p>
                   <ul className="space-y-3 mb-6">
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Swipe right to invest, left to pass
                       </span>
                     </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         AI curates personalized recommendations
                       </span>
                     </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Instant access to detailed analysis
                       </span>
                     </li>
@@ -668,10 +668,10 @@ export default function Index() {
                         .getElementById("mvp-demo")
                         ?.scrollIntoView({ behavior: "smooth" })
                     }
-                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105"
+                    className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105"
                   >
                     See It In Action
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </div>
               </div>
