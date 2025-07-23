@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAnalytics } from "@/lib/analytics";
+import { Logo } from "@/components/Logo";
 import {
   TrendingUp,
   Menu,
