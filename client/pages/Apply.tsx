@@ -201,7 +201,6 @@ export default function Apply() {
           email: "",
           phone: "",
           position: "",
-          experience: "",
           linkedinUrl: "",
           portfolioUrl: "",
           startDate: "",
