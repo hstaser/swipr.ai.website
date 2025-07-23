@@ -2184,7 +2184,7 @@ export default function Index() {
               </div>
 
               <div>
-                <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl">
+                <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 rounded-3xl">
                   <CardHeader>
                     <CardTitle className="text-2xl text-white">
                       Send us a message
