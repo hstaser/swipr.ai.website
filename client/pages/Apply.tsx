@@ -429,7 +429,7 @@ export default function Apply() {
                     value={formData.experience}
                     onChange={handleInputChange}
                     required
-                    className="bg-white/10 border-white/30 text-white placeholder-white/60 min-h-[120px] rounded-xl"
+                    className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 min-h-[120px] rounded-xl"
                     placeholder="Tell us about your experience, education, and what makes you excited about this role..."
                   />
                 </div>
