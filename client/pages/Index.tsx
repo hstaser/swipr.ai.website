@@ -582,21 +582,21 @@ export default function Index() {
                     </div>
                     <h3 className="text-3xl font-bold text-white">Swipe to Invest</h3>
                   </div>
-                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
                     Make investing as intuitive as swiping right. Explore stocks, ETFs, and AI-picked assets with the familiar gesture you know and love.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Swipe right to invest, left to pass</span>
+                      <span className="text-slate-200">Swipe right to invest, left to pass</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">AI curates personalized recommendations</span>
+                      <span className="text-slate-200">AI curates personalized recommendations</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Instant access to detailed analysis</span>
+                      <span className="text-slate-200">Instant access to detailed analysis</span>
                     </li>
                   </ul>
                   <Button
