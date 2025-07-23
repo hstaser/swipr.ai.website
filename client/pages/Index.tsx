@@ -1201,11 +1201,11 @@ export default function Index() {
                       </div>
                     </div>
                     <div className="space-y-6">
-                      <div className="bg-white/10 rounded-xl p-6">
+                      <div className="bg-slate-800/50 rounded-xl p-6 border border-white/10">
                         <h4 className="text-xl font-semibold text-white mb-4">Portfolio Metrics</h4>
                         <div className="space-y-4">
                           <div className="flex justify-between">
-                            <span className="text-white/60">Total Value:</span>
+                            <span className="text-slate-300">Total Value:</span>
                             <span className="text-white font-bold">$10,000</span>
                           </div>
                           <div className="flex justify-between">
