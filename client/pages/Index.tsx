@@ -1326,21 +1326,27 @@ export default function Index() {
                       <div className="space-y-3 mb-6">
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
-                            <span className="text-xl mr-3">🍎</span>
+                            <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
+                              <img src="https://logo.clearbit.com/apple.com" alt="AAPL" className="w-4 h-4" />
+                            </div>
                             <span className="text-white">AAPL</span>
                           </div>
                           <span className="text-white/60">35%</span>
                         </div>
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
-                            <span className="text-xl mr-3">🔥</span>
+                            <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
+                              <img src="https://logo.clearbit.com/nvidia.com" alt="NVDA" className="w-4 h-4" />
+                            </div>
                             <span className="text-white">NVDA</span>
                           </div>
                           <span className="text-white/60">25%</span>
                         </div>
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
-                            <span className="text-xl mr-3">⚡</span>
+                            <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
+                              <img src="https://logo.clearbit.com/tesla.com" alt="TSLA" className="w-4 h-4" />
+                            </div>
                             <span className="text-white">TSLA</span>
                           </div>
                           <span className="text-white/60">20%</span>
