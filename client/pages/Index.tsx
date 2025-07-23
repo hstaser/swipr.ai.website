@@ -2002,7 +2002,7 @@ export default function Index() {
                 Team
               </span>
             </h2>
-            <p className="text-xl text-white/80 leading-relaxed">
+            <p className="text-xl text-slate-200 leading-relaxed">
               We're building the future of accessible investing and looking for
               exceptional talent to help shape our mission.
             </p>
