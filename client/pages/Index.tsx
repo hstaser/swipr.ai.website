@@ -2387,12 +2387,6 @@ export default function Index() {
                 {/* Social Icons */}
                 <div className="flex items-center space-x-4">
                   <a
-                    href="#"
-                    className="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  >
-                    <Twitter className="h-5 w-5 text-white" />
-                  </a>
-                  <a
                     href="https://www.linkedin.com/company/swiprai/"
                     target="_blank"
                     rel="noopener noreferrer"
