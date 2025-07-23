@@ -332,7 +332,7 @@ export default function Apply() {
                 {/* Personal Information */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-slate-100 font-semibold mb-3">
+                    <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
                       <User className="inline h-4 w-4 mr-2" />
                       First Name *
                     </label>
@@ -346,7 +346,7 @@ export default function Apply() {
                     />
                   </div>
                   <div>
-                    <label className="block text-slate-100 font-semibold mb-3">
+                    <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
                       <User className="inline h-4 w-4 mr-2" />
                       Last Name *
                     </label>
@@ -363,7 +363,7 @@ export default function Apply() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-slate-100 font-semibold mb-3">
+                    <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
                       <Mail className="inline h-4 w-4 mr-2" />
                       Email Address *
                     </label>
@@ -378,7 +378,7 @@ export default function Apply() {
                     />
                   </div>
                   <div>
-                    <label className="block text-slate-100 font-semibold mb-3">
+                    <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
                       <Phone className="inline h-4 w-4 mr-2" />
                       Phone Number *
                     </label>
@@ -437,7 +437,7 @@ export default function Apply() {
                 {/* Optional Fields */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-slate-100 font-semibold mb-3">
+                    <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
                       <ExternalLink className="inline h-4 w-4 mr-2" />
                       LinkedIn Profile (Optional)
                     </label>
@@ -451,7 +451,7 @@ export default function Apply() {
                     />
                   </div>
                   <div>
-                    <label className="block text-slate-100 font-semibold mb-3">
+                    <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
                       <ExternalLink className="inline h-4 w-4 mr-2" />
                       Portfolio/GitHub (Optional)
                     </label>
