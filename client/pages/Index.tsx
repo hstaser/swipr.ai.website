@@ -2197,7 +2197,12 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Email</p>
-                        <p className="text-slate-200">team@swipr.ai</p>
+                        <a
+                          href="mailto:team@swipr.ai"
+                          className="text-slate-200 hover:text-white transition-colors"
+                        >
+                          team@swipr.ai
+                        </a>
                       </div>
                     </div>
 
@@ -2207,7 +2212,14 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Location</p>
-                        <p className="text-slate-200">New York City, NY</p>
+                        <a
+                          href="https://maps.google.com/?q=New+York+City,+NY"
+                          className="text-slate-200 hover:text-white transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          New York City, NY
+                        </a>
                       </div>
                     </div>
 
