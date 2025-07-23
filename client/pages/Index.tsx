@@ -1276,7 +1276,7 @@ export default function Index() {
                     <div className="flex gap-3">
                       <div className="flex-1 relative">
                         <Input
-                          placeholder="Ask SwiprBot Alpha... (Coming Feature)"
+                          placeholder="Ask AlphaCue... (Coming Feature)"
                           className="bg-white/10 border-white/30 text-white placeholder-white/60 h-12 rounded-xl flex-1"
                           disabled
                         />
