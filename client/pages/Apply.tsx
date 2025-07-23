@@ -27,6 +27,11 @@ import {
   ExternalLink,
   AlertCircle,
   Info,
+  TrendingUp,
+  Rocket,
+  Zap,
+  Brain,
+  Target,
 } from "lucide-react";
 import { JobApplicationRequest, JobApplicationResponse } from "@shared/api";
 
@@ -40,6 +45,8 @@ const POSITIONS = {
       "Interest in backend development and APIs",
       "Basic programming skills (any language)",
     ],
+    icon: Rocket,
+    gradient: "from-blue-500 to-teal-500",
   },
   "ai-developer": {
     title: "AI/ML Engineer",
@@ -48,619 +55,521 @@ const POSITIONS = {
     skills: [
       "1+ years of college or relevant coursework",
       "Interest in AI/ML and data science",
-      "Basic Python or programming experience",
+      "Experience with Python or similar languages",
     ],
+    icon: Brain,
+    gradient: "from-purple-500 to-pink-500",
   },
   "quantitative-analyst": {
-    title: "Quantitative Researcher",
+    title: "Quantitative Analyst",
     description:
       "Create smart algorithms that optimize portfolios and manage risk. Help users achieve better returns while keeping their investments safe.",
     skills: [
-      "1+ years of college in math, statistics, or related field",
-      "Interest in finance and quantitative analysis",
-      "Basic understanding of statistics or willingness to learn",
+      "Strong background in mathematics or finance",
+      "Programming experience (Python, R, or similar)",
+      "Interest in financial markets and quantitative analysis",
     ],
+    icon: Target,
+    gradient: "from-emerald-500 to-teal-500",
   },
   "mobile-app-developer": {
     title: "Mobile App Developer",
     description:
       "Work on world-class mobile experiences that make portfolio management intuitive and accessible. Build complex financial apps with smooth performance.",
     skills: [
-      "1+ years of college or bootcamp experience",
-      "Interest in mobile app development",
-      "Basic React, Flutter, or mobile development experience",
+      "Experience with React Native, Flutter, or native development",
+      "Understanding of mobile UI/UX principles",
+      "Portfolio of mobile app projects",
     ],
+    icon: Zap,
+    gradient: "from-orange-500 to-red-500",
   },
-} as const;
-
-interface ValidationErrors {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phone?: string;
-  general?: string;
-}
+};
 
 export default function Apply() {
   const [searchParams] = useSearchParams();
-  const position =
-    (searchParams.get("position") as keyof typeof POSITIONS) ||
-    "backend-engineer";
-
-  const [formData, setFormData] = useState<JobApplicationRequest>({
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    position,
+    position: searchParams.get("position") || "",
+    experience: "",
+    linkedinUrl: "",
+    portfolioUrl: "",
+    startDate: "",
   });
-
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resume, setResume] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
-  const [applicationId, setApplicationId] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isDragOver, setIsDragOver] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<"saved" | "saving" | "">("");
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
-    {},
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Handle scroll for sticky navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const selectedPosition = POSITIONS[formData.position as keyof typeof POSITIONS];
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      setFormData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    [],
   );
 
-  // Auto-save draft functionality
-  useEffect(() => {
-    const savedData = localStorage.getItem(`application-${position}`);
-    if (savedData) {
-      try {
-        const parsed = JSON.parse(savedData);
-        setFormData((prev) => ({ ...prev, ...parsed }));
-      } catch (e) {
-        console.error("Failed to load saved application data");
-      }
-    }
-  }, [position]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (formData.firstName || formData.lastName || formData.email) {
-        setSaveStatus("saving");
-        localStorage.setItem(
-          `application-${position}`,
-          JSON.stringify(formData),
-        );
-        setTimeout(() => setSaveStatus("saved"), 500);
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [formData, position]);
-
-  const validateField = (name: string, value: string): string | undefined => {
-    switch (name) {
-      case "firstName":
-      case "lastName":
-        if (!value.trim()) return "This field is required";
-        if (value.trim().length < 2)
-          return "Must be at least 2 characters long";
-        if (!/^[a-zA-Z\s\-']+$/.test(value))
-          return "Only letters, spaces, hyphens, and apostrophes allowed";
-        break;
-
-      case "email":
-        if (!value.trim()) return "Email is required";
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value))
-          return "Please enter a valid email address";
-        break;
-
-      case "phone":
-        if (!value.trim()) return "Phone number is required";
-        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-        const cleanPhone = value.replace(/[\s\-\(\)\.]/g, "");
-        if (!phoneRegex.test(cleanPhone))
-          return "Please enter a valid phone number";
-        break;
-
-      default:
-        break;
-    }
-    return undefined;
-  };
-
-  const validateForm = (): boolean => {
-    const errors: ValidationErrors = {};
-
-    // Validate required fields
-    errors.firstName = validateField("firstName", formData.firstName);
-    errors.lastName = validateField("lastName", formData.lastName);
-    errors.email = validateField("email", formData.email);
-    errors.phone = validateField("phone", formData.phone);
-
-    // Remove undefined errors
-    Object.keys(errors).forEach((key) => {
-      if (!errors[key as keyof ValidationErrors]) {
-        delete errors[key as keyof ValidationErrors];
-      }
-    });
-
-    setValidationErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    // Clear validation error when user starts typing
-    if (validationErrors[name as keyof ValidationErrors]) {
-      setValidationErrors((prev) => ({
-        ...prev,
-        [name]: undefined,
-      }));
-    }
-  };
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  }, []);
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-
-    const files = Array.from(e.dataTransfer.files);
-    const file = files[0];
-
-    if (
-      file &&
-      (file.type === "application/pdf" ||
-        file.type === "application/msword" ||
-        file.type ===
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
-        file.type === "text/plain")
-    ) {
-      if (file.size > 5 * 1024 * 1024) {
-        setValidationErrors((prev) => ({
-          ...prev,
-          general: "File size must be less than 5MB",
-        }));
-        return;
-      }
-      setResumeFile(file);
-      setValidationErrors((prev) => ({ ...prev, general: undefined }));
-    } else {
-      setValidationErrors((prev) => ({
-        ...prev,
-        general: "Please upload a PDF, DOC, DOCX, or TXT file.",
-      }));
-    }
-  }, []);
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setValidationErrors((prev) => ({
-          ...prev,
-          general: "File size must be less than 5MB",
-        }));
+      if (file.size > 10 * 1024 * 1024) {
+        setSubmitMessage("File size must be less than 10MB");
         return;
       }
-      setResumeFile(file);
-      setValidationErrors((prev) => ({ ...prev, general: undefined }));
+      if (!file.type.includes("pdf") && !file.type.includes("doc")) {
+        setSubmitMessage("Please upload a PDF or DOC file");
+        return;
+      }
+      setResume(file);
+      setSubmitMessage("");
     }
-  };
+  }, []);
+
+  const removeResume = useCallback(() => {
+    setResume(null);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage("");
-    setValidationErrors({});
-
-    // Validate form
-    if (!validateForm()) {
-      setIsSubmitting(false);
-      setValidationErrors((prev) => ({
-        ...prev,
-        general: "Please fix the errors above before submitting.",
-      }));
-      return;
-    }
 
     try {
       const applicationData: JobApplicationRequest = {
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
-        email: formData.email.trim().toLowerCase(),
+        email: formData.email.trim(),
         phone: formData.phone.trim(),
-        position,
+        position: formData.position,
+        experience: formData.experience.trim(),
+        linkedinUrl: formData.linkedinUrl.trim() || undefined,
+        portfolioUrl: formData.portfolioUrl.trim() || undefined,
+        startDate: formData.startDate,
       };
+
+      const formDataToSend = new FormData();
+      Object.entries(applicationData).forEach(([key, value]) => {
+        if (value !== undefined) {
+          formDataToSend.append(key, value);
+        }
+      });
+
+      if (resume) {
+        formDataToSend.append("resume", resume);
+      }
 
       const response = await fetch("/api/jobs/apply", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(applicationData),
+        body: formDataToSend,
       });
 
       const result: JobApplicationResponse = await response.json();
 
       if (response.ok && result.success) {
-        setIsSuccess(true);
+        setSubmitSuccess(true);
         setSubmitMessage(
-          result.message || "Application submitted successfully!",
+          result.message || "Application submitted successfully! We'll be in touch soon."
         );
-        setApplicationId(result.applicationId || "");
-
-        // Clear saved draft
-        localStorage.removeItem(`application-${position}`);
-
-        // Scroll to success message
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          position: "",
+          experience: "",
+          linkedinUrl: "",
+          portfolioUrl: "",
+          startDate: "",
+        });
+        setResume(null);
       } else {
         setSubmitMessage(
-          result.message || "Something went wrong. Please try again later.",
+          result.message || "Something went wrong. Please try again."
         );
       }
     } catch (error) {
       console.error("Application submission error:", error);
       setSubmitMessage(
-        "Network error. Please check your internet connection and try again.",
+        "Network error. Please check your connection and try again."
       );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-6">
-        <Card className="max-w-lg w-full text-center border-0 shadow-xl">
-          <CardHeader>
-            <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-10 w-10 text-white" />
-            </div>
-            <CardTitle className="text-2xl text-slate-800">
-              Application Submitted!
-            </CardTitle>
-            <CardDescription className="text-lg">
-              {submitMessage}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-slate-50 p-4 rounded-lg">
-                <p className="text-sm text-slate-600 mb-2">Application ID</p>
-                <p className="font-mono text-sm bg-white p-2 rounded border break-all">
-                  {applicationId}
-                </p>
-              </div>
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-sm text-blue-600 mb-2">Timeline</p>
-                <p className="text-sm text-blue-800">
-                  Review: 3-5 business days
-                </p>
-              </div>
-            </div>
-
-            <Alert className="bg-teal-50 border-teal-200">
-              <Info className="h-4 w-4 text-teal-600" />
-              <AlertDescription className="text-teal-700">
-                We'll review your application carefully and get back to you with
-                next steps. Keep an eye on your email for updates!
-              </AlertDescription>
-            </Alert>
-
-            <div className="grid sm:grid-cols-2 gap-3 pt-4">
-              <Link to="/">
-                <Button variant="outline" className="w-full">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back Home
-                </Button>
-              </Link>
-              <Button
-                onClick={() => window.location.reload()}
-                className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700"
-              >
-                Apply Again
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Navigation */}
-      <Navigation />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-teal-600/20 animate-pulse" />
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float-delayed" />
+          <div className="absolute bottom-1/4 left-1/2 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-float-slow" />
+        </div>
+      </div>
 
-      {/* Save Status Bar */}
-      {saveStatus && (
-        <div className="bg-white border-b">
-          <div className="container mx-auto px-6 py-2">
-            <span className="text-sm text-slate-500 flex items-center justify-center">
-              {saveStatus === "saving" ? (
-                <>
-                  <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                  Saving draft...
-                </>
-              ) : (
-                <>
-                  <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
-                  Draft saved automatically
-                </>
-              )}
-            </span>
+      {/* Sticky Navigation */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-3 group">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/25">
+                <TrendingUp className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                swipr.ai
+              </span>
+            </Link>
+
+            {/* Back Button */}
+            <Link to="/">
+              <Button
+                variant="outline"
+                className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
+              >
+                <ArrowLeft className="mr-2 h-5 w-5" />
+                Back to Home
+              </Button>
+            </Link>
           </div>
         </div>
-      )}
+      </nav>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative container mx-auto px-6 py-16 text-center text-white">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent leading-tight pb-2">
-              Apply for {POSITIONS[position].title}
+      {/* Main Content */}
+      <div className="pt-32 pb-20 px-6 relative z-10">
+        <div className="container mx-auto max-w-4xl">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent leading-tight animate-fade-in">
+              Join Our Team
             </h1>
-            <p className="text-xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              {POSITIONS[position].description}
+            <p className="text-xl text-white/80 leading-relaxed animate-fade-in-delayed">
+              Help build the future of intelligent investing
             </p>
           </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-50 to-transparent" />
-      </section>
 
-      <div className="container mx-auto px-6 py-12">
-        <div className="max-w-4xl mx-auto">
-          {/* Position Details */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-800 mb-6">
-              Position Overview
-            </h2>
-            <div className="space-y-4 max-w-4xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-blue-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-blue-900 mb-3 flex items-center">
-                    <Briefcase className="h-5 w-5 mr-2" />
-                    Position Details
-                  </h3>
-                  <div className="space-y-2 text-sm text-blue-700">
-                    <p>• Part-time position</p>
-                    <p>• Remote</p>
-                    <p>• Equity-based compensation</p>
-                  </div>
+          {/* Position Info */}
+          {selectedPosition && (
+            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl mb-12 animate-fade-in-slow">
+              <CardHeader className="text-center pb-6">
+                <div className={`w-20 h-20 bg-gradient-to-br ${selectedPosition.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}>
+                  <selectedPosition.icon className="h-10 w-10 text-white" />
                 </div>
-                <div className="bg-teal-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-teal-900 mb-3">
-                    Key Requirements
-                  </h3>
-                  <div className="space-y-1 text-sm text-teal-700">
-                    {POSITIONS[position].skills
-                      .slice(0, 3)
-                      .map((skill, index) => (
-                        <p key={index}>• {skill}</p>
-                      ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Global Validation Errors */}
-          {validationErrors.general && (
-            <Alert className="mb-6 border-red-200 bg-red-50">
-              <AlertCircle className="h-4 w-4 text-red-600" />
-              <AlertDescription className="text-red-700">
-                {validationErrors.general}
-              </AlertDescription>
-            </Alert>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Personal Information */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <User className="h-5 w-5 mr-2 text-blue-600" />
-                  Personal Information
+                <CardTitle className="text-3xl text-white font-bold">
+                  {selectedPosition.title}
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    First Name *
-                  </label>
-                  <Input
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
-                    className={`h-12 ${validationErrors.firstName ? "border-red-500" : ""}`}
-                    placeholder="Enter your first name"
-                  />
-                  {validationErrors.firstName && (
-                    <p className="text-red-600 text-sm mt-1">
-                      {validationErrors.firstName}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Last Name *
-                  </label>
-                  <Input
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
-                    className={`h-12 ${validationErrors.lastName ? "border-red-500" : ""}`}
-                    placeholder="Enter your last name"
-                  />
-                  {validationErrors.lastName && (
-                    <p className="text-red-600 text-sm mt-1">
-                      {validationErrors.lastName}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    <Mail className="h-4 w-4 inline mr-1" />
-                    Email *
-                  </label>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className={`h-12 ${validationErrors.email ? "border-red-500" : ""}`}
-                    placeholder="your.email@example.com"
-                  />
-                  {validationErrors.email && (
-                    <p className="text-red-600 text-sm mt-1">
-                      {validationErrors.email}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    <Phone className="h-4 w-4 inline mr-1" />
-                    Phone Number *
-                  </label>
-                  <Input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className={`h-12 ${validationErrors.phone ? "border-red-500" : ""}`}
-                    placeholder="+1 (555) 123-4567"
-                  />
-                  {validationErrors.phone && (
-                    <p className="text-red-600 text-sm mt-1">
-                      {validationErrors.phone}
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Resume Upload */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                  Resume/CV (Optional)
-                </CardTitle>
-                <CardDescription>
-                  Upload your resume in PDF, DOC, DOCX, or TXT format (max 5MB)
-                  <br />
-                  <span className="text-blue-600 font-medium">Note:</span>{" "}
-                  Resume can also be sent via email if preferred
+                <CardDescription className="text-lg text-white/80 mt-4">
+                  {selectedPosition.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div
-                  className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-                    isDragOver
-                      ? "border-blue-500 bg-blue-50"
-                      : resumeFile
-                        ? "border-green-500 bg-green-50"
-                        : "border-slate-300 hover:border-slate-400"
-                  }`}
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                >
-                  {resumeFile ? (
-                    <div className="flex items-center justify-center space-x-4">
-                      <FileText className="h-8 w-8 text-green-600" />
-                      <div className="text-left">
-                        <p className="font-medium text-slate-800">
-                          {resumeFile.name}
-                        </p>
-                        <p className="text-sm text-slate-600">
-                          {(resumeFile.size / 1024 / 1024).toFixed(2)} MB
-                        </p>
-                      </div>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setResumeFile(null)}
-                        className="text-red-600 hover:text-red-700"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ) : (
-                    <div>
-                      <Upload className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                      <p className="text-lg font-medium text-slate-800 mb-2">
-                        Drag and drop your resume here
-                      </p>
-                      <p className="text-slate-600 mb-4">or</p>
-                      <Button type="button" variant="outline" asChild>
-                        <label className="cursor-pointer">
-                          Choose File
-                          <input
-                            type="file"
-                            accept=".pdf,.doc,.docx,.txt"
-                            onChange={handleFileSelect}
-                            className="hidden"
-                          />
-                        </label>
-                      </Button>
-                    </div>
-                  )}
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold text-white mb-4">What we're looking for:</h3>
+                  <ul className="space-y-3">
+                    {selectedPosition.skills.map((skill, index) => (
+                      <li key={index} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-emerald-400 mr-3 flex-shrink-0" />
+                        <span className="text-white/80">{skill}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </CardContent>
             </Card>
+          )}
 
-            {/* Submit */}
-            <div className="flex justify-center">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-lg px-12 py-6"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin mr-2" />
-                    Submitting Application...
-                  </>
-                ) : (
-                  "Submit Application"
+          {/* Application Form */}
+          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl">
+            <CardHeader>
+              <CardTitle className="text-3xl text-white font-bold">
+                Application Form
+              </CardTitle>
+              <CardDescription className="text-lg text-white/80">
+                Tell us about yourself and why you'd be a great fit
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Personal Information */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-white font-semibold mb-3">
+                      <User className="inline h-4 w-4 mr-2" />
+                      First Name *
+                    </label>
+                    <Input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white font-semibold mb-3">
+                      <User className="inline h-4 w-4 mr-2" />
+                      Last Name *
+                    </label>
+                    <Input
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      placeholder="Enter your last name"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-white font-semibold mb-3">
+                      <Mail className="inline h-4 w-4 mr-2" />
+                      Email Address *
+                    </label>
+                    <Input
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white font-semibold mb-3">
+                      <Phone className="inline h-4 w-4 mr-2" />
+                      Phone Number *
+                    </label>
+                    <Input
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                </div>
+
+                {/* Position Selection */}
+                <div>
+                  <label className="block text-white font-semibold mb-3">
+                    <Briefcase className="inline h-4 w-4 mr-2" />
+                    Position *
+                  </label>
+                  <select
+                    name="position"
+                    value={formData.position}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-white/10 border border-white/30 text-white h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  >
+                    <option value="" className="bg-slate-800">Select a position</option>
+                    {Object.entries(POSITIONS).map(([key, position]) => (
+                      <option key={key} value={key} className="bg-slate-800">
+                        {position.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Experience */}
+                <div>
+                  <label className="block text-white font-semibold mb-3">
+                    <FileText className="inline h-4 w-4 mr-2" />
+                    Experience & Background *
+                  </label>
+                  <Textarea
+                    name="experience"
+                    value={formData.experience}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-white/10 border-white/30 text-white placeholder-white/60 min-h-[120px] rounded-xl"
+                    placeholder="Tell us about your experience, education, and what makes you excited about this role..."
+                  />
+                </div>
+
+                {/* Optional Fields */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-white font-semibold mb-3">
+                      <ExternalLink className="inline h-4 w-4 mr-2" />
+                      LinkedIn Profile (Optional)
+                    </label>
+                    <Input
+                      name="linkedinUrl"
+                      type="url"
+                      value={formData.linkedinUrl}
+                      onChange={handleInputChange}
+                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      placeholder="https://linkedin.com/in/yourname"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white font-semibold mb-3">
+                      <ExternalLink className="inline h-4 w-4 mr-2" />
+                      Portfolio/GitHub (Optional)
+                    </label>
+                    <Input
+                      name="portfolioUrl"
+                      type="url"
+                      value={formData.portfolioUrl}
+                      onChange={handleInputChange}
+                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      placeholder="https://github.com/yourname"
+                    />
+                  </div>
+                </div>
+
+                {/* Start Date */}
+                <div>
+                  <label className="block text-white font-semibold mb-3">
+                    <Calendar className="inline h-4 w-4 mr-2" />
+                    Earliest Start Date *
+                  </label>
+                  <Input
+                    name="startDate"
+                    type="date"
+                    value={formData.startDate}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-white/10 border-white/30 text-white h-14 rounded-xl"
+                  />
+                </div>
+
+                {/* Resume Upload */}
+                <div>
+                  <label className="block text-white font-semibold mb-3">
+                    <Upload className="inline h-4 w-4 mr-2" />
+                    Resume (PDF or DOC) *
+                  </label>
+                  <div className="border-2 border-dashed border-white/30 rounded-xl p-8 text-center hover:border-cyan-400/50 transition-colors">
+                    {resume ? (
+                      <div className="flex items-center justify-between bg-white/10 rounded-lg p-4">
+                        <div className="flex items-center">
+                          <FileText className="h-6 w-6 text-cyan-400 mr-3" />
+                          <div className="text-left">
+                            <p className="text-white font-medium">{resume.name}</p>
+                            <p className="text-white/60 text-sm">
+                              {(resume.size / 1024 / 1024).toFixed(2)} MB
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={removeResume}
+                          className="text-red-400 hover:text-red-300"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        <Upload className="h-12 w-12 text-white/60 mx-auto mb-4" />
+                        <p className="text-white/80 mb-2">
+                          Click to upload or drag and drop
+                        </p>
+                        <p className="text-white/60 text-sm">
+                          PDF or DOC files only, max 10MB
+                        </p>
+                        <input
+                          type="file"
+                          accept=".pdf,.doc,.docx"
+                          onChange={handleFileChange}
+                          className="hidden"
+                          id="resume-upload"
+                        />
+                        <label
+                          htmlFor="resume-upload"
+                          className="inline-block mt-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl font-semibold cursor-pointer transition-all duration-300 hover:scale-105"
+                        >
+                          Choose File
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-6">
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting || !resume}
+                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-6 rounded-xl text-xl font-bold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-16"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-6 w-6 animate-spin mr-3" />
+                        Submitting Application...
+                      </>
+                    ) : (
+                      <>
+                        <Rocket className="h-6 w-6 mr-3" />
+                        Submit Application
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {/* Status Message */}
+                {submitMessage && (
+                  <Alert className={`${submitSuccess ? "border-emerald-500 bg-emerald-500/10" : "border-red-500 bg-red-500/10"} rounded-xl`}>
+                    {submitSuccess ? (
+                      <CheckCircle className="h-5 w-5 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="h-5 w-5 text-red-400" />
+                    )}
+                    <AlertDescription className={submitSuccess ? "text-emerald-200" : "text-red-200"}>
+                      {submitMessage}
+                    </AlertDescription>
+                  </Alert>
                 )}
-              </Button>
-            </div>
+              </form>
+            </CardContent>
+          </Card>
 
-            {submitMessage && !isSuccess && (
-              <Alert className="border-red-200 bg-red-50">
-                <AlertCircle className="h-4 w-4 text-red-600" />
-                <AlertDescription className="text-red-700">
-                  {submitMessage}
-                </AlertDescription>
-              </Alert>
-            )}
-          </form>
+          {/* Additional Info */}
+          <div className="mt-12 text-center">
+            <Alert className="border-cyan-500/50 bg-cyan-500/10 rounded-xl max-w-2xl mx-auto">
+              <Info className="h-5 w-5 text-cyan-400" />
+              <AlertDescription className="text-cyan-200">
+                We review all applications carefully and will get back to you within 5-7 business days. 
+                Questions? Email us at <a href="mailto:careers@swipr.ai" className="text-cyan-300 hover:text-cyan-200 underline">careers@swipr.ai</a>
+              </AlertDescription>
+            </Alert>
+          </div>
         </div>
       </div>
     </div>
