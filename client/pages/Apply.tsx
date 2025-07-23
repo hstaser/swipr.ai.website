@@ -285,7 +285,7 @@ export default function Apply() {
 
           {/* Position Info */}
           {selectedPosition && (
-            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl mb-12 animate-fade-in-slow">
+            <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl mb-12 animate-fade-in-slow">
               <CardHeader className="text-center pb-6">
                 <div
                   className={`w-20 h-20 bg-gradient-to-br ${selectedPosition.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}
