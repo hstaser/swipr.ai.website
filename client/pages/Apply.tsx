@@ -515,7 +515,7 @@ export default function Apply() {
                     ) : (
                       <div>
                         <Upload className="h-12 w-12 text-white/60 mx-auto mb-4" />
-                        <p className="text-white/80 mb-2">
+                        <p className="text-slate-200 mb-2">
                           Click to upload or drag and drop
                         </p>
                         <p className="text-white/60 text-sm">
