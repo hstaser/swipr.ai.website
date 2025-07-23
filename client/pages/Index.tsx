@@ -791,7 +791,7 @@ export default function Index() {
                     </div>
                     <div className="mt-4 flex items-center p-3 bg-white/10 rounded-xl">
                       <input
-                        placeholder="Ask SwiprBot..."
+                        placeholder="Ask SwiprBot Alpha... (Coming Feature)"
                         className="flex-1 bg-transparent text-white placeholder-white/60 outline-none"
                         disabled
                       />
