@@ -2017,7 +2017,7 @@ export default function Index() {
                 <CardTitle className="text-xl text-white">
                   Backend Engineer
                 </CardTitle>
-                <CardDescription className="text-white/80">
+                <CardDescription className="text-slate-200">
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
@@ -2045,7 +2045,7 @@ export default function Index() {
                 <CardTitle className="text-xl text-white">
                   AI Developer
                 </CardTitle>
-                <CardDescription className="text-white/80">
+                <CardDescription className="text-slate-200">
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
@@ -2073,7 +2073,7 @@ export default function Index() {
                 <CardTitle className="text-xl text-white">
                   Quantitative Analyst
                 </CardTitle>
-                <CardDescription className="text-white/80">
+                <CardDescription className="text-slate-200">
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
@@ -2101,7 +2101,7 @@ export default function Index() {
                 <CardTitle className="text-xl text-white">
                   Mobile App Developer
                 </CardTitle>
-                <CardDescription className="text-white/80">
+                <CardDescription className="text-slate-200">
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
