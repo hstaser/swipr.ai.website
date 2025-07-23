@@ -1931,7 +1931,7 @@ export default function Index() {
                           tickMargin={5}
                           minTickGap={5}
                           tickSize={6}
-                          domain={['dataMin', 'dataMax']}
+                          domain={["dataMin", "dataMax"]}
                           tickFormatter={(value) =>
                             `$${(value / 1000).toFixed(0)}k`
                           }
