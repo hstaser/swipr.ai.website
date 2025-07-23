@@ -2199,7 +2199,7 @@ export default function Index() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                          className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                         />
                       </div>
                       <div>
@@ -2210,7 +2210,7 @@ export default function Index() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                          className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                         />
                       </div>
                       <div>
