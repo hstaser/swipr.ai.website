@@ -1089,7 +1089,9 @@ export default function Index() {
                         {portfolio.map((stock, index) => (
                           <div key={stock.id} className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
                             <div className="flex items-center">
-                              <span className="text-2xl mr-3">{stock.logo}</span>
+                              <div className="w-8 h-8 bg-white rounded mr-3 flex items-center justify-center">
+                                <img src={stock.logo} alt={stock.symbol} className="w-6 h-6" />
+                              </div>
                               <div>
                                 <div className="text-white font-semibold">{stock.symbol}</div>
                                 <div className="text-white/60 text-sm">{stock.name}</div>
