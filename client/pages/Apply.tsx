@@ -405,7 +405,7 @@ export default function Apply() {
                     value={formData.position}
                     onChange={handleInputChange}
                     required
-                    className="w-full bg-white/10 border border-white/30 text-white h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    className="w-full bg-slate-800/60 border border-slate-600 text-slate-100 h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   >
                     <option value="" className="bg-slate-800">
                       Select a position
