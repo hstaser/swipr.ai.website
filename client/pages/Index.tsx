@@ -769,27 +769,27 @@ export default function Index() {
                       Portfolio Optimization
                     </h3>
                   </div>
-                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
+                  <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-6">
                     Our algorithm allocates for you — balancing risk, growth,
                     and diversification automatically based on modern portfolio
                     theory.
                   </p>
                   <ul className="space-y-3 mb-6">
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Automatic rebalancing
                       </span>
                     </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Risk-adjusted optimization
                       </span>
                     </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Tax-loss harvesting
                       </span>
                     </li>
@@ -800,47 +800,47 @@ export default function Index() {
                         .getElementById("simulator")
                         ?.scrollIntoView({ behavior: "smooth" })
                     }
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                    className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
                   >
                     Try Simulator
-                    <BarChart3 className="ml-2 h-5 w-5" />
+                    <BarChart3 className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                 </div>
               </div>
             </div>
 
             {/* Feature 3: Real-time Analytics */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="order-2 lg:order-1">
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-emerald-400/50 transition-all duration-500 group">
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-emerald-500/25">
-                      <Activity className="h-8 w-8 text-white" />
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20 hover:border-emerald-400/50 transition-all duration-500 group">
+                  <div className="flex flex-col sm:flex-row sm:items-center mb-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-emerald-500/25">
+                      <Activity className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
                       Real-time Analytics
                     </h3>
                   </div>
-                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
+                  <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-6">
                     See your performance live. Watch how each swipe shifts your
                     future with instant portfolio impact visualization.
                   </p>
                   <ul className="space-y-3 mb-6">
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Live performance tracking
                       </span>
                     </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Instant portfolio impact
                       </span>
                     </li>
-                    <li className="flex items-center">
-                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm sm:text-base text-slate-200">
                         Predictive analytics
                       </span>
                     </li>
