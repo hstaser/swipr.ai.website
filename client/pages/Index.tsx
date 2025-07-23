@@ -1971,7 +1971,9 @@ export default function Index() {
                     <Twitter className="h-5 w-5 text-white" />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/swiprai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-12 h-12 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
                   >
                     <Linkedin className="h-5 w-5 text-white" />
