@@ -572,7 +572,7 @@ export default function AdminDashboard() {
                       <CardTitle className="text-sm font-medium">
                         Waitlist
                       </CardTitle>
-                      <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                      <Logo size="sm" showText={false} />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
