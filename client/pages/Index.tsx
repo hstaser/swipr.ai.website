@@ -2242,9 +2242,7 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Location</p>
-                        <p className="text-slate-200">
-                          New York City, NY
-                        </p>
+                        <p className="text-slate-200">New York City, NY</p>
                       </div>
                     </div>
 
