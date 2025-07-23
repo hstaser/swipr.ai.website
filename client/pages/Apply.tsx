@@ -320,7 +320,7 @@ export default function Apply() {
           {/* Application Form */}
           <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl">
             <CardHeader>
-              <CardTitle className="text-3xl text-white font-bold">
+              <CardTitle className="text-3xl text-white dark:text-white font-bold">
                 Application Form
               </CardTitle>
               <CardDescription className="text-lg text-slate-200">
