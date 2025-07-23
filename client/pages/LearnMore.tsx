@@ -66,7 +66,7 @@ export default function LearnMore() {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/25">
-                <TrendingUp className="h-6 w-6 text-white" />
+                <Logo variant="transparent" size="sm" showText={false} />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                 swipr.ai
@@ -521,7 +521,7 @@ export default function LearnMore() {
           <div className="max-w-7xl mx-auto text-center">
             <div className="flex items-center justify-center space-x-3 mb-8">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-white" />
+                <Logo variant="transparent" size="sm" showText={false} />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                 swipr.ai
