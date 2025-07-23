@@ -1911,6 +1911,12 @@ export default function Index() {
                           allowDataOverflow={false}
                           allowDecimals={true}
                           allowDuplicatedCategory={true}
+                          type="category"
+                          scale="auto"
+                          tickMargin={5}
+                          minTickGap={5}
+                          interval="preserveStartEnd"
+                          tickSize={6}
                         />
                         <YAxis
                           stroke="#ffffff80"
@@ -1920,6 +1926,12 @@ export default function Index() {
                           allowDataOverflow={false}
                           allowDecimals={true}
                           allowDuplicatedCategory={true}
+                          type="number"
+                          scale="auto"
+                          tickMargin={5}
+                          minTickGap={5}
+                          tickSize={6}
+                          domain={['dataMin', 'dataMax']}
                           tickFormatter={(value) =>
                             `$${(value / 1000).toFixed(0)}k`
                           }
