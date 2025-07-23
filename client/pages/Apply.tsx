@@ -323,7 +323,7 @@ export default function Apply() {
               <CardTitle className="text-3xl text-white font-bold">
                 Application Form
               </CardTitle>
-              <CardDescription className="text-lg text-white/80">
+              <CardDescription className="text-lg text-slate-200">
                 Tell us about yourself and why you'd be a great fit
               </CardDescription>
             </CardHeader>
