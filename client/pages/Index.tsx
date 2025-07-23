@@ -168,16 +168,23 @@ export default function Index() {
   const [contactMessage, setContactMessage] = useState("");
   const [waitlistMessage, setWaitlistMessage] = useState("");
   const [riskLevel, setRiskLevel] = useState(0.5);
-  const [portfolioData, setPortfolioData] = useState(generatePortfolioData(0.5));
+  const [portfolioData, setPortfolioData] = useState(
+    generatePortfolioData(0.5),
+  );
   const [isScrolled, setIsScrolled] = useState(false);
 
   // MVP Demo States
   const [mvpStep, setMvpStep] = useState(0);
   const [currentStockIndex, setCurrentStockIndex] = useState(0);
-  const [swipedStocks, setSwipedStocks] = useState<{[key: number]: 'left' | 'right'}>({});
+  const [swipedStocks, setSwipedStocks] = useState<{
+    [key: number]: "left" | "right";
+  }>({});
   const [portfolio, setPortfolio] = useState<typeof stockCards>([]);
   const [chatMessages, setChatMessages] = useState([
-    { sender: "bot", message: "Hi! I'm AlphaCue. Ask me anything about the market!" },
+    {
+      sender: "bot",
+      message: "Hi! I'm AlphaCue. Ask me anything about the market!",
+    },
   ]);
   const [chatInput, setChatInput] = useState("");
   const [optimizationProgress, setOptimizationProgress] = useState(0);
@@ -208,7 +215,7 @@ export default function Index() {
   useEffect(() => {
     if (mvpStep === 2 && optimizationProgress < 100) {
       const timer = setTimeout(() => {
-        setOptimizationProgress(prev => Math.min(prev + 20, 100));
+        setOptimizationProgress((prev) => Math.min(prev + 20, 100));
       }, 200); // Faster progress - every 200ms instead of 1000ms
       return () => clearTimeout(timer);
     }
@@ -317,21 +324,21 @@ export default function Index() {
     const expectedReturn = (baseReturn * (1 + riskLevel * 0.8)).toFixed(1);
     const riskScore = (baseRisk * (1 + riskLevel * 0.6)).toFixed(1);
     const diversification = (95 - riskLevel * 15).toFixed(0);
-    
+
     return { expectedReturn, riskScore, diversification };
   };
 
   // MVP Demo Functions
-  const handleStockSwipe = (direction: 'left' | 'right') => {
+  const handleStockSwipe = (direction: "left" | "right") => {
     const currentStock = stockCards[currentStockIndex];
-    setSwipedStocks(prev => ({ ...prev, [currentStock.id]: direction }));
-    
-    if (direction === 'right') {
-      setPortfolio(prev => [...prev, currentStock]);
+    setSwipedStocks((prev) => ({ ...prev, [currentStock.id]: direction }));
+
+    if (direction === "right") {
+      setPortfolio((prev) => [...prev, currentStock]);
     }
-    
+
     if (currentStockIndex < stockCards.length - 1) {
-      setCurrentStockIndex(prev => prev + 1);
+      setCurrentStockIndex((prev) => prev + 1);
     } else {
       setMvpStep(2); // Move to optimization preview
       setOptimizationProgress(0); // Reset optimization progress
@@ -343,7 +350,10 @@ export default function Index() {
     if (!chatInput.trim()) return;
 
     const userMessage = chatInput;
-    setChatMessages(prev => [...prev, { sender: "user", message: userMessage }]);
+    setChatMessages((prev) => [
+      ...prev,
+      { sender: "user", message: userMessage },
+    ]);
     setChatInput("");
 
     // Simulate bot response with contextual answers
@@ -352,15 +362,26 @@ export default function Index() {
       const message = userMessage.toLowerCase();
 
       if (message.includes("tech stock") || message.includes("best tech")) {
-        response = "Based on current analysis, NVDA shows strong fundamentals with AI tailwinds. Your portfolio already has 28% NVDA allocation, which provides good exposure to the AI trend.";
-      } else if (message.includes("diversify") || message.includes("diversification")) {
-        response = "Your current portfolio has 60% tech allocation (AAPL 32%, NVDA 28%) and 25% automotive (TSLA). Consider adding healthcare, finance, or international exposure for better diversification.";
-      } else if (message.includes("expected return") || message.includes("return")) {
-        response = "With your current allocation, the expected annual return is 12.8% with a Sharpe ratio of 0.89. This reflects a balanced risk-return profile for a tech-heavy portfolio.";
+        response =
+          "Based on current analysis, NVDA shows strong fundamentals with AI tailwinds. Your portfolio already has 28% NVDA allocation, which provides good exposure to the AI trend.";
+      } else if (
+        message.includes("diversify") ||
+        message.includes("diversification")
+      ) {
+        response =
+          "Your current portfolio has 60% tech allocation (AAPL 32%, NVDA 28%) and 25% automotive (TSLA). Consider adding healthcare, finance, or international exposure for better diversification.";
+      } else if (
+        message.includes("expected return") ||
+        message.includes("return")
+      ) {
+        response =
+          "With your current allocation, the expected annual return is 12.8% with a Sharpe ratio of 0.89. This reflects a balanced risk-return profile for a tech-heavy portfolio.";
       } else if (message.includes("aapl") || message.includes("apple")) {
-        response = "AAPL represents 32% of your portfolio. Given strong fundamentals and upcoming product launches, this allocation seems appropriate. Consider holding for long-term growth.";
+        response =
+          "AAPL represents 32% of your portfolio. Given strong fundamentals and upcoming product launches, this allocation seems appropriate. Consider holding for long-term growth.";
       } else if (message.includes("tsla") || message.includes("tesla")) {
-        response = "TSLA at 25% allocation provides good exposure to EV growth. Monitor production targets and autonomous driving progress for future rebalancing decisions.";
+        response =
+          "TSLA at 25% allocation provides good exposure to EV growth. Monitor production targets and autonomous driving progress for future rebalancing decisions.";
       } else {
         const genericResponses = [
           "Based on current market data, your portfolio shows solid fundamentals.",
@@ -369,10 +390,14 @@ export default function Index() {
           "Your tech allocation aligns well with current market trends.",
           "Regular rebalancing helps maintain optimal risk-return ratios.",
         ];
-        response = genericResponses[Math.floor(Math.random() * genericResponses.length)];
+        response =
+          genericResponses[Math.floor(Math.random() * genericResponses.length)];
       }
 
-      setChatMessages(prev => [...prev, { sender: "bot", message: response }]);
+      setChatMessages((prev) => [
+        ...prev,
+        { sender: "bot", message: response },
+      ]);
     }, 1000);
   };
 
@@ -383,7 +408,7 @@ export default function Index() {
     "Portfolio",
     "Chat Bot",
     "Social",
-    "Sign Up"
+    "Sign Up",
   ];
 
   const metrics = getRiskMetrics();
@@ -458,7 +483,9 @@ export default function Index() {
                 href="#hero"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+                  document
+                    .getElementById("hero")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
               >
@@ -480,8 +507,8 @@ export default function Index() {
               Swipe. Optimize. Grow.
             </p>
             <p className="text-xl md:text-2xl mb-12 text-slate-200 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
-              Smarter investing in seconds. Swipe through stocks like social media,
-              let AI optimize your portfolio.
+              Smarter investing in seconds. Swipe through stocks like social
+              media, let AI optimize your portfolio.
             </p>
 
             {/* Interactive Preview */}
@@ -510,7 +537,11 @@ export default function Index() {
             {/* Hero CTA */}
             <div className="flex justify-center items-center mb-16">
               <Button
-                onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() =>
+                  document
+                    .getElementById("mvp-demo")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-12 py-6 rounded-2xl text-xl font-bold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 border-2 border-blue-400/50 hover:border-blue-300 group h-16"
               >
                 <Eye className="mr-3 h-6 w-6" />
@@ -563,7 +594,8 @@ export default function Index() {
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
               Revolutionary
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                {" "}Features
+                {" "}
+                Features
               </span>
             </h2>
             <p className="text-xl text-slate-200 leading-relaxed">
@@ -580,27 +612,41 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-cyan-500/25">
                       <Smartphone className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">Swipe to Invest</h3>
+                    <h3 className="text-3xl font-bold text-white">
+                      Swipe to Invest
+                    </h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    Make investing as intuitive as swiping right. Explore stocks, ETFs, and AI-picked assets with the familiar gesture you know and love.
+                    Make investing as intuitive as swiping right. Explore
+                    stocks, ETFs, and AI-picked assets with the familiar gesture
+                    you know and love.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Swipe right to invest, left to pass</span>
+                      <span className="text-slate-200">
+                        Swipe right to invest, left to pass
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">AI curates personalized recommendations</span>
+                      <span className="text-slate-200">
+                        AI curates personalized recommendations
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Instant access to detailed analysis</span>
+                      <span className="text-slate-200">
+                        Instant access to detailed analysis
+                      </span>
                     </li>
                   </ul>
                   <Button
-                    onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
+                    onClick={() =>
+                      document
+                        .getElementById("mvp-demo")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
                     className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105"
                   >
                     See It In Action
@@ -614,21 +660,33 @@ export default function Index() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
                         <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
-                          <img src="https://logo.clearbit.com/apple.com" alt="AAPL" className="w-6 h-6" />
+                          <img
+                            src="https://logo.clearbit.com/apple.com"
+                            alt="AAPL"
+                            className="w-6 h-6"
+                          />
                         </div>
                         <div className="text-white font-semibold">AAPL</div>
                         <div className="text-green-400 text-sm">+2.4%</div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
                         <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
-                          <img src="https://logo.clearbit.com/tesla.com" alt="TSLA" className="w-6 h-6" />
+                          <img
+                            src="https://logo.clearbit.com/tesla.com"
+                            alt="TSLA"
+                            className="w-6 h-6"
+                          />
                         </div>
                         <div className="text-white font-semibold">TSLA</div>
                         <div className="text-green-400 text-sm">+5.7%</div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer col-span-2">
                         <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
-                          <img src="https://logo.clearbit.com/nvidia.com" alt="NVDA" className="w-6 h-6" />
+                          <img
+                            src="https://logo.clearbit.com/nvidia.com"
+                            alt="NVDA"
+                            className="w-6 h-6"
+                          />
                         </div>
                         <div className="text-white font-semibold">NVDA</div>
                         <div className="text-green-400 text-sm">+3.2%</div>
@@ -665,10 +723,10 @@ export default function Index() {
                           </Pie>
                           <Tooltip
                             contentStyle={{
-                              backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                              border: '1px solid rgba(255, 255, 255, 0.2)',
-                              borderRadius: '12px',
-                              color: 'white',
+                              backgroundColor: "rgba(15, 23, 42, 0.95)",
+                              border: "1px solid rgba(255, 255, 255, 0.2)",
+                              borderRadius: "12px",
+                              color: "white",
                             }}
                           />
                         </PieChart>
@@ -686,27 +744,41 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-purple-500/25">
                       <Target className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">Portfolio Optimization</h3>
+                    <h3 className="text-3xl font-bold text-white">
+                      Portfolio Optimization
+                    </h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    Our algorithm allocates for you — balancing risk, growth, and diversification automatically based on modern portfolio theory.
+                    Our algorithm allocates for you — balancing risk, growth,
+                    and diversification automatically based on modern portfolio
+                    theory.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Automatic rebalancing</span>
+                      <span className="text-slate-200">
+                        Automatic rebalancing
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Risk-adjusted optimization</span>
+                      <span className="text-slate-200">
+                        Risk-adjusted optimization
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Tax-loss harvesting</span>
+                      <span className="text-slate-200">
+                        Tax-loss harvesting
+                      </span>
                     </li>
                   </ul>
                   <Button
-                    onClick={() => document.getElementById("simulator")?.scrollIntoView({ behavior: "smooth" })}
+                    onClick={() =>
+                      document
+                        .getElementById("simulator")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
                     className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
                   >
                     Try Simulator
@@ -724,23 +796,32 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-emerald-500/25">
                       <Activity className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">Real-time Analytics</h3>
+                    <h3 className="text-3xl font-bold text-white">
+                      Real-time Analytics
+                    </h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    See your performance live. Watch how each swipe shifts your future with instant portfolio impact visualization.
+                    See your performance live. Watch how each swipe shifts your
+                    future with instant portfolio impact visualization.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Live performance tracking</span>
+                      <span className="text-slate-200">
+                        Live performance tracking
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Instant portfolio impact</span>
+                      <span className="text-slate-200">
+                        Instant portfolio impact
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Predictive analytics</span>
+                      <span className="text-slate-200">
+                        Predictive analytics
+                      </span>
                     </li>
                   </ul>
                   <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
@@ -755,20 +836,28 @@ export default function Index() {
                     <div className="space-y-4">
                       <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                         <span className="text-white">Portfolio Value</span>
-                        <span className="text-emerald-400 font-bold">$11,350</span>
+                        <span className="text-emerald-400 font-bold">
+                          $11,350
+                        </span>
                       </div>
                       <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                         <span className="text-white">Total Return</span>
-                        <span className="text-emerald-400 font-bold">+13.5%</span>
+                        <span className="text-emerald-400 font-bold">
+                          +13.5%
+                        </span>
                       </div>
                       <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
                         <span className="text-white">Today's Gain</span>
-                        <span className="text-emerald-400 font-bold">+$142.30</span>
+                        <span className="text-emerald-400 font-bold">
+                          +$142.30
+                        </span>
                       </div>
                       <div className="h-32 bg-white/10 rounded-xl p-4 flex items-center justify-center">
                         <div className="text-center">
                           <TrendingUp className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
-                          <div className="text-white/60 text-sm">Live chart updates</div>
+                          <div className="text-white/60 text-sm">
+                            Live chart updates
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -785,17 +874,24 @@ export default function Index() {
                     <div className="space-y-4 max-h-64 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">Hi! I'm AlphaCue. Ask me about the market!</div>
+                          <div className="text-white text-sm">
+                            Hi! I'm AlphaCue. Ask me about the market!
+                          </div>
                         </div>
                       </div>
                       <div className="flex justify-end">
                         <div className="bg-blue-600 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">What's the best tech stock right now?</div>
+                          <div className="text-white text-sm">
+                            What's the best tech stock right now?
+                          </div>
                         </div>
                       </div>
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">Based on current data, NVDA shows strong momentum with AI tailwinds.</div>
+                          <div className="text-white text-sm">
+                            Based on current data, NVDA shows strong momentum
+                            with AI tailwinds.
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -816,19 +912,27 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
                       <Brain className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">AlphaCue (Coming Soon)</h3>
+                    <h3 className="text-3xl font-bold text-white">
+                      AlphaCue (Coming Soon)
+                    </h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    Ask our AI any market question. Built on real-time data and LLM intelligence to provide instant, accurate investment insights.
+                    Ask our AI any market question. Built on real-time data and
+                    LLM intelligence to provide instant, accurate investment
+                    insights.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Real-time market data</span>
+                      <span className="text-slate-200">
+                        Real-time market data
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Personalized recommendations</span>
+                      <span className="text-slate-200">
+                        Personalized recommendations
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
@@ -838,7 +942,9 @@ export default function Index() {
                   <Button
                     onClick={() => {
                       setMvpStep(4);
-                      document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" });
+                      document
+                        .getElementById("mvp-demo")
+                        ?.scrollIntoView({ behavior: "smooth" });
                     }}
                     className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105"
                   >
@@ -857,19 +963,26 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-pink-500/25">
                       <Users className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">Social Trading</h3>
+                    <h3 className="text-3xl font-bold text-white">
+                      Social Trading
+                    </h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    See what your friends are swiping on. Build or clone portfolios together and learn from successful investors.
+                    See what your friends are swiping on. Build or clone
+                    portfolios together and learn from successful investors.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Follow top performers</span>
+                      <span className="text-slate-200">
+                        Follow top performers
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">Copy successful portfolios</span>
+                      <span className="text-slate-200">
+                        Copy successful portfolios
+                      </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
@@ -879,7 +992,9 @@ export default function Index() {
                   <Button
                     onClick={() => {
                       setMvpStep(5);
-                      document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" });
+                      document
+                        .getElementById("mvp-demo")
+                        ?.scrollIntoView({ behavior: "smooth" });
                     }}
                     className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 hover:scale-105"
                   >
@@ -897,27 +1012,53 @@ export default function Index() {
                           <span className="text-white font-bold">A</span>
                         </div>
                         <div className="flex-1">
-                          <div className="text-white font-semibold">Alex Chen</div>
-                          <div className="text-green-400 text-sm">+24.7% this year</div>
+                          <div className="text-white font-semibold">
+                            Alex Chen
+                          </div>
+                          <div className="text-green-400 text-sm">
+                            +24.7% this year
+                          </div>
                         </div>
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">Follow</Button>
+                        <Button
+                          size="sm"
+                          className="bg-blue-600 hover:bg-blue-700"
+                        >
+                          Follow
+                        </Button>
                       </div>
                       <div className="flex items-center p-4 bg-white/10 rounded-xl">
                         <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-3">
                           <span className="text-white font-bold">S</span>
                         </div>
                         <div className="flex-1">
-                          <div className="text-white font-semibold">Sarah Kim</div>
-                          <div className="text-green-400 text-sm">+18.3% this year</div>
+                          <div className="text-white font-semibold">
+                            Sarah Kim
+                          </div>
+                          <div className="text-green-400 text-sm">
+                            +18.3% this year
+                          </div>
                         </div>
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">Follow</Button>
+                        <Button
+                          size="sm"
+                          className="bg-blue-600 hover:bg-blue-700"
+                        >
+                          Follow
+                        </Button>
                       </div>
                       <div className="p-4 bg-white/10 rounded-xl">
-                        <div className="text-white/60 text-sm mb-2">Popular swipes today:</div>
+                        <div className="text-white/60 text-sm mb-2">
+                          Popular swipes today:
+                        </div>
                         <div className="flex gap-2">
-                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">AAPL</span>
-                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">NVDA</span>
-                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">TSLA</span>
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">
+                            AAPL
+                          </span>
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">
+                            NVDA
+                          </span>
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">
+                            TSLA
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -936,7 +1077,8 @@ export default function Index() {
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
               Experience Swipr
               <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                {" "}Before You Sign Up
+                {" "}
+                Before You Sign Up
               </span>
             </h2>
             <p className="text-xl text-slate-200 leading-relaxed">
@@ -952,13 +1094,13 @@ export default function Index() {
                 {mvpSteps.map((step, index) => (
                   <div
                     key={index}
-                    className={`flex items-center ${index < mvpSteps.length - 1 ? 'flex-1' : ''}`}
+                    className={`flex items-center ${index < mvpSteps.length - 1 ? "flex-1" : ""}`}
                   >
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
                         index <= mvpStep
-                          ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white'
-                          : 'bg-white/20 text-white/60'
+                          ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
+                          : "bg-white/20 text-white/60"
                       }`}
                     >
                       {index + 1}
@@ -967,8 +1109,8 @@ export default function Index() {
                       <div
                         className={`flex-1 h-1 mx-2 transition-all duration-300 ${
                           index < mvpStep
-                            ? 'bg-gradient-to-r from-cyan-500 to-blue-500'
-                            : 'bg-white/20'
+                            ? "bg-gradient-to-r from-cyan-500 to-blue-500"
+                            : "bg-white/20"
                         }`}
                       />
                     )}
@@ -989,9 +1131,12 @@ export default function Index() {
                     <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-blue-500/25">
                       <Rocket className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className="text-4xl font-bold text-white mb-6">Welcome to swipr.ai</h3>
+                    <h3 className="text-4xl font-bold text-white mb-6">
+                      Welcome to swipr.ai
+                    </h3>
                     <p className="text-xl text-white/80 mb-8 max-w-2xl">
-                      Ready to revolutionize your investing experience? Let's take a quick tour through our platform.
+                      Ready to revolutionize your investing experience? Let's
+                      take a quick tour through our platform.
                     </p>
                     <Button
                       onClick={() => setMvpStep(1)}
@@ -1008,49 +1153,78 @@ export default function Index() {
               {mvpStep === 1 && (
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">Swipe Through Stocks</h3>
-                    <p className="text-white/80">Swipe right to invest, left to pass (3 stocks only)</p>
+                    <h3 className="text-3xl font-bold text-white mb-4">
+                      Swipe Through Stocks
+                    </h3>
+                    <p className="text-white/80">
+                      Swipe right to invest, left to pass (3 stocks only)
+                    </p>
                   </div>
                   {currentStockIndex < stockCards.length ? (
                     <div className="max-w-md mx-auto">
                       <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
                         <div className="text-center mb-6">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-lg flex items-center justify-center">
-                        <img src={stockCards[currentStockIndex].logo} alt={stockCards[currentStockIndex].symbol} className="w-12 h-12" />
-                      </div>
-                          <div className="text-2xl font-bold text-white mb-2">{stockCards[currentStockIndex].symbol}</div>
-                          <div className="text-white/80 mb-2">{stockCards[currentStockIndex].name}</div>
-                          <div className="text-3xl font-bold text-white mb-1">{stockCards[currentStockIndex].price}</div>
-                          <div className={`text-lg font-semibold ${stockCards[currentStockIndex].change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
-                            {stockCards[currentStockIndex].change} ({stockCards[currentStockIndex].changeValue})
+                          <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-lg flex items-center justify-center">
+                            <img
+                              src={stockCards[currentStockIndex].logo}
+                              alt={stockCards[currentStockIndex].symbol}
+                              className="w-12 h-12"
+                            />
+                          </div>
+                          <div className="text-2xl font-bold text-white mb-2">
+                            {stockCards[currentStockIndex].symbol}
+                          </div>
+                          <div className="text-white/80 mb-2">
+                            {stockCards[currentStockIndex].name}
+                          </div>
+                          <div className="text-3xl font-bold text-white mb-1">
+                            {stockCards[currentStockIndex].price}
+                          </div>
+                          <div
+                            className={`text-lg font-semibold ${stockCards[currentStockIndex].change.startsWith("+") ? "text-green-400" : "text-red-400"}`}
+                          >
+                            {stockCards[currentStockIndex].change} (
+                            {stockCards[currentStockIndex].changeValue})
                           </div>
                         </div>
                         <div className="space-y-4 mb-8">
                           <div className="flex justify-between text-sm">
                             <span className="text-white/60">Sector:</span>
-                            <span className="text-white">{stockCards[currentStockIndex].sector}</span>
+                            <span className="text-white">
+                              {stockCards[currentStockIndex].sector}
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-white/60">Market Cap:</span>
-                            <span className="text-white">{stockCards[currentStockIndex].marketCap}</span>
+                            <span className="text-white">
+                              {stockCards[currentStockIndex].marketCap}
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-white/60">AI Score:</span>
-                            <span className="text-cyan-400 font-bold">{stockCards[currentStockIndex].aiScore}/100</span>
+                            <span className="text-cyan-400 font-bold">
+                              {stockCards[currentStockIndex].aiScore}/100
+                            </span>
                           </div>
                           <div className="text-center">
-                            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                              stockCards[currentStockIndex].recommendation === 'STRONG BUY' ? 'bg-green-500/20 text-green-400' :
-                              stockCards[currentStockIndex].recommendation === 'BUY' ? 'bg-blue-500/20 text-blue-400' :
-                              'bg-yellow-500/20 text-yellow-400'
-                            }`}>
+                            <span
+                              className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                                stockCards[currentStockIndex].recommendation ===
+                                "STRONG BUY"
+                                  ? "bg-green-500/20 text-green-400"
+                                  : stockCards[currentStockIndex]
+                                        .recommendation === "BUY"
+                                    ? "bg-blue-500/20 text-blue-400"
+                                    : "bg-yellow-500/20 text-yellow-400"
+                              }`}
+                            >
                               {stockCards[currentStockIndex].recommendation}
                             </span>
                           </div>
                         </div>
                         <div className="flex gap-4">
                           <Button
-                            onClick={() => handleStockSwipe('left')}
+                            onClick={() => handleStockSwipe("left")}
                             variant="outline"
                             className="flex-1 border-red-400 text-red-400 hover:bg-red-400/10 h-14 rounded-xl"
                           >
@@ -1058,7 +1232,7 @@ export default function Index() {
                             Pass
                           </Button>
                           <Button
-                            onClick={() => handleStockSwipe('right')}
+                            onClick={() => handleStockSwipe("right")}
                             className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-14 rounded-xl"
                           >
                             <Check className="mr-2 h-6 w-6" />
@@ -1072,7 +1246,9 @@ export default function Index() {
                     </div>
                   ) : (
                     <div className="text-center">
-                      <div className="text-white mb-4">Great job! You've reviewed all stocks.</div>
+                      <div className="text-white mb-4">
+                        Great job! You've reviewed all stocks.
+                      </div>
                       <Button
                         onClick={() => setMvpStep(2)}
                         className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
@@ -1089,27 +1265,48 @@ export default function Index() {
               {mvpStep === 2 && (
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">AI Portfolio Optimization</h3>
-                    <p className="text-white/80">Watch as our AI optimizes your selections</p>
+                    <h3 className="text-3xl font-bold text-white mb-4">
+                      AI Portfolio Optimization
+                    </h3>
+                    <p className="text-white/80">
+                      Watch as our AI optimizes your selections
+                    </p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <h4 className="text-xl font-semibold text-white mb-4">Your Selections</h4>
+                      <h4 className="text-xl font-semibold text-white mb-4">
+                        Your Selections
+                      </h4>
                       <div className="space-y-3">
                         {portfolio.map((stock, index) => (
-                          <div key={stock.id} className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
+                          <div
+                            key={stock.id}
+                            className="flex items-center justify-between p-3 bg-white/10 rounded-xl"
+                          >
                             <div className="flex items-center">
                               <div className="w-8 h-8 bg-white rounded mr-3 flex items-center justify-center">
-                                <img src={stock.logo} alt={stock.symbol} className="w-6 h-6" />
+                                <img
+                                  src={stock.logo}
+                                  alt={stock.symbol}
+                                  className="w-6 h-6"
+                                />
                               </div>
                               <div>
-                                <div className="text-white font-semibold">{stock.symbol}</div>
-                                <div className="text-white/60 text-sm">{stock.name}</div>
+                                <div className="text-white font-semibold">
+                                  {stock.symbol}
+                                </div>
+                                <div className="text-white/60 text-sm">
+                                  {stock.name}
+                                </div>
                               </div>
                             </div>
                             <div className="text-right">
-                              <div className="text-white font-semibold">{stock.price}</div>
-                              <div className={`text-sm ${stock.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
+                              <div className="text-white font-semibold">
+                                {stock.price}
+                              </div>
+                              <div
+                                className={`text-sm ${stock.change.startsWith("+") ? "text-green-400" : "text-red-400"}`}
+                              >
                                 {stock.change}
                               </div>
                             </div>
@@ -1118,39 +1315,55 @@ export default function Index() {
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold text-white mb-4">Optimized Allocation</h4>
+                      <h4 className="text-xl font-semibold text-white mb-4">
+                        Optimized Allocation
+                      </h4>
                       <div className="bg-white/10 rounded-xl p-6">
                         {optimizationProgress < 100 ? (
                           <div className="h-48 flex flex-col items-center justify-center">
                             <RefreshCw className="h-12 w-12 text-cyan-400 mx-auto mb-4 animate-spin" />
-                            <div className="text-white/80 mb-4">Optimizing portfolio...</div>
+                            <div className="text-white/80 mb-4">
+                              Optimizing portfolio...
+                            </div>
                             <div className="w-full bg-white/20 rounded-full h-2 mb-4">
-                              <div 
+                              <div
                                 className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-300"
                                 style={{ width: `${optimizationProgress}%` }}
                               />
                             </div>
-                            <div className="text-cyan-400 font-bold">{optimizationProgress}%</div>
+                            <div className="text-cyan-400 font-bold">
+                              {optimizationProgress}%
+                            </div>
                           </div>
                         ) : (
                           <div className="h-48 flex flex-col justify-center">
                             <div className="text-center mb-6">
                               <Check className="h-12 w-12 text-emerald-400 mx-auto mb-2" />
-                              <div className="text-emerald-400 font-bold">Optimization Complete!</div>
+                              <div className="text-emerald-400 font-bold">
+                                Optimization Complete!
+                              </div>
                             </div>
                           </div>
                         )}
                         <div className="space-y-3">
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Expected Return:</span>
-                            <span className="text-emerald-400 font-bold">+12.8%</span>
+                            <span className="text-slate-300">
+                              Expected Return:
+                            </span>
+                            <span className="text-emerald-400 font-bold">
+                              +12.8%
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-slate-300">Risk Score:</span>
-                            <span className="text-orange-400 font-bold">Medium</span>
+                            <span className="text-orange-400 font-bold">
+                              Medium
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Diversification:</span>
+                            <span className="text-slate-300">
+                              Diversification:
+                            </span>
                             <span className="text-blue-400 font-bold">78%</span>
                           </div>
                         </div>
@@ -1175,8 +1388,12 @@ export default function Index() {
               {mvpStep === 3 && (
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">Your Optimized Portfolio</h3>
-                    <p className="text-white/80">Perfectly balanced for risk and return</p>
+                    <h3 className="text-3xl font-bold text-white mb-4">
+                      Your Optimized Portfolio
+                    </h3>
+                    <p className="text-white/80">
+                      Perfectly balanced for risk and return
+                    </p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
@@ -1193,15 +1410,18 @@ export default function Index() {
                               label={(entry) => `${entry.name} ${entry.value}%`}
                             >
                               {pieData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.color} />
+                                <Cell
+                                  key={`cell-${index}`}
+                                  fill={entry.color}
+                                />
                               ))}
                             </Pie>
                             <Tooltip
                               contentStyle={{
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)',
-                                borderRadius: '12px',
-                                color: 'white',
+                                backgroundColor: "rgba(15, 23, 42, 0.95)",
+                                border: "1px solid rgba(255, 255, 255, 0.2)",
+                                borderRadius: "12px",
+                                color: "white",
                               }}
                             />
                           </PieChart>
@@ -1210,40 +1430,67 @@ export default function Index() {
                     </div>
                     <div className="space-y-6">
                       <div className="bg-slate-800/50 rounded-xl p-6 border border-white/10">
-                        <h4 className="text-xl font-semibold text-white mb-4">Portfolio Metrics</h4>
+                        <h4 className="text-xl font-semibold text-white mb-4">
+                          Portfolio Metrics
+                        </h4>
                         <div className="space-y-4">
                           <div className="flex justify-between">
                             <span className="text-slate-300">Total Value:</span>
-                            <span className="text-white font-bold">$10,000</span>
+                            <span className="text-white font-bold">
+                              $10,000
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Expected Annual Return:</span>
-                            <span className="text-emerald-400 font-bold">+12.8%</span>
+                            <span className="text-slate-300">
+                              Expected Annual Return:
+                            </span>
+                            <span className="text-emerald-400 font-bold">
+                              +12.8%
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-slate-300">Risk Level:</span>
-                            <span className="text-orange-400 font-bold">Medium</span>
+                            <span className="text-orange-400 font-bold">
+                              Medium
+                            </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-slate-300">Sharpe Ratio:</span>
-                            <span className="text-blue-400 font-bold">0.89</span>
+                            <span className="text-slate-300">
+                              Sharpe Ratio:
+                            </span>
+                            <span className="text-blue-400 font-bold">
+                              0.89
+                            </span>
                           </div>
                         </div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-6">
-                        <h4 className="text-xl font-semibold text-white mb-4">Top Holdings</h4>
+                        <h4 className="text-xl font-semibold text-white mb-4">
+                          Top Holdings
+                        </h4>
                         <div className="space-y-3">
                           {portfolio.slice(0, 3).map((stock, index) => {
                             const allocations = ["32%", "28%", "25%"]; // Tech total: 60%, Auto: 25%, Others: 15%
                             return (
-                              <div key={stock.id} className="flex items-center justify-between">
+                              <div
+                                key={stock.id}
+                                className="flex items-center justify-between"
+                              >
                                 <div className="flex items-center">
                                   <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
-                                    <img src={stock.logo} alt={stock.symbol} className="w-4 h-4" />
+                                    <img
+                                      src={stock.logo}
+                                      alt={stock.symbol}
+                                      className="w-4 h-4"
+                                    />
                                   </div>
-                                  <span className="text-white">{stock.symbol}</span>
+                                  <span className="text-white">
+                                    {stock.symbol}
+                                  </span>
                                 </div>
-                                <span className="text-white/60">{allocations[index]}</span>
+                                <span className="text-white/60">
+                                  {allocations[index]}
+                                </span>
                               </div>
                             );
                           })}
@@ -1267,34 +1514,52 @@ export default function Index() {
               {mvpStep === 4 && (
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">Chat with AlphaCue</h3>
-                    <p className="text-slate-200">Try these sample questions or ask anything about investing</p>
+                    <h3 className="text-3xl font-bold text-white mb-4">
+                      Chat with AlphaCue
+                    </h3>
+                    <p className="text-slate-200">
+                      Try these sample questions or ask anything about investing
+                    </p>
                   </div>
                   <div className="max-w-2xl mx-auto">
                     {/* Sample Questions */}
                     <div className="mb-6">
-                      <h4 className="text-lg font-semibold text-white mb-4">Sample Questions:</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">
+                        Sample Questions:
+                      </h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <button
-                          onClick={() => setChatInput("What's the best tech stock to invest in right now?")}
+                          onClick={() =>
+                            setChatInput(
+                              "What's the best tech stock to invest in right now?",
+                            )
+                          }
                           className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
                         >
                           "What's the best tech stock to invest in right now?"
                         </button>
                         <button
-                          onClick={() => setChatInput("How should I diversify my portfolio?")}
+                          onClick={() =>
+                            setChatInput("How should I diversify my portfolio?")
+                          }
                           className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
                         >
                           "How should I diversify my portfolio?"
                         </button>
                         <button
-                          onClick={() => setChatInput("What's my expected return with this allocation?")}
+                          onClick={() =>
+                            setChatInput(
+                              "What's my expected return with this allocation?",
+                            )
+                          }
                           className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
                         >
                           "What's my expected return with this allocation?"
                         </button>
                         <button
-                          onClick={() => setChatInput("Should I buy or sell AAPL?")}
+                          onClick={() =>
+                            setChatInput("Should I buy or sell AAPL?")
+                          }
                           className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
                         >
                           "Should I buy or sell AAPL?"
@@ -1305,12 +1570,17 @@ export default function Index() {
                     <div className="bg-slate-900/70 border border-slate-600 rounded-xl p-6 mb-6 h-80 overflow-y-auto">
                       <div className="space-y-4">
                         {chatMessages.map((msg, index) => (
-                          <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-xs p-3 rounded-xl ${
-                              msg.sender === 'user'
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-slate-700 text-slate-100 border border-slate-600'
-                            }`}>
+                          <div
+                            key={index}
+                            className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                          >
+                            <div
+                              className={`max-w-xs p-3 rounded-xl ${
+                                msg.sender === "user"
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-slate-700 text-slate-100 border border-slate-600"
+                              }`}
+                            >
                               {msg.message}
                             </div>
                           </div>
@@ -1348,26 +1618,42 @@ export default function Index() {
               {mvpStep === 5 && (
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">Social Trading</h3>
-                    <p className="text-white/80">See what your network is investing in</p>
+                    <h3 className="text-3xl font-bold text-white mb-4">
+                      Social Trading
+                    </h3>
+                    <p className="text-white/80">
+                      See what your network is investing in
+                    </p>
                   </div>
                   <div className="max-w-2xl mx-auto space-y-6">
                     <div className="bg-white/10 rounded-xl p-6">
-                      <h4 className="text-xl font-semibold text-white mb-4">Friend's Portfolio</h4>
+                      <h4 className="text-xl font-semibold text-white mb-4">
+                        Friend's Portfolio
+                      </h4>
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
-                          <span className="text-white font-bold text-lg">A</span>
+                          <span className="text-white font-bold text-lg">
+                            A
+                          </span>
                         </div>
                         <div>
-                          <div className="text-white font-semibold">Alex Chen</div>
-                          <div className="text-emerald-400">+24.7% this year • 2.1k followers</div>
+                          <div className="text-white font-semibold">
+                            Alex Chen
+                          </div>
+                          <div className="text-emerald-400">
+                            +24.7% this year • 2.1k followers
+                          </div>
                         </div>
                       </div>
                       <div className="space-y-3 mb-6">
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
                             <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
-                              <img src="https://logo.clearbit.com/apple.com" alt="AAPL" className="w-4 h-4" />
+                              <img
+                                src="https://logo.clearbit.com/apple.com"
+                                alt="AAPL"
+                                className="w-4 h-4"
+                              />
                             </div>
                             <span className="text-white">AAPL</span>
                           </div>
@@ -1376,7 +1662,11 @@ export default function Index() {
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
                             <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
-                              <img src="https://logo.clearbit.com/nvidia.com" alt="NVDA" className="w-4 h-4" />
+                              <img
+                                src="https://logo.clearbit.com/nvidia.com"
+                                alt="NVDA"
+                                className="w-4 h-4"
+                              />
                             </div>
                             <span className="text-white">NVDA</span>
                           </div>
@@ -1385,7 +1675,11 @@ export default function Index() {
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
                             <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
-                              <img src="https://logo.clearbit.com/tesla.com" alt="TSLA" className="w-4 h-4" />
+                              <img
+                                src="https://logo.clearbit.com/tesla.com"
+                                alt="TSLA"
+                                className="w-4 h-4"
+                              />
                             </div>
                             <span className="text-white">TSLA</span>
                           </div>
@@ -1397,40 +1691,63 @@ export default function Index() {
                           <Plus className="mr-2 h-5 w-5" />
                           Copy Portfolio
                         </Button>
-                        <Button variant="outline" className="flex-1 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 rounded-xl">
+                        <Button
+                          variant="outline"
+                          className="flex-1 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 rounded-xl"
+                        >
                           <Heart className="mr-2 h-5 w-5" />
                           Follow
                         </Button>
                       </div>
                     </div>
-                    
+
                     <div className="bg-white/10 rounded-xl p-6">
-                      <h4 className="text-xl font-semibold text-white mb-4">Trending Today</h4>
+                      <h4 className="text-xl font-semibold text-white mb-4">
+                        Trending Today
+                      </h4>
                       <div className="grid grid-cols-3 gap-3">
                         <div className="text-center p-3 bg-white/10 rounded-lg">
                           <div className="w-8 h-8 bg-white rounded mb-2 mx-auto flex items-center justify-center">
-                            <img src="https://logo.clearbit.com/apple.com" alt="AAPL" className="w-6 h-6" />
+                            <img
+                              src="https://logo.clearbit.com/apple.com"
+                              alt="AAPL"
+                              className="w-6 h-6"
+                            />
                           </div>
                           <div className="text-white font-semibold">AAPL</div>
-                          <div className="text-green-400 text-sm">453 swipes</div>
+                          <div className="text-green-400 text-sm">
+                            453 swipes
+                          </div>
                         </div>
                         <div className="text-center p-3 bg-white/10 rounded-lg">
                           <div className="w-8 h-8 bg-white rounded mb-2 mx-auto flex items-center justify-center">
-                            <img src="https://logo.clearbit.com/nvidia.com" alt="NVDA" className="w-6 h-6" />
+                            <img
+                              src="https://logo.clearbit.com/nvidia.com"
+                              alt="NVDA"
+                              className="w-6 h-6"
+                            />
                           </div>
                           <div className="text-white font-semibold">NVDA</div>
-                          <div className="text-green-400 text-sm">392 swipes</div>
+                          <div className="text-green-400 text-sm">
+                            392 swipes
+                          </div>
                         </div>
                         <div className="text-center p-3 bg-white/10 rounded-lg">
                           <div className="w-8 h-8 bg-white rounded mb-2 mx-auto flex items-center justify-center">
-                            <img src="https://logo.clearbit.com/tesla.com" alt="TSLA" className="w-6 h-6" />
+                            <img
+                              src="https://logo.clearbit.com/tesla.com"
+                              alt="TSLA"
+                              className="w-6 h-6"
+                            />
                           </div>
                           <div className="text-white font-semibold">TSLA</div>
-                          <div className="text-green-400 text-sm">287 swipes</div>
+                          <div className="text-green-400 text-sm">
+                            287 swipes
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="text-center">
                       <Button
                         onClick={() => setMvpStep(6)}
@@ -1451,13 +1768,21 @@ export default function Index() {
                     <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-emerald-500/25">
                       <Check className="h-12 w-12 text-white" />
                     </div>
-                    <h3 className="text-4xl font-bold text-white mb-6">Ready to Build Your Real Portfolio?</h3>
+                    <h3 className="text-4xl font-bold text-white mb-6">
+                      Ready to Build Your Real Portfolio?
+                    </h3>
                     <p className="text-xl text-white/80 mb-8 max-w-2xl">
-                      You've seen how easy and powerful swipr.ai can be. Join thousands of smart investors already building wealth with our platform.
+                      You've seen how easy and powerful swipr.ai can be. Join
+                      thousands of smart investors already building wealth with
+                      our platform.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <Button
-                        onClick={() => document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" })}
+                        onClick={() =>
+                          document
+                            .getElementById("hero")
+                            ?.scrollIntoView({ behavior: "smooth" })
+                        }
                         className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-4 rounded-xl text-xl font-bold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105"
                       >
                         Sign Up Free
@@ -1494,7 +1819,8 @@ export default function Index() {
               <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
                 Portfolio
                 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                  {" "}Simulator
+                  {" "}
+                  Simulator
                 </span>
               </h2>
               <p className="text-xl text-white/80 leading-relaxed max-w-3xl mx-auto">
@@ -1507,7 +1833,9 @@ export default function Index() {
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-bold text-white">Portfolio Growth</h3>
+                    <h3 className="text-2xl font-bold text-white">
+                      Portfolio Growth
+                    </h3>
                     <div className="flex items-center space-x-4 text-sm">
                       <div className="flex items-center">
                         <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-2"></div>
@@ -1519,7 +1847,9 @@ export default function Index() {
                   {/* Risk Level Slider */}
                   <div className="mb-8">
                     <div className="flex items-center justify-between mb-4">
-                      <label className="text-white font-semibold">Risk Level</label>
+                      <label className="text-white font-semibold">
+                        Risk Level
+                      </label>
                       <span className="text-cyan-400 font-bold">
                         {Math.round(riskLevel * 100)}%
                       </span>
@@ -1539,36 +1869,50 @@ export default function Index() {
                   <div className="h-80">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={portfolioData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" />
-                        <XAxis 
-                          dataKey="month" 
+                        <CartesianGrid
+                          strokeDasharray="3 3"
+                          stroke="#ffffff20"
+                        />
+                        <XAxis
+                          dataKey="month"
                           stroke="#ffffff80"
                           fontSize={12}
                         />
-                        <YAxis 
+                        <YAxis
                           stroke="#ffffff80"
                           fontSize={12}
-                          tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                          tickFormatter={(value) =>
+                            `$${(value / 1000).toFixed(0)}k`
+                          }
                         />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            borderRadius: '12px',
-                            color: 'white',
+                            backgroundColor: "rgba(15, 23, 42, 0.95)",
+                            border: "1px solid rgba(255, 255, 255, 0.2)",
+                            borderRadius: "12px",
+                            color: "white",
                           }}
-                          formatter={(value: any) => [`$${value.toLocaleString()}`, 'Portfolio Value']}
+                          formatter={(value: any) => [
+                            `$${value.toLocaleString()}`,
+                            "Portfolio Value",
+                          ]}
                         />
                         <Line
                           type="monotone"
                           dataKey="value"
                           stroke="url(#colorGradient)"
                           strokeWidth={3}
-                          dot={{ fill: '#06b6d4', strokeWidth: 2, r: 6 }}
-                          activeDot={{ r: 8, fill: '#06b6d4' }}
+                          dot={{ fill: "#06b6d4", strokeWidth: 2, r: 6 }}
+                          activeDot={{ r: 8, fill: "#06b6d4" }}
                         />
                         <defs>
-                          <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
+                          <linearGradient
+                            id="colorGradient"
+                            x1="0"
+                            y1="0"
+                            x2="1"
+                            y2="0"
+                          >
                             <stop offset="0%" stopColor="#06b6d4" />
                             <stop offset="100%" stopColor="#3b82f6" />
                           </linearGradient>
@@ -1583,7 +1927,9 @@ export default function Index() {
               <div className="space-y-8">
                 {/* Performance Metrics */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-                  <h3 className="text-2xl font-bold text-white mb-6">Portfolio Metrics</h3>
+                  <h3 className="text-2xl font-bold text-white mb-6">
+                    Portfolio Metrics
+                  </h3>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-emerald-400 mb-2">
@@ -1608,7 +1954,9 @@ export default function Index() {
 
                 {/* Asset Allocation */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-                  <h3 className="text-2xl font-bold text-white mb-6">Asset Allocation</h3>
+                  <h3 className="text-2xl font-bold text-white mb-6">
+                    Asset Allocation
+                  </h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -1627,10 +1975,10 @@ export default function Index() {
                         </Pie>
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            borderRadius: '12px',
-                            color: 'white',
+                            backgroundColor: "rgba(15, 23, 42, 0.95)",
+                            border: "1px solid rgba(255, 255, 255, 0.2)",
+                            borderRadius: "12px",
+                            color: "white",
                           }}
                         />
                       </PieChart>
@@ -1650,7 +1998,8 @@ export default function Index() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Join Our
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {" "}Team
+                {" "}
+                Team
               </span>
             </h2>
             <p className="text-xl text-white/80 leading-relaxed">
@@ -1783,7 +2132,8 @@ export default function Index() {
               <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
                 Get In
                 <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  {" "}Touch
+                  {" "}
+                  Touch
                 </span>
               </h2>
               <p className="text-xl text-white/80 leading-relaxed">
@@ -1910,9 +2260,30 @@ export default function Index() {
                   About
                 </h3>
                 <ul className="space-y-3">
-                  <li><a href="#" className="text-white/70 hover:text-white transition-colors">Our Story</a></li>
-                  <li><a href="#" className="text-white/70 hover:text-white transition-colors">Team</a></li>
-                  <li><a href="#open-roles" className="text-white/70 hover:text-white transition-colors">Careers</a></li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Our Story
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Team
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#open-roles"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Careers
+                    </a>
+                  </li>
                 </ul>
               </div>
 
@@ -1922,9 +2293,30 @@ export default function Index() {
                   Product
                 </h3>
                 <ul className="space-y-3">
-                  <li><a href="#features" className="text-white/70 hover:text-white transition-colors">Features</a></li>
-                  <li><a href="#simulator" className="text-white/70 hover:text-white transition-colors">Portfolio Simulator</a></li>
-                  <li><a href="#mvp-demo" className="text-white/70 hover:text-white transition-colors">Try Demo</a></li>
+                  <li>
+                    <a
+                      href="#features"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Features
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#simulator"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Portfolio Simulator
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#mvp-demo"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Try Demo
+                    </a>
+                  </li>
                 </ul>
               </div>
 
@@ -1934,9 +2326,30 @@ export default function Index() {
                   Legal
                 </h3>
                 <ul className="space-y-3">
-                  <li><Link to="/privacy" className="text-white/70 hover:text-white transition-colors">Privacy Policy</Link></li>
-                  <li><a href="#" className="text-white/70 hover:text-white transition-colors">Terms of Service</a></li>
-                  <li><a href="#" className="text-white/70 hover:text-white transition-colors">Security</a></li>
+                  <li>
+                    <Link
+                      to="/privacy"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Terms of Service
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Security
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -1980,7 +2393,7 @@ export default function Index() {
                   </a>
                 </div>
               </div>
-              
+
               <div className="text-center mt-8">
                 <p className="text-white/60">
                   © 2025 swipr.ai. All rights reserved.

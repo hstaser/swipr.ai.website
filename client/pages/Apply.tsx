@@ -411,7 +411,11 @@ export default function Apply() {
                       Select a position
                     </option>
                     {Object.entries(POSITIONS).map(([key, position]) => (
-                      <option key={key} value={key} className="bg-white text-slate-900">
+                      <option
+                        key={key}
+                        value={key}
+                        className="bg-white text-slate-900"
+                      >
                         {position.title}
                       </option>
                     ))}
