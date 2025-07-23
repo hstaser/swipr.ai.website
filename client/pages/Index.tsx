@@ -806,7 +806,7 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
                       <Brain className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">Smart Chatbot (Alpha)</h3>
+                    <h3 className="text-3xl font-bold text-white">AlphaCue (Coming Soon)</h3>
                   </div>
                   <p className="text-lg text-white/80 leading-relaxed mb-6">
                     Ask our AI any market question. Built on real-time data and LLM intelligence to provide instant, accurate investment insights.
