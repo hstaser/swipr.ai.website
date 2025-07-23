@@ -845,7 +845,7 @@ export default function Index() {
                       </span>
                     </li>
                   </ul>
-                  <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
+                  <Button className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
                     View Analytics
                     <div className="ml-2">
                       <Logo variant="transparent" size="sm" showText={false} />
@@ -853,25 +853,25 @@ export default function Index() {
                   </Button>
                 </div>
               </div>
-              <div className="order-1 lg:order-2">
+              <div className="order-1 lg:order-2 mb-8 lg:mb-0">
                 <div className="relative">
-                  <div className="bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-3xl p-8 backdrop-blur-sm border border-emerald-400/30">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
-                        <span className="text-white">Portfolio Value</span>
-                        <span className="text-emerald-400 font-bold">
+                  <div className="bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-emerald-400/30">
+                    <div className="space-y-3 md:space-y-4">
+                      <div className="flex items-center justify-between p-3 md:p-4 bg-white/10 rounded-lg md:rounded-xl">
+                        <span className="text-white text-sm md:text-base">Portfolio Value</span>
+                        <span className="text-emerald-400 font-bold text-sm md:text-base">
                           $11,350
                         </span>
                       </div>
-                      <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
-                        <span className="text-white">Total Return</span>
-                        <span className="text-emerald-400 font-bold">
+                      <div className="flex items-center justify-between p-3 md:p-4 bg-white/10 rounded-lg md:rounded-xl">
+                        <span className="text-white text-sm md:text-base">Total Return</span>
+                        <span className="text-emerald-400 font-bold text-sm md:text-base">
                           +13.5%
                         </span>
                       </div>
-                      <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
-                        <span className="text-white">Today's Gain</span>
-                        <span className="text-emerald-400 font-bold">
+                      <div className="flex items-center justify-between p-3 md:p-4 bg-white/10 rounded-lg md:rounded-xl">
+                        <span className="text-white text-sm md:text-base">Today's Gain</span>
+                        <span className="text-emerald-400 font-bold text-sm md:text-base">
                           +$142.30
                         </span>
                       </div>
