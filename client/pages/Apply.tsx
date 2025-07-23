@@ -308,7 +308,7 @@ export default function Apply() {
                     {selectedPosition.skills.map((skill, index) => (
                       <li key={index} className="flex items-center">
                         <CheckCircle className="h-5 w-5 text-emerald-400 mr-3 flex-shrink-0" />
-                        <span className="text-white/80">{skill}</span>
+                        <span className="text-slate-200">{skill}</span>
                       </li>
                     ))}
                   </ul>
