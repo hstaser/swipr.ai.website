@@ -407,11 +407,11 @@ export default function Apply() {
                     required
                     className="w-full bg-slate-800/60 border border-slate-600 text-slate-100 h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   >
-                    <option value="" className="bg-slate-800">
+                    <option value="" className="bg-white text-slate-900">
                       Select a position
                     </option>
                     {Object.entries(POSITIONS).map(([key, position]) => (
-                      <option key={key} value={key} className="bg-slate-800">
+                      <option key={key} value={key} className="bg-white text-slate-900">
                         {position.title}
                       </option>
                     ))}
