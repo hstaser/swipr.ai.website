@@ -1911,11 +1911,13 @@ export default function Index() {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-6 md:mb-0">
                   <div className="flex items-center space-x-3">
-                    <img
-                      src="https://cdn.builder.io/api/v1/image/assets%2F8274926fadf9406c8e2d75b7a56de814%2Fa6a66b2fcf0441379eacc75b64af9438?format=webp&width=800"
-                      alt="swipr.ai logo"
-                      className="w-10 h-10"
-                    />
+                    <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20">
+                      <img
+                        src="https://cdn.builder.io/api/v1/image/assets%2F8274926fadf9406c8e2d75b7a56de814%2Fa6a66b2fcf0441379eacc75b64af9438?format=webp&width=800"
+                        alt="swipr.ai logo"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                     <span className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                       swipr.ai
                     </span>
