@@ -1273,20 +1273,24 @@ export default function Index() {
                         ))}
                       </div>
                     </div>
-                    <form onSubmit={handleChatSubmit} className="flex gap-3">
-                      <Input
-                        value={chatInput}
-                        onChange={(e) => setChatInput(e.target.value)}
-                        placeholder="Ask about your portfolio..."
-                        className="bg-white/10 border-white/30 text-white placeholder-white/60 h-12 rounded-xl flex-1"
-                      />
+                    <div className="flex gap-3">
+                      <div className="flex-1 relative">
+                        <Input
+                          placeholder="Ask SwiprBot Alpha... (Coming Feature)"
+                          className="bg-white/10 border-white/30 text-white placeholder-white/60 h-12 rounded-xl flex-1"
+                          disabled
+                        />
+                        <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
+                          <span className="text-cyan-400 text-sm font-semibold">Coming Soon</span>
+                        </div>
+                      </div>
                       <Button
-                        type="submit"
-                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 h-12 rounded-xl"
+                        disabled
+                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 h-12 rounded-xl opacity-50 cursor-not-allowed"
                       >
                         Send
                       </Button>
-                    </form>
+                    </div>
                     <div className="text-center mt-8">
                       <Button
                         onClick={() => setMvpStep(5)}
