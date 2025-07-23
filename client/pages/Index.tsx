@@ -1223,17 +1223,20 @@ export default function Index() {
                       <div className="bg-white/10 rounded-xl p-6">
                         <h4 className="text-xl font-semibold text-white mb-4">Top Holdings</h4>
                         <div className="space-y-3">
-                          {portfolio.slice(0, 3).map((stock, index) => (
-                            <div key={stock.id} className="flex items-center justify-between">
-                              <div className="flex items-center">
-                                <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
-                                  <img src={stock.logo} alt={stock.symbol} className="w-4 h-4" />
+                          {portfolio.slice(0, 3).map((stock, index) => {
+                            const allocations = ["32%", "28%", "25%"]; // Tech total: 60%, Auto: 25%, Others: 15%
+                            return (
+                              <div key={stock.id} className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
+                                    <img src={stock.logo} alt={stock.symbol} className="w-4 h-4" />
+                                  </div>
+                                  <span className="text-white">{stock.symbol}</span>
                                 </div>
-                                <span className="text-white">{stock.symbol}</span>
+                                <span className="text-white/60">{allocations[index]}</span>
                               </div>
-                              <span className="text-white/60">{40 - index * 10}%</span>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
