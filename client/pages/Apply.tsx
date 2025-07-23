@@ -292,7 +292,7 @@ export default function Apply() {
                 >
                   <selectedPosition.icon className="h-10 w-10 text-white" />
                 </div>
-                <CardTitle className="text-3xl text-white font-bold">
+                <CardTitle className="text-3xl text-slate-900 dark:text-white font-bold">
                   {selectedPosition.title}
                 </CardTitle>
                 <CardDescription className="text-lg text-slate-200 mt-4">
