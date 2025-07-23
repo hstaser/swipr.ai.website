@@ -603,17 +603,23 @@ export default function Index() {
                   <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl p-8 backdrop-blur-sm border border-cyan-400/30">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
-                        <div className="text-2xl mb-2">📱</div>
+                        <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
+                          <img src="https://logo.clearbit.com/apple.com" alt="AAPL" className="w-6 h-6" />
+                        </div>
                         <div className="text-white font-semibold">AAPL</div>
                         <div className="text-green-400 text-sm">+2.4%</div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
-                        <div className="text-2xl mb-2">⚡</div>
+                        <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
+                          <img src="https://logo.clearbit.com/tesla.com" alt="TSLA" className="w-6 h-6" />
+                        </div>
                         <div className="text-white font-semibold">TSLA</div>
                         <div className="text-green-400 text-sm">+5.7%</div>
                       </div>
                       <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer col-span-2">
-                        <div className="text-2xl mb-2">🔥</div>
+                        <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
+                          <img src="https://logo.clearbit.com/nvidia.com" alt="NVDA" className="w-6 h-6" />
+                        </div>
                         <div className="text-white font-semibold">NVDA</div>
                         <div className="text-green-400 text-sm">+3.2%</div>
                       </div>
