@@ -177,7 +177,7 @@ export default function Index() {
   const [swipedStocks, setSwipedStocks] = useState<{[key: number]: 'left' | 'right'}>({});
   const [portfolio, setPortfolio] = useState<typeof stockCards>([]);
   const [chatMessages, setChatMessages] = useState([
-    { sender: "bot", message: "Hi! I'm SwiprBot Alpha. Ask me anything about the market!" },
+    { sender: "bot", message: "Hi! I'm AlphaCue. Ask me anything about the market!" },
   ]);
   const [chatInput, setChatInput] = useState("");
   const [optimizationProgress, setOptimizationProgress] = useState(0);
