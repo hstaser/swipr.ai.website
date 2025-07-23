@@ -1209,15 +1209,15 @@ export default function Index() {
                             <span className="text-white font-bold">$10,000</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/60">Expected Annual Return:</span>
+                            <span className="text-slate-300">Expected Annual Return:</span>
                             <span className="text-emerald-400 font-bold">+12.8%</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/60">Risk Level:</span>
+                            <span className="text-slate-300">Risk Level:</span>
                             <span className="text-orange-400 font-bold">Medium</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/60">Sharpe Ratio:</span>
+                            <span className="text-slate-300">Sharpe Ratio:</span>
                             <span className="text-blue-400 font-bold">0.89</span>
                           </div>
                         </div>
