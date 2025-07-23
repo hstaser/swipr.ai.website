@@ -726,21 +726,21 @@ export default function Index() {
                     </div>
                     <h3 className="text-3xl font-bold text-white">Real-time Analytics</h3>
                   </div>
-                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
                     See your performance live. Watch how each swipe shifts your future with instant portfolio impact visualization.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Live performance tracking</span>
+                      <span className="text-slate-200">Live performance tracking</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Instant portfolio impact</span>
+                      <span className="text-slate-200">Instant portfolio impact</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Predictive analytics</span>
+                      <span className="text-slate-200">Predictive analytics</span>
                     </li>
                   </ul>
                   <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
