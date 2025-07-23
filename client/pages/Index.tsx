@@ -829,7 +829,9 @@ export default function Index() {
                   </ul>
                   <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
                     View Analytics
-                    <TrendingUp className="ml-2 h-5 w-5" />
+                    <div className="ml-2">
+                      <Logo variant="transparent" size="sm" showText={false} />
+                    </div>
                   </Button>
                 </div>
               </div>
@@ -857,7 +859,9 @@ export default function Index() {
                       </div>
                       <div className="h-32 bg-white/10 rounded-xl p-4 flex items-center justify-center">
                         <div className="text-center">
-                          <TrendingUp className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
+                          <div className="mx-auto mb-2">
+                            <Logo variant="transparent" size="md" showText={false} />
+                          </div>
                           <div className="text-white/60 text-sm">
                             Live chart updates
                           </div>
