@@ -818,21 +818,21 @@ export default function Index() {
                     </div>
                     <h3 className="text-3xl font-bold text-white">AlphaCue (Coming Soon)</h3>
                   </div>
-                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
                     Ask our AI any market question. Built on real-time data and LLM intelligence to provide instant, accurate investment insights.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Real-time market data</span>
+                      <span className="text-slate-200">Real-time market data</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Personalized recommendations</span>
+                      <span className="text-slate-200">Personalized recommendations</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">24/7 availability</span>
+                      <span className="text-slate-200">24/7 availability</span>
                     </li>
                   </ul>
                   <Button
