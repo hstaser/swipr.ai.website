@@ -2104,7 +2104,9 @@ export default function Index() {
                 <Link to="/apply?position=quantitative-analyst">
                   <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
-                    <TrendingUp className="ml-2 h-4 w-4" />
+                    <div className="ml-2">
+                      <Logo variant="transparent" size="sm" showText={false} />
+                    </div>
                   </Button>
                 </Link>
               </CardContent>
