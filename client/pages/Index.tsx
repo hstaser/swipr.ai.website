@@ -479,8 +479,8 @@ export default function Index() {
             <p className="text-2xl md:text-3xl font-bold mb-4 text-cyan-300 animate-fade-in-delayed">
               Swipe. Optimize. Grow.
             </p>
-            <p className="text-xl md:text-2xl mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
-              Smarter investing in seconds. Swipe through stocks like social media, 
+            <p className="text-xl md:text-2xl mb-12 text-slate-200 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
+              Smarter investing in seconds. Swipe through stocks like social media,
               let AI optimize your portfolio.
             </p>
 
