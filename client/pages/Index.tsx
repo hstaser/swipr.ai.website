@@ -346,17 +346,33 @@ export default function Index() {
     setChatMessages(prev => [...prev, { sender: "user", message: userMessage }]);
     setChatInput("");
 
-    // Simulate bot response
+    // Simulate bot response with contextual answers
     setTimeout(() => {
-      const responses = [
-        "Based on current market data, tech stocks are showing strong momentum.",
-        "Your portfolio is well-diversified across growth and value sectors.",
-        "Consider rebalancing if tech allocation exceeds 40% of total portfolio.",
-        "Market volatility is expected to decrease over the next quarter.",
-        "Your risk-adjusted returns are performing above market average.",
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setChatMessages(prev => [...prev, { sender: "bot", message: randomResponse }]);
+      let response = "";
+      const message = userMessage.toLowerCase();
+
+      if (message.includes("tech stock") || message.includes("best tech")) {
+        response = "Based on current analysis, NVDA shows strong fundamentals with AI tailwinds. Your portfolio already has 28% NVDA allocation, which provides good exposure to the AI trend.";
+      } else if (message.includes("diversify") || message.includes("diversification")) {
+        response = "Your current portfolio has 60% tech allocation (AAPL 32%, NVDA 28%) and 25% automotive (TSLA). Consider adding healthcare, finance, or international exposure for better diversification.";
+      } else if (message.includes("expected return") || message.includes("return")) {
+        response = "With your current allocation, the expected annual return is 12.8% with a Sharpe ratio of 0.89. This reflects a balanced risk-return profile for a tech-heavy portfolio.";
+      } else if (message.includes("aapl") || message.includes("apple")) {
+        response = "AAPL represents 32% of your portfolio. Given strong fundamentals and upcoming product launches, this allocation seems appropriate. Consider holding for long-term growth.";
+      } else if (message.includes("tsla") || message.includes("tesla")) {
+        response = "TSLA at 25% allocation provides good exposure to EV growth. Monitor production targets and autonomous driving progress for future rebalancing decisions.";
+      } else {
+        const genericResponses = [
+          "Based on current market data, your portfolio shows solid fundamentals.",
+          "Consider reviewing your risk tolerance and investment timeline.",
+          "Market conditions favor growth stocks in the current environment.",
+          "Your tech allocation aligns well with current market trends.",
+          "Regular rebalancing helps maintain optimal risk-return ratios.",
+        ];
+        response = genericResponses[Math.floor(Math.random() * genericResponses.length)];
+      }
+
+      setChatMessages(prev => [...prev, { sender: "bot", message: response }]);
     }, 1000);
   };
 
