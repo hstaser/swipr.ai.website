@@ -95,7 +95,6 @@ export default function Apply() {
     email: "",
     phone: "",
     position: searchParams.get("position") || "",
-    experience: "",
     linkedinUrl: "",
     portfolioUrl: "",
     startDate: "",
