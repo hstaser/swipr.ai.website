@@ -1226,7 +1226,9 @@ export default function Index() {
                           {portfolio.slice(0, 3).map((stock, index) => (
                             <div key={stock.id} className="flex items-center justify-between">
                               <div className="flex items-center">
-                                <span className="text-xl mr-3">{stock.logo}</span>
+                                <div className="w-6 h-6 bg-white rounded mr-3 flex items-center justify-center">
+                                  <img src={stock.logo} alt={stock.symbol} className="w-4 h-4" />
+                                </div>
                                 <span className="text-white">{stock.symbol}</span>
                               </div>
                               <span className="text-white/60">{40 - index * 10}%</span>
