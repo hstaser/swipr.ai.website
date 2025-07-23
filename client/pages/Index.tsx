@@ -1005,7 +1005,9 @@ export default function Index() {
                     <div className="max-w-md mx-auto">
                       <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
                         <div className="text-center mb-6">
-                          <div className="text-6xl mb-4">{stockCards[currentStockIndex].logo}</div>
+                      <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-lg flex items-center justify-center">
+                        <img src={stockCards[currentStockIndex].logo} alt={stockCards[currentStockIndex].symbol} className="w-12 h-12" />
+                      </div>
                           <div className="text-2xl font-bold text-white mb-2">{stockCards[currentStockIndex].symbol}</div>
                           <div className="text-white/80 mb-2">{stockCards[currentStockIndex].name}</div>
                           <div className="text-3xl font-bold text-white mb-1">{stockCards[currentStockIndex].price}</div>
