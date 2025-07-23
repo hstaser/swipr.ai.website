@@ -42,7 +42,6 @@ import {
   Target,
   Rocket,
   Linkedin,
-  Mail,
   PlayCircle,
   ChevronDown,
   Eye,
