@@ -675,45 +675,45 @@ export default function Index() {
                   </Button>
                 </div>
               </div>
-              <div className="order-1 lg:order-2">
+              <div className="order-1 lg:order-2 mb-8 lg:mb-0">
                 <div className="relative">
-                  <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl p-8 backdrop-blur-sm border border-cyan-400/30">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
-                        <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-cyan-400/30">
+                    <div className="grid grid-cols-2 gap-3 md:gap-4">
+                      <div className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
                             src="https://logo.clearbit.com/apple.com"
                             alt="AAPL"
-                            className="w-6 h-6"
+                            className="w-4 h-4 md:w-6 md:h-6"
                           />
                         </div>
-                        <div className="text-white font-semibold">AAPL</div>
-                        <div className="text-green-400 text-sm">+2.4%</div>
+                        <div className="text-white font-semibold text-sm md:text-base">AAPL</div>
+                        <div className="text-green-400 text-xs md:text-sm">+2.4%</div>
                       </div>
-                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
-                        <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
+                      <div className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
                             src="https://logo.clearbit.com/tesla.com"
                             alt="TSLA"
-                            className="w-6 h-6"
+                            className="w-4 h-4 md:w-6 md:h-6"
                           />
                         </div>
-                        <div className="text-white font-semibold">TSLA</div>
-                        <div className="text-green-400 text-sm">+5.7%</div>
+                        <div className="text-white font-semibold text-sm md:text-base">TSLA</div>
+                        <div className="text-green-400 text-xs md:text-sm">+5.7%</div>
                       </div>
-                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer col-span-2">
-                        <div className="w-8 h-8 bg-white rounded mb-2 flex items-center justify-center">
+                      <div className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer col-span-2">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
                             src="https://logo.clearbit.com/nvidia.com"
                             alt="NVDA"
-                            className="w-6 h-6"
+                            className="w-4 h-4 md:w-6 md:h-6"
                           />
                         </div>
-                        <div className="text-white font-semibold">NVDA</div>
-                        <div className="text-green-400 text-sm">+3.2%</div>
+                        <div className="text-white font-semibold text-sm md:text-base">NVDA</div>
+                        <div className="text-green-400 text-xs md:text-sm">+3.2%</div>
                       </div>
                     </div>
-                    <div className="text-center mt-6 text-white/60">
+                    <div className="text-center mt-4 md:mt-6 text-white/60 text-xs md:text-sm">
                       ← Swipe left to pass • Swipe right to invest →
                     </div>
                   </div>
@@ -722,11 +722,11 @@ export default function Index() {
             </div>
 
             {/* Feature 2: Portfolio Optimization */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="order-1">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="order-1 mb-8 lg:mb-0">
                 <div className="relative">
-                  <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-3xl p-8 backdrop-blur-sm border border-purple-400/30">
-                    <div className="h-64">
+                  <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-purple-400/30">
+                    <div className="h-48 md:h-64">
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie
@@ -753,19 +753,19 @@ export default function Index() {
                         </PieChart>
                       </ResponsiveContainer>
                     </div>
-                    <div className="text-center mt-4 text-white/60">
+                    <div className="text-center mt-4 text-white/60 text-xs md:text-sm">
                       Automatically balanced portfolio
                     </div>
                   </div>
                 </div>
               </div>
               <div className="order-2">
-                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-purple-400/50 transition-all duration-500 group">
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-purple-500/25">
-                      <Target className="h-8 w-8 text-white" />
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl md:rounded-3xl p-6 md:p-8 border border-white/20 hover:border-purple-400/50 transition-all duration-500 group">
+                  <div className="flex flex-col sm:flex-row sm:items-center mb-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-0 sm:mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-purple-500/25">
+                      <Target className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
                       Portfolio Optimization
                     </h3>
                   </div>
