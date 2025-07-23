@@ -1134,15 +1134,15 @@ export default function Index() {
                         )}
                         <div className="space-y-3">
                           <div className="flex justify-between">
-                            <span className="text-white/60">Expected Return:</span>
+                            <span className="text-slate-300">Expected Return:</span>
                             <span className="text-emerald-400 font-bold">+12.8%</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/60">Risk Score:</span>
+                            <span className="text-slate-300">Risk Score:</span>
                             <span className="text-orange-400 font-bold">Medium</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-white/60">Diversification:</span>
+                            <span className="text-slate-300">Diversification:</span>
                             <span className="text-blue-400 font-bold">78%</span>
                           </div>
                         </div>
