@@ -2022,7 +2022,7 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-white/80 mb-4 leading-relaxed">
+                <p className="text-slate-200 mb-4 leading-relaxed">
                   Help build scalable, high-performance systems that power our
                   investment platform. Use cutting-edge technology to help users
                   make better investment decisions.
@@ -2050,7 +2050,7 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-white/80 mb-4 leading-relaxed">
+                <p className="text-slate-200 mb-4 leading-relaxed">
                   Develop intelligent systems that help users build better
                   portfolios. Apply machine learning to make complex financial
                   data simple and actionable.
@@ -2078,7 +2078,7 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-white/80 mb-4 leading-relaxed">
+                <p className="text-slate-200 mb-4 leading-relaxed">
                   Create smart algorithms that optimize portfolios and manage
                   risk. Help users achieve better returns while keeping their
                   investments safe.
@@ -2106,7 +2106,7 @@ export default function Index() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-white/80 mb-4 leading-relaxed">
+                <p className="text-slate-200 mb-4 leading-relaxed">
                   Work on world-class mobile experiences that make portfolio
                   management intuitive and accessible. Build complex financial
                   apps with smooth performance.
