@@ -422,21 +422,7 @@ export default function Apply() {
                   </select>
                 </div>
 
-                {/* Experience */}
-                <div>
-                  <label className="block text-white font-semibold mb-3">
-                    <FileText className="inline h-4 w-4 mr-2" />
-                    Experience & Background *
-                  </label>
-                  <Textarea
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 min-h-[120px] rounded-xl"
-                    placeholder="Tell us about your experience, education, and what makes you excited about this role..."
-                  />
-                </div>
+
 
                 {/* Optional Fields */}
                 <div className="grid md:grid-cols-2 gap-6">
