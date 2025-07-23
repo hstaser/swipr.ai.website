@@ -1368,17 +1368,23 @@ export default function Index() {
                       <h4 className="text-xl font-semibold text-white mb-4">Trending Today</h4>
                       <div className="grid grid-cols-3 gap-3">
                         <div className="text-center p-3 bg-white/10 rounded-lg">
-                          <div className="text-2xl mb-2">🍎</div>
+                          <div className="w-8 h-8 bg-white rounded mb-2 mx-auto flex items-center justify-center">
+                            <img src="https://logo.clearbit.com/apple.com" alt="AAPL" className="w-6 h-6" />
+                          </div>
                           <div className="text-white font-semibold">AAPL</div>
                           <div className="text-green-400 text-sm">453 swipes</div>
                         </div>
                         <div className="text-center p-3 bg-white/10 rounded-lg">
-                          <div className="text-2xl mb-2">🔥</div>
+                          <div className="w-8 h-8 bg-white rounded mb-2 mx-auto flex items-center justify-center">
+                            <img src="https://logo.clearbit.com/nvidia.com" alt="NVDA" className="w-6 h-6" />
+                          </div>
                           <div className="text-white font-semibold">NVDA</div>
                           <div className="text-green-400 text-sm">392 swipes</div>
                         </div>
                         <div className="text-center p-3 bg-white/10 rounded-lg">
-                          <div className="text-2xl mb-2">⚡</div>
+                          <div className="w-8 h-8 bg-white rounded mb-2 mx-auto flex items-center justify-center">
+                            <img src="https://logo.clearbit.com/tesla.com" alt="TSLA" className="w-6 h-6" />
+                          </div>
                           <div className="text-white font-semibold">TSLA</div>
                           <div className="text-green-400 text-sm">287 swipes</div>
                         </div>
