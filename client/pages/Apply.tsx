@@ -301,7 +301,7 @@ export default function Apply() {
               </CardHeader>
               <CardContent>
                 <div className="mb-6">
-                  <h3 className="text-xl font-semibold text-white mb-4">
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">
                     What we're looking for:
                   </h3>
                   <ul className="space-y-3">
