@@ -41,7 +41,6 @@ import {
   DollarSign,
   Target,
   Rocket,
-  Twitter,
   Linkedin,
   PlayCircle,
   ChevronDown,
