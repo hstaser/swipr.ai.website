@@ -420,6 +420,8 @@ export default function Apply() {
                   </select>
                 </div>
 
+
+
                 {/* Optional Fields */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -577,10 +579,10 @@ export default function Apply() {
                 We review all applications carefully and will get back to you
                 within 5-7 business days. Questions? Email us at{" "}
                 <a
-                  href="mailto:careers@swipr.ai"
+                  href="mailto:team@swipr.ai"
                   className="text-cyan-300 hover:text-cyan-200 underline"
                 >
-                  careers@swipr.ai
+                  team@swipr.ai
                 </a>
               </AlertDescription>
             </Alert>
