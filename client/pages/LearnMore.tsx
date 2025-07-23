@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
+import { Logo } from "@/components/Logo";
 import {
   Card,
   CardContent,
