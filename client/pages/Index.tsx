@@ -775,7 +775,7 @@ export default function Index() {
                     <div className="space-y-4 max-h-64 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">Hi! I'm SwiprBot. Ask me about the market!</div>
+                          <div className="text-white text-sm">Hi! I'm SwiprBot Alpha. Ask me about the market!</div>
                         </div>
                       </div>
                       <div className="flex justify-end">
