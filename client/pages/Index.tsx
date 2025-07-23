@@ -1056,11 +1056,11 @@ export default function Index() {
                     <div className="space-y-4">
                       <div className="flex items-center p-4 bg-white/10 rounded-xl">
                         <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-white font-bold">A</span>
+                          <span className="text-white font-bold">M</span>
                         </div>
                         <div className="flex-1">
                           <div className="text-white font-semibold">
-                            Alex Chen
+                            Michael Rodriguez
                           </div>
                           <div className="text-green-400 text-sm">
                             +24.7% this year
@@ -1069,6 +1069,19 @@ export default function Index() {
                         <Button
                           size="sm"
                           className="bg-blue-600 hover:bg-blue-700"
+                          onClick={() => {
+                            // Show temporary success message
+                            const button = event.currentTarget;
+                            const originalText = button.textContent;
+                            button.textContent = 'Following!';
+                            button.disabled = true;
+                            button.className = 'bg-green-600 hover:bg-green-700 text-sm px-3 py-1 rounded-md text-white font-medium transition-colors';
+                            setTimeout(() => {
+                              button.textContent = originalText;
+                              button.disabled = false;
+                              button.className = 'bg-blue-600 hover:bg-blue-700 text-sm px-3 py-1 rounded-md text-white font-medium transition-colors';
+                            }, 2000);
+                          }}
                         >
                           Follow
                         </Button>
@@ -1088,6 +1101,19 @@ export default function Index() {
                         <Button
                           size="sm"
                           className="bg-blue-600 hover:bg-blue-700"
+                          onClick={() => {
+                            // Show temporary success message
+                            const button = event.currentTarget;
+                            const originalText = button.textContent;
+                            button.textContent = 'Following!';
+                            button.disabled = true;
+                            button.className = 'bg-green-600 hover:bg-green-700 text-sm px-3 py-1 rounded-md text-white font-medium transition-colors';
+                            setTimeout(() => {
+                              button.textContent = originalText;
+                              button.disabled = false;
+                              button.className = 'bg-blue-600 hover:bg-blue-700 text-sm px-3 py-1 rounded-md text-white font-medium transition-colors';
+                            }, 2000);
+                          }}
                         >
                           Follow
                         </Button>
@@ -1680,12 +1706,12 @@ export default function Index() {
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
                           <span className="text-white font-bold text-lg">
-                            A
+                            M
                           </span>
                         </div>
                         <div>
                           <div className="text-white font-semibold">
-                            Alex Chen
+                            Michael Rodriguez
                           </div>
                           <div className="text-emerald-400">
                             +24.7% this year • 2.1k followers
@@ -1741,6 +1767,19 @@ export default function Index() {
                         <Button
                           variant="outline"
                           className="flex-1 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 rounded-xl"
+                          onClick={() => {
+                            // Show temporary success message
+                            const button = event.currentTarget;
+                            const originalHTML = button.innerHTML;
+                            button.innerHTML = '<svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Following!';
+                            button.disabled = true;
+                            button.className = 'flex-1 border-green-400 text-green-300 bg-green-400/10 rounded-xl px-4 py-2 font-medium transition-colors';
+                            setTimeout(() => {
+                              button.innerHTML = originalHTML;
+                              button.disabled = false;
+                              button.className = 'flex-1 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 rounded-xl px-4 py-2 font-medium transition-colors';
+                            }, 2000);
+                          }}
                         >
                           <Heart className="mr-2 h-5 w-5" />
                           Follow
