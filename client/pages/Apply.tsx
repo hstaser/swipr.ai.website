@@ -341,7 +341,7 @@ export default function Apply() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                       placeholder="Enter your first name"
                     />
                   </div>
@@ -355,7 +355,7 @@ export default function Apply() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       required
-                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                       placeholder="Enter your last name"
                     />
                   </div>
@@ -373,7 +373,7 @@ export default function Apply() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -388,7 +388,7 @@ export default function Apply() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                       placeholder="+1 (555) 123-4567"
                     />
                   </div>
@@ -446,7 +446,7 @@ export default function Apply() {
                       type="url"
                       value={formData.linkedinUrl}
                       onChange={handleInputChange}
-                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                       placeholder="https://linkedin.com/in/yourname"
                     />
                   </div>
@@ -460,7 +460,7 @@ export default function Apply() {
                       type="url"
                       value={formData.portfolioUrl}
                       onChange={handleInputChange}
-                      className="bg-white/10 border-white/30 text-white placeholder-white/60 h-14 rounded-xl"
+                      className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
                       placeholder="https://github.com/yourname"
                     />
                   </div>
