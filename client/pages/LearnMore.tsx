@@ -117,8 +117,8 @@ export default function LearnMore() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed animate-fade-in-delayed">
-              Discover how swipr.ai revolutionizes investing with intuitive design, 
-              AI-powered insights, and automated portfolio optimization.
+              Discover how swipr.ai revolutionizes investing with intuitive
+              design, AI-powered insights, and automated portfolio optimization.
             </p>
 
             {/* CTA Buttons */}
@@ -130,7 +130,11 @@ export default function LearnMore() {
                 </Button>
               </Link>
               <Button
-                onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() =>
+                  document
+                    .getElementById("how-it-works")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 variant="outline"
                 className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-10 py-6 rounded-2xl text-xl font-bold hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm h-16"
               >
@@ -154,7 +158,8 @@ export default function LearnMore() {
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
               How It
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                {" "}Works
+                {" "}
+                Works
               </span>
             </h2>
             <p className="text-xl text-white/80 leading-relaxed">
@@ -169,9 +174,12 @@ export default function LearnMore() {
                 <Smartphone className="h-12 w-12 text-white" />
               </div>
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 group-hover:border-cyan-400/50 transition-all duration-500">
-                <h3 className="text-2xl font-bold text-white mb-4">1. Swipe Stocks</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  1. Swipe Stocks
+                </h3>
                 <p className="text-white/80 leading-relaxed">
-                  Browse curated stocks with simple swipe gestures. Like what you see? Swipe right to add it to your portfolio.
+                  Browse curated stocks with simple swipe gestures. Like what
+                  you see? Swipe right to add it to your portfolio.
                 </p>
               </div>
             </div>
@@ -182,9 +190,12 @@ export default function LearnMore() {
                 <Brain className="h-12 w-12 text-white" />
               </div>
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 group-hover:border-purple-400/50 transition-all duration-500">
-                <h3 className="text-2xl font-bold text-white mb-4">2. AI Analysis</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  2. AI Analysis
+                </h3>
                 <p className="text-white/80 leading-relaxed">
-                  Our AI analyzes market data, company fundamentals, and your preferences to provide personalized recommendations.
+                  Our AI analyzes market data, company fundamentals, and your
+                  preferences to provide personalized recommendations.
                 </p>
               </div>
             </div>
@@ -195,9 +206,12 @@ export default function LearnMore() {
                 <Target className="h-12 w-12 text-white" />
               </div>
               <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 group-hover:border-emerald-400/50 transition-all duration-500">
-                <h3 className="text-2xl font-bold text-white mb-4">3. Auto-Optimize</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  3. Auto-Optimize
+                </h3>
                 <p className="text-white/80 leading-relaxed">
-                  Watch as our algorithms automatically rebalance your portfolio for optimal risk-adjusted returns.
+                  Watch as our algorithms automatically rebalance your portfolio
+                  for optimal risk-adjusted returns.
                 </p>
               </div>
             </div>
@@ -212,7 +226,8 @@ export default function LearnMore() {
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
               Powerful
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {" "}Features
+                {" "}
+                Features
               </span>
             </h2>
             <p className="text-xl text-white/80 leading-relaxed">
@@ -233,7 +248,9 @@ export default function LearnMore() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-lg text-white/80 leading-relaxed mb-6">
-                  Navigate investments with familiar social media gestures. Our interface makes complex financial decisions feel as simple as choosing what to watch next.
+                  Navigate investments with familiar social media gestures. Our
+                  interface makes complex financial decisions feel as simple as
+                  choosing what to watch next.
                 </CardDescription>
                 <ul className="space-y-3">
                   <li className="flex items-center">
@@ -246,7 +263,9 @@ export default function LearnMore() {
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mr-3" />
-                    <span className="text-white/80">Tap for detailed analysis</span>
+                    <span className="text-white/80">
+                      Tap for detailed analysis
+                    </span>
                   </li>
                 </ul>
               </CardContent>
@@ -264,12 +283,16 @@ export default function LearnMore() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-lg text-white/80 leading-relaxed mb-6">
-                  Advanced machine learning algorithms analyze thousands of data points to provide personalized investment recommendations tailored to your goals.
+                  Advanced machine learning algorithms analyze thousands of data
+                  points to provide personalized investment recommendations
+                  tailored to your goals.
                 </CardDescription>
                 <ul className="space-y-3">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mr-3" />
-                    <span className="text-white/80">Real-time market analysis</span>
+                    <span className="text-white/80">
+                      Real-time market analysis
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mr-3" />
@@ -295,7 +318,8 @@ export default function LearnMore() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-lg text-white/80 leading-relaxed mb-6">
-                  Automatically optimize your portfolio allocation using modern portfolio theory and quantitative risk management techniques.
+                  Automatically optimize your portfolio allocation using modern
+                  portfolio theory and quantitative risk management techniques.
                 </CardDescription>
                 <ul className="space-y-3">
                   <li className="flex items-center">
@@ -326,7 +350,8 @@ export default function LearnMore() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-lg text-white/80 leading-relaxed mb-6">
-                  Your investments and personal data are protected with enterprise-grade security measures and compliance protocols.
+                  Your investments and personal data are protected with
+                  enterprise-grade security measures and compliance protocols.
                 </CardDescription>
                 <ul className="space-y-3">
                   <li className="flex items-center">
@@ -339,7 +364,9 @@ export default function LearnMore() {
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-emerald-400 mr-3" />
-                    <span className="text-white/80">Two-factor authentication</span>
+                    <span className="text-white/80">
+                      Two-factor authentication
+                    </span>
                   </li>
                 </ul>
               </CardContent>
@@ -355,7 +382,8 @@ export default function LearnMore() {
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
               Why Choose
               <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                {" "}swipr.ai?
+                {" "}
+                swipr.ai?
               </span>
             </h2>
             <p className="text-xl text-white/80 leading-relaxed">
@@ -370,7 +398,10 @@ export default function LearnMore() {
                 <DollarSign className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4">Low Fees</h3>
-              <p className="text-white/80">No commission trading and low management fees to maximize your returns.</p>
+              <p className="text-white/80">
+                No commission trading and low management fees to maximize your
+                returns.
+              </p>
             </div>
 
             {/* Advantage 2 */}
@@ -378,8 +409,13 @@ export default function LearnMore() {
               <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500">
                 <Activity className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Real-Time Updates</h3>
-              <p className="text-white/80">Get instant notifications and portfolio updates as market conditions change.</p>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Real-Time Updates
+              </h3>
+              <p className="text-white/80">
+                Get instant notifications and portfolio updates as market
+                conditions change.
+              </p>
             </div>
 
             {/* Advantage 3 */}
@@ -387,8 +423,13 @@ export default function LearnMore() {
               <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Expert Support</h3>
-              <p className="text-white/80">24/7 customer support from licensed financial advisors and investment experts.</p>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Expert Support
+              </h3>
+              <p className="text-white/80">
+                24/7 customer support from licensed financial advisors and
+                investment experts.
+              </p>
             </div>
 
             {/* Advantage 4 */}
@@ -396,8 +437,13 @@ export default function LearnMore() {
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500">
                 <BarChart3 className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Advanced Analytics</h3>
-              <p className="text-white/80">Comprehensive performance tracking and detailed investment analytics.</p>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Advanced Analytics
+              </h3>
+              <p className="text-white/80">
+                Comprehensive performance tracking and detailed investment
+                analytics.
+              </p>
             </div>
 
             {/* Advantage 5 */}
@@ -405,8 +451,13 @@ export default function LearnMore() {
               <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500">
                 <Zap className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Lightning Fast</h3>
-              <p className="text-white/80">Execute trades in milliseconds with our high-performance trading infrastructure.</p>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Lightning Fast
+              </h3>
+              <p className="text-white/80">
+                Execute trades in milliseconds with our high-performance trading
+                infrastructure.
+              </p>
             </div>
 
             {/* Advantage 6 */}
@@ -414,8 +465,13 @@ export default function LearnMore() {
               <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-all duration-500">
                 <Settings className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Customizable</h3>
-              <p className="text-white/80">Tailor your investment strategy with personalized risk and return preferences.</p>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Customizable
+              </h3>
+              <p className="text-white/80">
+                Tailor your investment strategy with personalized risk and
+                return preferences.
+              </p>
             </div>
           </div>
         </div>
@@ -428,11 +484,13 @@ export default function LearnMore() {
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
               Ready to Start
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                {" "}Investing?
+                {" "}
+                Investing?
               </span>
             </h2>
             <p className="text-xl text-white/80 leading-relaxed mb-12">
-              Join thousands of smart investors already using swipr.ai to build their wealth.
+              Join thousands of smart investors already using swipr.ai to build
+              their wealth.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -471,22 +529,34 @@ export default function LearnMore() {
             <p className="text-white/60 mb-8">
               The future of intelligent investing
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-8 mb-8">
-              <Link to="/" className="text-white/70 hover:text-white transition-colors">
+              <Link
+                to="/"
+                className="text-white/70 hover:text-white transition-colors"
+              >
                 Home
               </Link>
-              <Link to="/privacy" className="text-white/70 hover:text-white transition-colors">
+              <Link
+                to="/privacy"
+                className="text-white/70 hover:text-white transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
                 Terms of Service
               </a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
                 Contact
               </a>
             </div>
-            
+
             <div className="border-t border-white/10 pt-8">
               <p className="text-white/60">
                 © 2025 swipr.ai. All rights reserved.

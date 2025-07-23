@@ -114,10 +114,15 @@ export default function Apply() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const selectedPosition = POSITIONS[formData.position as keyof typeof POSITIONS];
+  const selectedPosition =
+    POSITIONS[formData.position as keyof typeof POSITIONS];
 
   const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >,
+    ) => {
       setFormData((prev) => ({
         ...prev,
         [e.target.name]: e.target.value,
@@ -126,21 +131,24 @@ export default function Apply() {
     [],
   );
 
-  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        setSubmitMessage("File size must be less than 10MB");
-        return;
+  const handleFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        if (file.size > 10 * 1024 * 1024) {
+          setSubmitMessage("File size must be less than 10MB");
+          return;
+        }
+        if (!file.type.includes("pdf") && !file.type.includes("doc")) {
+          setSubmitMessage("Please upload a PDF or DOC file");
+          return;
+        }
+        setResume(file);
+        setSubmitMessage("");
       }
-      if (!file.type.includes("pdf") && !file.type.includes("doc")) {
-        setSubmitMessage("Please upload a PDF or DOC file");
-        return;
-      }
-      setResume(file);
-      setSubmitMessage("");
-    }
-  }, []);
+    },
+    [],
+  );
 
   const removeResume = useCallback(() => {
     setResume(null);
@@ -185,7 +193,8 @@ export default function Apply() {
       if (response.ok && result.success) {
         setSubmitSuccess(true);
         setSubmitMessage(
-          result.message || "Application submitted successfully! We'll be in touch soon."
+          result.message ||
+            "Application submitted successfully! We'll be in touch soon.",
         );
         // Reset form
         setFormData({
@@ -202,13 +211,13 @@ export default function Apply() {
         setResume(null);
       } else {
         setSubmitMessage(
-          result.message || "Something went wrong. Please try again."
+          result.message || "Something went wrong. Please try again.",
         );
       }
     } catch (error) {
       console.error("Application submission error:", error);
       setSubmitMessage(
-        "Network error. Please check your connection and try again."
+        "Network error. Please check your connection and try again.",
       );
     } finally {
       setIsSubmitting(false);
@@ -278,7 +287,9 @@ export default function Apply() {
           {selectedPosition && (
             <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl mb-12 animate-fade-in-slow">
               <CardHeader className="text-center pb-6">
-                <div className={`w-20 h-20 bg-gradient-to-br ${selectedPosition.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}>
+                <div
+                  className={`w-20 h-20 bg-gradient-to-br ${selectedPosition.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}
+                >
                   <selectedPosition.icon className="h-10 w-10 text-white" />
                 </div>
                 <CardTitle className="text-3xl text-white font-bold">
@@ -290,7 +301,9 @@ export default function Apply() {
               </CardHeader>
               <CardContent>
                 <div className="mb-6">
-                  <h3 className="text-xl font-semibold text-white mb-4">What we're looking for:</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4">
+                    What we're looking for:
+                  </h3>
                   <ul className="space-y-3">
                     {selectedPosition.skills.map((skill, index) => (
                       <li key={index} className="flex items-center">
@@ -394,7 +407,9 @@ export default function Apply() {
                     required
                     className="w-full bg-white/10 border border-white/30 text-white h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   >
-                    <option value="" className="bg-slate-800">Select a position</option>
+                    <option value="" className="bg-slate-800">
+                      Select a position
+                    </option>
                     {Object.entries(POSITIONS).map(([key, position]) => (
                       <option key={key} value={key} className="bg-slate-800">
                         {position.title}
@@ -479,7 +494,9 @@ export default function Apply() {
                         <div className="flex items-center">
                           <FileText className="h-6 w-6 text-cyan-400 mr-3" />
                           <div className="text-left">
-                            <p className="text-white font-medium">{resume.name}</p>
+                            <p className="text-white font-medium">
+                              {resume.name}
+                            </p>
                             <p className="text-white/60 text-sm">
                               {(resume.size / 1024 / 1024).toFixed(2)} MB
                             </p>
@@ -545,13 +562,19 @@ export default function Apply() {
 
                 {/* Status Message */}
                 {submitMessage && (
-                  <Alert className={`${submitSuccess ? "border-emerald-500 bg-emerald-500/10" : "border-red-500 bg-red-500/10"} rounded-xl`}>
+                  <Alert
+                    className={`${submitSuccess ? "border-emerald-500 bg-emerald-500/10" : "border-red-500 bg-red-500/10"} rounded-xl`}
+                  >
                     {submitSuccess ? (
                       <CheckCircle className="h-5 w-5 text-emerald-400" />
                     ) : (
                       <AlertCircle className="h-5 w-5 text-red-400" />
                     )}
-                    <AlertDescription className={submitSuccess ? "text-emerald-200" : "text-red-200"}>
+                    <AlertDescription
+                      className={
+                        submitSuccess ? "text-emerald-200" : "text-red-200"
+                      }
+                    >
                       {submitMessage}
                     </AlertDescription>
                   </Alert>
@@ -565,8 +588,14 @@ export default function Apply() {
             <Alert className="border-cyan-500/50 bg-cyan-500/10 rounded-xl max-w-2xl mx-auto">
               <Info className="h-5 w-5 text-cyan-400" />
               <AlertDescription className="text-cyan-200">
-                We review all applications carefully and will get back to you within 5-7 business days. 
-                Questions? Email us at <a href="mailto:careers@swipr.ai" className="text-cyan-300 hover:text-cyan-200 underline">careers@swipr.ai</a>
+                We review all applications carefully and will get back to you
+                within 5-7 business days. Questions? Email us at{" "}
+                <a
+                  href="mailto:careers@swipr.ai"
+                  className="text-cyan-300 hover:text-cyan-200 underline"
+                >
+                  careers@swipr.ai
+                </a>
               </AlertDescription>
             </Alert>
           </div>
