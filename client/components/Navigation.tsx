@@ -48,8 +48,16 @@ export function Navigation({
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-teal-600 rounded-lg flex items-center justify-center">
-              <TrendingUp className="h-5 w-5 text-white" />
+            <div className={`w-10 h-10 rounded-xl p-2 border transition-all duration-300 hover:scale-105 ${
+              isTransparent
+                ? "bg-white/10 backdrop-blur-sm border-white/20 hover:border-cyan-400/50"
+                : "bg-slate-100 border-slate-200 hover:border-blue-400/50"
+            }`}>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F8274926fadf9406c8e2d75b7a56de814%2Fa6a66b2fcf0441379eacc75b64af9438?format=webp&width=800"
+                alt="swipr.ai logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <span
               className={`text-xl font-bold ${isTransparent ? "text-white" : "bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent"}`}
