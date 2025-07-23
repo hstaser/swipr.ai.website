@@ -566,7 +566,7 @@ export default function Index() {
                 {" "}Features
               </span>
             </h2>
-            <p className="text-xl text-white/80 leading-relaxed">
+            <p className="text-xl text-slate-200 leading-relaxed">
               Experience the next generation of intelligent investing
             </p>
           </div>
