@@ -420,8 +420,6 @@ export default function Apply() {
                   </select>
                 </div>
 
-
-
                 {/* Optional Fields */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>

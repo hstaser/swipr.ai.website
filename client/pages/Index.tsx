@@ -438,18 +438,36 @@ export default function Index() {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="group-hover:scale-110 transition-all duration-300">
-                <svg width="40" height="40" viewBox="0 0 40 40" className="text-white">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  className="text-white"
+                >
                   {/* Stylized arrow/diamond shape inspired by the logo */}
-                  <path d="M20 4 L36 20 L20 36 L4 20 Z" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M20 4 L28 20 L20 36 L12 20 Z" fill="currentColor" opacity="0.3"/>
-                  <path d="M20 12 L28 20 L20 28 L12 20 Z" fill="currentColor"/>
+                  <path
+                    d="M20 4 L36 20 L20 36 L4 20 Z"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M20 4 L28 20 L20 36 L12 20 Z"
+                    fill="currentColor"
+                    opacity="0.3"
+                  />
+                  <path d="M20 12 L28 20 L20 28 L12 20 Z" fill="currentColor" />
                   {/* Arrow pointing up and right */}
-                  <path d="M16 24 L20 20 L24 24 M20 20 L20 16" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                  <path
+                    d="M16 24 L20 20 L24 24 M20 20 L20 16"
+                    stroke="white"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
-              <span className="text-2xl font-bold text-white">
-                swipr.ai
-              </span>
+              <span className="text-2xl font-bold text-white">swipr.ai</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -860,7 +878,11 @@ export default function Index() {
                       <div className="h-32 bg-white/10 rounded-xl p-4 flex items-center justify-center">
                         <div className="text-center">
                           <div className="mx-auto mb-2">
-                            <Logo variant="transparent" size="md" showText={false} />
+                            <Logo
+                              variant="transparent"
+                              size="md"
+                              showText={false}
+                            />
                           </div>
                           <div className="text-white/60 text-sm">
                             Live chart updates
@@ -2370,13 +2392,36 @@ export default function Index() {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-6 md:mb-0">
                   <div className="flex items-center space-x-3">
-                    <svg width="40" height="40" viewBox="0 0 40 40" className="text-white">
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      className="text-white"
+                    >
                       {/* Stylized arrow/diamond shape inspired by the logo */}
-                      <path d="M20 4 L36 20 L20 36 L4 20 Z" fill="none" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M20 4 L28 20 L20 36 L12 20 Z" fill="currentColor" opacity="0.3"/>
-                      <path d="M20 12 L28 20 L20 28 L12 20 Z" fill="currentColor"/>
+                      <path
+                        d="M20 4 L36 20 L20 36 L4 20 Z"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M20 4 L28 20 L20 36 L12 20 Z"
+                        fill="currentColor"
+                        opacity="0.3"
+                      />
+                      <path
+                        d="M20 12 L28 20 L20 28 L12 20 Z"
+                        fill="currentColor"
+                      />
                       {/* Arrow pointing up and right */}
-                      <path d="M16 24 L20 20 L24 24 M20 20 L20 16" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                      <path
+                        d="M16 24 L20 20 L24 24 M20 20 L20 16"
+                        stroke="white"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
                     </svg>
                     <span className="text-2xl font-bold text-white">
                       swipr.ai
