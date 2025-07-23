@@ -478,7 +478,7 @@ export default function Apply() {
                     value={formData.startDate}
                     onChange={handleInputChange}
                     required
-                    className="bg-white/10 border-white/30 text-white h-14 rounded-xl"
+                    className="bg-slate-800/60 border-slate-600 text-slate-100 h-14 rounded-xl"
                   />
                 </div>
 
