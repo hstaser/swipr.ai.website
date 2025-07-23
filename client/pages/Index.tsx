@@ -103,11 +103,11 @@ const generatePortfolioData = (riskLevel: number) => {
 };
 
 const pieData = [
-  { name: "Tech", value: 35, color: "#3B82F6" },
-  { name: "Healthcare", value: 25, color: "#10B981" },
-  { name: "Finance", value: 20, color: "#8B5CF6" },
-  { name: "Energy", value: 12, color: "#F59E0B" },
-  { name: "Other", value: 8, color: "#EF4444" },
+  { name: "Tech", value: 60, color: "#3B82F6" },
+  { name: "Automotive", value: 25, color: "#10B981" },
+  { name: "Finance", value: 8, color: "#8B5CF6" },
+  { name: "Healthcare", value: 4, color: "#F59E0B" },
+  { name: "Other", value: 3, color: "#EF4444" },
 ];
 
 // Reduced to 3 stocks for faster optimization
