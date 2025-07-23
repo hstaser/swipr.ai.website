@@ -1317,24 +1317,20 @@ export default function Index() {
                         ))}
                       </div>
                     </div>
-                    <div className="flex gap-3">
-                      <div className="flex-1 relative">
-                        <Input
-                          placeholder="Ask AlphaCue... (Coming Feature)"
-                          className="bg-white/10 border-white/30 text-white placeholder-white/60 h-12 rounded-xl flex-1"
-                          disabled
-                        />
-                        <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
-                          <span className="text-cyan-400 text-sm font-semibold">Coming Soon</span>
-                        </div>
-                      </div>
+                    <form onSubmit={handleChatSubmit} className="flex gap-3">
+                      <Input
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        placeholder="Ask AlphaCue anything..."
+                        className="bg-slate-800/50 border-slate-600 text-slate-100 placeholder-slate-400 h-12 rounded-xl flex-1"
+                      />
                       <Button
-                        disabled
-                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 h-12 rounded-xl opacity-50 cursor-not-allowed"
+                        type="submit"
+                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 h-12 rounded-xl"
                       >
                         Send
                       </Button>
-                    </div>
+                    </form>
                     <div className="text-center mt-8">
                       <Button
                         onClick={() => setMvpStep(5)}
