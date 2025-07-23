@@ -1252,17 +1252,48 @@ export default function Index() {
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
                     <h3 className="text-3xl font-bold text-white mb-4">Chat with AlphaCue</h3>
-                    <p className="text-white/80">Ask our AI anything about your portfolio or the market</p>
+                    <p className="text-slate-200">Try these sample questions or ask anything about investing</p>
                   </div>
                   <div className="max-w-2xl mx-auto">
-                    <div className="bg-white/10 rounded-xl p-6 mb-6 h-80 overflow-y-auto">
+                    {/* Sample Questions */}
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-white mb-4">Sample Questions:</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <button
+                          onClick={() => setChatInput("What's the best tech stock to invest in right now?")}
+                          className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
+                        >
+                          "What's the best tech stock to invest in right now?"
+                        </button>
+                        <button
+                          onClick={() => setChatInput("How should I diversify my portfolio?")}
+                          className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
+                        >
+                          "How should I diversify my portfolio?"
+                        </button>
+                        <button
+                          onClick={() => setChatInput("What's my expected return with this allocation?")}
+                          className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
+                        >
+                          "What's my expected return with this allocation?"
+                        </button>
+                        <button
+                          onClick={() => setChatInput("Should I buy or sell AAPL?")}
+                          className="p-3 bg-slate-800/50 border border-slate-600 rounded-lg text-left text-slate-200 hover:bg-slate-700/50 hover:border-cyan-400/50 transition-all duration-200"
+                        >
+                          "Should I buy or sell AAPL?"
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="bg-slate-900/70 border border-slate-600 rounded-xl p-6 mb-6 h-80 overflow-y-auto">
                       <div className="space-y-4">
                         {chatMessages.map((msg, index) => (
                           <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`max-w-xs p-3 rounded-xl ${
-                              msg.sender === 'user' 
-                                ? 'bg-blue-600 text-white' 
-                                : 'bg-white/20 text-white'
+                              msg.sender === 'user'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-slate-700 text-slate-100 border border-slate-600'
                             }`}>
                               {msg.message}
                             </div>
