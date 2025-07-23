@@ -2143,7 +2143,7 @@ export default function Index() {
 
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl">
+                <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 rounded-3xl">
                   <CardHeader>
                     <CardTitle className="text-2xl text-white">
                       Contact Information
@@ -2156,7 +2156,7 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Email</p>
-                        <p className="text-white/80">team@swipr.ai</p>
+                        <p className="text-slate-200">team@swipr.ai</p>
                       </div>
                     </div>
 
@@ -2166,7 +2166,7 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Location</p>
-                        <p className="text-white/80">New York City, NY</p>
+                        <p className="text-slate-200">New York City, NY</p>
                       </div>
                     </div>
 
@@ -2176,7 +2176,7 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Office Hours</p>
-                        <p className="text-white/80">Mon-Fri, 9AM-6PM EST</p>
+                        <p className="text-slate-200">Mon-Fri, 9AM-6PM EST</p>
                       </div>
                     </div>
                   </CardContent>
