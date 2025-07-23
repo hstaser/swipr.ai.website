@@ -165,7 +165,6 @@ export default function Apply() {
         email: formData.email.trim(),
         phone: formData.phone.trim(),
         position: formData.position,
-        experience: formData.experience.trim(),
         linkedinUrl: formData.linkedinUrl.trim() || undefined,
         portfolioUrl: formData.portfolioUrl.trim() || undefined,
         startDate: formData.startDate,
