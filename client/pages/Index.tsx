@@ -859,21 +859,21 @@ export default function Index() {
                     </div>
                     <h3 className="text-3xl font-bold text-white">Social Trading</h3>
                   </div>
-                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
                     See what your friends are swiping on. Build or clone portfolios together and learn from successful investors.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Follow top performers</span>
+                      <span className="text-slate-200">Follow top performers</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Copy successful portfolios</span>
+                      <span className="text-slate-200">Copy successful portfolios</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Share your wins</span>
+                      <span className="text-slate-200">Share your wins</span>
                     </li>
                   </ul>
                   <Button
