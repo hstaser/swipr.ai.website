@@ -491,19 +491,11 @@ export default function Index() {
               </div>
             </div>
 
-            {/* Hero CTAs */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+            {/* Hero CTA */}
+            <div className="flex justify-center items-center mb-16">
               <Button
                 onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-10 py-6 rounded-2xl text-xl font-bold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 border-2 border-blue-400/50 hover:border-blue-300 group h-16"
-              >
-                <Rocket className="mr-3 h-6 w-6 group-hover:animate-bounce" />
-                Launch App
-              </Button>
-              <Button
-                onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
-                variant="outline"
-                className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-10 py-6 rounded-2xl text-xl font-bold hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm h-16"
+                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-12 py-6 rounded-2xl text-xl font-bold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 border-2 border-blue-400/50 hover:border-blue-300 group h-16"
               >
                 <Eye className="mr-3 h-6 w-6" />
                 See Demo
