@@ -48,22 +48,8 @@ export function Navigation({
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="transition-all duration-300 hover:scale-105">
-              <svg width="32" height="32" viewBox="0 0 40 40" className={isTransparent ? "text-white" : "text-blue-600"}>
-                {/* Stylized arrow/diamond shape inspired by the logo */}
-                <path d="M20 4 L36 20 L20 36 L4 20 Z" fill="none" stroke="currentColor" strokeWidth="2"/>
-                <path d="M20 4 L28 20 L20 36 L12 20 Z" fill="currentColor" opacity="0.3"/>
-                <path d="M20 12 L28 20 L20 28 L12 20 Z" fill="currentColor"/>
-                {/* Arrow pointing up and right */}
-                <path d="M16 24 L20 20 L24 24 M20 20 L20 16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-              </svg>
-            </div>
-            <span
-              className={`text-xl font-bold ${isTransparent ? "text-white" : "bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent"}`}
-            >
-              swipr.ai
-            </span>
+          <Link to="/">
+            <Logo variant={variant} size="md" />
           </Link>
 
           {/* Desktop Navigation */}
