@@ -1254,7 +1254,7 @@ export default function Index() {
               {mvpStep === 4 && (
                 <div className="flex-1 p-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">Chat with SwiprBot</h3>
+                    <h3 className="text-3xl font-bold text-white mb-4">Chat with AlphaCue</h3>
                     <p className="text-white/80">Ask our AI anything about your portfolio or the market</p>
                   </div>
                   <div className="max-w-2xl mx-auto">
