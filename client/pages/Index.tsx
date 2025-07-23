@@ -2242,14 +2242,9 @@ export default function Index() {
                       </div>
                       <div>
                         <p className="font-semibold text-white">Location</p>
-                        <a
-                          href="https://maps.google.com/?q=New+York+City,+NY"
-                          className="text-slate-200 hover:text-white transition-colors"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                        <p className="text-slate-200">
                           New York City, NY
-                        </a>
+                        </p>
                       </div>
                     </div>
 
