@@ -1336,7 +1336,7 @@ export default function Index() {
                             </div>
                             <span className="text-white">AAPL</span>
                           </div>
-                          <span className="text-white/60">35%</span>
+                          <span className="text-white/60">32%</span>
                         </div>
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
@@ -1345,7 +1345,7 @@ export default function Index() {
                             </div>
                             <span className="text-white">NVDA</span>
                           </div>
-                          <span className="text-white/60">25%</span>
+                          <span className="text-white/60">28%</span>
                         </div>
                         <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
                           <div className="flex items-center">
@@ -1354,7 +1354,7 @@ export default function Index() {
                             </div>
                             <span className="text-white">TSLA</span>
                           </div>
-                          <span className="text-white/60">20%</span>
+                          <span className="text-white/60">25%</span>
                         </div>
                       </div>
                       <div className="flex gap-3">
