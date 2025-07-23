@@ -688,21 +688,21 @@ export default function Index() {
                     </div>
                     <h3 className="text-3xl font-bold text-white">Portfolio Optimization</h3>
                   </div>
-                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                  <p className="text-lg text-slate-200 leading-relaxed mb-6">
                     Our algorithm allocates for you — balancing risk, growth, and diversification automatically based on modern portfolio theory.
                   </p>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Automatic rebalancing</span>
+                      <span className="text-slate-200">Automatic rebalancing</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Risk-adjusted optimization</span>
+                      <span className="text-slate-200">Risk-adjusted optimization</span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-white/80">Tax-loss harvesting</span>
+                      <span className="text-slate-200">Tax-loss harvesting</span>
                     </li>
                   </ul>
                   <Button
