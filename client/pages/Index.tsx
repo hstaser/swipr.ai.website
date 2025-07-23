@@ -687,8 +687,12 @@ export default function Index() {
                             className="w-4 h-4 md:w-6 md:h-6"
                           />
                         </div>
-                        <div className="text-white font-semibold text-sm md:text-base">AAPL</div>
-                        <div className="text-green-400 text-xs md:text-sm">+2.4%</div>
+                        <div className="text-white font-semibold text-sm md:text-base">
+                          AAPL
+                        </div>
+                        <div className="text-green-400 text-xs md:text-sm">
+                          +2.4%
+                        </div>
                       </div>
                       <div className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer">
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
@@ -698,8 +702,12 @@ export default function Index() {
                             className="w-4 h-4 md:w-6 md:h-6"
                           />
                         </div>
-                        <div className="text-white font-semibold text-sm md:text-base">TSLA</div>
-                        <div className="text-green-400 text-xs md:text-sm">+5.7%</div>
+                        <div className="text-white font-semibold text-sm md:text-base">
+                          TSLA
+                        </div>
+                        <div className="text-green-400 text-xs md:text-sm">
+                          +5.7%
+                        </div>
                       </div>
                       <div className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer col-span-2">
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
@@ -709,8 +717,12 @@ export default function Index() {
                             className="w-4 h-4 md:w-6 md:h-6"
                           />
                         </div>
-                        <div className="text-white font-semibold text-sm md:text-base">NVDA</div>
-                        <div className="text-green-400 text-xs md:text-sm">+3.2%</div>
+                        <div className="text-white font-semibold text-sm md:text-base">
+                          NVDA
+                        </div>
+                        <div className="text-green-400 text-xs md:text-sm">
+                          +3.2%
+                        </div>
                       </div>
                     </div>
                     <div className="text-center mt-4 md:mt-6 text-white/60 text-xs md:text-sm">
@@ -858,19 +870,25 @@ export default function Index() {
                   <div className="bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-emerald-400/30">
                     <div className="space-y-3 md:space-y-4">
                       <div className="flex items-center justify-between p-3 md:p-4 bg-white/10 rounded-lg md:rounded-xl">
-                        <span className="text-white text-sm md:text-base">Portfolio Value</span>
+                        <span className="text-white text-sm md:text-base">
+                          Portfolio Value
+                        </span>
                         <span className="text-emerald-400 font-bold text-sm md:text-base">
                           $11,350
                         </span>
                       </div>
                       <div className="flex items-center justify-between p-3 md:p-4 bg-white/10 rounded-lg md:rounded-xl">
-                        <span className="text-white text-sm md:text-base">Total Return</span>
+                        <span className="text-white text-sm md:text-base">
+                          Total Return
+                        </span>
                         <span className="text-emerald-400 font-bold text-sm md:text-base">
                           +13.5%
                         </span>
                       </div>
                       <div className="flex items-center justify-between p-3 md:p-4 bg-white/10 rounded-lg md:rounded-xl">
-                        <span className="text-white text-sm md:text-base">Today's Gain</span>
+                        <span className="text-white text-sm md:text-base">
+                          Today's Gain
+                        </span>
                         <span className="text-emerald-400 font-bold text-sm md:text-base">
                           +$142.30
                         </span>
