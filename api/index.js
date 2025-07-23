@@ -1,5 +1,5 @@
-// Vercel serverless function handler
-export default function handler(req, res) {
+// Vercel serverless function handler (CommonJS)
+module.exports = function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -48,4 +48,4 @@ export default function handler(req, res) {
 
   // Default 404 for unmatched routes
   res.status(404).json({ error: "API endpoint not found" });
-}
+};
