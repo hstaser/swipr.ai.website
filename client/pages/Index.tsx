@@ -1877,10 +1877,20 @@ export default function Index() {
                           dataKey="month"
                           stroke="#ffffff80"
                           fontSize={12}
+                          axisLine={true}
+                          tickLine={true}
+                          allowDataOverflow={false}
+                          allowDecimals={true}
+                          allowDuplicatedCategory={true}
                         />
                         <YAxis
                           stroke="#ffffff80"
                           fontSize={12}
+                          axisLine={true}
+                          tickLine={true}
+                          allowDataOverflow={false}
+                          allowDecimals={true}
+                          allowDuplicatedCategory={true}
                           tickFormatter={(value) =>
                             `$${(value / 1000).toFixed(0)}k`
                           }
