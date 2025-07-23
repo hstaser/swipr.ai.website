@@ -2274,15 +2274,7 @@ export default function Index() {
                       href="#"
                       className="text-white/70 hover:text-white transition-colors"
                     >
-                      Our Story
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-white/70 hover:text-white transition-colors"
-                    >
-                      Team
+                      Mission
                     </a>
                   </li>
                   <li>
