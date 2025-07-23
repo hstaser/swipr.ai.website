@@ -48,6 +48,26 @@ import {
   Eye,
   PieChart as PieChartIcon,
   Activity,
+  MessageSquare,
+  ArrowLeft,
+  ArrowUp,
+  Check,
+  X,
+  ThumbsUp,
+  ThumbsDown,
+  Copy,
+  Share,
+  TrendingDown,
+  Plus,
+  Minus,
+  RefreshCw,
+  BookOpen,
+  Heart,
+  Star,
+  Clock,
+  Calendar,
+  Globe,
+  Briefcase,
 } from "lucide-react";
 import {
   ContactRequest,
@@ -90,6 +110,80 @@ const pieData = [
   { name: "Other", value: 8, color: "#EF4444" },
 ];
 
+// Mock stock data for MVP demo
+const stockCards = [
+  {
+    id: 1,
+    symbol: "AAPL",
+    name: "Apple Inc.",
+    price: "$185.42",
+    change: "+2.4%",
+    changeValue: "+$4.32",
+    logo: "🍎",
+    sector: "Technology",
+    marketCap: "$2.9T",
+    description: "Consumer electronics and software company",
+    recommendation: "BUY",
+    aiScore: 92,
+  },
+  {
+    id: 2,
+    symbol: "TSLA",
+    name: "Tesla Inc.",
+    price: "$248.73",
+    change: "+5.7%",
+    changeValue: "+$13.41",
+    logo: "⚡",
+    sector: "Automotive",
+    marketCap: "$789B",
+    description: "Electric vehicles and clean energy",
+    recommendation: "BUY",
+    aiScore: 88,
+  },
+  {
+    id: 3,
+    symbol: "NVDA",
+    name: "NVIDIA Corp.",
+    price: "$721.33",
+    change: "+3.2%",
+    changeValue: "+$22.41",
+    logo: "🔥",
+    sector: "Technology",
+    marketCap: "$1.8T",
+    description: "AI and graphics processing chips",
+    recommendation: "STRONG BUY",
+    aiScore: 95,
+  },
+  {
+    id: 4,
+    symbol: "MSFT",
+    name: "Microsoft Corp.",
+    price: "$378.85",
+    change: "+1.8%",
+    changeValue: "+$6.72",
+    logo: "🪟",
+    sector: "Technology",
+    marketCap: "$2.8T",
+    description: "Cloud computing and software",
+    recommendation: "BUY",
+    aiScore: 89,
+  },
+  {
+    id: 5,
+    symbol: "AMZN",
+    name: "Amazon.com Inc.",
+    price: "$151.94",
+    change: "-0.5%",
+    changeValue: "-$0.76",
+    logo: "📦",
+    sector: "E-commerce",
+    marketCap: "$1.6T",
+    description: "E-commerce and cloud services",
+    recommendation: "HOLD",
+    aiScore: 76,
+  },
+];
+
 export default function Index() {
   const [formData, setFormData] = useState({
     name: "",
@@ -107,6 +201,16 @@ export default function Index() {
   const [riskLevel, setRiskLevel] = useState(0.5);
   const [portfolioData, setPortfolioData] = useState(generatePortfolioData(0.5));
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // MVP Demo States
+  const [mvpStep, setMvpStep] = useState(0);
+  const [currentStockIndex, setCurrentStockIndex] = useState(0);
+  const [swipedStocks, setSwipedStocks] = useState<{[key: number]: 'left' | 'right'}>({});
+  const [portfolio, setPortfolio] = useState<typeof stockCards>([]);
+  const [chatMessages, setChatMessages] = useState([
+    { sender: "bot", message: "Hi! I'm SwiprBot. Ask me anything about the market!" },
+  ]);
+  const [chatInput, setChatInput] = useState("");
 
   const {
     trackApplyClick,
@@ -266,6 +370,54 @@ export default function Index() {
     return { expectedReturn, riskScore, diversification };
   };
 
+  // MVP Demo Functions
+  const handleStockSwipe = (direction: 'left' | 'right') => {
+    const currentStock = stockCards[currentStockIndex];
+    setSwipedStocks(prev => ({ ...prev, [currentStock.id]: direction }));
+    
+    if (direction === 'right') {
+      setPortfolio(prev => [...prev, currentStock]);
+    }
+    
+    if (currentStockIndex < stockCards.length - 1) {
+      setCurrentStockIndex(prev => prev + 1);
+    } else {
+      setMvpStep(2); // Move to optimization preview
+    }
+  };
+
+  const handleChatSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim()) return;
+
+    const userMessage = chatInput;
+    setChatMessages(prev => [...prev, { sender: "user", message: userMessage }]);
+    setChatInput("");
+
+    // Simulate bot response
+    setTimeout(() => {
+      const responses = [
+        "Based on current market data, tech stocks are showing strong momentum.",
+        "Your portfolio is well-diversified across growth and value sectors.",
+        "Consider rebalancing if tech allocation exceeds 40% of total portfolio.",
+        "Market volatility is expected to decrease over the next quarter.",
+        "Your risk-adjusted returns are performing above market average.",
+      ];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      setChatMessages(prev => [...prev, { sender: "bot", message: randomResponse }]);
+    }, 1000);
+  };
+
+  const mvpSteps = [
+    "Welcome",
+    "Swipe Stocks",
+    "Optimization",
+    "Portfolio",
+    "Chat Bot",
+    "Social",
+    "Sign Up"
+  ];
+
   const metrics = getRiskMetrics();
 
   return (
@@ -317,10 +469,17 @@ export default function Index() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-teal-400 group-hover:w-full transition-all duration-300" />
               </a>
               <a
-                href="#simulator"
+                href="#mvp-demo"
                 className="text-white/80 hover:text-white transition-all duration-300 font-medium relative group"
               >
-                Features
+                Try Demo
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-teal-400 group-hover:w-full transition-all duration-300" />
+              </a>
+              <a
+                href="#open-roles"
+                className="text-white/80 hover:text-white transition-all duration-300 font-medium relative group"
+              >
+                Careers
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-teal-400 group-hover:w-full transition-all duration-300" />
               </a>
               <a
@@ -379,14 +538,14 @@ export default function Index() {
             {/* Hero CTAs */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <Button
-                onClick={() => document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
                 className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-10 py-6 rounded-2xl text-xl font-bold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 border-2 border-blue-400/50 hover:border-blue-300 group h-16"
               >
                 <Rocket className="mr-3 h-6 w-6 group-hover:animate-bounce" />
                 Launch App
               </Button>
               <Button
-                onClick={() => document.getElementById("simulator")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
                 variant="outline"
                 className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-10 py-6 rounded-2xl text-xl font-bold hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm h-16"
               >
@@ -433,72 +592,857 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Enhanced Features Section */}
       <section id="features" className="py-32 relative z-10">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
-              The Future of
+              Revolutionary
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                {" "}Investing
+                {" "}Features
               </span>
             </h2>
             <p className="text-xl text-white/80 leading-relaxed">
-              Experience intelligent portfolio management with cutting-edge AI technology
+              Experience the next generation of intelligent investing
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {/* Feature Card 1 */}
-            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 group rounded-3xl">
-              <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-cyan-500/25">
-                  <Smartphone className="h-10 w-10 text-white" />
+          <div className="space-y-20 max-w-7xl mx-auto">
+            {/* Feature 1: Swipe to Invest */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-cyan-400/50 transition-all duration-500 group">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-cyan-500/25">
+                      <Smartphone className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-white">Swipe to Invest</h3>
+                  </div>
+                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                    Make investing as intuitive as swiping right. Explore stocks, ETFs, and AI-picked assets with the familiar gesture you know and love.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Swipe right to invest, left to pass</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">AI curates personalized recommendations</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Instant access to detailed analysis</span>
+                    </li>
+                  </ul>
+                  <Button
+                    onClick={() => document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" })}
+                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105"
+                  >
+                    See It In Action
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
                 </div>
-                <CardTitle className="text-2xl text-white font-bold">
-                  Swipe to Invest
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-lg text-white/80 leading-relaxed">
-                  Navigate stocks with familiar swipe gestures. Our intelligent system learns your preferences and suggests optimal investments.
-                </CardDescription>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-3xl p-8 backdrop-blur-sm border border-cyan-400/30">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
+                        <div className="text-2xl mb-2">📱</div>
+                        <div className="text-white font-semibold">AAPL</div>
+                        <div className="text-green-400 text-sm">+2.4%</div>
+                      </div>
+                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
+                        <div className="text-2xl mb-2">⚡</div>
+                        <div className="text-white font-semibold">TSLA</div>
+                        <div className="text-green-400 text-sm">+5.7%</div>
+                      </div>
+                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
+                        <div className="text-2xl mb-2">🔥</div>
+                        <div className="text-white font-semibold">NVDA</div>
+                        <div className="text-green-400 text-sm">+3.2%</div>
+                      </div>
+                      <div className="bg-white/10 rounded-xl p-4 hover:scale-105 transition-transform cursor-pointer">
+                        <div className="text-2xl mb-2">🪟</div>
+                        <div className="text-white font-semibold">MSFT</div>
+                        <div className="text-green-400 text-sm">+1.8%</div>
+                      </div>
+                    </div>
+                    <div className="text-center mt-6 text-white/60">
+                      ← Swipe left to pass • Swipe right to invest →
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            {/* Feature Card 2 */}
-            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group rounded-3xl">
-              <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-purple-500/25">
-                  <Brain className="h-10 w-10 text-white" />
+            {/* Feature 2: Portfolio Optimization */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="order-1">
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-3xl p-8 backdrop-blur-sm border border-purple-400/30">
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <PieChart>
+                          <Pie
+                            data={pieData}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={80}
+                            fill="#8884d8"
+                            dataKey="value"
+                            label={(entry) => `${entry.name} ${entry.value}%`}
+                          >
+                            {pieData.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                          </Pie>
+                          <Tooltip
+                            contentStyle={{
+                              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                              border: '1px solid rgba(255, 255, 255, 0.2)',
+                              borderRadius: '12px',
+                              color: 'white',
+                            }}
+                          />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="text-center mt-4 text-white/60">
+                      Automatically balanced portfolio
+                    </div>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl text-white font-bold">
-                  AI-Powered Analysis
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-lg text-white/80 leading-relaxed">
-                  Advanced machine learning analyzes market trends, fundamentals, and sentiment to guide your investment decisions.
-                </CardDescription>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="order-2">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-purple-400/50 transition-all duration-500 group">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-purple-500/25">
+                      <Target className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-white">Portfolio Optimization</h3>
+                  </div>
+                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                    Our algorithm allocates for you — balancing risk, growth, and diversification automatically based on modern portfolio theory.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Automatic rebalancing</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Risk-adjusted optimization</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Tax-loss harvesting</span>
+                    </li>
+                  </ul>
+                  <Button
+                    onClick={() => document.getElementById("simulator")?.scrollIntoView({ behavior: "smooth" })}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                  >
+                    Try Simulator
+                    <BarChart3 className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+            </div>
 
-            {/* Feature Card 3 */}
-            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-emerald-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 group rounded-3xl">
-              <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-emerald-500/25">
-                  <Target className="h-10 w-10 text-white" />
+            {/* Feature 3: Real-time Analytics */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-emerald-400/50 transition-all duration-500 group">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-emerald-500/25">
+                      <Activity className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-white">Real-time Analytics</h3>
+                  </div>
+                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                    See your performance live. Watch how each swipe shifts your future with instant portfolio impact visualization.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Live performance tracking</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Instant portfolio impact</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Predictive analytics</span>
+                    </li>
+                  </ul>
+                  <Button className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
+                    View Analytics
+                    <TrendingUp className="ml-2 h-5 w-5" />
+                  </Button>
                 </div>
-                <CardTitle className="text-2xl text-white font-bold">
-                  Auto-Rebalance
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-lg text-white/80 leading-relaxed">
-                  Automatically optimize your portfolio for maximum returns while managing risk through quantitative analysis.
-                </CardDescription>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-3xl p-8 backdrop-blur-sm border border-emerald-400/30">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
+                        <span className="text-white">Portfolio Value</span>
+                        <span className="text-emerald-400 font-bold">$11,350</span>
+                      </div>
+                      <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
+                        <span className="text-white">Total Return</span>
+                        <span className="text-emerald-400 font-bold">+13.5%</span>
+                      </div>
+                      <div className="flex items-center justify-between p-4 bg-white/10 rounded-xl">
+                        <span className="text-white">Today's Gain</span>
+                        <span className="text-emerald-400 font-bold">+$142.30</span>
+                      </div>
+                      <div className="h-32 bg-white/10 rounded-xl p-4 flex items-center justify-center">
+                        <div className="text-center">
+                          <TrendingUp className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
+                          <div className="text-white/60 text-sm">Live chart updates</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 4: Smart Chatbot */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="order-1">
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-3xl p-8 backdrop-blur-sm border border-orange-400/30">
+                    <div className="space-y-4 max-h-64 overflow-y-auto">
+                      <div className="flex justify-start">
+                        <div className="bg-white/20 rounded-xl p-3 max-w-xs">
+                          <div className="text-white text-sm">Hi! I'm SwiprBot. Ask me about the market!</div>
+                        </div>
+                      </div>
+                      <div className="flex justify-end">
+                        <div className="bg-blue-600 rounded-xl p-3 max-w-xs">
+                          <div className="text-white text-sm">What's the best tech stock right now?</div>
+                        </div>
+                      </div>
+                      <div className="flex justify-start">
+                        <div className="bg-white/20 rounded-xl p-3 max-w-xs">
+                          <div className="text-white text-sm">Based on current data, NVDA shows strong momentum with AI tailwinds.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex items-center p-3 bg-white/10 rounded-xl">
+                      <input
+                        placeholder="Ask SwiprBot..."
+                        className="flex-1 bg-transparent text-white placeholder-white/60 outline-none"
+                        disabled
+                      />
+                      <MessageSquare className="h-5 w-5 text-white/60" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="order-2">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-orange-400/50 transition-all duration-500 group">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
+                      <Brain className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-white">Smart Chatbot (Alpha)</h3>
+                  </div>
+                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                    Ask our AI any market question. Built on real-time data and LLM intelligence to provide instant, accurate investment insights.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Real-time market data</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Personalized recommendations</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">24/7 availability</span>
+                    </li>
+                  </ul>
+                  <Button
+                    onClick={() => {
+                      setMvpStep(4);
+                      document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105"
+                  >
+                    Chat Now
+                    <MessageSquare className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 5: Social Trading */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-pink-400/50 transition-all duration-500 group">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-pink-500/25">
+                      <Users className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold text-white">Social Trading</h3>
+                  </div>
+                  <p className="text-lg text-white/80 leading-relaxed mb-6">
+                    See what your friends are swiping on. Build or clone portfolios together and learn from successful investors.
+                  </p>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Follow top performers</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Copy successful portfolios</span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-white/80">Share your wins</span>
+                    </li>
+                  </ul>
+                  <Button
+                    onClick={() => {
+                      setMvpStep(5);
+                      document.getElementById("mvp-demo")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 hover:scale-105"
+                  >
+                    Explore Social
+                    <Users className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-3xl p-8 backdrop-blur-sm border border-pink-400/30">
+                    <div className="space-y-4">
+                      <div className="flex items-center p-4 bg-white/10 rounded-xl">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white font-bold">A</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-white font-semibold">Alex Chen</div>
+                          <div className="text-green-400 text-sm">+24.7% this year</div>
+                        </div>
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">Follow</Button>
+                      </div>
+                      <div className="flex items-center p-4 bg-white/10 rounded-xl">
+                        <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white font-bold">S</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-white font-semibold">Sarah Kim</div>
+                          <div className="text-green-400 text-sm">+18.3% this year</div>
+                        </div>
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">Follow</Button>
+                      </div>
+                      <div className="p-4 bg-white/10 rounded-xl">
+                        <div className="text-white/60 text-sm mb-2">Popular swipes today:</div>
+                        <div className="flex gap-2">
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">AAPL</span>
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">NVDA</span>
+                          <span className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">TSLA</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive MVP Demo Section */}
+      <section id="mvp-demo" className="py-32 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
+              Experience Swipr
+              <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                {" "}Before You Sign Up
+              </span>
+            </h2>
+            <p className="text-xl text-white/80 leading-relaxed">
+              Take a full walkthrough of our platform with this interactive demo
+            </p>
+          </div>
+
+          {/* MVP Demo Container */}
+          <div className="max-w-4xl mx-auto">
+            {/* Progress Bar */}
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-4">
+                {mvpSteps.map((step, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-center ${index < mvpSteps.length - 1 ? 'flex-1' : ''}`}
+                  >
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                        index <= mvpStep
+                          ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white'
+                          : 'bg-white/20 text-white/60'
+                      }`}
+                    >
+                      {index + 1}
+                    </div>
+                    {index < mvpSteps.length - 1 && (
+                      <div
+                        className={`flex-1 h-1 mx-2 transition-all duration-300 ${
+                          index < mvpStep
+                            ? 'bg-gradient-to-r from-cyan-500 to-blue-500'
+                            : 'bg-white/20'
+                        }`}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="text-center text-white/60">
+                Step {mvpStep + 1} of {mvpSteps.length}: {mvpSteps[mvpStep]}
+              </div>
+            </div>
+
+            {/* Demo Content */}
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl border border-white/20 min-h-[600px] flex flex-col">
+              {/* Step 0: Welcome */}
+              {mvpStep === 0 && (
+                <div className="flex-1 flex items-center justify-center p-12 text-center">
+                  <div>
+                    <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-blue-500/25">
+                      <Rocket className="h-12 w-12 text-white" />
+                    </div>
+                    <h3 className="text-4xl font-bold text-white mb-6">Welcome to swipr.ai</h3>
+                    <p className="text-xl text-white/80 mb-8 max-w-2xl">
+                      Ready to revolutionize your investing experience? Let's take a quick tour through our platform.
+                    </p>
+                    <Button
+                      onClick={() => setMvpStep(1)}
+                      className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-12 py-4 rounded-xl text-xl font-bold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
+                    >
+                      Try Demo
+                      <ArrowRight className="ml-3 h-6 w-6" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 1: Swipe Screen */}
+              {mvpStep === 1 && (
+                <div className="flex-1 p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-white mb-4">Swipe Through Stocks</h3>
+                    <p className="text-white/80">Swipe right to invest, left to pass</p>
+                  </div>
+                  {currentStockIndex < stockCards.length ? (
+                    <div className="max-w-md mx-auto">
+                      <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
+                        <div className="text-center mb-6">
+                          <div className="text-6xl mb-4">{stockCards[currentStockIndex].logo}</div>
+                          <div className="text-2xl font-bold text-white mb-2">{stockCards[currentStockIndex].symbol}</div>
+                          <div className="text-white/80 mb-2">{stockCards[currentStockIndex].name}</div>
+                          <div className="text-3xl font-bold text-white mb-1">{stockCards[currentStockIndex].price}</div>
+                          <div className={`text-lg font-semibold ${stockCards[currentStockIndex].change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
+                            {stockCards[currentStockIndex].change} ({stockCards[currentStockIndex].changeValue})
+                          </div>
+                        </div>
+                        <div className="space-y-4 mb-8">
+                          <div className="flex justify-between text-sm">
+                            <span className="text-white/60">Sector:</span>
+                            <span className="text-white">{stockCards[currentStockIndex].sector}</span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-white/60">Market Cap:</span>
+                            <span className="text-white">{stockCards[currentStockIndex].marketCap}</span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-white/60">AI Score:</span>
+                            <span className="text-cyan-400 font-bold">{stockCards[currentStockIndex].aiScore}/100</span>
+                          </div>
+                          <div className="text-center">
+                            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                              stockCards[currentStockIndex].recommendation === 'STRONG BUY' ? 'bg-green-500/20 text-green-400' :
+                              stockCards[currentStockIndex].recommendation === 'BUY' ? 'bg-blue-500/20 text-blue-400' :
+                              'bg-yellow-500/20 text-yellow-400'
+                            }`}>
+                              {stockCards[currentStockIndex].recommendation}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex gap-4">
+                          <Button
+                            onClick={() => handleStockSwipe('left')}
+                            variant="outline"
+                            className="flex-1 border-red-400 text-red-400 hover:bg-red-400/10 h-14 rounded-xl"
+                          >
+                            <X className="mr-2 h-6 w-6" />
+                            Pass
+                          </Button>
+                          <Button
+                            onClick={() => handleStockSwipe('right')}
+                            className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-14 rounded-xl"
+                          >
+                            <Check className="mr-2 h-6 w-6" />
+                            Invest
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="text-center mt-6 text-white/60">
+                        {currentStockIndex + 1} of {stockCards.length} stocks
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <div className="text-white mb-4">Great job! You've reviewed all stocks.</div>
+                      <Button
+                        onClick={() => setMvpStep(2)}
+                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
+                      >
+                        See Portfolio Optimization
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Step 2: Optimization Preview */}
+              {mvpStep === 2 && (
+                <div className="flex-1 p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-white mb-4">AI Portfolio Optimization</h3>
+                    <p className="text-white/80">Watch as our AI optimizes your selections</p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-4">Your Selections</h4>
+                      <div className="space-y-3">
+                        {portfolio.map((stock, index) => (
+                          <div key={stock.id} className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
+                            <div className="flex items-center">
+                              <span className="text-2xl mr-3">{stock.logo}</span>
+                              <div>
+                                <div className="text-white font-semibold">{stock.symbol}</div>
+                                <div className="text-white/60 text-sm">{stock.name}</div>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-white font-semibold">{stock.price}</div>
+                              <div className={`text-sm ${stock.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
+                                {stock.change}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-4">Optimized Allocation</h4>
+                      <div className="bg-white/10 rounded-xl p-6">
+                        <div className="h-48 flex items-center justify-center">
+                          <div className="text-center">
+                            <RefreshCw className="h-12 w-12 text-cyan-400 mx-auto mb-4 animate-spin" />
+                            <div className="text-white/80">Optimizing portfolio...</div>
+                          </div>
+                        </div>
+                        <div className="mt-6 space-y-3">
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Expected Return:</span>
+                            <span className="text-emerald-400 font-bold">+16.2%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Risk Score:</span>
+                            <span className="text-orange-400 font-bold">Medium</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Diversification:</span>
+                            <span className="text-blue-400 font-bold">87%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center mt-8">
+                    <Button
+                      onClick={() => setMvpStep(3)}
+                      className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
+                    >
+                      View Portfolio Breakdown
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 3: Portfolio Breakdown */}
+              {mvpStep === 3 && (
+                <div className="flex-1 p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-white mb-4">Your Optimized Portfolio</h3>
+                    <p className="text-white/80">Perfectly balanced for risk and return</p>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <div className="h-80">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <PieChart>
+                            <Pie
+                              data={pieData}
+                              cx="50%"
+                              cy="50%"
+                              outerRadius={120}
+                              fill="#8884d8"
+                              dataKey="value"
+                              label={(entry) => `${entry.name} ${entry.value}%`}
+                            >
+                              {pieData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.color} />
+                              ))}
+                            </Pie>
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                                border: '1px solid rgba(255, 255, 255, 0.2)',
+                                borderRadius: '12px',
+                                color: 'white',
+                              }}
+                            />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                    <div className="space-y-6">
+                      <div className="bg-white/10 rounded-xl p-6">
+                        <h4 className="text-xl font-semibold text-white mb-4">Portfolio Metrics</h4>
+                        <div className="space-y-4">
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Total Value:</span>
+                            <span className="text-white font-bold">$10,000</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Expected Annual Return:</span>
+                            <span className="text-emerald-400 font-bold">+16.2%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Risk Level:</span>
+                            <span className="text-orange-400 font-bold">Medium</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/60">Sharpe Ratio:</span>
+                            <span className="text-blue-400 font-bold">1.34</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-white/10 rounded-xl p-6">
+                        <h4 className="text-xl font-semibold text-white mb-4">Top Holdings</h4>
+                        <div className="space-y-3">
+                          {portfolio.slice(0, 3).map((stock, index) => (
+                            <div key={stock.id} className="flex items-center justify-between">
+                              <div className="flex items-center">
+                                <span className="text-xl mr-3">{stock.logo}</span>
+                                <span className="text-white">{stock.symbol}</span>
+                              </div>
+                              <span className="text-white/60">{25 - index * 5}%</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center mt-8">
+                    <Button
+                      onClick={() => setMvpStep(4)}
+                      className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
+                    >
+                      Chat with SwiprBot
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 4: Chatbot */}
+              {mvpStep === 4 && (
+                <div className="flex-1 p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-white mb-4">Chat with SwiprBot</h3>
+                    <p className="text-white/80">Ask our AI anything about your portfolio or the market</p>
+                  </div>
+                  <div className="max-w-2xl mx-auto">
+                    <div className="bg-white/10 rounded-xl p-6 mb-6 h-80 overflow-y-auto">
+                      <div className="space-y-4">
+                        {chatMessages.map((msg, index) => (
+                          <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                            <div className={`max-w-xs p-3 rounded-xl ${
+                              msg.sender === 'user' 
+                                ? 'bg-blue-600 text-white' 
+                                : 'bg-white/20 text-white'
+                            }`}>
+                              {msg.message}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <form onSubmit={handleChatSubmit} className="flex gap-3">
+                      <Input
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        placeholder="Ask about your portfolio..."
+                        className="bg-white/10 border-white/30 text-white placeholder-white/60 h-12 rounded-xl flex-1"
+                      />
+                      <Button
+                        type="submit"
+                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 h-12 rounded-xl"
+                      >
+                        Send
+                      </Button>
+                    </form>
+                    <div className="text-center mt-8">
+                      <Button
+                        onClick={() => setMvpStep(5)}
+                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
+                      >
+                        Explore Social Features
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 5: Social Features */}
+              {mvpStep === 5 && (
+                <div className="flex-1 p-8">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl font-bold text-white mb-4">Social Trading</h3>
+                    <p className="text-white/80">See what your network is investing in</p>
+                  </div>
+                  <div className="max-w-2xl mx-auto space-y-6">
+                    <div className="bg-white/10 rounded-xl p-6">
+                      <h4 className="text-xl font-semibold text-white mb-4">Friend's Portfolio</h4>
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
+                          <span className="text-white font-bold text-lg">A</span>
+                        </div>
+                        <div>
+                          <div className="text-white font-semibold">Alex Chen</div>
+                          <div className="text-emerald-400">+24.7% this year • 2.1k followers</div>
+                        </div>
+                      </div>
+                      <div className="space-y-3 mb-6">
+                        <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
+                          <div className="flex items-center">
+                            <span className="text-xl mr-3">🍎</span>
+                            <span className="text-white">AAPL</span>
+                          </div>
+                          <span className="text-white/60">35%</span>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
+                          <div className="flex items-center">
+                            <span className="text-xl mr-3">🔥</span>
+                            <span className="text-white">NVDA</span>
+                          </div>
+                          <span className="text-white/60">25%</span>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-white/10 rounded-lg">
+                          <div className="flex items-center">
+                            <span className="text-xl mr-3">⚡</span>
+                            <span className="text-white">TSLA</span>
+                          </div>
+                          <span className="text-white/60">20%</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <Button className="flex-1 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white rounded-xl">
+                          <Plus className="mr-2 h-5 w-5" />
+                          Copy Portfolio
+                        </Button>
+                        <Button variant="outline" className="flex-1 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 rounded-xl">
+                          <Heart className="mr-2 h-5 w-5" />
+                          Follow
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white/10 rounded-xl p-6">
+                      <h4 className="text-xl font-semibold text-white mb-4">Trending Today</h4>
+                      <div className="grid grid-cols-3 gap-3">
+                        <div className="text-center p-3 bg-white/10 rounded-lg">
+                          <div className="text-2xl mb-2">🍎</div>
+                          <div className="text-white font-semibold">AAPL</div>
+                          <div className="text-green-400 text-sm">453 swipes</div>
+                        </div>
+                        <div className="text-center p-3 bg-white/10 rounded-lg">
+                          <div className="text-2xl mb-2">🔥</div>
+                          <div className="text-white font-semibold">NVDA</div>
+                          <div className="text-green-400 text-sm">392 swipes</div>
+                        </div>
+                        <div className="text-center p-3 bg-white/10 rounded-lg">
+                          <div className="text-2xl mb-2">⚡</div>
+                          <div className="text-white font-semibold">TSLA</div>
+                          <div className="text-green-400 text-sm">287 swipes</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <Button
+                        onClick={() => setMvpStep(6)}
+                        className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
+                      >
+                        Ready to Get Started?
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 6: Final CTA */}
+              {mvpStep === 6 && (
+                <div className="flex-1 flex items-center justify-center p-12 text-center">
+                  <div>
+                    <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-emerald-500/25">
+                      <Check className="h-12 w-12 text-white" />
+                    </div>
+                    <h3 className="text-4xl font-bold text-white mb-6">Ready to Build Your Real Portfolio?</h3>
+                    <p className="text-xl text-white/80 mb-8 max-w-2xl">
+                      You've seen how easy and powerful swipr.ai can be. Join thousands of smart investors already building wealth with our platform.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button
+                        onClick={() => document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" })}
+                        className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-12 py-4 rounded-xl text-xl font-bold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105"
+                      >
+                        Sign Up Free
+                        <Rocket className="ml-3 h-6 w-6" />
+                      </Button>
+                      <Button
+                        onClick={() => setMvpStep(0)}
+                        variant="outline"
+                        className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-12 py-4 rounded-xl text-xl font-bold hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
+                      >
+                        <RefreshCw className="mr-3 h-6 w-6" />
+                        Try Demo Again
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -660,6 +1604,138 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Open Roles Section */}
+      <section id="open-roles" className="py-32 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Join Our
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                {" "}Team
+              </span>
+            </h2>
+            <p className="text-xl text-white/80 leading-relaxed">
+              We're building the future of accessible investing and looking for
+              exceptional talent to help shape our mission.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 group cursor-pointer rounded-3xl">
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-blue-500/25">
+                  <Briefcase className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl text-white">
+                  Backend Engineer
+                </CardTitle>
+                <CardDescription className="text-white/80">
+                  Part-time • Remote
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80 mb-4 leading-relaxed">
+                  Help build scalable, high-performance systems that power our
+                  investment platform. Use cutting-edge technology to help users
+                  make better investment decisions.
+                </p>
+
+                <Link to="/apply?position=backend-engineer">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
+                    Join Us
+                    <Sparkles className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group cursor-pointer rounded-3xl">
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-purple-500/25">
+                  <Brain className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl text-white">
+                  AI Developer
+                </CardTitle>
+                <CardDescription className="text-white/80">
+                  Part-time • Remote
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80 mb-4 leading-relaxed">
+                  Develop intelligent systems that help users build better
+                  portfolios. Apply machine learning to make complex financial
+                  data simple and actionable.
+                </p>
+
+                <Link to="/apply?position=ai-developer">
+                  <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
+                    Join Us
+                    <Zap className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-emerald-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 group cursor-pointer rounded-3xl">
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-emerald-500/25">
+                  <BarChart3 className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl text-white">
+                  Quantitative Analyst
+                </CardTitle>
+                <CardDescription className="text-white/80">
+                  Part-time • Remote
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80 mb-4 leading-relaxed">
+                  Create smart algorithms that optimize portfolios and manage
+                  risk. Help users achieve better returns while keeping their
+                  investments safe.
+                </p>
+
+                <Link to="/apply?position=quantitative-analyst">
+                  <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
+                    Join Us
+                    <TrendingUp className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 hover:border-orange-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 group cursor-pointer rounded-3xl">
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
+                  <Smartphone className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl text-white">
+                  Mobile App Developer
+                </CardTitle>
+                <CardDescription className="text-white/80">
+                  Part-time • Remote
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80 mb-4 leading-relaxed">
+                  Work on world-class mobile experiences that make portfolio
+                  management intuitive and accessible. Build complex financial
+                  apps with smooth performance.
+                </p>
+
+                <Link to="/apply?position=mobile-app-developer">
+                  <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
+                    Join Us
+                    <Smartphone className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-32 relative z-10">
         <div className="container mx-auto px-6">
@@ -702,6 +1778,16 @@ export default function Index() {
                       <div>
                         <p className="font-semibold text-white">Location</p>
                         <p className="text-white/80">New York City, NY</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
+                        <Globe className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-white">Office Hours</p>
+                        <p className="text-white/80">Mon-Fri, 9AM-6PM EST</p>
                       </div>
                     </div>
                   </CardContent>
@@ -761,7 +1847,7 @@ export default function Index() {
                     </form>
                     {contactMessage && (
                       <p
-                        className={`text-center mt-4 ${contactMessage.includes("Thank you") ? "text-green-400" : "text-red-400"}`}
+                        className={`text-center mt-4 ${contactMessage.includes("Thank you") || contactMessage.includes("successfully") ? "text-green-400" : "text-red-400"}`}
                       >
                         {contactMessage}
                       </p>
@@ -787,7 +1873,7 @@ export default function Index() {
                 <ul className="space-y-3">
                   <li><a href="#" className="text-white/70 hover:text-white transition-colors">Our Story</a></li>
                   <li><a href="#" className="text-white/70 hover:text-white transition-colors">Team</a></li>
-                  <li><a href="#" className="text-white/70 hover:text-white transition-colors">Careers</a></li>
+                  <li><a href="#open-roles" className="text-white/70 hover:text-white transition-colors">Careers</a></li>
                 </ul>
               </div>
 
@@ -799,7 +1885,7 @@ export default function Index() {
                 <ul className="space-y-3">
                   <li><a href="#features" className="text-white/70 hover:text-white transition-colors">Features</a></li>
                   <li><a href="#simulator" className="text-white/70 hover:text-white transition-colors">Portfolio Simulator</a></li>
-                  <li><a href="#" className="text-white/70 hover:text-white transition-colors">API</a></li>
+                  <li><a href="#mvp-demo" className="text-white/70 hover:text-white transition-colors">Try Demo</a></li>
                 </ul>
               </div>
 
@@ -903,83 +1989,6 @@ export default function Index() {
           </div>
         </div>
       </footer>
-
-      {/* Custom Styles */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-30px) rotate(-180deg); }
-        }
-        
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-15px) rotate(90deg); }
-        }
-        
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fade-in-delayed {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fade-in-slow {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 8s ease-in-out infinite;
-        }
-        
-        .animate-float-slow {
-          animation: float-slow 10s ease-in-out infinite;
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 1s ease-out forwards;
-        }
-        
-        .animate-fade-in-delayed {
-          animation: fade-in-delayed 1.2s ease-out forwards;
-        }
-        
-        .animate-fade-in-slow {
-          animation: fade-in-slow 1.5s ease-out forwards;
-        }
-        
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #06b6d4, #3b82f6);
-          cursor: pointer;
-          box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
-        }
-        
-        .slider::-moz-range-thumb {
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #06b6d4, #3b82f6);
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
-        }
-      `}</style>
     </div>
   );
 }
