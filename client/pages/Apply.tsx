@@ -295,7 +295,7 @@ export default function Apply() {
                 <CardTitle className="text-3xl text-white font-bold">
                   {selectedPosition.title}
                 </CardTitle>
-                <CardDescription className="text-lg text-white/80 mt-4">
+                <CardDescription className="text-lg text-slate-200 mt-4">
                   {selectedPosition.description}
                 </CardDescription>
               </CardHeader>
