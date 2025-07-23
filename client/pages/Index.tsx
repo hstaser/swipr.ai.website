@@ -2212,12 +2212,19 @@ export default function Index() {
                     </div>
 
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
-                        <Globe className="h-6 w-6 text-white" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center">
+                        <Linkedin className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <p className="font-semibold text-white">Office Hours</p>
-                        <p className="text-slate-200">Mon-Fri, 9AM-6PM EST</p>
+                        <p className="font-semibold text-white">LinkedIn</p>
+                        <a
+                          href="https://linkedin.com/company/swipr-ai"
+                          className="text-slate-200 hover:text-white transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Connect with us
+                        </a>
                       </div>
                     </div>
                   </CardContent>
