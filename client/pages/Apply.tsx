@@ -278,7 +278,7 @@ export default function Apply() {
             <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent leading-tight animate-fade-in">
               Join Our Team
             </h1>
-            <p className="text-xl text-white/80 leading-relaxed animate-fade-in-delayed">
+            <p className="text-xl text-slate-200 leading-relaxed animate-fade-in-delayed">
               Help build the future of intelligent investing
             </p>
           </div>
