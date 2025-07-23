@@ -1208,7 +1208,7 @@ export default function Index() {
                           </div>
                           <div className="flex justify-between">
                             <span className="text-white/60">Expected Annual Return:</span>
-                            <span className="text-emerald-400 font-bold">+16.2%</span>
+                            <span className="text-emerald-400 font-bold">+12.8%</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-white/60">Risk Level:</span>
@@ -1216,7 +1216,7 @@ export default function Index() {
                           </div>
                           <div className="flex justify-between">
                             <span className="text-white/60">Sharpe Ratio:</span>
-                            <span className="text-blue-400 font-bold">1.34</span>
+                            <span className="text-blue-400 font-bold">0.89</span>
                           </div>
                         </div>
                       </div>
