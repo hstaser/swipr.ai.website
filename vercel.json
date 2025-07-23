@@ -4,7 +4,7 @@
   "outputDirectory": "dist",
   "framework": null,
   "functions": {
-    "api/server.js": {
+    "api/index.js": {
       "runtime": "nodejs18.x"
     }
   },
@@ -15,7 +15,7 @@
     },
     {
       "source": "/api/(.*)",
-      "destination": "/api/server.js"
+      "destination": "/api/index.js"
     }
   ]
 }
