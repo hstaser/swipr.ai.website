@@ -1,0 +1,49 @@
+<svg width="2048" height="512" viewBox="0 0 2048 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradientHorizontal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradientHorizontal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#475569;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowHorizontal" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Logo Icon Section -->
+  <g transform="translate(64, 64)">
+    <!-- Background circle -->
+    <rect width="384" height="384" rx="96" ry="96" fill="url(#logoGradientHorizontal)" filter="url(#shadowHorizontal)"/>
+    
+    <!-- Diamond shape -->
+    <path d="M192 32 L352 192 L192 352 L32 192 Z" fill="none" stroke="#ffffff" stroke-width="8" opacity="0.9"/>
+    <path d="M192 32 L288 192 L192 352 L96 192 Z" fill="#ffffff" opacity="0.15"/>
+    <path d="M192 64 L288 192 L192 320 L96 192 Z" fill="#ffffff" opacity="0.25"/>
+    
+    <!-- Arrow -->
+    <g stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M144 240 L192 192 L240 240"/>
+      <path d="M192 192 L192 144"/>
+    </g>
+    
+    <!-- Accent dots -->
+    <circle cx="192" cy="144" r="6" fill="#ffffff" opacity="0.8"/>
+    <circle cx="240" cy="192" r="4" fill="#ffffff" opacity="0.6"/>
+    <circle cx="192" cy="240" r="4" fill="#ffffff" opacity="0.6"/>
+    <circle cx="144" cy="192" r="4" fill="#ffffff" opacity="0.6"/>
+  </g>
+  
+  <!-- Company Text -->
+  <g transform="translate(520, 120)">
+    <!-- Main text -->
+    <text x="0" y="120" font-family="Arial, Helvetica, sans-serif" font-size="160" font-weight="700" fill="url(#textGradientHorizontal)">swipr</text>
+    <text x="800" y="120" font-family="Arial, Helvetica, sans-serif" font-size="160" font-weight="700" fill="url(#logoGradientHorizontal)">.ai</text>
+    
+    <!-- Tagline -->
+    <text x="0" y="200" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="400" fill="#64748b">The Future of Intelligent Investing</text>
+  </g>
+</svg>
