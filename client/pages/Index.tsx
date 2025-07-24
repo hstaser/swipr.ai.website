@@ -421,16 +421,15 @@ export default function Index() {
       }
 
       // Track page view (non-blocking)
-      const token = localStorage.getItem('swipr_token');
-      // Use setTimeout to make this completely non-blocking
-      setTimeout(() => {
+      try {
+        const token = localStorage.getItem('swipr_token');
         apiClient.trackEvent('page_viewed', {
           page: 'home',
           authenticated: !!token
-        }).catch(error => {
-          console.debug('Analytics tracking failed:', error);
         });
-      }, 0);
+      } catch (error) {
+        // Ignore analytics errors
+      }
     };
 
     initializeData();
