@@ -31,6 +31,17 @@ class Analytics {
     this.sessionId = this.generateSessionId();
     this.startTime = Date.now();
 
+    // Disable analytics in embedded environments or if fetch might be intercepted
+    const isEmbedded = window.top !== window.self ||
+                      window.location.href.includes('reload=') ||
+                      !!window.FS; // FullStory detection
+
+    if (isEmbedded) {
+      console.debug('Analytics disabled: embedded environment detected');
+      this.isEnabled = false;
+      return; // Skip initialization entirely
+    }
+
     // Wait for page to be fully loaded before initializing analytics
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () => {
