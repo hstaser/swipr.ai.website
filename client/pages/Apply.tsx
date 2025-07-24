@@ -637,8 +637,6 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
               </form>
             </CardContent>
           </Card>
-
-
         </div>
       </div>
     </div>

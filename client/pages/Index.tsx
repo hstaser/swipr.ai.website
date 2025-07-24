@@ -179,7 +179,7 @@ const companyData = {
     name: "Apple Inc.",
     ticker: "AAPL",
     price: 214.55,
-    change: 0.40,
+    change: 0.4,
     changePercent: 0.19,
     logo: "https://logo.clearbit.com/apple.com",
     sector: "Technology",
@@ -320,13 +320,26 @@ const companyData = {
     peRatio: 38.4,
     dividendYield: 0.0,
     yearPerformance: 42.8,
-    description: "Amazon.com, Inc. engages in the retail sale of consumer products and subscriptions through online and physical stores.",
+    description:
+      "Amazon.com, Inc. engages in the retail sale of consumer products and subscriptions through online and physical stores.",
     news: [
-      { title: "AWS Revenue Growth Accelerates", summary: "Cloud division shows strong enterprise adoption", time: "3 hours ago" },
-      { title: "Prime Day Records Broken", summary: "Biggest shopping event in company history", time: "1 day ago" },
-      { title: "Logistics Network Expansion", summary: "Opening 50 new fulfillment centers globally", time: "1 week ago" }
-    ]
-  }
+      {
+        title: "AWS Revenue Growth Accelerates",
+        summary: "Cloud division shows strong enterprise adoption",
+        time: "3 hours ago",
+      },
+      {
+        title: "Prime Day Records Broken",
+        summary: "Biggest shopping event in company history",
+        time: "1 day ago",
+      },
+      {
+        title: "Logistics Network Expansion",
+        summary: "Opening 50 new fulfillment centers globally",
+        time: "1 week ago",
+      },
+    ],
+  },
 };
 
 // Reduced to 3 stocks for faster optimization
@@ -1200,7 +1213,7 @@ export default function Index() {
                       <div
                         className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 col-span-2 cursor-pointer hover:bg-white/20 transition-all duration-200 hover:scale-105"
                         onClick={() => {
-                          setSelectedCompany('NVDA');
+                          setSelectedCompany("NVDA");
                           setCompanyDrawerOpen(true);
                         }}
                       >
@@ -2860,7 +2873,7 @@ export default function Index() {
                           axisLine={false}
                           tickLine={false}
                           tick={{ fill: "#ffffff60" }}
-                          domain={['dataMin - 200', 'dataMax + 200']}
+                          domain={["dataMin - 200", "dataMax + 200"]}
                           tickFormatter={(value) =>
                             `$${(value / 1000).toFixed(0)}k`
                           }
@@ -2901,7 +2914,12 @@ export default function Index() {
                           strokeWidth={2}
                           strokeDasharray="5 5"
                           dot={false}
-                          activeDot={{ r: 5, fill: "#FB923C", stroke: "#ffffff", strokeWidth: 2 }}
+                          activeDot={{
+                            r: 5,
+                            fill: "#FB923C",
+                            stroke: "#ffffff",
+                            strokeWidth: 2,
+                          }}
                           name="S&P 500"
                         />
                       </LineChart>
