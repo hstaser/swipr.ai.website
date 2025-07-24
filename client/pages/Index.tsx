@@ -1335,6 +1335,26 @@ export default function Index() {
                           {followedUsers.has('sarah-kim') ? 'Following' : 'Follow'}
                         </Button>
                       </div>
+                      <div className="flex items-center p-4 bg-white/10 rounded-xl">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-white font-bold">J</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-white font-semibold">
+                            Jake Thompson
+                          </div>
+                          <div className="text-green-400 text-sm">
+                            +15.9% this year
+                          </div>
+                        </div>
+                        <Button
+                          size="sm"
+                          className={followedUsers.has('jake-thompson') ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'}
+                          onClick={() => handleFollowUser('jake-thompson')}
+                        >
+                          {followedUsers.has('jake-thompson') ? 'Following' : 'Follow'}
+                        </Button>
+                      </div>
                       <div className="p-4 bg-white/10 rounded-xl">
                         <div className="text-white/60 text-sm mb-2">
                           Popular swipes today:
