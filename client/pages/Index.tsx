@@ -360,7 +360,7 @@ export default function Index() {
         waitlistData.interests
       );
 
-      setWaitlistMessage(`Success! You're #${result.position} on our waitlist.`);
+      setWaitlistMessage("Success! You've joined the waitlist.");
       setWaitlistData({ name: "", email: "", interests: [] });
 
       await apiClient.trackEvent('waitlist_joined', {
