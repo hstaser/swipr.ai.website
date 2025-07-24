@@ -1893,16 +1893,26 @@ export default function Index() {
                           <Button
                             onClick={() => handleStockSwipe("left")}
                             variant="outline"
-                            className="flex-1 border-red-400 text-red-400 hover:bg-red-400/10 h-14 rounded-xl"
+                            disabled={isSubmittingPortfolio}
+                            className="flex-1 border-red-400 text-red-400 hover:bg-red-400/10 h-14 rounded-xl disabled:opacity-50"
                           >
-                            <X className="mr-2 h-6 w-6" />
+                            {isSubmittingPortfolio ? (
+                              <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+                            ) : (
+                              <X className="mr-2 h-6 w-6" />
+                            )}
                             Pass
                           </Button>
                           <Button
                             onClick={() => handleStockSwipe("right")}
-                            className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-14 rounded-xl"
+                            disabled={isSubmittingPortfolio}
+                            className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-14 rounded-xl disabled:opacity-50"
                           >
-                            <Check className="mr-2 h-6 w-6" />
+                            {isSubmittingPortfolio ? (
+                              <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+                            ) : (
+                              <Check className="mr-2 h-6 w-6" />
+                            )}
                             Invest
                           </Button>
                         </div>
