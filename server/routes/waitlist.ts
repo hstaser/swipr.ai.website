@@ -63,10 +63,15 @@ export const handleWaitlistSignup: RequestHandler = async (req, res) => {
     console.log(`📊 Total Waitlist: ${waitlistEntries.length}`);
     console.log("=======================");
 
-    const response: WaitlistResponse = {
+    const response = {
       success: true,
-      message:
-        "Thanks for joining our waitlist! We'll notify you when Swipr.ai launches.",
+      message: "Thanks for joining our waitlist! We'll notify you when Swipr.ai launches.",
+      position: waitlistEntries.length,
+      id: waitlistEntry.id,
+      data: {
+        position: waitlistEntries.length,
+        id: waitlistEntry.id
+      }
     };
 
     res.json(response);
