@@ -3137,7 +3137,7 @@ export default function Index() {
                 >
                   <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
-                    <Smartphone className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
