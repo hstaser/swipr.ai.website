@@ -211,9 +211,9 @@ const companyData = {
   NVDA: {
     name: "NVIDIA Corporation",
     ticker: "NVDA",
-    price: 145.25,
-    change: 4.67,
-    changePercent: 3.3,
+    price: 172.79,
+    change: 2.01,
+    changePercent: 1.18,
     logo: "https://logo.clearbit.com/nvidia.com",
     sector: "Technology",
     industry: "Semiconductors",
@@ -376,9 +376,9 @@ const stockCards = [
     id: 3,
     symbol: "NVDA",
     name: "NVIDIA Corp.",
-    price: "$172.28",
-    change: "+0.88%",
-    changeValue: "+$1.50",
+    price: "$172.79",
+    change: "+1.18%",
+    changeValue: "+$2.01",
     logo: "https://logo.clearbit.com/nvidia.com",
     sector: "Technology",
     marketCap: "$1.8T",
@@ -1244,7 +1244,7 @@ export default function Index() {
                           NVDA
                         </div>
                         <div className="text-green-400 text-xs md:text-sm">
-                          +0.88%
+                          +1.18%
                         </div>
                       </div>
                     </div>
