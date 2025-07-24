@@ -653,20 +653,30 @@ export default function Index() {
             </div>
 
             {/* Waitlist Form */}
-            <div className="max-w-md mx-auto">
-              <form onSubmit={handleWaitlistSubmit} className="flex gap-4">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={waitlistData.email}
-                  onChange={(e) => setWaitlistData(prev => ({ ...prev, email: e.target.value }))}
-                  required
-                  className="bg-white/10 backdrop-blur-lg border-white/30 text-white placeholder-white/60 h-14 rounded-xl flex-1"
-                />
+            <div className="max-w-lg mx-auto">
+              <form onSubmit={handleWaitlistSubmit} className="space-y-4">
+                <div className="flex gap-4">
+                  <Input
+                    type="text"
+                    placeholder="Your name"
+                    value={waitlistData.name}
+                    onChange={(e) => setWaitlistData(prev => ({ ...prev, name: e.target.value }))}
+                    required
+                    className="bg-white/10 backdrop-blur-lg border-white/30 text-white placeholder-white/60 h-14 rounded-xl flex-1"
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Your email"
+                    value={waitlistData.email}
+                    onChange={(e) => setWaitlistData(prev => ({ ...prev, email: e.target.value }))}
+                    required
+                    className="bg-white/10 backdrop-blur-lg border-white/30 text-white placeholder-white/60 h-14 rounded-xl flex-1"
+                  />
+                </div>
                 <Button
                   type="submit"
                   disabled={isSubmittingWaitlist}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 h-14 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 h-14 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
                 >
                   {isSubmittingWaitlist ? (
                     <Loader2 className="h-5 w-5 animate-spin" />
