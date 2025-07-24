@@ -420,16 +420,8 @@ export default function Index() {
         console.error('Failed to load stock prices:', error);
       }
 
-      // Track page view (non-blocking)
-      try {
-        const token = localStorage.getItem('swipr_token');
-        apiClient.trackEvent('page_viewed', {
-          page: 'home',
-          authenticated: !!token
-        });
-      } catch (error) {
-        // Ignore analytics errors
-      }
+      // Page view tracking disabled to prevent API errors
+      console.log('App initialized successfully');
     };
 
     initializeData();
