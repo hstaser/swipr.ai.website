@@ -1732,6 +1732,43 @@ export default function Index() {
                           </div>
                         </div>
                       </div>
+                      <div className="bg-slate-800/50 rounded-xl p-6 border border-white/10">
+                        <h4 className="text-xl font-semibold text-white mb-4">
+                          Watchlist
+                        </h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+                            <div className="flex items-center space-x-3">
+                              <span className="text-white font-semibold">AAPL</span>
+                              <span className="text-slate-300 text-sm">Apple Inc.</span>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-white font-bold">$185.42</div>
+                              <div className="text-green-400 text-sm">+2.4%</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+                            <div className="flex items-center space-x-3">
+                              <span className="text-white font-semibold">NVDA</span>
+                              <span className="text-slate-300 text-sm">NVIDIA Corp.</span>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-white font-bold">$432.81</div>
+                              <div className="text-green-400 text-sm">+3.2%</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+                            <div className="flex items-center space-x-3">
+                              <span className="text-white font-semibold">TSLA</span>
+                              <span className="text-slate-300 text-sm">Tesla Inc.</span>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-white font-bold">$248.73</div>
+                              <div className="text-red-400 text-sm">-1.8%</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div className="bg-white/10 rounded-xl p-6">
                         <h4 className="text-xl font-semibold text-white mb-4">
                           Top Holdings
