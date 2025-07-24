@@ -541,6 +541,12 @@ module.exports = async function handler(req, res) {
         status: 'ok',
         timestamp: getCurrentTimestamp(),
         version: '1.0.0',
+        modules: {
+          bcrypt: !!bcrypt,
+          jwt: !!jwt,
+          validator: !!validator,
+          uuid: !!uuidv4
+        },
         endpoints: {
           auth: ['/api/auth/register', '/api/auth/login'],
           waitlist: ['/api/waitlist'],
@@ -552,6 +558,14 @@ module.exports = async function handler(req, res) {
           contact: ['/api/contact'],
           jobs: ['/api/jobs/apply']
         }
+      });
+    }
+
+    if (url === '/api/test' && method === 'GET') {
+      return res.status(200).json({
+        message: 'API is working',
+        timestamp: getCurrentTimestamp(),
+        testPassed: true
       });
     }
     
