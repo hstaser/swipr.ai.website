@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAnalytics } from "@/lib/analytics";
 import { Navigation } from "@/components/Navigation";
 import { Logo } from "@/components/Logo";
+import { apiClient, type PortfolioOptimization, type StockData } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
