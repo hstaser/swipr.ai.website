@@ -2931,7 +2931,7 @@ export default function Index() {
               </div>
 
               {/* Metrics and Pie Chart */}
-              <div className={`space-y-8 ${comparedStocks.length > 1 ? 'mt-8 grid md:grid-cols-2 gap-8' : ''}`}>
+              <div className="space-y-8">
                 {/* Performance Metrics */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
                   <h3 className="text-2xl font-bold text-white mb-6">
