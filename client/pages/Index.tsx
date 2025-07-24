@@ -421,13 +421,16 @@ export default function Index() {
   useEffect(() => {
     const interval = setInterval(() => {
       setPortfolioData(prevData =>
-        prevData.map(item => ({
-          ...item,
-          value: Math.max(
-            item.value + (Math.random() - 0.5) * 50, // Small random changes
-            item.value * 0.95 // Prevent values from going too low
-          )
-        }))
+        prevData.map(item => {
+          const currentValue = typeof item.value === 'number' ? item.value : 10000;
+          const randomChange = (Math.random() - 0.5) * 50;
+          const newValue = Math.max(currentValue + randomChange, currentValue * 0.95);
+
+          return {
+            ...item,
+            value: Math.round(isNaN(newValue) ? currentValue : newValue)
+          };
+        })
       );
     }, 3000); // Update every 3 seconds
 
