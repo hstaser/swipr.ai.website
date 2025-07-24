@@ -91,30 +91,24 @@ class ApiClient {
       const response = await fetch(url, configWithAbort);
       clearTimeout(timeoutId);
 
-      // Check if response body can be read
-      if (!response.body) {
-        throw new Error('No response body received');
+      // Read response as text first, then parse as JSON
+      let responseText: string;
+      try {
+        responseText = await response.text();
+      } catch (readError) {
+        throw new Error(`Failed to read response: ${readError.message}`);
       }
 
-      // Clone response to prevent "body already read" errors
-      const responseClone = response.clone();
-
-      // Try to read as JSON first
+      // Parse the text as JSON
       let data: any;
-      try {
-        data = await response.json();
-      } catch (jsonError) {
-        // If JSON parsing fails, try reading as text from the cloned response
+      if (responseText.trim()) {
         try {
-          const responseText = await responseClone.text();
-          if (responseText.trim()) {
-            throw new Error(`Expected JSON but received text. Response: ${responseText.substring(0, 100)}...`);
-          } else {
-            data = {};
-          }
-        } catch (textError) {
-          throw new Error(`Failed to read response: ${textError.message}`);
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          throw new Error(`Expected JSON but received text. Response: ${responseText.substring(0, 100)}...`);
         }
+      } else {
+        data = {};
       }
 
       if (!response.ok) {
