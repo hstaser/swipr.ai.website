@@ -3703,79 +3703,7 @@ export default function Index() {
                         </div>
                       </div>
 
-                      {/* Action Buttons */}
-                      <div className="space-y-3">
-                        <Button
-                          className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                          onClick={() => {
-                            alert(`✅ ${selectedCompany} successfully added to your portfolio!\n\nYou can view and manage your holdings in the Portfolio section.`);
-                            setCompanyDrawerOpen(false);
-                          }}
-                        >
-                          <Plus className="h-5 w-5 mr-2" />
-                          Add to Portfolio
-                        </Button>
 
-                        <div className="grid grid-cols-2 gap-3">
-                          <Button
-                            variant="outline"
-                            className="border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 py-2 rounded-xl"
-                            onClick={() => {
-                              alert(`👀 ${selectedCompany} added to your watchlist!\n\nYou'll receive notifications about price changes and important news.`);
-                            }}
-                          >
-                            <Heart className="h-4 w-4 mr-2" />
-                            Watch
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="border-slate-600 text-slate-300 hover:bg-slate-600/20 py-2 rounded-xl"
-                            onClick={() => {
-                              const shareOptions = [
-                                "📱 Share on Social Media",
-                                "📧 Send via Email",
-                                "🔗 Copy Link",
-                                "🚀 Share swipr.ai Platform"
-                              ];
-                              const choice = confirm(`Choose how to share:\n\n1. Share ${selectedCompany} stock info\n2. Share swipr.ai platform for marketing\n\nClick OK for stock info, Cancel for platform marketing`);
-
-                              if (choice) {
-                                // Share stock info
-                                const stockInfo = companyData[selectedCompany as keyof typeof companyData];
-                                const shareText = `Check out ${stockInfo.name} (${selectedCompany}): $${stockInfo.price} (${stockInfo.changePercent > 0 ? '+' : ''}${stockInfo.changePercent}%) on swipr.ai! 📈`;
-
-                                if (navigator.share) {
-                                  navigator.share({
-                                    title: `${stockInfo.name} Stock Info`,
-                                    text: shareText,
-                                    url: window.location.href
-                                  });
-                                } else {
-                                  navigator.clipboard.writeText(shareText + " " + window.location.href);
-                                  alert("📋 Stock info copied to clipboard!");
-                                }
-                              } else {
-                                // Share platform for marketing
-                                const marketingText = "🚀 Discover the future of investing with swipr.ai! Swipe to invest, AI-powered portfolio optimization, and intelligent market insights. Join thousands of smart investors! 💰📱";
-
-                                if (navigator.share) {
-                                  navigator.share({
-                                    title: "swipr.ai - The Future of Intelligent Investing",
-                                    text: marketingText,
-                                    url: window.location.origin
-                                  });
-                                } else {
-                                  navigator.clipboard.writeText(marketingText + " " + window.location.origin);
-                                  alert("📋 Marketing message copied to clipboard! Share swipr.ai with your network!");
-                                }
-                              }
-                            }}
-                          >
-                            <Share className="h-4 w-4 mr-2" />
-                            Share
-                          </Button>
-                        </div>
-                      </div>
                     </div>
                   );
                 })()}
