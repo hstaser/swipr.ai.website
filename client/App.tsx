@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/privacy" element={<Privacy />} />
-
+          <Route path="/mission" element={<Mission />} />
           <Route path="/admin/*" element={<AdminRouter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
