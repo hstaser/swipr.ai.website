@@ -215,6 +215,10 @@ export default function Index() {
   const [selectedTimeframe, setSelectedTimeframe] = useState('1M');
   const [comparedStocks, setComparedStocks] = useState<string[]>(['AAPL']);
 
+  // Company Drawer States
+  const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
+  const [companyDrawerOpen, setCompanyDrawerOpen] = useState(false);
+
   // Chat and AI state
   const [chatMessages, setChatMessages] = useState([
     {
