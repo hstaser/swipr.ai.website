@@ -3504,6 +3504,14 @@ export default function Index() {
                       Privacy Policy
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      to="/mission"
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Our Mission
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
