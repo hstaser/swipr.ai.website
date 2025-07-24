@@ -94,13 +94,18 @@ const generatePortfolioData = (riskLevel: number) => {
     { month: "Dec", value: 11350, growth: 13.5 },
   ];
 
-  return baseData.map((item, index) => ({
-    ...item,
-    value: Math.floor(
-      10000 + (item.growth / 100) * 10000 * (1 + riskLevel * 0.5),
-    ),
-    growth: item.growth * (1 + riskLevel * 0.5),
-  }));
+  return baseData.map((item, index) => {
+    const safeRiskLevel = typeof riskLevel === 'number' ? riskLevel : 0.5;
+    const growthMultiplier = (item.growth / 100) * 10000 * (1 + safeRiskLevel * 0.5);
+    const calculatedValue = 10000 + growthMultiplier;
+    const calculatedGrowth = item.growth * (1 + safeRiskLevel * 0.5);
+
+    return {
+      ...item,
+      value: Math.floor(isNaN(calculatedValue) ? 10000 : calculatedValue),
+      growth: isNaN(calculatedGrowth) ? item.growth : calculatedGrowth,
+    };
+  });
 };
 
 const pieData = [
