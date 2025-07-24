@@ -102,7 +102,7 @@ const generateChatResponse = (message, userId = null) => {
 };
 
 // Main handler function
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   corsMiddleware(res);
   
   if (req.method === 'OPTIONS') {
