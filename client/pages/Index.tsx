@@ -937,7 +937,11 @@ export default function Index() {
                   <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-cyan-400/30">
                     <div className="grid grid-cols-2 gap-3 md:gap-4">
                       <div
-                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4"
+                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 cursor-pointer hover:bg-white/20 transition-all duration-200 hover:scale-105"
+                        onClick={() => {
+                          setSelectedCompany('AAPL');
+                          setCompanyDrawerOpen(true);
+                        }}
                       >
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
