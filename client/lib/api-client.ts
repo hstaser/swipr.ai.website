@@ -349,6 +349,16 @@ class ApiClient {
     userId?: string,
   ): Promise<void> {
     try {
+      // Detect embedded environment or FullStory interference
+      const isEmbedded = window.top !== window.self ||
+                        window.location.href.includes("reload=") ||
+                        !!window.FS;
+
+      if (isEmbedded) {
+        console.debug("Analytics tracking skipped: embedded environment detected");
+        return;
+      }
+
       // Map the event name to valid eventType enum values
       const eventTypeMap: Record<string, string> = {
         page_view: "page_view",
@@ -400,6 +410,12 @@ class ApiClient {
         body: JSON.stringify(analyticsData),
       });
     } catch (error) {
+      // Enhanced error handling for FullStory and embedded environments
+      if (error instanceof TypeError && error.message.includes("Failed to fetch")) {
+        console.debug("Analytics tracking failed due to fetch interference, likely FullStory or embedded environment");
+        return;
+      }
+
       // Graceful degradation - log but don't break app
       console.warn("Analytics tracking failed:", error);
     }
