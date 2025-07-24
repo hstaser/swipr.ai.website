@@ -268,8 +268,8 @@ class ApiClient {
       }
 
       const value = properties.value || properties.amount || properties.position;
-      if (value !== null && value !== undefined && value !== '') {
-        analyticsData.value = value;
+      if (value !== null && value !== undefined && value !== '' && typeof value !== 'object') {
+        analyticsData.value = String(value);
       }
 
       if (document.referrer) {
