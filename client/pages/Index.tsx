@@ -369,7 +369,11 @@ export default function Index() {
       });
       trackWaitlistSignup();
     } catch (error: any) {
-      setErrors(prev => ({ ...prev, waitlist: error.message || 'Failed to join waitlist' }));
+      if (error.message?.includes('already on our waitlist')) {
+        setWaitlistMessage("You're already on the waitlist!");
+      } else {
+        setErrors(prev => ({ ...prev, waitlist: error.message || 'Failed to join waitlist' }));
+      }
     } finally {
       setIsSubmittingWaitlist(false);
     }
