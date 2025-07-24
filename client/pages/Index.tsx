@@ -690,6 +690,11 @@ export default function Index() {
                   {waitlistMessage}
                 </p>
               )}
+              {errors.waitlist && (
+                <p className="text-red-400 text-center mt-4 animate-fade-in">
+                  {errors.waitlist}
+                </p>
+              )}
             </div>
           </div>
         </div>
