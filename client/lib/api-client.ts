@@ -167,20 +167,8 @@ class ApiClient {
 
   // Stock data methods
   async getStockPrices(): Promise<Record<string, StockData>> {
-    try {
-      const response = await this.request<Record<string, StockData>>('/stocks/prices');
-      return response.data!;
-    } catch (error) {
-      console.warn('Failed to fetch stock prices from API, using fallback data:', error);
-      // Return fallback stock data
-      return {
-        AAPL: { symbol: 'AAPL', price: 185.42, change: 2.4, volume: 45289000, marketCap: '$2.9T' },
-        NVDA: { symbol: 'NVDA', price: 432.81, change: 3.2, volume: 52134000, marketCap: '$1.1T' },
-        TSLA: { symbol: 'TSLA', price: 248.73, change: -1.8, volume: 78456000, marketCap: '$792B' },
-        GOOGL: { symbol: 'GOOGL', price: 141.52, change: 1.1, volume: 31245000, marketCap: '$1.8T' },
-        MSFT: { symbol: 'MSFT', price: 414.31, change: 0.8, volume: 29876000, marketCap: '$3.1T' }
-      };
-    }
+    const response = await this.request<Record<string, StockData>>('/stocks/prices');
+    return response.data!;
   }
 
   async getStockData(symbol: string): Promise<StockData> {
