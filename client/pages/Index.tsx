@@ -1982,6 +1982,7 @@ export default function Index() {
                               });
 
                               setPortfolioCopied(true);
+                              setShowExecutionScreen(true);
                               setSuccessMessages(prev => ({
                                 ...prev,
                                 portfolio: 'Portfolio copied successfully!'
