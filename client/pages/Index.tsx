@@ -243,7 +243,8 @@ export default function Index() {
       const optimization = await apiClient.optimizePortfolio(riskLevel, investmentAmount);
       setPortfolioOptimization(optimization);
       setPortfolioValue(optimization.totalValue);
-      await apiClient.trackEvent('portfolio_optimized', {
+      // Track analytics (non-blocking)
+      apiClient.trackEvent('portfolio_optimized', {
         riskLevel,
         amount: investmentAmount,
         expectedReturn: optimization.expectedReturn
