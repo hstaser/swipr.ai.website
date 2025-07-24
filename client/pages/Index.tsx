@@ -239,16 +239,16 @@ const companyData = {
   TSLA: {
     name: "Tesla, Inc.",
     ticker: "TSLA",
-    price: 248.73,
-    change: -4.52,
-    changePercent: -1.8,
+    price: 412.87,
+    change: 15.23,
+    changePercent: 3.8,
     logo: "https://logo.clearbit.com/tesla.com",
     sector: "Consumer Cyclical",
     industry: "Auto Manufacturers",
-    marketCap: "792B",
-    peRatio: 42.1,
+    marketCap: "1.3T",
+    peRatio: 65.4,
     dividendYield: 0.0,
-    yearPerformance: -14.2,
+    yearPerformance: 68.2,
     description:
       "Tesla, Inc. designs, develops, manufactures, and sells electric vehicles and energy generation and storage systems.",
     news: [
