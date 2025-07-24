@@ -66,18 +66,20 @@ export default function Mission() {
             <CardContent>
               <div className="text-lg text-slate-200 leading-relaxed space-y-6">
                 <p>
-                  We believe smart investing shouldn't be reserved for Wall Street insiders.
-                  Advanced investment strategies and AI-powered portfolio optimization should be
-                  available to everyone, not just institutions and the ultra-wealthy.
+                  We believe smart investing shouldn't be reserved for Wall
+                  Street insiders. Advanced investment strategies and AI-powered
+                  portfolio optimization should be available to everyone, not
+                  just institutions and the ultra-wealthy.
                 </p>
                 <p>
-                  Our mission is simple: give every investor access to intelligent investment tools,
-                  regardless of how much money they're starting with or their financial background.
+                  Our mission is simple: give every investor access to
+                  intelligent investment tools, regardless of how much money
+                  they're starting with or their financial background.
                 </p>
                 <p>
-                  We're breaking down the complexity, high fees, and barriers that have kept
-                  sophisticated investing out of reach, building a platform where everyone can
-                  invest with confidence.
+                  We're breaking down the complexity, high fees, and barriers
+                  that have kept sophisticated investing out of reach, building
+                  a platform where everyone can invest with confidence.
                 </p>
               </div>
             </CardContent>
@@ -90,12 +92,15 @@ export default function Mission() {
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-xl text-white">Smart Technology</CardTitle>
+                <CardTitle className="text-xl text-white">
+                  Smart Technology
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-slate-200 text-center">
                   We use advanced AI and machine learning to give you
-                  data-driven investment recommendations and automatic portfolio optimization.
+                  data-driven investment recommendations and automatic portfolio
+                  optimization.
                 </p>
               </CardContent>
             </Card>
@@ -109,8 +114,9 @@ export default function Mission() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-200 text-center">
-                  We're completely transparent about our algorithms, fees,
-                  and recommendations while keeping your investments secure and compliant.
+                  We're completely transparent about our algorithms, fees, and
+                  recommendations while keeping your investments secure and
+                  compliant.
                 </p>
               </CardContent>
             </Card>
@@ -120,12 +126,15 @@ export default function Mission() {
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-xl text-white">Accessibility</CardTitle>
+                <CardTitle className="text-xl text-white">
+                  Accessibility
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-slate-200 text-center">
-                  We make sophisticated investment tools easy to use for everyone,
-                  with simple interfaces and no minimum investment requirements.
+                  We make sophisticated investment tools easy to use for
+                  everyone, with simple interfaces and no minimum investment
+                  requirements.
                 </p>
               </CardContent>
             </Card>
@@ -140,10 +149,11 @@ export default function Mission() {
             </CardHeader>
             <CardContent>
               <p className="text-lg text-slate-200 leading-relaxed text-center">
-                We're building a world where everyone has access to the same smart
-                investment tools that were once only available to big institutions.
-                Through technology, transparency, and innovation, we're creating a more
-                fair and accessible financial future for all.
+                We're building a world where everyone has access to the same
+                smart investment tools that were once only available to big
+                institutions. Through technology, transparency, and innovation,
+                we're creating a more fair and accessible financial future for
+                all.
               </p>
             </CardContent>
           </Card>
