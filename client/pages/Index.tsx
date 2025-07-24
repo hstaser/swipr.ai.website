@@ -1752,8 +1752,8 @@ export default function Index() {
                               <span className="text-slate-300 text-sm">Apple Inc.</span>
                             </div>
                             <div className="text-right">
-                              <div className="text-white font-bold">$185.42</div>
-                              <div className="text-green-400 text-sm">+2.4%</div>
+                              <div className="text-white font-bold">$185.{Math.floor(Math.random() * 100)}</div>
+                              <div className="text-green-400 text-sm">+{(2.4 + (Math.random() - 0.5) * 0.5).toFixed(1)}%</div>
                             </div>
                           </div>
                           <div className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
