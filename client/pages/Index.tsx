@@ -1377,6 +1377,50 @@ export default function Index() {
                     and diversification automatically based on modern portfolio
                     theory.
                   </p>
+
+                  {/* Risk Tolerance Setting */}
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="text-white font-semibold">
+                        Risk Tolerance
+                      </label>
+                      <span className="text-purple-400 font-bold">
+                        {riskLevel === "conservative" ? "Conservative" : riskLevel === "moderate" ? "Moderate" : "Aggressive"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <button
+                        onClick={() => setRiskLevel("conservative")}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          riskLevel === "conservative"
+                            ? "bg-blue-500 text-white"
+                            : "bg-white/10 text-white/70 hover:bg-white/20"
+                        }`}
+                      >
+                        Conservative
+                      </button>
+                      <button
+                        onClick={() => setRiskLevel("moderate")}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          riskLevel === "moderate"
+                            ? "bg-blue-500 text-white"
+                            : "bg-white/10 text-white/70 hover:bg-white/20"
+                        }`}
+                      >
+                        Moderate
+                      </button>
+                      <button
+                        onClick={() => setRiskLevel("aggressive")}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          riskLevel === "aggressive"
+                            ? "bg-blue-500 text-white"
+                            : "bg-white/10 text-white/70 hover:bg-white/20"
+                        }`}
+                      >
+                        Aggressive
+                      </button>
+                    </div>
+                  </div>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" />
@@ -2926,26 +2970,7 @@ export default function Index() {
                     </div>
                   </div>
 
-                  {/* Risk Level Slider */}
-                  <div className="mb-8">
-                    <div className="flex items-center justify-between mb-4">
-                      <label className="text-white font-semibold">
-                        Risk Level
-                      </label>
-                      <span className="text-cyan-400 font-bold">
-                        {Math.round(riskLevel * 100)}%
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.1"
-                      value={riskLevel}
-                      onChange={(e) => setRiskLevel(parseFloat(e.target.value))}
-                      className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
-                    />
-                  </div>
+
 
                   {/* Portfolio vs S&P 500 Chart */}
                   <div className="h-96 bg-slate-900/50 rounded-xl p-4">
