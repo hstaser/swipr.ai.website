@@ -105,10 +105,15 @@ const generatePortfolioData = (riskLevel: number) => {
     const calculatedValue = 10000 + growthMultiplier;
     const calculatedGrowth = item.growth * (1 + safeRiskLevel * 0.5);
 
+    // S&P 500 baseline performance (typically 8-10% annually)
+    const sp500Growth = item.growth * 0.7; // Slightly lower than optimized portfolio
+    const sp500Value = 10000 + (sp500Growth / 100) * 10000;
+
     return {
       ...item,
       value: Math.floor(isNaN(calculatedValue) ? 10000 : calculatedValue),
       growth: isNaN(calculatedGrowth) ? item.growth : calculatedGrowth,
+      sp500: Math.floor(isNaN(sp500Value) ? 10000 : sp500Value),
     };
   });
 };
