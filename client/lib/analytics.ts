@@ -37,18 +37,49 @@ class Analytics {
   private async checkAnalyticsAvailability() {
     try {
       // Quick health check for analytics endpoint
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+
       const response = await fetch("/api/analytics/track", {
         method: "OPTIONS",
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+      this.isEnabled = response.ok || response.status === 404; // 404 is ok for OPTIONS
+    } catch (error) {
+      // Start with analytics disabled and enable on first successful request
+      console.debug("Analytics endpoint check failed, starting with limited tracking");
+      this.isEnabled = false;
+
+      // Try to enable analytics after a delay by testing with a minimal request
+      setTimeout(() => {
+        this.testAnalyticsEndpoint();
+      }, 5000);
+    }
+  }
+
+  private async testAnalyticsEndpoint() {
+    try {
+      const testPayload = {
+        event: "health_check",
+        properties: { test: true },
+        userId: "test"
+      };
+
+      const response = await fetch("/api/analytics/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(testPayload),
         signal: AbortSignal.timeout(3000),
       });
-      this.isEnabled = true;
+
+      if (response.ok) {
+        this.isEnabled = true;
+        console.debug("Analytics endpoint is now available");
+      }
     } catch (error) {
-      // For serverless functions, we'll assume they're available
-      // and let individual requests handle failures gracefully
-      console.debug(
-        "Analytics endpoint check failed, but continuing with tracking",
-      );
-      this.isEnabled = true;
+      console.debug("Analytics endpoint still unavailable");
     }
   }
 
