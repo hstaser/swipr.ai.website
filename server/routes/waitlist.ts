@@ -19,6 +19,7 @@ interface WaitlistEntry {
   id: string;
   email: string;
   name?: string;
+  interests?: string[];
   joinedAt: string;
 }
 
