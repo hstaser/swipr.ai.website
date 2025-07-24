@@ -3050,7 +3050,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group cursor-pointer rounded-3xl">
+            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-purple-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 group cursor-pointer rounded-3xl h-full flex flex-col">
               <CardHeader>
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-purple-500/25">
                   <Brain className="h-8 w-8 text-white" />
@@ -3062,8 +3062,8 @@ export default function Index() {
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-slate-200 mb-4 leading-relaxed">
+              <CardContent className="flex-1 flex flex-col">
+                <p className="text-slate-200 mb-4 leading-relaxed flex-1">
                   Develop intelligent systems that help users build better
                   portfolios. Apply machine learning to make complex financial
                   data simple and actionable.
@@ -3081,7 +3081,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-emerald-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 group cursor-pointer rounded-3xl">
+            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-emerald-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20 group cursor-pointer rounded-3xl h-full flex flex-col">
               <CardHeader>
                 <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-emerald-500/25">
                   <BarChart3 className="h-8 w-8 text-white" />
@@ -3093,8 +3093,8 @@ export default function Index() {
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-slate-200 mb-4 leading-relaxed">
+              <CardContent className="flex-1 flex flex-col">
+                <p className="text-slate-200 mb-4 leading-relaxed flex-1">
                   Create smart algorithms that optimize portfolios and manage
                   risk. Help users achieve better returns while keeping their
                   investments safe.
@@ -3112,7 +3112,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-orange-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 group cursor-pointer rounded-3xl">
+            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-orange-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/20 group cursor-pointer rounded-3xl h-full flex flex-col">
               <CardHeader>
                 <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
                   <Smartphone className="h-8 w-8 text-white" />
@@ -3124,8 +3124,8 @@ export default function Index() {
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-slate-200 mb-4 leading-relaxed">
+              <CardContent className="flex-1 flex flex-col">
+                <p className="text-slate-200 mb-4 leading-relaxed flex-1">
                   Work on world-class mobile experiences that make portfolio
                   management intuitive and accessible. Build complex financial
                   apps with smooth performance.
