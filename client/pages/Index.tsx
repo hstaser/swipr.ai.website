@@ -655,9 +655,10 @@ export default function Index() {
                 href="#hero"
                 onClick={(e) => {
                   e.preventDefault();
-                  document
-                    .getElementById("hero")
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  const waitlistForm = document.querySelector('.max-w-lg.mx-auto');
+                  if (waitlistForm) {
+                    waitlistForm.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }
                 }}
                 className="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
               >
