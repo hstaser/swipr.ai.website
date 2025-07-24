@@ -1172,7 +1172,13 @@ export default function Index() {
                           +5.7%
                         </div>
                       </div>
-                      <div className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 col-span-2">
+                      <div
+                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 col-span-2 cursor-pointer hover:bg-white/20 transition-all duration-200 hover:scale-105"
+                        onClick={() => {
+                          setSelectedCompany('NVDA');
+                          setCompanyDrawerOpen(true);
+                        }}
+                      >
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
                             src="https://logo.clearbit.com/nvidia.com"
@@ -1184,7 +1190,7 @@ export default function Index() {
                           NVDA
                         </div>
                         <div className="text-green-400 text-xs md:text-sm">
-                          +3.2%
+                          +3.3%
                         </div>
                       </div>
                     </div>
