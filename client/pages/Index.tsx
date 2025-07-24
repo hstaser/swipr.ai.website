@@ -412,14 +412,23 @@ export default function Index() {
   // Initialize backend data on component mount
   useEffect(() => {
     const initializeData = async () => {
-      await loadStockPrices();
+      try {
+        await loadStockPrices();
+      } catch (error) {
+        console.error('Failed to load stock prices:', error);
+      }
 
-      // Track page view
-      const token = localStorage.getItem('swipr_token');
-      await apiClient.trackEvent('page_viewed', {
-        page: 'home',
-        authenticated: !!token
-      });
+      // Track page view (non-blocking)
+      try {
+        const token = localStorage.getItem('swipr_token');
+        await apiClient.trackEvent('page_viewed', {
+          page: 'home',
+          authenticated: !!token
+        });
+      } catch (error) {
+        console.error('Failed to track page view:', error);
+        // Don't show error to user for analytics failures
+      }
     };
 
     initializeData();
