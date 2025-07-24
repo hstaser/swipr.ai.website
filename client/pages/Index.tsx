@@ -2442,17 +2442,18 @@ export default function Index() {
                   <h3 className="text-2xl font-bold text-white mb-6">
                     Asset Allocation
                   </h3>
-                  <div className="h-64">
+                  <div className="h-80">
                     <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
+                      <PieChart margin={{ top: 30, right: 30, bottom: 30, left: 30 }}>
                         <Pie
                           data={pieData}
                           cx="50%"
                           cy="50%"
-                          outerRadius={80}
+                          outerRadius={90}
                           fill="#8884d8"
                           dataKey="value"
                           label={(entry) => `${entry.name} ${entry.value}%`}
+                          labelLine={false}
                         >
                           {pieData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />
