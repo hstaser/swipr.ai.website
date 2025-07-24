@@ -2514,7 +2514,7 @@ export default function Index() {
                   make better investment decisions.
                 </p>
 
-                <Link to="/apply?position=backend-engineer">
+                <Link to="/apply?position=backend-engineer" onClick={() => window.scrollTo(0, 0)}>
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
                     <Sparkles className="ml-2 h-4 w-4" />
