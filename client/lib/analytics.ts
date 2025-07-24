@@ -179,12 +179,15 @@ class Analytics {
       if (error instanceof Error) {
         if (error.name === "AbortError") {
           console.debug("Analytics request timed out");
-        } else if (error.message.includes("Failed to fetch")) {
+        } else if (error.message.includes("Failed to fetch") || error.name === "TypeError") {
           console.debug("Analytics network error - disabling for session");
           this.isEnabled = false; // Disable for rest of session to prevent spam
         } else {
           console.debug("Analytics tracking failed:", error.message);
         }
+      } else {
+        console.debug("Analytics tracking failed with unknown error");
+        this.isEnabled = false; // Disable for safety
       }
     }
   }
