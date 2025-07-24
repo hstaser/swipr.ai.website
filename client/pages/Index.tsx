@@ -1552,13 +1552,24 @@ export default function Index() {
               {/* Step 2: Optimization Preview - Faster */}
               {mvpStep === 2 && (
                 <div className="flex-1 p-8">
-                  <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">
-                      AI Portfolio Optimization
-                    </h3>
-                    <p className="text-white/80">
-                      Watch as our AI optimizes your selections
-                    </p>
+                  <div className="flex items-center justify-between mb-8">
+                    <Button
+                      onClick={() => setMvpStep(1)}
+                      variant="outline"
+                      className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500"
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Back
+                    </Button>
+                    <div className="text-center flex-1">
+                      <h3 className="text-3xl font-bold text-white mb-4">
+                        AI Portfolio Optimization
+                      </h3>
+                      <p className="text-white/80">
+                        Watch as our AI optimizes your selections
+                      </p>
+                    </div>
+                    <div className="w-20"></div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
