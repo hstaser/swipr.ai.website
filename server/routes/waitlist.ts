@@ -57,6 +57,7 @@ export const handleWaitlistSignup: RequestHandler = async (req, res) => {
     console.log("=======================");
     console.log(`📧 Email: ${waitlistEntry.email}`);
     console.log(`👤 Name: ${waitlistEntry.name || "Anonymous"}`);
+    console.log(`🎯 Interests: ${waitlistEntry.interests?.join(", ") || "None"}`);
     console.log(`🆔 Entry ID: ${waitlistEntry.id}`);
     console.log(`⏰ Joined At: ${waitlistEntry.joinedAt}`);
     console.log(`📊 Total Waitlist: ${waitlistEntries.length}`);
