@@ -243,9 +243,9 @@ const companyData = {
   AAPL: {
     name: "Apple Inc.",
     ticker: "AAPL",
-    price: 214.55,
-    change: 0.4,
-    changePercent: 0.19,
+    price: 214.46,
+    change: 0.31,
+    changePercent: 0.14,
     logo: "https://logo.clearbit.com/apple.com",
     sector: "Technology",
     industry: "Consumer Electronics",
@@ -309,9 +309,9 @@ const companyData = {
   TSLA: {
     name: "Tesla, Inc.",
     ticker: "TSLA",
-    price: 302.97,
-    change: -29.59,
-    changePercent: -8.9,
+    price: 302.28,
+    change: -30.28,
+    changePercent: -9.11,
     logo: "https://logo.clearbit.com/tesla.com",
     sector: "Consumer Cyclical",
     industry: "Auto Manufacturers",
@@ -413,9 +413,9 @@ const stockCards = [
     id: 1,
     symbol: "AAPL",
     name: "Apple Inc.",
-    price: "$214.78",
-    change: "+0.29%",
-    changeValue: "+$0.63",
+    price: "$214.46",
+    change: "+0.14%",
+    changeValue: "+$0.31",
     logo: "https://logo.clearbit.com/apple.com",
     sector: "Technology",
     marketCap: "$2.9T",
@@ -427,9 +427,9 @@ const stockCards = [
     id: 2,
     symbol: "TSLA",
     name: "Tesla Inc.",
-    price: "$304.02",
-    change: "-8.58%",
-    changeValue: "-$28.54",
+    price: "$302.28",
+    change: "-9.11%",
+    changeValue: "-$30.28",
     logo: "https://logo.clearbit.com/tesla.com",
     sector: "Automotive",
     marketCap: "$789B",
@@ -1267,7 +1267,7 @@ export default function Index() {
                           AAPL
                         </div>
                         <div className="text-green-400 text-xs md:text-sm">
-                          +0.29%
+                          +0.14%
                         </div>
                       </div>
                       <div
@@ -1288,7 +1288,7 @@ export default function Index() {
                           TSLA
                         </div>
                         <div className="text-red-400 text-xs md:text-sm">
-                          -8.58%
+                          -9.11%
                         </div>
                       </div>
                       <div
