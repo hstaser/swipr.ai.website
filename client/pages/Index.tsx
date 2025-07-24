@@ -3504,22 +3504,6 @@ export default function Index() {
                       Privacy Policy
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      to="/terms"
-                      className="text-white/70 hover:text-white transition-colors"
-                    >
-                      Terms of Service
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/security"
-                      className="text-white/70 hover:text-white transition-colors"
-                    >
-                      Security
-                    </Link>
-                  </li>
                 </ul>
               </div>
             </div>
