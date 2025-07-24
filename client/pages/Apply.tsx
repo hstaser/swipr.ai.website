@@ -277,30 +277,26 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                 </span>
               </Link>
 
-
+              {/* Back Button - Directly under swipr.ai */}
+              <div className="mt-2 ml-13">
+                <Link to="/">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border border-cyan-400/50 text-cyan-300 hover:bg-cyan-400/10 px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
+                  >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Home
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Back Button - Outside Navigation */}
-      <div className="pt-24 pb-4 px-6 relative z-10">
-        <div className="container mx-auto max-w-4xl">
-          <Link to="/">
-            <Button
-              variant="outline"
-              size="sm"
-              className="border border-cyan-400/50 text-cyan-300 hover:bg-cyan-400/10 px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Button>
-          </Link>
-        </div>
-      </div>
-
       {/* Main Content */}
-      <div className="pb-20 px-6 relative z-10">
+      <div className="pt-32 pb-20 px-6 relative z-10">
         <div className="container mx-auto max-w-4xl">
           {/* Header */}
           <div className="text-center mb-16">
