@@ -476,6 +476,7 @@ export default function Index() {
   const [portfolioOptimization, setPortfolioOptimization] =
     useState<PortfolioOptimization | null>(null);
   const [isOptimizing, setIsOptimizing] = useState(false);
+  const [isSubmittingPortfolio, setIsSubmittingPortfolio] = useState(false);
   const [followedUsers, setFollowedUsers] = useState<Set<string>>(new Set());
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [riskLevel, setRiskLevel] = useState<
