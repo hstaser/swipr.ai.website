@@ -570,6 +570,8 @@ export default function Index() {
     const currentStock = stockCards[currentStockIndex];
     if (!currentStock) return;
 
+    setIsSubmittingPortfolio(true);
+
     try {
       const result = await apiClient.swipeStock(currentStock.symbol, direction);
 
@@ -581,6 +583,15 @@ export default function Index() {
       if (direction === "right" && result.portfolioUpdate) {
         setPortfolio((prev) => [...prev, currentStock]);
         setUserPortfolio((prev) => [...prev, result.portfolioUpdate]);
+        setSuccessMessages((prev) => ({
+          ...prev,
+          swipe: `Successfully invested in ${currentStock.symbol}!`,
+        }));
+      } else if (direction === "left") {
+        setSuccessMessages((prev) => ({
+          ...prev,
+          swipe: `Passed on ${currentStock.symbol}`,
+        }));
       }
 
       await apiClient.trackEvent("stock_swiped", {
@@ -589,10 +600,15 @@ export default function Index() {
         step: currentStockIndex + 1,
       });
 
-      setCurrentStockIndex((prev) => prev + 1);
+      // Brief delay to show feedback before moving to next stock
+      setTimeout(() => {
+        setCurrentStockIndex((prev) => prev + 1);
+        setIsSubmittingPortfolio(false);
+      }, 800);
     } catch (error) {
       console.error("Stock swipe failed:", error);
       setErrors((prev) => ({ ...prev, swipe: "Failed to process swipe" }));
+      setIsSubmittingPortfolio(false);
     }
   };
 
