@@ -57,10 +57,14 @@ interface StockData {
 class ApiClient {
   private baseUrl: string;
   private token: string | null = null;
+  private analyticsEnabled: boolean = true;
 
   constructor() {
     this.baseUrl = '/api';
     this.token = localStorage.getItem('swipr_token');
+
+    // Allow disabling analytics via localStorage for debugging
+    this.analyticsEnabled = localStorage.getItem('disable_analytics') !== 'true';
   }
 
   private async request<T>(
