@@ -2269,22 +2269,9 @@ export default function Index() {
                   Reset to AI Recommendations
                 </Button>
               </div>
-              <p className="text-slate-400 text-sm mb-4">
-                Adjust the sliders above to manually override AI recommendations. The total should equal 100%.
+              <p className="text-slate-400 text-sm">
+                Adjust individual stock allocations above. Portfolio must total 100% for optimal performance. Cash allocation earns 4.8% overnight yield on unallocated funds.
               </p>
-              <div className="text-right">
-                <span className="text-slate-300">Total Allocation: </span>
-                <span className={`font-bold ${
-                  Object.values(manualOverrides).reduce((sum, val) => sum + val, 0) === 100
-                    ? 'text-green-400'
-                    : 'text-red-400'
-                }`}>
-                  {Object.values(manualOverrides).length > 0
-                    ? Object.values(manualOverrides).reduce((sum, val) => sum + val, 0)
-                    : pieData.reduce((sum, item) => sum + item.value, 0)
-                  }%
-                </span>
-              </div>
             </div>
 
             {/* Action Buttons */}
