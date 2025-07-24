@@ -394,12 +394,12 @@ export default function Privacy() {
               </div>
 
               <div className="flex justify-center pt-4">
-                <Link to="/#contact">
+                <a href="mailto:privacy@swipr.ai?subject=Privacy Request">
                   <Button className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700">
                     <Mail className="h-4 w-4 mr-2" />
                     Contact Our Team
                   </Button>
-                </Link>
+                </a>
               </div>
             </CardContent>
           </Card>
