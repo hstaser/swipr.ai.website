@@ -874,8 +874,7 @@ export default function Index() {
                         </div>
                       </div>
                       <div
-                        onClick={() => alert('NVDA: $432.81 (+3.2%)\nMarket Cap: $1.1T\nSwipes: 2,156 today\nAnalyst Rating: STRONG BUY\nAI Leader - Hot Stock!')}
-                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer col-span-2 hover:bg-white/20"
+                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 col-span-2"
                       >
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
