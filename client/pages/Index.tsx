@@ -1918,6 +1918,16 @@ export default function Index() {
                         </div>
                       </div>
                       <div className="text-center mt-6 space-y-2">
+                        {successMessages.swipe && (
+                          <div className="text-green-400 text-sm font-medium mb-2">
+                            {successMessages.swipe}
+                          </div>
+                        )}
+                        {errors.swipe && (
+                          <div className="text-red-400 text-sm font-medium mb-2">
+                            {errors.swipe}
+                          </div>
+                        )}
                         <div className="text-white/60 text-sm">
                           {currentStockIndex + 1} of {stockCards.length} stocks
                         </div>
