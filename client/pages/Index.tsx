@@ -3021,20 +3021,20 @@ export default function Index() {
                     </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to="/terms"
                       className="text-white/70 hover:text-white transition-colors"
                     >
                       Terms of Service
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to="/security"
                       className="text-white/70 hover:text-white transition-colors"
                     >
                       Security
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
