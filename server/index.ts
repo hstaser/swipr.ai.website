@@ -159,5 +159,96 @@ export function createServer() {
     });
   });
 
+  // Stock swipe endpoint
+  app.post("/api/stocks/swipe", (req, res) => {
+    const { symbol, direction, userId } = req.body;
+
+    if (!symbol || !direction) {
+      return res.status(400).json({ error: 'Symbol and direction required' });
+    }
+
+    res.json({
+      message: 'Stock swipe recorded successfully',
+      data: {
+        symbol,
+        direction,
+        userId: userId || 'anonymous',
+        timestamp: new Date().toISOString(),
+        portfolioUpdate: direction === 'right' ? {
+          symbol,
+          allocation: '5%',
+          addedAt: new Date().toISOString()
+        } : null
+      }
+    });
+  });
+
+  // Chat endpoint
+  app.post("/api/chat", (req, res) => {
+    const { message, sessionId } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ error: 'Message required' });
+    }
+
+    const responses = {
+      'tech stock': "Based on current analysis, NVDA shows strong fundamentals with AI tailwinds.",
+      'diversify': "I recommend diversifying across sectors: 30% tech, 25% healthcare, 20% finance, 15% consumer goods, 10% bonds/cash.",
+      'expected return': "With your current allocation, expected annual return is 8-12%. Tech heavy weighting increases potential but adds volatility.",
+      'AAPL': "AAPL is currently trading at $185.50 (+2.4%). Strong buy signals: iOS 18 adoption, services growth, China recovery."
+    };
+
+    let response = "I'm here to help with investment decisions! Ask me about portfolio allocation, stock analysis, or market trends.";
+
+    for (const [key, defaultResponse] of Object.entries(responses)) {
+      if (message.toLowerCase().includes(key.toLowerCase())) {
+        response = defaultResponse;
+        break;
+      }
+    }
+
+    res.json({
+      message: 'Chat response generated',
+      data: {
+        response,
+        sessionId: sessionId || `session_${Date.now()}`
+      }
+    });
+  });
+
+  // Portfolio simulation endpoint
+  app.post("/api/portfolio/simulate", (req, res) => {
+    const { allocation, timeframe = 12 } = req.body;
+
+    if (!allocation) {
+      return res.status(400).json({ error: 'Portfolio allocation required' });
+    }
+
+    const monthlyData = [];
+    let currentValue = 10000;
+
+    for (let i = 0; i <= timeframe; i++) {
+      const monthlyReturn = (Math.random() - 0.5) * 0.04 + 0.008; // -2% to +2% monthly, avg 0.8%
+      currentValue *= (1 + monthlyReturn);
+
+      monthlyData.push({
+        month: i,
+        value: Math.round(currentValue),
+        return: ((currentValue - 10000) / 10000 * 100).toFixed(2)
+      });
+    }
+
+    res.json({
+      message: 'Portfolio simulation completed',
+      data: {
+        simulation: monthlyData,
+        finalValue: currentValue,
+        totalReturn: ((currentValue - 10000) / 10000 * 100).toFixed(2),
+        volatility: (Math.random() * 15 + 10).toFixed(1),
+        sharpeRatio: (Math.random() * 2 + 0.5).toFixed(2)
+      }
+    });
+  });
+
   return app;
 }
