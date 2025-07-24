@@ -710,7 +710,7 @@ export default function Index() {
                     <div className="text-sm text-white/70">Apple Inc.</div>
                   </div>
                   <div className="text-center text-white/60 text-sm">
-                    👆 Swipe to build your portfolio
+                    Swipe to build your portfolio
                   </div>
                 </div>
               </div>
