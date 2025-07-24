@@ -1137,44 +1137,6 @@ export default function Index() {
             {/* Feature 4: Smart Chatbot */}
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="order-1">
-                <div className="relative">
-                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-3xl p-8 backdrop-blur-sm border border-orange-400/30">
-                    <div className="space-y-4 max-h-64 overflow-y-auto">
-                      <div className="flex justify-start">
-                        <div className="bg-white/20 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">
-                            Hi! I'm AlphaCue. Ask me about the market!
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex justify-end">
-                        <div className="bg-blue-600 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">
-                            What's the best tech stock right now?
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex justify-start">
-                        <div className="bg-white/20 rounded-xl p-3 max-w-xs">
-                          <div className="text-white text-sm">
-                            Based on current data, NVDA shows strong momentum
-                            with AI tailwinds.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 flex items-center p-3 bg-white/10 rounded-xl">
-                      <input
-                        placeholder="Ask AlphaCue... (Coming Feature)"
-                        className="flex-1 bg-transparent text-white placeholder-white/60 outline-none"
-                        disabled
-                      />
-                      <MessageSquare className="h-5 w-5 text-white/60" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="order-2">
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 hover:border-orange-400/50 transition-all duration-500 group">
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
@@ -1189,7 +1151,7 @@ export default function Index() {
                     LLM intelligence to provide instant, accurate investment
                     insights.
                   </p>
-                  <ul className="space-y-3 mb-6">
+                  <ul className="space-y-3">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
                       <span className="text-slate-200">
@@ -1207,18 +1169,44 @@ export default function Index() {
                       <span className="text-slate-200">24/7 availability</span>
                     </li>
                   </ul>
-                  <Button
-                    onClick={() => {
-                      setMvpStep(4);
-                      document
-                        .getElementById("mvp-demo")
-                        ?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105"
-                  >
-                    Chat Now
-                    <MessageSquare className="ml-2 h-5 w-5" />
-                  </Button>
+                </div>
+              </div>
+              <div className="order-2">
+                <div className="relative">
+                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md">
+                    <div className="space-y-3 max-h-48 overflow-y-auto">
+                      <div className="flex justify-start">
+                        <div className="bg-white/20 rounded-lg p-2 max-w-xs">
+                          <div className="text-white text-sm">
+                            Hi! I'm AlphaCue. Ask me about the market!
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-end">
+                        <div className="bg-blue-600 rounded-lg p-2 max-w-xs">
+                          <div className="text-white text-sm">
+                            What's the best tech stock right now?
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-start">
+                        <div className="bg-white/20 rounded-lg p-2 max-w-xs">
+                          <div className="text-white text-sm">
+                            Based on current data, NVDA shows strong momentum
+                            with AI tailwinds.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-3 flex items-center p-2 bg-white/10 rounded-lg">
+                      <input
+                        placeholder="Ask AlphaCue... (Coming Feature)"
+                        className="flex-1 bg-transparent text-white placeholder-white/60 outline-none text-sm"
+                        disabled
+                      />
+                      <MessageSquare className="h-4 w-4 text-white/60" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
