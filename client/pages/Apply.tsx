@@ -278,7 +278,7 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
               </Link>
 
               {/* Back Button */}
-              <Link to="/" className="mt-2">
+              <Link to="/" className="mt-4">
                 <Button
                   variant="outline"
                   size="sm"
