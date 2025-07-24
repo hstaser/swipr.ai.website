@@ -1443,7 +1443,7 @@ export default function Index() {
                         Swipe Through Stocks
                       </h3>
                       <p className="text-white/80">
-                        Swipe right to invest, left to pass (3 stocks only)
+                        Swipe right to invest, left to pass • 3 stocks total
                       </p>
                     </div>
                     <div className="w-20"></div>
