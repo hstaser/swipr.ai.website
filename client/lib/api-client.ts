@@ -213,9 +213,38 @@ class ApiClient {
   // Analytics methods
   async trackEvent(event: string, properties: Record<string, any> = {}, userId?: string): Promise<void> {
     try {
+      // Map the event name to valid eventType enum values
+      const eventTypeMap: Record<string, string> = {
+        'page_view': 'page_view',
+        'button_click': 'button_click',
+        'form_submit': 'form_submit',
+        'link_click': 'link_click',
+        'portfolio_optimized': 'button_click',
+        'stock_swiped': 'button_click',
+        'waitlist_joined': 'form_submit',
+        'contact_form_submitted': 'form_submit',
+        'job_application_submitted': 'form_submit',
+        'portfolio_copied': 'button_click'
+      };
+
+      const eventType = eventTypeMap[event] || 'button_click';
+
+      // Generate required fields for analytics schema
+      const analyticsData = {
+        eventType,
+        page: properties.page || window.location.pathname || '/',
+        element: properties.element || event,
+        value: properties.value || properties.amount || properties.position || null,
+        sessionId: properties.sessionId || `session_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        referrer: document.referrer || null,
+        location: window.location.href
+      };
+
       await this.request('/analytics/track', {
         method: 'POST',
-        body: JSON.stringify({ event, properties, userId }),
+        body: JSON.stringify(analyticsData),
       });
     } catch (error) {
       // Graceful degradation - log but don't break app
