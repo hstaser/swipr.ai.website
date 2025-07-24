@@ -75,7 +75,6 @@ class ApiClient {
         ...(this.token && { Authorization: `Bearer ${this.token}` }),
         ...options.headers,
       },
-      timeout: 10000, // 10 second timeout
       ...options,
     };
 
