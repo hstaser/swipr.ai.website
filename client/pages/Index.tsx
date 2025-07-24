@@ -2828,17 +2828,12 @@ export default function Index() {
                     />
                   </div>
 
-                  {/* Enhanced Interactive Chart */}
-                  <div className={`${comparedStocks.length > 1 ? 'h-[500px]' : 'h-96'} bg-slate-900/50 rounded-xl p-4`}>
+                  {/* Portfolio vs S&P 500 Chart */}
+                  <div className="h-96 bg-slate-900/50 rounded-xl p-4">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart
                         data={portfolioData}
-                        margin={{
-                          top: 20,
-                          right: comparedStocks.length > 1 ? 40 : 30,
-                          left: comparedStocks.length > 1 ? 40 : 20,
-                          bottom: comparedStocks.length > 1 ? 30 : 20
-                        }}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
                       >
                         <CartesianGrid
                           strokeDasharray="3 3"
