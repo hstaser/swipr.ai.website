@@ -1134,18 +1134,14 @@ export default function Index() {
                           +$142.30
                         </span>
                       </div>
-                      <div className="h-32 bg-white/10 rounded-xl p-4 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="mx-auto mb-2">
-                            <Logo
-                              variant="transparent"
-                              size="md"
-                              showText={false}
-                            />
-                          </div>
-                          <div className="text-white/60 text-sm">
-                            Live chart updates
-                          </div>
+                      <div className="h-32 bg-white/10 rounded-xl p-4 flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                          <span className="text-white text-sm">Portfolio updated</span>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-emerald-400 text-sm font-medium">+2.1%</div>
+                          <div className="text-white/60 text-xs">Last 24h</div>
                         </div>
                       </div>
                     </div>
