@@ -108,13 +108,18 @@ const generatePortfolioData = (riskLevel: number) => {
   });
 };
 
-const pieData = [
-  { name: "Tech", value: 60, color: "#3B82F6" },
-  { name: "Automotive", value: 25, color: "#10B981" },
-  { name: "Finance", value: 8, color: "#8B5CF6" },
-  { name: "Healthcare", value: 4, color: "#F59E0B" },
-  { name: "Other", value: 3, color: "#EF4444" },
+const stockAllocations = [
+  { ticker: "AAPL", name: "Apple Inc.", value: 25, color: "#3B82F6", logo: "https://logo.clearbit.com/apple.com" },
+  { ticker: "NVDA", name: "NVIDIA Corp.", value: 20, color: "#10B981", logo: "https://logo.clearbit.com/nvidia.com" },
+  { ticker: "TSLA", name: "Tesla Inc.", value: 15, color: "#8B5CF6", logo: "https://logo.clearbit.com/tesla.com" },
+  { ticker: "MSFT", name: "Microsoft Corp.", value: 12, color: "#F59E0B", logo: "https://logo.clearbit.com/microsoft.com" },
+  { ticker: "GOOGL", name: "Alphabet Inc.", value: 10, color: "#EF4444", logo: "https://logo.clearbit.com/google.com" },
+  { ticker: "AMZN", name: "Amazon.com Inc.", value: 8, color: "#EC4899", logo: "https://logo.clearbit.com/amazon.com" },
+  { ticker: "CASH", name: "Cash (4.8% APY)", value: 10, color: "#14B8A6", logo: "" },
 ];
+
+// For backward compatibility with pie charts
+const pieData = stockAllocations.filter(item => item.ticker !== "CASH");
 
 // Reduced to 3 stocks for faster optimization
 const stockCards = [
