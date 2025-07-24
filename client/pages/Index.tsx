@@ -2776,7 +2776,7 @@ export default function Index() {
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-2xl font-bold text-white">
-                      Portfolio Performance
+                      Portfolio vs S&P 500
                     </h3>
                     <div className="flex items-center space-x-2">
                       {["1D", "1W", "1M", "3M", "1Y"].map((timeframe) => (
