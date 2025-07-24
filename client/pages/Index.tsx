@@ -221,6 +221,179 @@ export default function Index() {
     trackLearnMoreClick,
   } = useAnalytics();
 
+  // Backend integration functions
+  const loadStockPrices = async () => {
+    setIsLoadingStocks(true);
+    try {
+      const prices = await apiClient.getStockPrices();
+      setStockPrices(prices);
+      await apiClient.trackEvent('stock_prices_loaded', { count: Object.keys(prices).length });
+    } catch (error) {
+      console.error('Failed to load stock prices:', error);
+      setErrors(prev => ({ ...prev, stocks: 'Failed to load stock data' }));
+    } finally {
+      setIsLoadingStocks(false);
+    }
+  };
+
+  const handlePortfolioOptimization = async () => {
+    setIsOptimizing(true);
+    try {
+      const optimization = await apiClient.optimizePortfolio(riskLevel, investmentAmount);
+      setPortfolioOptimization(optimization);
+      setPortfolioValue(optimization.totalValue);
+      await apiClient.trackEvent('portfolio_optimized', {
+        riskLevel,
+        amount: investmentAmount,
+        expectedReturn: optimization.expectedReturn
+      });
+      setSuccessMessages(prev => ({ ...prev, portfolio: 'Portfolio optimized successfully!' }));
+    } catch (error) {
+      console.error('Portfolio optimization failed:', error);
+      setErrors(prev => ({ ...prev, portfolio: 'Failed to optimize portfolio' }));
+    } finally {
+      setIsOptimizing(false);
+    }
+  };
+
+  const handleStockSwipe = async (direction: 'left' | 'right') => {
+    const currentStock = stockCards[currentStockIndex];
+    if (!currentStock) return;
+
+    try {
+      const result = await apiClient.swipeStock(currentStock.symbol, direction);
+
+      setSwipedStocks((prev) => ({
+        ...prev,
+        [currentStockIndex]: direction,
+      }));
+
+      if (direction === 'right' && result.portfolioUpdate) {
+        setPortfolio((prev) => [...prev, currentStock]);
+        setUserPortfolio(prev => [...prev, result.portfolioUpdate]);
+      }
+
+      await apiClient.trackEvent('stock_swiped', {
+        symbol: currentStock.symbol,
+        direction,
+        step: currentStockIndex + 1
+      });
+
+      setCurrentStockIndex((prev) => prev + 1);
+    } catch (error) {
+      console.error('Stock swipe failed:', error);
+      setErrors(prev => ({ ...prev, swipe: 'Failed to process swipe' }));
+    }
+  };
+
+  const handleFollowUser = async (userId: string) => {
+    try {
+      if (followedUsers.has(userId)) {
+        await apiClient.unfollowUser(userId);
+        setFollowedUsers(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(userId);
+          return newSet;
+        });
+        await apiClient.trackEvent('user_unfollowed', { targetUserId: userId });
+      } else {
+        await apiClient.followUser(userId);
+        setFollowedUsers(prev => new Set(prev).add(userId));
+        await apiClient.trackEvent('user_followed', { targetUserId: userId });
+      }
+    } catch (error) {
+      console.error('Follow action failed:', error);
+      setErrors(prev => ({ ...prev, follow: 'Failed to update follow status' }));
+    }
+  };
+
+  const handleChatSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim()) return;
+
+    setIsLoadingResponse(true);
+    const userMessage = chatInput;
+    setChatInput("");
+
+    // Add user message immediately
+    setChatMessages(prev => [...prev, { sender: "user", message: userMessage }]);
+
+    try {
+      const response = await apiClient.sendChatMessage(userMessage, chatSessionId);
+      setChatSessionId(response.sessionId);
+
+      // Add bot response
+      setChatMessages(prev => [...prev, { sender: "bot", message: response.response }]);
+
+      await apiClient.trackEvent('chat_message_sent', {
+        messageLength: userMessage.length,
+        sessionId: response.sessionId
+      });
+    } catch (error) {
+      console.error('Chat failed:', error);
+      setChatMessages(prev => [...prev, {
+        sender: "bot",
+        message: "Sorry, I'm having trouble connecting right now. Please try again."
+      }]);
+    } finally {
+      setIsLoadingResponse(false);
+    }
+  };
+
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingWaitlist(true);
+    setErrors(prev => ({ ...prev, waitlist: '' }));
+
+    try {
+      const result = await apiClient.joinWaitlist(
+        waitlistData.email,
+        waitlistData.name,
+        waitlistData.interests
+      );
+
+      setWaitlistMessage(`Success! You're #${result.position} on our waitlist.`);
+      setWaitlistData({ name: "", email: "", interests: [] });
+
+      await apiClient.trackEvent('waitlist_joined', {
+        position: result.position,
+        interests: waitlistData.interests
+      });
+      trackWaitlistSignup();
+    } catch (error: any) {
+      setErrors(prev => ({ ...prev, waitlist: error.message || 'Failed to join waitlist' }));
+    } finally {
+      setIsSubmittingWaitlist(false);
+    }
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingContact(true);
+    setErrors(prev => ({ ...prev, contact: '' }));
+
+    try {
+      const result = await apiClient.sendContactMessage(
+        formData.name,
+        formData.email,
+        formData.message
+      );
+
+      setContactMessage("Message sent successfully! We'll get back to you soon.");
+      setFormData({ name: "", email: "", message: "" });
+
+      await apiClient.trackEvent('contact_form_submitted', {
+        messageId: result.id,
+        messageLength: formData.message.length
+      });
+      trackFormSubmit();
+    } catch (error: any) {
+      setErrors(prev => ({ ...prev, contact: error.message || 'Failed to send message' }));
+    } finally {
+      setIsSubmittingContact(false);
+    }
+  };
+
   // Handle scroll for sticky navbar
   useEffect(() => {
     const handleScroll = () => {
