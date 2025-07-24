@@ -121,6 +121,90 @@ const stockAllocations = [
 // For backward compatibility with pie charts
 const pieData = stockAllocations.filter(item => item.ticker !== "CASH");
 
+// Company information database
+const companyData = {
+  AAPL: {
+    name: "Apple Inc.",
+    ticker: "AAPL",
+    price: 185.42,
+    change: 4.32,
+    changePercent: 2.4,
+    logo: "https://logo.clearbit.com/apple.com",
+    sector: "Technology",
+    industry: "Consumer Electronics",
+    marketCap: "2.9T",
+    peRatio: 28.5,
+    dividendYield: 0.5,
+    yearPerformance: 12.8,
+    description: "Apple Inc. designs, manufactures, and markets consumer electronics, computer software, and online services worldwide.",
+    news: [
+      { title: "Apple Reports Record Q4 Earnings", summary: "iPhone sales exceed expectations with strong services growth", time: "2 hours ago" },
+      { title: "New Vision Pro Updates Released", summary: "Enhanced productivity features and app ecosystem expansion", time: "1 day ago" },
+      { title: "AI Integration Roadmap Announced", summary: "Machine learning capabilities coming to all Apple devices", time: "3 days ago" }
+    ]
+  },
+  NVDA: {
+    name: "NVIDIA Corporation",
+    ticker: "NVDA",
+    price: 432.81,
+    change: 13.65,
+    changePercent: 3.2,
+    logo: "https://logo.clearbit.com/nvidia.com",
+    sector: "Technology",
+    industry: "Semiconductors",
+    marketCap: "1.1T",
+    peRatio: 45.2,
+    dividendYield: 0.1,
+    yearPerformance: 234.5,
+    description: "NVIDIA Corporation provides graphics, computing and networking solutions for gaming, professional markets, and data centers.",
+    news: [
+      { title: "AI Chip Demand Surges", summary: "Data center revenue up 200% year-over-year", time: "4 hours ago" },
+      { title: "New H200 GPU Launch", summary: "Next-generation AI accelerator for enterprise customers", time: "2 days ago" },
+      { title: "Partnership with Major Cloud Providers", summary: "Expanding infrastructure for AI workloads globally", time: "1 week ago" }
+    ]
+  },
+  TSLA: {
+    name: "Tesla, Inc.",
+    ticker: "TSLA",
+    price: 248.73,
+    change: -4.52,
+    changePercent: -1.8,
+    logo: "https://logo.clearbit.com/tesla.com",
+    sector: "Consumer Cyclical",
+    industry: "Auto Manufacturers",
+    marketCap: "792B",
+    peRatio: 42.1,
+    dividendYield: 0.0,
+    yearPerformance: -14.2,
+    description: "Tesla, Inc. designs, develops, manufactures, and sells electric vehicles and energy generation and storage systems.",
+    news: [
+      { title: "Model Y Production Milestone", summary: "Reaches 2 million units produced globally", time: "6 hours ago" },
+      { title: "Supercharger Network Expansion", summary: "Opening 500 new charging stations across North America", time: "1 day ago" },
+      { title: "Full Self-Driving Update", summary: "Beta version 12.0 released to select customers", time: "4 days ago" }
+    ]
+  },
+  MSFT: {
+    name: "Microsoft Corporation",
+    ticker: "MSFT",
+    price: 378.91,
+    change: 8.45,
+    changePercent: 2.3,
+    logo: "https://logo.clearbit.com/microsoft.com",
+    sector: "Technology",
+    industry: "Software - Infrastructure",
+    marketCap: "2.8T",
+    peRatio: 32.1,
+    dividendYield: 0.7,
+    yearPerformance: 18.9,
+    description: "Microsoft Corporation develops and supports software, services, devices and solutions worldwide.",
+    news: [
+      { title: "Azure Cloud Revenue Jumps", summary: "40% growth in cloud services this quarter", time: "1 hour ago" },
+      { title: "Copilot AI Integration", summary: "AI assistant now available across Office 365 suite", time: "2 days ago" },
+      { title: "Gaming Division Strong Performance", summary: "Xbox Game Pass reaches 30 million subscribers", time: "5 days ago" }
+    ]
+  }
+};
+
 // Reduced to 3 stocks for faster optimization
 const stockCards = [
   {
