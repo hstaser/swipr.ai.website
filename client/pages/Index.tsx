@@ -2146,6 +2146,134 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Portfolio Execution Screen */}
+      {showExecutionScreen && (
+        <section className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-slate-600">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-white">Execute Portfolio</h2>
+              <Button
+                onClick={() => setShowExecutionScreen(false)}
+                variant="outline"
+                className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Portfolio Overview */}
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div className="bg-slate-800/50 rounded-xl p-6">
+                <h3 className="text-xl font-semibold text-white mb-4">Portfolio Allocation</h3>
+                <div className="space-y-4">
+                  {pieData.map((item, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div
+                          className="w-4 h-4 rounded-full"
+                          style={{ backgroundColor: item.color }}
+                        ></div>
+                        <span className="text-slate-200">{item.name}</span>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <span className="text-white font-semibold">{manualOverrides[item.name] ?? item.value}%</span>
+                        <input
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={manualOverrides[item.name] ?? item.value}
+                          onChange={(e) => setManualOverrides(prev => ({
+                            ...prev,
+                            [item.name]: parseInt(e.target.value)
+                          }))}
+                          className="w-20 h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer slider"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-slate-800/50 rounded-xl p-6">
+                <h3 className="text-xl font-semibold text-white mb-4">Investment Summary</h3>
+                <div className="space-y-4">
+                  <div className="flex justify-between">
+                    <span className="text-slate-300">Total Investment:</span>
+                    <span className="text-white font-bold text-lg">$10,000</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-300">Expected Annual Return:</span>
+                    <span className="text-emerald-400 font-bold">+12.8%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-300">Risk Score:</span>
+                    <span className="text-orange-400 font-bold">Medium</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-300">Estimated 1Y Value:</span>
+                    <span className="text-cyan-400 font-bold">$11,280</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Manual Override Section */}
+            <div className="bg-slate-800/50 rounded-xl p-6 mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold text-white">Manual Overrides</h3>
+                <Button
+                  onClick={() => setManualOverrides({})}
+                  variant="outline"
+                  className="border-slate-600 text-slate-300 hover:text-white text-sm"
+                >
+                  Reset to AI Recommendations
+                </Button>
+              </div>
+              <p className="text-slate-400 text-sm mb-4">
+                Adjust the sliders above to manually override AI recommendations. The total should equal 100%.
+              </p>
+              <div className="text-right">
+                <span className="text-slate-300">Total Allocation: </span>
+                <span className={`font-bold ${
+                  Object.values(manualOverrides).reduce((sum, val) => sum + val, 0) === 100
+                    ? 'text-green-400'
+                    : 'text-red-400'
+                }`}>
+                  {Object.values(manualOverrides).length > 0
+                    ? Object.values(manualOverrides).reduce((sum, val) => sum + val, 0)
+                    : pieData.reduce((sum, item) => sum + item.value, 0)
+                  }%
+                </span>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <Button
+                className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white h-14 rounded-xl font-semibold"
+                onClick={() => {
+                  setShowExecutionScreen(false);
+                  alert('Portfolio executed successfully! You would now be redirected to your brokerage account.');
+                }}
+              >
+                <Target className="mr-2 h-5 w-5" />
+                Execute Portfolio ($10,000)
+              </Button>
+              <Button
+                variant="outline"
+                className="flex-1 border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 h-14 rounded-xl font-semibold"
+                onClick={() => {
+                  alert('Portfolio saved to watchlist!');
+                }}
+              >
+                <Eye className="mr-2 h-5 w-5" />
+                Save to Watchlist
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Portfolio Simulator Section */}
       <section id="simulator" className="py-32 relative z-10">
         <div className="container mx-auto px-6">
