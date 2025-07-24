@@ -617,22 +617,117 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
             </CardContent>
           </Card>
 
-          {/* Additional Info */}
-          <div className="mt-12 text-center">
-            <Alert className="border-cyan-500/50 bg-cyan-500/10 rounded-xl max-w-2xl mx-auto">
-              <Info className="h-5 w-5 text-cyan-400" />
-              <AlertDescription className="text-cyan-200">
-                We review all applications carefully and will get back to you
-                within 5-7 business days. Questions? Email us at{" "}
-                <a
-                  href="mailto:team@swipr.ai"
-                  className="text-cyan-300 hover:text-cyan-200 underline"
+          {/* Success Screen */}
+          {submitSuccess ? (
+            <div className="text-center py-20">
+              <div className="mb-8">
+                <div className="w-24 h-24 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                  <CheckCircle className="h-12 w-12 text-white" />
+                </div>
+                <h2 className="text-4xl font-bold text-white mb-4">
+                  Application Submitted!
+                </h2>
+                <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
+                  Thank you for your interest in joining swipr.ai. We've received your application and will review it carefully.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl p-8 max-w-2xl mx-auto mb-8">
+                <h3 className="text-2xl font-bold text-white mb-6">What's Next?</h3>
+                <div className="space-y-4 text-left">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">1</div>
+                    <div>
+                      <div className="text-white font-semibold">Application Review</div>
+                      <div className="text-slate-300 text-sm">Our team will review your application within 3-5 business days</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">2</div>
+                    <div>
+                      <div className="text-white font-semibold">Initial Interview</div>
+                      <div className="text-slate-300 text-sm">If selected, we'll schedule a 30-minute video call</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">3</div>
+                    <div>
+                      <div className="text-white font-semibold">Technical Assessment</div>
+                      <div className="text-slate-300 text-sm">A brief project or technical discussion</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">4</div>
+                    <div>
+                      <div className="text-white font-semibold">Final Decision</div>
+                      <div className="text-slate-300 text-sm">We'll make our final decision and extend an offer</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4 justify-center">
+                <Button
+                  onClick={() => {
+                    setSubmitSuccess(false);
+                    setCurrentStep(1);
+                    setFormData({
+                      firstName: "",
+                      lastName: "",
+                      email: "",
+                      phone: "",
+                      position: "",
+                      linkedinUrl: "",
+                      portfolioUrl: "",
+                      startDate: "",
+                    });
+                    setResume(null);
+                  }}
+                  variant="outline"
+                  className="border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-6 py-3 rounded-xl"
                 >
-                  team@swipr.ai
-                </a>
-              </AlertDescription>
-            </Alert>
-          </div>
+                  Submit Another Application
+                </Button>
+                <Link to="/">
+                  <Button className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 px-6 py-3 rounded-xl">
+                    Back to Home
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            /* Regular form content when not in success state */
+            <>
+              {/* Application Form */}
+              <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl">
+                <CardHeader>
+                  <CardTitle className="text-3xl text-white dark:text-white font-bold">
+                    {currentStep === 1 ? 'Application Form' : 'Review Your Application'}
+                  </CardTitle>
+                  <CardDescription className="text-lg text-slate-200">
+                    {currentStep === 1 ? 'Tell us about yourself and why you\'d be a great fit' : 'Please review your information before submitting'}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              {/* Additional Info */}
+              <div className="mt-12 text-center">
+                <Alert className="border-cyan-500/50 bg-cyan-500/10 rounded-xl max-w-2xl mx-auto">
+                  <Info className="h-5 w-5 text-cyan-400" />
+                  <AlertDescription className="text-cyan-200">
+                    We review all applications carefully and will get back to you
+                    within 5-7 business days. Questions? Email us at{" "}
+                    <a
+                      href="mailto:team@swipr.ai"
+                      className="text-cyan-300 hover:text-cyan-200 underline"
+                    >
+                      team@swipr.ai
+                    </a>
+                  </AlertDescription>
+                </Alert>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
