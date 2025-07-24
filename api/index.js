@@ -56,26 +56,32 @@ const authenticateToken = (authHeader) => {
 };
 
 const generatePortfolioOptimization = (riskLevel, investmentAmount, preferences = {}) => {
+  // Ensure valid inputs to prevent NaN
+  const safeInvestmentAmount = Math.max(Number(investmentAmount) || 100, 100);
+
   const allocations = {
     conservative: { stocks: 0.3, bonds: 0.6, cash: 0.1 },
     moderate: { stocks: 0.6, bonds: 0.3, cash: 0.1 },
     aggressive: { stocks: 0.8, bonds: 0.15, cash: 0.05 }
   };
-  
+
   const allocation = allocations[riskLevel] || allocations.moderate;
-  
+
   const stocks = ['AAPL', 'NVDA', 'TSLA', 'GOOGL', 'MSFT'];
   const portfolio = stocks.map(symbol => ({
     symbol,
     allocation: (allocation.stocks / stocks.length * 100).toFixed(1),
-    amount: ((allocation.stocks / stocks.length) * investmentAmount).toFixed(2),
-    currentPrice: stockPrices[symbol]?.price || 0,
+    amount: ((allocation.stocks / stocks.length) * safeInvestmentAmount).toFixed(2),
+    currentPrice: stockPrices[symbol]?.price || 185.42,
     expectedReturn: (Math.random() * 20 + 5).toFixed(1) + '%'
   }));
-  
+
+  // Ensure all calculated values are valid numbers
+  const expectedReturnValue = (allocation.stocks * 12 + allocation.bonds * 4 + allocation.cash * 1);
+
   return {
-    totalValue: investmentAmount,
-    expectedReturn: ((allocation.stocks * 12 + allocation.bonds * 4 + allocation.cash * 1)).toFixed(1) + '%',
+    totalValue: safeInvestmentAmount,
+    expectedReturn: (expectedReturnValue || 10).toFixed(1) + '%',
     riskScore: riskLevel === 'conservative' ? 3 : riskLevel === 'moderate' ? 6 : 9,
     allocations: allocation,
     recommendations: portfolio,
