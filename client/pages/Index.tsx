@@ -2600,7 +2600,7 @@ export default function Index() {
                   apps with smooth performance.
                 </p>
 
-                <Link to="/apply?position=mobile-app-developer">
+                <Link to="/apply?position=mobile-app-developer" onClick={() => window.scrollTo(0, 0)}>
                   <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
                     <Smartphone className="ml-2 h-4 w-4" />
