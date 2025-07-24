@@ -826,8 +826,8 @@ export default function Index() {
   useEffect(() => {
     const riskValue =
       riskLevel === "conservative" ? 0.3 : riskLevel === "moderate" ? 0.6 : 0.8;
-    setPortfolioData(generatePortfolioData(riskValue));
-  }, [riskLevel]);
+    setPortfolioData(generatePortfolioData(riskValue, selectedTimeframe));
+  }, [riskLevel, selectedTimeframe]);
 
   // Portfolio data remains static - no fake real-time updates
 
