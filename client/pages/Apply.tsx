@@ -249,27 +249,30 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
         }`}
       >
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/25">
-                <Logo variant="transparent" size="sm" showText={false} />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                swipr.ai
-              </span>
-            </Link>
+          <div className="h-20">
+            <div className="flex flex-col">
+              {/* Logo */}
+              <Link to="/" className="flex items-center space-x-3 group pt-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/25">
+                  <Logo variant="transparent" size="sm" showText={false} />
+                </div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                  swipr.ai
+                </span>
+              </Link>
 
-            {/* Back Button */}
-            <Link to="/">
-              <Button
-                variant="outline"
-                className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
-              >
-                <ArrowLeft className="mr-2 h-5 w-5" />
-                Back to Home
-              </Button>
-            </Link>
+              {/* Back Button */}
+              <Link to="/" className="mt-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border border-cyan-400/50 text-cyan-300 hover:bg-cyan-400/10 px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Home
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
