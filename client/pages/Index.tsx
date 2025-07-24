@@ -2843,7 +2843,7 @@ export default function Index() {
                   </div>
 
                   {/* Enhanced Interactive Chart */}
-                  <div className="h-96 bg-slate-900/50 rounded-xl p-4">
+                  <div className={`${comparedStocks.length > 1 ? 'h-[500px]' : 'h-96'} bg-slate-900/50 rounded-xl p-4`}>
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart
                         data={portfolioData}
