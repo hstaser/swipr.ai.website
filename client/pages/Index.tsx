@@ -680,7 +680,7 @@ export default function Index() {
             </p>
             <p className="text-xl md:text-2xl mb-12 text-slate-200 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
               Smarter investing in seconds. Swipe through stocks like social
-              media, let AI optimize your portfolio.
+              media and let AI optimize your portfolio.
             </p>
 
             {/* Interactive Preview */}
