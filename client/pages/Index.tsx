@@ -3044,7 +3044,7 @@ export default function Index() {
                 >
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
-                    <Sparkles className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
@@ -3075,7 +3075,7 @@ export default function Index() {
                 >
                   <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
-                    <Zap className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
@@ -3106,7 +3106,7 @@ export default function Index() {
                 >
                   <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
-                    <Target className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
