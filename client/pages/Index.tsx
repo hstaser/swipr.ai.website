@@ -459,10 +459,25 @@ export default function Index() {
   // Auto-optimize portfolio when in demo mode
   useEffect(() => {
     if (mvpStep === 2) {
+      setOptimizationProgress(0);
+      const interval = setInterval(() => {
+        setOptimizationProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 200);
+
       const timer = setTimeout(() => {
         handlePortfolioOptimization();
-      }, 1000);
-      return () => clearTimeout(timer);
+      }, 2500);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timer);
+      };
     }
   }, [mvpStep, riskLevel, investmentAmount]);
 
