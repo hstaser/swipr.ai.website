@@ -2874,6 +2874,7 @@ export default function Index() {
                           axisLine={false}
                           tickLine={false}
                           tick={{ fill: "#ffffff60" }}
+                          domain={['dataMin - 200', 'dataMax + 200']}
                           tickFormatter={(value) =>
                             `$${(value / 1000).toFixed(0)}k`
                           }
