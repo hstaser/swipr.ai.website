@@ -81,22 +81,69 @@ import {
   WaitlistResponse,
 } from "@shared/api";
 
-// Portfolio simulation data
-const generatePortfolioData = (riskLevel: number) => {
-  const baseData = [
-    { month: "Jan", value: 10000, growth: 0 },
-    { month: "Feb", value: 10200, growth: 2 },
-    { month: "Mar", value: 10150, growth: 1.5 },
-    { month: "Apr", value: 10400, growth: 4 },
-    { month: "May", value: 10380, growth: 3.8 },
-    { month: "Jun", value: 10650, growth: 6.5 },
-    { month: "Jul", value: 10580, growth: 5.8 },
-    { month: "Aug", value: 10820, growth: 8.2 },
-    { month: "Sep", value: 10750, growth: 7.5 },
-    { month: "Oct", value: 11050, growth: 10.5 },
-    { month: "Nov", value: 11100, growth: 11 },
-    { month: "Dec", value: 11350, growth: 13.5 },
-  ];
+// Portfolio simulation data with different timeframes
+const generatePortfolioData = (riskLevel: number, timeframe: string = "1M") => {
+  let baseData;
+
+  switch (timeframe) {
+    case "1D":
+      baseData = [
+        { month: "9AM", value: 10000, growth: 0 },
+        { month: "10AM", value: 10025, growth: 0.25 },
+        { month: "11AM", value: 10015, growth: 0.15 },
+        { month: "12PM", value: 10045, growth: 0.45 },
+        { month: "1PM", value: 10035, growth: 0.35 },
+        { month: "2PM", value: 10055, growth: 0.55 },
+        { month: "3PM", value: 10040, growth: 0.40 },
+        { month: "4PM", value: 10065, growth: 0.65 },
+      ];
+      break;
+    case "1W":
+      baseData = [
+        { month: "Mon", value: 10000, growth: 0 },
+        { month: "Tue", value: 10120, growth: 1.2 },
+        { month: "Wed", value: 10080, growth: 0.8 },
+        { month: "Thu", value: 10200, growth: 2.0 },
+        { month: "Fri", value: 10180, growth: 1.8 },
+        { month: "Sat", value: 10220, growth: 2.2 },
+        { month: "Sun", value: 10250, growth: 2.5 },
+      ];
+      break;
+    case "3M":
+      baseData = [
+        { month: "Oct", value: 10000, growth: 0 },
+        { month: "Oct 15", value: 10180, growth: 1.8 },
+        { month: "Nov", value: 10240, growth: 2.4 },
+        { month: "Nov 15", value: 10320, growth: 3.2 },
+        { month: "Dec", value: 10280, growth: 2.8 },
+        { month: "Dec 15", value: 10420, growth: 4.2 },
+        { month: "Jan", value: 10480, growth: 4.8 },
+      ];
+      break;
+    case "1Y":
+      baseData = [
+        { month: "Jan", value: 10000, growth: 0 },
+        { month: "Feb", value: 10200, growth: 2 },
+        { month: "Mar", value: 10150, growth: 1.5 },
+        { month: "Apr", value: 10400, growth: 4 },
+        { month: "May", value: 10380, growth: 3.8 },
+        { month: "Jun", value: 10650, growth: 6.5 },
+        { month: "Jul", value: 10580, growth: 5.8 },
+        { month: "Aug", value: 10820, growth: 8.2 },
+        { month: "Sep", value: 10750, growth: 7.5 },
+        { month: "Oct", value: 11050, growth: 10.5 },
+        { month: "Nov", value: 11100, growth: 11 },
+        { month: "Dec", value: 11350, growth: 13.5 },
+      ];
+      break;
+    default: // 1M
+      baseData = [
+        { month: "Week 1", value: 10000, growth: 0 },
+        { month: "Week 2", value: 10140, growth: 1.4 },
+        { month: "Week 3", value: 10110, growth: 1.1 },
+        { month: "Week 4", value: 10280, growth: 2.8 },
+      ];
+  }
 
   return baseData.map((item, index) => {
     const safeRiskLevel = typeof riskLevel === "number" ? riskLevel : 0.5;
@@ -105,8 +152,26 @@ const generatePortfolioData = (riskLevel: number) => {
     const calculatedValue = 10000 + growthMultiplier;
     const calculatedGrowth = item.growth * (1 + safeRiskLevel * 0.5);
 
-    // S&P 500 baseline performance (typically 8-10% annually)
-    const sp500Growth = item.growth * 0.7; // Slightly lower than optimized portfolio
+    // S&P 500 baseline performance varies by timeframe
+    let sp500Multiplier;
+    switch (timeframe) {
+      case "1D":
+        sp500Multiplier = 0.6; // Slightly lower daily performance
+        break;
+      case "1W":
+        sp500Multiplier = 0.7; // Weekly performance
+        break;
+      case "3M":
+        sp500Multiplier = 0.75; // Quarterly performance
+        break;
+      case "1Y":
+        sp500Multiplier = 0.8; // Annual performance (closer to portfolio)
+        break;
+      default: // 1M
+        sp500Multiplier = 0.65; // Monthly performance
+    }
+
+    const sp500Growth = item.growth * sp500Multiplier;
     const sp500Value = 10000 + (sp500Growth / 100) * 10000;
 
     return {
