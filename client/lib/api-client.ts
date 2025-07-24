@@ -208,47 +208,16 @@ class ApiClient {
 
   // Analytics methods
   async trackEvent(event: string, properties: Record<string, any> = {}, userId?: string): Promise<void> {
-    // Skip analytics if disabled
-    if (!this.analyticsEnabled) {
-      console.debug('Analytics disabled, skipping event:', event);
-      return;
-    }
+    // Simple analytics implementation that never throws errors
+    if (!event) return;
 
     try {
-      // Validate input data before sending
-      if (!event || typeof event !== 'string') {
-        console.warn('Invalid event name for analytics:', event);
-        return;
-      }
-
-      // Sanitize properties to avoid serialization issues
-      const sanitizedProperties = JSON.parse(JSON.stringify(properties || {}));
-
       await this.request('/analytics/track', {
         method: 'POST',
-        body: JSON.stringify({
-          event: event.trim(),
-          properties: sanitizedProperties,
-          userId: userId || undefined
-        }),
+        body: JSON.stringify({ event, properties, userId }),
       });
     } catch (error) {
-      // Log detailed analytics errors but don't throw them
-      console.warn('Analytics tracking failed for event:', event, 'Error:', error);
-
-      // Try to provide more context about the error
-      if (error instanceof Error) {
-        console.warn('Error details:', {
-          message: error.message,
-          stack: error.stack?.substring(0, 200)
-        });
-      }
-
-      // If analytics keep failing, auto-disable them for this session
-      if (error instanceof Error && error.message.includes('analytics')) {
-        console.warn('Disabling analytics for this session due to repeated failures');
-        this.analyticsEnabled = false;
-      }
+      // Silently ignore analytics errors
     }
   }
 
