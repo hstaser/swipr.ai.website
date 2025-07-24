@@ -294,6 +294,32 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
             </p>
           </div>
 
+          {/* Progress Tracker */}
+          {!submitSuccess && (
+            <div className="mb-12">
+              <div className="flex justify-center items-center space-x-4 mb-4">
+                <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition-all duration-300 ${
+                  currentStep >= 1 ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white' : 'bg-slate-600 text-slate-400'
+                }`}>
+                  1
+                </div>
+                <div className={`w-16 h-1 transition-all duration-300 ${
+                  currentStep >= 2 ? 'bg-gradient-to-r from-blue-500 to-teal-500' : 'bg-slate-600'
+                }`}></div>
+                <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition-all duration-300 ${
+                  currentStep >= 2 ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white' : 'bg-slate-600 text-slate-400'
+                }`}>
+                  2
+                </div>
+              </div>
+              <div className="text-center">
+                <p className="text-slate-300 text-sm">
+                  Step {currentStep} of 2: {currentStep === 1 ? 'Application Details' : 'Review & Submit'}
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Position Info */}
           {selectedPosition && (
             <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl mb-12 animate-fade-in-slow">
