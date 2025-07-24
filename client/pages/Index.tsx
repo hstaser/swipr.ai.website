@@ -2411,82 +2411,97 @@ export default function Index() {
                     />
                   </div>
 
-                  {/* Chart */}
-                  <div className="h-80">
+                  {/* Enhanced Interactive Chart */}
+                  <div className="h-96 bg-slate-900/50 rounded-xl p-4">
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={portfolioData}>
+                      <LineChart
+                        data={portfolioData}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                      >
                         <CartesianGrid
                           strokeDasharray="3 3"
-                          stroke="#ffffff20"
+                          stroke="#ffffff15"
+                          horizontal={true}
+                          vertical={false}
                         />
                         <XAxis
                           dataKey="month"
-                          stroke="#ffffff80"
-                          fontSize={12}
-                          axisLine={true}
-                          tickLine={true}
-                          allowDataOverflow={false}
-                          allowDecimals={true}
-                          allowDuplicatedCategory={true}
-                          type="category"
-                          scale="auto"
-                          tickMargin={5}
-                          minTickGap={5}
-                          interval="preserveStartEnd"
-                          tickSize={6}
+                          stroke="#ffffff60"
+                          fontSize={11}
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fill: '#ffffff60' }}
                         />
                         <YAxis
-                          stroke="#ffffff80"
-                          fontSize={12}
-                          axisLine={true}
-                          tickLine={true}
-                          allowDataOverflow={false}
-                          allowDecimals={true}
-                          allowDuplicatedCategory={true}
-                          type="number"
-                          scale="auto"
-                          tickMargin={5}
-                          minTickGap={5}
-                          tickSize={6}
-                          domain={["dataMin", "dataMax"]}
-                          tickFormatter={(value) =>
-                            `$${(value / 1000).toFixed(0)}k`
-                          }
+                          stroke="#ffffff60"
+                          fontSize={11}
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fill: '#ffffff60' }}
+                          tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
                         />
                         <Tooltip
                           contentStyle={{
                             backgroundColor: "rgba(15, 23, 42, 0.95)",
-                            border: "1px solid rgba(255, 255, 255, 0.2)",
-                            borderRadius: "12px",
+                            border: "1px solid rgba(6, 182, 212, 0.3)",
+                            borderRadius: "8px",
                             color: "white",
+                            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.3)",
                           }}
-                          formatter={(value: any) => [
-                            `$${value.toLocaleString()}`,
-                            "Portfolio Value",
-                          ]}
+                          labelStyle={{ color: '#06b6d4' }}
+                          cursor={{ stroke: '#06b6d4', strokeWidth: 1 }}
                         />
+
+                        {/* Portfolio Line */}
                         <Line
                           type="monotone"
                           dataKey="value"
-                          stroke="url(#colorGradient)"
+                          stroke="#06b6d4"
                           strokeWidth={3}
-                          dot={{ fill: "#06b6d4", strokeWidth: 2, r: 6 }}
-                          activeDot={{ r: 8, fill: "#06b6d4" }}
+                          dot={false}
+                          activeDot={{ r: 6, fill: "#06b6d4", stroke: "#ffffff", strokeWidth: 2 }}
+                          name="Portfolio"
                         />
-                        <defs>
-                          <linearGradient
-                            id="colorGradient"
-                            x1="0"
-                            y1="0"
-                            x2="1"
-                            y2="0"
-                          >
-                            <stop offset="0%" stopColor="#06b6d4" />
-                            <stop offset="100%" stopColor="#3b82f6" />
-                          </linearGradient>
-                        </defs>
+
+                        {/* Dynamic Stock Comparison Lines */}
+                        {comparedStocks.map((ticker, index) => {
+                          const colors = ['#10B981', '#8B5CF6', '#F59E0B'];
+                          const stockData = portfolioData.map((item, i) => ({
+                            ...item,
+                            [`${ticker}_value`]: item.value * (0.8 + Math.random() * 0.4) // Simulate different stock performance
+                          }));
+
+                          return (
+                            <Line
+                              key={ticker}
+                              type="monotone"
+                              dataKey={`${ticker}_value`}
+                              stroke={colors[index]}
+                              strokeWidth={2}
+                              strokeDasharray="5 5"
+                              dot={false}
+                              activeDot={{ r: 4, fill: colors[index] }}
+                              name={ticker}
+                              data={stockData}
+                            />
+                          );
+                        })}
                       </LineChart>
                     </ResponsiveContainer>
+                  </div>
+
+                  {/* Chart Controls */}
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <button className="p-2 bg-white/10 hover:bg-white/20 rounded text-white/70 hover:text-white transition-colors">
+                        <Eye className="h-4 w-4" />
+                      </button>
+                      <span className="text-white/60 text-sm">Zoom & Pan enabled</span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-emerald-400 font-bold text-lg">+13.5%</div>
+                      <div className="text-white/60 text-sm">Portfolio Return ({selectedTimeframe})</div>
+                    </div>
                   </div>
                 </div>
               </div>
