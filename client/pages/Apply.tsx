@@ -162,7 +162,7 @@ export default function Apply() {
 
     try {
       // Create comprehensive cover letter
-      const coverLetter = `I am applying for the ${position?.title} position at swipr.ai.
+      const coverLetter = `I am applying for the ${selectedPosition?.title} position at swipr.ai.
 
 Name: ${formData.firstName.trim()} ${formData.lastName.trim()}
 Email: ${formData.email.trim()}
