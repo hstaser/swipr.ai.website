@@ -180,39 +180,51 @@ class Analytics {
     // Track page view on initialization
     this.trackPageView();
 
-    // Track scroll depth with throttling
+    // Track scroll depth with throttling and error handling
     let ticking = false;
     let lastScrollTime = 0;
     const trackScroll = () => {
-      const now = Date.now();
-      // Throttle scroll tracking to once per second
-      if (!ticking && now - lastScrollTime > 1000) {
-        ticking = true;
-        lastScrollTime = now;
-        requestAnimationFrame(() => {
-          const scrollHeight =
-            document.documentElement.scrollHeight - window.innerHeight;
-          if (scrollHeight > 0) {
-            const scrollDepth = Math.round(
-              (window.scrollY / scrollHeight) * 100,
-            );
+      try {
+        if (!this.isEnabled) return;
 
-            if (
-              scrollDepth > this.lastScrollDepth &&
-              scrollDepth % 25 === 0 &&
-              scrollDepth <= 100
-            ) {
-              this.trackEvent({
-                eventType: "scroll_depth",
-                page: window.location.pathname,
-                element: "page",
-                value: scrollDepth,
-              });
-              this.lastScrollDepth = scrollDepth;
+        const now = Date.now();
+        // Throttle scroll tracking to once per second
+        if (!ticking && now - lastScrollTime > 1000) {
+          ticking = true;
+          lastScrollTime = now;
+          requestAnimationFrame(() => {
+            try {
+              const scrollHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
+              if (scrollHeight > 0) {
+                const scrollDepth = Math.round(
+                  (window.scrollY / scrollHeight) * 100,
+                );
+
+                if (
+                  scrollDepth > this.lastScrollDepth &&
+                  scrollDepth % 25 === 0 &&
+                  scrollDepth <= 100
+                ) {
+                  this.trackEvent({
+                    eventType: "scroll_depth",
+                    page: window.location.pathname,
+                    element: "page",
+                    value: scrollDepth,
+                  });
+                  this.lastScrollDepth = scrollDepth;
+                }
+              }
+            } catch (error) {
+              console.debug("Scroll tracking error:", error);
+            } finally {
+              ticking = false;
             }
-          }
-          ticking = false;
-        });
+          });
+        }
+      } catch (error) {
+        console.debug("Scroll handler error:", error);
+        ticking = false;
       }
     };
 
