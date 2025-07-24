@@ -405,18 +405,58 @@ export default function Index() {
 
   // Update portfolio data when risk level changes
   useEffect(() => {
-    setPortfolioData(generatePortfolioData(riskLevel));
+    const riskValue = riskLevel === 'conservative' ? 0.3 : riskLevel === 'moderate' ? 0.6 : 0.8;
+    setPortfolioData(generatePortfolioData(riskValue));
   }, [riskLevel]);
 
-  // Speed up optimization effect
+  // Initialize backend data on component mount
   useEffect(() => {
-    if (mvpStep === 2 && optimizationProgress < 100) {
+    const initializeData = async () => {
+      await loadStockPrices();
+
+      // Track page view
+      const token = localStorage.getItem('swipr_token');
+      await apiClient.trackEvent('page_viewed', {
+        page: 'home',
+        authenticated: !!token
+      });
+    };
+
+    initializeData();
+  }, []);
+
+  // Auto-optimize portfolio when in demo mode
+  useEffect(() => {
+    if (mvpStep === 2) {
       const timer = setTimeout(() => {
-        setOptimizationProgress((prev) => Math.min(prev + 20, 100));
-      }, 200); // Faster progress - every 200ms instead of 1000ms
+        handlePortfolioOptimization();
+      }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [mvpStep, optimizationProgress]);
+  }, [mvpStep, riskLevel, investmentAmount]);
+
+  // Clear messages after some time
+  useEffect(() => {
+    Object.keys(successMessages).forEach(key => {
+      if (successMessages[key]) {
+        const timer = setTimeout(() => {
+          setSuccessMessages(prev => ({ ...prev, [key]: '' }));
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    });
+  }, [successMessages]);
+
+  useEffect(() => {
+    Object.keys(errors).forEach(key => {
+      if (errors[key]) {
+        const timer = setTimeout(() => {
+          setErrors(prev => ({ ...prev, [key]: '' }));
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    });
+  }, [errors]);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
