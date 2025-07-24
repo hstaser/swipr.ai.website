@@ -227,7 +227,8 @@ export default function Index() {
     try {
       const prices = await apiClient.getStockPrices();
       setStockPrices(prices);
-      await apiClient.trackEvent('stock_prices_loaded', { count: Object.keys(prices).length });
+      // Track analytics (non-blocking)
+      apiClient.trackEvent('stock_prices_loaded', { count: Object.keys(prices).length });
     } catch (error) {
       console.error('Failed to load stock prices:', error);
       setErrors(prev => ({ ...prev, stocks: 'Failed to load stock data' }));
