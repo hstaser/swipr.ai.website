@@ -479,22 +479,7 @@ export default function Index() {
     return { expectedReturn, riskScore, diversification };
   };
 
-  // MVP Demo Functions
-  const handleStockSwipe = (direction: "left" | "right") => {
-    const currentStock = stockCards[currentStockIndex];
-    setSwipedStocks((prev) => ({ ...prev, [currentStock.id]: direction }));
 
-    if (direction === "right") {
-      setPortfolio((prev) => [...prev, currentStock]);
-    }
-
-    if (currentStockIndex < stockCards.length - 1) {
-      setCurrentStockIndex((prev) => prev + 1);
-    } else {
-      setMvpStep(2); // Move to optimization preview
-      setOptimizationProgress(0); // Reset optimization progress
-    }
-  };
 
   const handleChatSubmit = (e: React.FormEvent) => {
     e.preventDefault();
