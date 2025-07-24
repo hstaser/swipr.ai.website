@@ -1967,8 +1967,8 @@ export default function Index() {
                 </div>
               )}
 
-              {/* Step 6: Final CTA */}
-              {mvpStep === 6 && (
+              {/* Step 5: Final CTA */}
+              {mvpStep === 5 && (
                 <div className="flex-1 flex items-center justify-center p-12 text-center">
                   <div>
                     <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-emerald-500/25">
