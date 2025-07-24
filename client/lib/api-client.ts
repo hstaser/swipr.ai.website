@@ -204,10 +204,15 @@ class ApiClient {
 
   // Analytics methods
   async trackEvent(event: string, properties: Record<string, any> = {}, userId?: string): Promise<void> {
-    await this.request('/analytics/track', {
-      method: 'POST',
-      body: JSON.stringify({ event, properties, userId }),
-    });
+    try {
+      await this.request('/analytics/track', {
+        method: 'POST',
+        body: JSON.stringify({ event, properties, userId }),
+      });
+    } catch (error) {
+      // Log analytics errors but don't throw them to avoid breaking user experience
+      console.warn('Analytics tracking failed:', error);
+    }
   }
 
   // Contact methods
