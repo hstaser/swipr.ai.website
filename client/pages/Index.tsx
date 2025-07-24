@@ -923,17 +923,18 @@ export default function Index() {
               <div className="order-1 mb-8 lg:mb-0">
                 <div className="relative">
                   <div className="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-purple-400/30">
-                    <div className="h-48 md:h-64">
+                    <div className="h-56 md:h-72">
                       <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
+                        <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                           <Pie
                             data={pieData}
                             cx="50%"
                             cy="50%"
-                            outerRadius={80}
+                            outerRadius={70}
                             fill="#8884d8"
                             dataKey="value"
                             label={(entry) => `${entry.name} ${entry.value}%`}
+                            labelLine={false}
                           >
                             {pieData.map((entry, index) => (
                               <Cell key={`cell-${index}`} fill={entry.color} />
