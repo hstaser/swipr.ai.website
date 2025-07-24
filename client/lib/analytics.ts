@@ -63,17 +63,28 @@ class Analytics {
     >,
     useBeacon: boolean = false,
   ) {
+    if (!this.isEnabled) {
+      return;
+    }
+
     try {
-      const fullEvent: AnalyticsEvent = {
-        ...event,
-        sessionId: this.sessionId,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        referrer: document.referrer || undefined,
-        location: window.location.href,
+      // Transform to match API expectations
+      const apiPayload = {
+        event: event.eventType,
+        properties: {
+          page: event.page,
+          element: event.element,
+          value: event.value,
+          sessionId: this.sessionId,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          referrer: document.referrer || undefined,
+          location: window.location.href,
+        },
+        userId: this.sessionId, // Use sessionId as userId for anonymous tracking
       };
 
-      const payload = JSON.stringify(fullEvent);
+      const payload = JSON.stringify(apiPayload);
 
       // Use navigator.sendBeacon for page unload events (more reliable)
       if (useBeacon && navigator.sendBeacon) {
@@ -85,9 +96,9 @@ class Analytics {
 
       // Use regular fetch for other events
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 3000); // Reduced to 3 second timeout
 
-      await fetch("/api/analytics/track", {
+      const response = await fetch("/api/analytics/track", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,6 +108,11 @@ class Analytics {
       });
 
       clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`Analytics API returned ${response.status}`);
+      }
+
       console.log(
         "📊 Analytics tracked:",
         event.eventType,
@@ -104,8 +120,15 @@ class Analytics {
       );
     } catch (error) {
       // Silently fail for analytics to not disrupt user experience
-      if (error instanceof Error && error.name !== "AbortError") {
-        console.debug("Analytics tracking failed:", error.message);
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          console.debug("Analytics request timed out");
+        } else if (error.message.includes("Failed to fetch")) {
+          console.debug("Analytics network error - disabling for session");
+          this.isEnabled = false; // Disable for rest of session to prevent spam
+        } else {
+          console.debug("Analytics tracking failed:", error.message);
+        }
       }
     }
   }
