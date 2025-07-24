@@ -382,7 +382,7 @@ export default function Privacy() {
 
               <div className="bg-slate-50 p-4 rounded-lg space-y-2">
                 <p>
-                  <strong>Email:</strong> privacy@swipr.ai
+                  <strong>Email:</strong> team@swipr.ai
                 </p>
                 <p>
                   <strong>Subject Line:</strong> Privacy Request - [Your Request
@@ -394,7 +394,7 @@ export default function Privacy() {
               </div>
 
               <div className="flex justify-center pt-4">
-                <a href="mailto:privacy@swipr.ai?subject=Privacy Request">
+                <a href="mailto:team@swipr.ai?subject=Privacy Request">
                   <Button className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700">
                     <Mail className="h-4 w-4 mr-2" />
                     Contact Our Team
