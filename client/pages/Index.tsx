@@ -1305,22 +1305,10 @@ export default function Index() {
                         </div>
                         <Button
                           size="sm"
-                          className="bg-blue-600 hover:bg-blue-700"
-                          onClick={() => {
-                            // Show temporary success message
-                            const button = event.currentTarget;
-                            const originalText = button.textContent;
-                            button.textContent = 'Following!';
-                            button.disabled = true;
-                            button.className = 'bg-green-600 hover:bg-green-700 text-sm px-3 py-1 rounded-md text-white font-medium transition-colors';
-                            setTimeout(() => {
-                              button.textContent = originalText;
-                              button.disabled = false;
-                              button.className = 'bg-blue-600 hover:bg-blue-700 text-sm px-3 py-1 rounded-md text-white font-medium transition-colors';
-                            }, 2000);
-                          }}
+                          className={followedUsers.has('michael-rodriguez') ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'}
+                          onClick={() => handleFollowUser('michael-rodriguez')}
                         >
-                          Follow
+                          {followedUsers.has('michael-rodriguez') ? 'Following' : 'Follow'}
                         </Button>
                       </div>
                       <div className="flex items-center p-4 bg-white/10 rounded-xl">
