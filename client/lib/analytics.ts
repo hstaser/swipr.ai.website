@@ -32,12 +32,13 @@ class Analytics {
     this.startTime = Date.now();
 
     // Disable analytics in embedded environments or if fetch might be intercepted
-    const isEmbedded = window.top !== window.self ||
-                      window.location.href.includes('reload=') ||
-                      !!window.FS; // FullStory detection
+    const isEmbedded =
+      window.top !== window.self ||
+      window.location.href.includes("reload=") ||
+      !!window.FS; // FullStory detection
 
     if (isEmbedded) {
-      console.debug('Analytics disabled: embedded environment detected');
+      console.debug("Analytics disabled: embedded environment detected");
       this.isEnabled = false;
       return; // Skip initialization entirely
     }
@@ -179,7 +180,10 @@ class Analytics {
       if (error instanceof Error) {
         if (error.name === "AbortError") {
           console.debug("Analytics request timed out");
-        } else if (error.message.includes("Failed to fetch") || error.name === "TypeError") {
+        } else if (
+          error.message.includes("Failed to fetch") ||
+          error.name === "TypeError"
+        ) {
           console.debug("Analytics network error - disabling for session");
           this.isEnabled = false; // Disable for rest of session to prevent spam
         } else {

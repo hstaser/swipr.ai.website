@@ -1385,7 +1385,11 @@ export default function Index() {
                         Risk Tolerance
                       </label>
                       <span className="text-purple-400 font-bold">
-                        {riskLevel === "conservative" ? "Conservative" : riskLevel === "moderate" ? "Moderate" : "Aggressive"}
+                        {riskLevel === "conservative"
+                          ? "Conservative"
+                          : riskLevel === "moderate"
+                            ? "Moderate"
+                            : "Aggressive"}
                       </span>
                     </div>
                     <div className="grid grid-cols-3 gap-2">
@@ -2969,8 +2973,6 @@ export default function Index() {
                       <span className="text-white/80">S&P 500</span>
                     </div>
                   </div>
-
-
 
                   {/* Portfolio vs S&P 500 Chart */}
                   <div className="h-96 bg-slate-900/50 rounded-xl p-4">
