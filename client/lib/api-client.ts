@@ -202,19 +202,12 @@ class ApiClient {
     return response.data!;
   }
 
-  // Analytics methods
+  // Analytics methods - disabled to fix API errors
   async trackEvent(event: string, properties: Record<string, any> = {}, userId?: string): Promise<void> {
-    // Simple analytics implementation that never throws errors
-    if (!event) return;
-
-    try {
-      await this.request('/analytics/track', {
-        method: 'POST',
-        body: JSON.stringify({ event, properties, userId }),
-      });
-    } catch (error) {
-      // Silently ignore analytics errors
-    }
+    // Analytics temporarily disabled to prevent API errors
+    // TODO: Re-enable once backend analytics endpoint is stable
+    console.debug('Analytics tracking disabled:', { event, properties, userId });
+    return Promise.resolve();
   }
 
   // Contact methods
