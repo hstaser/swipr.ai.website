@@ -708,6 +708,245 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                     {currentStep === 1 ? 'Tell us about yourself and why you\'d be a great fit' : 'Please review your information before submitting'}
                   </CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    {currentStep === 1 ? (
+                      /* Step 1: Personal Information */
+                      <>
+                        {/* Personal Information */}
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
+                              <User className="inline h-4 w-4 mr-2" />
+                              First Name *
+                            </label>
+                            <Input
+                              name="firstName"
+                              value={formData.firstName}
+                              onChange={handleInputChange}
+                              required
+                              className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
+                              placeholder="Enter your first name"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
+                              <User className="inline h-4 w-4 mr-2" />
+                              Last Name *
+                            </label>
+                            <Input
+                              name="lastName"
+                              value={formData.lastName}
+                              onChange={handleInputChange}
+                              required
+                              className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
+                              placeholder="Enter your last name"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
+                              <Mail className="inline h-4 w-4 mr-2" />
+                              Email Address *
+                            </label>
+                            <Input
+                              name="email"
+                              type="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              required
+                              className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
+                              placeholder="your.email@example.com"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
+                              <Phone className="inline h-4 w-4 mr-2" />
+                              Phone Number *
+                            </label>
+                            <Input
+                              name="phone"
+                              type="tel"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              required
+                              className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
+                              placeholder="+1 (555) 123-4567"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Position Selection */}
+                        <div>
+                          <label className="block text-white font-semibold mb-3">
+                            <Briefcase className="inline h-4 w-4 mr-2" />
+                            Position *
+                          </label>
+                          <select
+                            name="position"
+                            value={formData.position}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full bg-slate-800/60 border border-slate-600 text-slate-100 h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                          >
+                            <option value="" className="bg-white text-slate-900">
+                              Select a position
+                            </option>
+                            {Object.entries(POSITIONS).map(([key, position]) => (
+                              <option
+                                key={key}
+                                value={key}
+                                className="bg-white text-slate-900"
+                              >
+                                {position.title}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        {/* Optional Fields */}
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
+                              <ExternalLink className="inline h-4 w-4 mr-2" />
+                              LinkedIn Profile (Optional)
+                            </label>
+                            <Input
+                              name="linkedinUrl"
+                              type="url"
+                              value={formData.linkedinUrl}
+                              onChange={handleInputChange}
+                              className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
+                              placeholder="https://linkedin.com/in/yourname"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-slate-900 dark:text-slate-100 font-semibold mb-3">
+                              <ExternalLink className="inline h-4 w-4 mr-2" />
+                              Portfolio/GitHub (Optional)
+                            </label>
+                            <Input
+                              name="portfolioUrl"
+                              type="url"
+                              value={formData.portfolioUrl}
+                              onChange={handleInputChange}
+                              className="bg-slate-800/60 border-slate-600 text-slate-100 placeholder-slate-400 h-14 rounded-xl"
+                              placeholder="https://github.com/yourname"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Start Date */}
+                        <div>
+                          <label className="block text-white font-semibold mb-3">
+                            <Calendar className="inline h-4 w-4 mr-2" />
+                            Earliest Start Date *
+                          </label>
+                          <Input
+                            name="startDate"
+                            type="date"
+                            value={formData.startDate}
+                            onChange={handleInputChange}
+                            min={today}
+                            required
+                            className="bg-slate-800/60 border-slate-600 text-slate-100 h-14 rounded-xl"
+                          />
+                        </div>
+
+                        {/* Continue Button */}
+                        <div className="pt-6">
+                          <Button
+                            type="submit"
+                            className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-6 rounded-xl text-xl font-bold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 h-16"
+                          >
+                            Continue to Review
+                            <ArrowRight className="h-6 w-6 ml-3" />
+                          </Button>
+                        </div>
+                      </>
+                    ) : (
+                      /* Step 2: Review */
+                      <>
+                        <div className="bg-slate-800/50 rounded-xl p-6 space-y-4">
+                          <h3 className="text-xl font-bold text-white mb-4">Review Your Information</h3>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <span className="text-slate-400 text-sm">Name:</span>
+                              <div className="text-white font-medium">{formData.firstName} {formData.lastName}</div>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 text-sm">Email:</span>
+                              <div className="text-white font-medium">{formData.email}</div>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 text-sm">Phone:</span>
+                              <div className="text-white font-medium">{formData.phone}</div>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 text-sm">Position:</span>
+                              <div className="text-white font-medium">{POSITIONS[formData.position as keyof typeof POSITIONS]?.title}</div>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 text-sm">Start Date:</span>
+                              <div className="text-white font-medium">{formData.startDate}</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-4">
+                          <Button
+                            type="button"
+                            onClick={() => setCurrentStep(1)}
+                            variant="outline"
+                            className="flex-1 border-slate-600 text-slate-300 hover:text-white h-14 rounded-xl"
+                          >
+                            <ArrowLeft className="h-5 w-5 mr-2" />
+                            Back to Edit
+                          </Button>
+                          <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed h-14"
+                          >
+                            {isSubmitting ? (
+                              <>
+                                <Loader2 className="h-5 w-5 animate-spin mr-3" />
+                                Submitting...
+                              </>
+                            ) : (
+                              <>
+                                <CheckCircle className="h-5 w-5 mr-3" />
+                                Submit Application
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </>
+                    )}
+
+                    {/* Status Message */}
+                    {submitMessage && currentStep === 2 && (
+                      <Alert
+                        className={`${submitSuccess ? "border-emerald-500 bg-emerald-500/10" : "border-red-500 bg-red-500/10"} rounded-xl`}
+                      >
+                        {submitSuccess ? (
+                          <CheckCircle className="h-5 w-5 text-emerald-400" />
+                        ) : (
+                          <AlertCircle className="h-5 w-5 text-red-400" />
+                        )}
+                        <AlertDescription
+                          className={
+                            submitSuccess ? "text-emerald-200" : "text-red-200"
+                          }
+                        >
+                          {submitMessage}
+                        </AlertDescription>
+                      </Alert>
+                    )}
+                  </form>
+                </CardContent>
               </Card>
 
               {/* Additional Info */}
