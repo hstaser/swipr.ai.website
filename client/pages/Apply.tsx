@@ -91,6 +91,7 @@ const POSITIONS = {
 export default function Apply() {
   const [searchParams] = useSearchParams();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -105,6 +106,9 @@ export default function Apply() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Get today's date for min date validation
+  const today = new Date().toISOString().split('T')[0];
 
   // Handle scroll for sticky navbar
   useEffect(() => {
