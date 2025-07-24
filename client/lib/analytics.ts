@@ -30,8 +30,20 @@ class Analytics {
   constructor() {
     this.sessionId = this.generateSessionId();
     this.startTime = Date.now();
-    this.checkAnalyticsAvailability();
-    this.initializeTracking();
+
+    // Wait for page to be fully loaded before initializing analytics
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.checkAnalyticsAvailability();
+        this.initializeTracking();
+      });
+    } else {
+      // Page already loaded
+      setTimeout(() => {
+        this.checkAnalyticsAvailability();
+        this.initializeTracking();
+      }, 100); // Small delay to ensure everything is ready
+    }
   }
 
   private async checkAnalyticsAvailability() {
