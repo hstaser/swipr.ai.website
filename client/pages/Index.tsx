@@ -658,8 +658,8 @@ export default function Index() {
                 <Input
                   type="email"
                   placeholder="Enter your email"
-                  value={waitlistEmail}
-                  onChange={(e) => setWaitlistEmail(e.target.value)}
+                  value={waitlistData.email}
+                  onChange={(e) => setWaitlistData(prev => ({ ...prev, email: e.target.value }))}
                   required
                   className="bg-white/10 backdrop-blur-lg border-white/30 text-white placeholder-white/60 h-14 rounded-xl flex-1"
                 />
@@ -1825,7 +1825,7 @@ export default function Index() {
                             Michael Rodriguez
                           </div>
                           <div className="text-emerald-400">
-                            +24.7% this year • 2.1k followers
+                            +24.7% this year �� 2.1k followers
                           </div>
                         </div>
                       </div>
