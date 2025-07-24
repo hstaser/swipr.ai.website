@@ -1073,8 +1073,8 @@ export default function Index() {
               Swipe. Optimize. Grow.
             </p>
             <p className="text-xl md:text-2xl mb-12 text-slate-200 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
-              Smarter investing in seconds. Swipe through stocks like social
-              media and let AI optimize your portfolio.
+              Professional AI-powered investing made simple. Make informed
+              decisions with intuitive selection and automated optimization.
             </p>
 
             {/* Interactive Preview */}
@@ -1094,7 +1094,7 @@ export default function Index() {
                     <div className="text-sm text-white/70">Apple Inc.</div>
                   </div>
                   <div className="text-center text-white/60 text-sm">
-                    Swipe to build your portfolio
+                    Select to build your portfolio
                   </div>
                 </div>
               </div>
