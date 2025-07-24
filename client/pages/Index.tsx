@@ -2941,7 +2941,7 @@ export default function Index() {
                         <Eye className="h-4 w-4" />
                       </button>
                       <span className="text-white/60 text-sm">
-                        Zoom & Pan enabled
+                        {comparedStocks.length > 1 ? 'Full-width analysis mode' : 'Zoom & Pan enabled'}
                       </span>
                     </div>
                     <div className="text-right">
