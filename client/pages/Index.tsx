@@ -411,6 +411,23 @@ export default function Index() {
     setPortfolioData(generatePortfolioData(riskValue));
   }, [riskLevel]);
 
+  // Live chart updates - simulate real-time data
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPortfolioData(prevData =>
+        prevData.map(item => ({
+          ...item,
+          value: Math.max(
+            item.value + (Math.random() - 0.5) * 50, // Small random changes
+            item.value * 0.95 // Prevent values from going too low
+          )
+        }))
+      );
+    }, 3000); // Update every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Initialize backend data on component mount
   useEffect(() => {
     const initializeData = async () => {
