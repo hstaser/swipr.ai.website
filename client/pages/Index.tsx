@@ -192,6 +192,7 @@ export default function Index() {
   // MVP Demo States
   const [mvpStep, setMvpStep] = useState(0);
   const [currentStockIndex, setCurrentStockIndex] = useState(0);
+  const [optimizationProgress, setOptimizationProgress] = useState(0);
   const [swipedStocks, setSwipedStocks] = useState<{
     [key: number]: "left" | "right";
   }>({});
