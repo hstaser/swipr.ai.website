@@ -1744,28 +1744,28 @@ export default function Index() {
                           Portfolio Metrics
                         </h4>
                         <div className="space-y-4">
-                          <div className="flex justify-between">
-                            <span className="text-slate-300">Total Value:</span>
-                            <span className="text-white font-bold">
+                          <div className="flex justify-between items-center">
+                            <span className="text-slate-300 text-sm">Total Value:</span>
+                            <span className="text-white font-bold text-lg">
                               $10,000
                             </span>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-slate-300">
-                              Expected Annual Return:
+                          <div className="flex justify-between items-center">
+                            <span className="text-slate-300 text-sm">
+                              Expected Return (Annual):
                             </span>
-                            <span className="text-emerald-400 font-bold">
+                            <span className="text-emerald-400 font-bold text-lg">
                               +12.8%
                             </span>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-slate-300">Risk Level:</span>
+                          <div className="flex justify-between items-center">
+                            <span className="text-slate-300 text-sm">Risk Level:</span>
                             <span className="text-orange-400 font-bold">
                               Medium
                             </span>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-slate-300">
+                          <div className="flex justify-between items-center">
+                            <span className="text-slate-300 text-sm">
                               Sharpe Ratio:
                             </span>
                             <span className="text-blue-400 font-bold">
