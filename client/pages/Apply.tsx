@@ -476,6 +476,7 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                     type="date"
                     value={formData.startDate}
                     onChange={handleInputChange}
+                    min={today}
                     required
                     className="bg-slate-800/60 border-slate-600 text-slate-100 h-14 rounded-xl"
                   />
