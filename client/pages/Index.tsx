@@ -158,21 +158,36 @@ const stockCards = [
 ];
 
 export default function Index() {
+  // Form and UI state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const [waitlistEmail, setWaitlistEmail] = useState("");
+  const [waitlistData, setWaitlistData] = useState({
+    name: "",
+    email: "",
+    interests: [] as string[],
+  });
   const [isSubmittingContact, setIsSubmittingContact] = useState(false);
   const [isSubmittingWaitlist, setIsSubmittingWaitlist] = useState(false);
   const [contactMessage, setContactMessage] = useState("");
   const [waitlistMessage, setWaitlistMessage] = useState("");
-  const [riskLevel, setRiskLevel] = useState(0.5);
-  const [portfolioData, setPortfolioData] = useState(
-    generatePortfolioData(0.5),
-  );
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Backend-integrated state
+  const [stockPrices, setStockPrices] = useState<Record<string, StockData>>({});
+  const [portfolioOptimization, setPortfolioOptimization] = useState<PortfolioOptimization | null>(null);
+  const [isOptimizing, setIsOptimizing] = useState(false);
+  const [followedUsers, setFollowedUsers] = useState<Set<string>>(new Set());
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [riskLevel, setRiskLevel] = useState<'conservative' | 'moderate' | 'aggressive'>('moderate');
+  const [investmentAmount, setInvestmentAmount] = useState(10000);
+
+  // Portfolio and trading state
+  const [portfolioData, setPortfolioData] = useState(generatePortfolioData(0.5));
+  const [userPortfolio, setUserPortfolio] = useState<any[]>([]);
+  const [portfolioValue, setPortfolioValue] = useState(0);
 
   // MVP Demo States
   const [mvpStep, setMvpStep] = useState(0);
@@ -181,6 +196,8 @@ export default function Index() {
     [key: number]: "left" | "right";
   }>({});
   const [portfolio, setPortfolio] = useState<typeof stockCards>([]);
+
+  // Chat and AI state
   const [chatMessages, setChatMessages] = useState([
     {
       sender: "bot",
@@ -188,7 +205,13 @@ export default function Index() {
     },
   ]);
   const [chatInput, setChatInput] = useState("");
-  const [optimizationProgress, setOptimizationProgress] = useState(0);
+  const [chatSessionId, setChatSessionId] = useState<string | null>(null);
+  const [isLoadingResponse, setIsLoadingResponse] = useState(false);
+
+  // Loading and error states
+  const [isLoadingStocks, setIsLoadingStocks] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [successMessages, setSuccessMessages] = useState<Record<string, string>>({});
 
   const {
     trackApplyClick,
