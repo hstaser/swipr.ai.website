@@ -79,8 +79,18 @@ class ApiClient {
       ...options,
     };
 
+    // Add timeout using AbortController
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+    const configWithAbort = {
+      ...config,
+      signal: controller.signal
+    };
+
     try {
-      const response = await fetch(url, config);
+      const response = await fetch(url, configWithAbort);
+      clearTimeout(timeoutId);
 
       // Check if response body can be read
       if (!response.body) {
