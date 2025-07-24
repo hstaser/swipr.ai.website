@@ -110,6 +110,16 @@ class ApiClient {
       return data;
     } catch (error) {
       console.error('API request failed:', error);
+
+      // Provide more specific error messages for common issues
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error('Network error. Please check your connection and try again.');
+      }
+
+      if (error instanceof Error && error.message.includes('Failed to fetch')) {
+        throw new Error('Unable to connect to server. Please try again.');
+      }
+
       throw error;
     }
   }
