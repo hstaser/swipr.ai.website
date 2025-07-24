@@ -1543,7 +1543,7 @@ export default function Index() {
                           {currentStockIndex + 1} of {stockCards.length} stocks
                         </div>
                         <div className="text-white/50 text-xs">
-                          💡 Tip: Choose stocks you'd actually want to invest in
+                          Tip: Choose stocks you'd actually want to invest in
                         </div>
                       </div>
                     </div>
