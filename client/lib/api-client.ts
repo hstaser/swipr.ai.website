@@ -81,17 +81,30 @@ class ApiClient {
     try {
       const response = await fetch(url, config);
 
-      // Check if response is actually JSON
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        const text = await response.text();
-        throw new Error(`Expected JSON but received ${contentType || 'unknown content type'}. Response: ${text.substring(0, 100)}...`);
+      // Read response body only once
+      let responseText: string;
+      let data: any;
+
+      try {
+        responseText = await response.text();
+
+        // Check if response is JSON by trying to parse it
+        if (responseText.trim()) {
+          try {
+            data = JSON.parse(responseText);
+          } catch (parseError) {
+            // Not JSON, treat as text error
+            throw new Error(`Expected JSON but received text. Response: ${responseText.substring(0, 100)}...`);
+          }
+        } else {
+          data = {};
+        }
+      } catch (readError) {
+        throw new Error(`Failed to read response: ${readError.message}`);
       }
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+        throw new Error(data?.error || data?.message || `HTTP error! status: ${response.status}`);
       }
 
       return data;
