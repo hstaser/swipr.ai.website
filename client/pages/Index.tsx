@@ -1818,7 +1818,35 @@ export default function Index() {
                         </div>
                       </div>
                       <div className="flex gap-3">
-                        <Button className="flex-1 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white rounded-xl">
+                        <Button
+                          className="flex-1 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white rounded-xl"
+                          onClick={async () => {
+                            try {
+                              // Simulate copying a featured user's portfolio
+                              const portfolioData = {
+                                riskLevel: 'moderate' as const,
+                                amount: 10000,
+                                preferences: { copyFrom: 'featured-user' }
+                              };
+
+                              await handlePortfolioOptimization();
+                              await apiClient.trackEvent('portfolio_copied', {
+                                sourceUser: 'featured-user',
+                                amount: 10000
+                              });
+
+                              setSuccessMessages(prev => ({
+                                ...prev,
+                                portfolio: 'Portfolio copied successfully!'
+                              }));
+                            } catch (error) {
+                              setErrors(prev => ({
+                                ...prev,
+                                portfolio: 'Failed to copy portfolio'
+                              }));
+                            }
+                          }}
+                        >
                           <Plus className="mr-2 h-5 w-5" />
                           Copy Portfolio
                         </Button>
