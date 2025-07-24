@@ -350,12 +350,15 @@ class ApiClient {
   ): Promise<void> {
     try {
       // Detect embedded environment or FullStory interference
-      const isEmbedded = window.top !== window.self ||
-                        window.location.href.includes("reload=") ||
-                        !!window.FS;
+      const isEmbedded =
+        window.top !== window.self ||
+        window.location.href.includes("reload=") ||
+        !!window.FS;
 
       if (isEmbedded) {
-        console.debug("Analytics tracking skipped: embedded environment detected");
+        console.debug(
+          "Analytics tracking skipped: embedded environment detected",
+        );
         return;
       }
 
@@ -411,8 +414,13 @@ class ApiClient {
       });
     } catch (error) {
       // Enhanced error handling for FullStory and embedded environments
-      if (error instanceof TypeError && error.message.includes("Failed to fetch")) {
-        console.debug("Analytics tracking failed due to fetch interference, likely FullStory or embedded environment");
+      if (
+        error instanceof TypeError &&
+        error.message.includes("Failed to fetch")
+      ) {
+        console.debug(
+          "Analytics tracking failed due to fetch interference, likely FullStory or embedded environment",
+        );
         return;
       }
 
