@@ -3105,6 +3105,141 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      {/* Company Information Drawer */}
+      {companyDrawerOpen && selectedCompany && companyData[selectedCompany as keyof typeof companyData] && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setCompanyDrawerOpen(false)}
+          ></div>
+
+          {/* Drawer */}
+          <div className="absolute right-0 top-0 h-full w-full max-w-lg bg-gradient-to-br from-slate-900 to-slate-800 shadow-2xl transform transition-transform duration-300 ease-out">
+            <div className="h-full overflow-y-auto">
+              {(() => {
+                const company = companyData[selectedCompany as keyof typeof companyData];
+                return (
+                  <div className="p-6">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                          <img src={company.logo} alt={company.ticker} className="w-8 h-8" />
+                        </div>
+                        <div>
+                          <h2 className="text-2xl font-bold text-white">{company.ticker}</h2>
+                          <p className="text-slate-300">{company.name}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setCompanyDrawerOpen(false)}
+                        className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                      >
+                        <X className="h-6 w-6 text-white" />
+                      </button>
+                    </div>
+
+                    {/* Price Information */}
+                    <div className="bg-slate-800/50 rounded-xl p-6 mb-6">
+                      <div className="flex items-baseline space-x-4 mb-4">
+                        <span className="text-3xl font-bold text-white">${company.price}</span>
+                        <span className={`text-lg font-semibold ${
+                          company.change >= 0 ? 'text-emerald-400' : 'text-red-400'
+                        }`}>
+                          {company.change >= 0 ? '+' : ''}${company.change} ({company.changePercent}%)
+                        </span>
+                      </div>
+                      <div className="text-slate-400 text-sm">
+                        Market Cap: {company.marketCap} • P/E: {company.peRatio} • Div Yield: {company.dividendYield}%
+                      </div>
+                    </div>
+
+                    {/* Company Details */}
+                    <div className="bg-slate-800/50 rounded-xl p-6 mb-6">
+                      <h3 className="text-lg font-semibold text-white mb-4">Company Overview</h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Sector:</span>
+                          <span className="text-white">{company.sector}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Industry:</span>
+                          <span className="text-white">{company.industry}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">1Y Performance:</span>
+                          <span className={`font-semibold ${
+                            company.yearPerformance >= 0 ? 'text-emerald-400' : 'text-red-400'
+                          }`}>
+                            {company.yearPerformance >= 0 ? '+' : ''}{company.yearPerformance}%
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-slate-300 text-sm mt-4 leading-relaxed">
+                        {company.description}
+                      </p>
+                    </div>
+
+                    {/* Recent News */}
+                    <div className="bg-slate-800/50 rounded-xl p-6 mb-6">
+                      <h3 className="text-lg font-semibold text-white mb-4">Recent News</h3>
+                      <div className="space-y-4">
+                        {company.news.map((article, index) => (
+                          <div key={index} className="border-l-2 border-cyan-500 pl-4">
+                            <h4 className="text-white font-medium mb-1">{article.title}</h4>
+                            <p className="text-slate-300 text-sm mb-2">{article.summary}</p>
+                            <span className="text-slate-500 text-xs">{article.time}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="space-y-3">
+                      <Button
+                        className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                        onClick={() => {
+                          // Add to portfolio logic
+                          setCompanyDrawerOpen(false);
+                          // You can add portfolio management logic here
+                        }}
+                      >
+                        <Plus className="h-5 w-5 mr-2" />
+                        Add to Portfolio
+                      </Button>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <Button
+                          variant="outline"
+                          className="border-cyan-400 text-cyan-300 hover:bg-cyan-400/10 py-2 rounded-xl"
+                          onClick={() => {
+                            // Add to watchlist logic
+                          }}
+                        >
+                          <Heart className="h-4 w-4 mr-2" />
+                          Watch
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="border-slate-600 text-slate-300 hover:bg-slate-600/20 py-2 rounded-xl"
+                          onClick={() => {
+                            // Share company logic
+                          }}
+                        >
+                          <Share className="h-4 w-4 mr-2" />
+                          Share
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
