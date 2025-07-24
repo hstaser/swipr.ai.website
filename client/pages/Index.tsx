@@ -211,6 +211,10 @@ export default function Index() {
   const [showExecutionScreen, setShowExecutionScreen] = useState(false);
   const [manualOverrides, setManualOverrides] = useState<Record<string, number>>({});
 
+  // Interactive Chart States
+  const [selectedTimeframe, setSelectedTimeframe] = useState('1M');
+  const [comparedStocks, setComparedStocks] = useState<string[]>(['AAPL']);
+
   // Chat and AI state
   const [chatMessages, setChatMessages] = useState([
     {
