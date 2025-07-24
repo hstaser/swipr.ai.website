@@ -840,8 +840,7 @@ export default function Index() {
                   <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-sm border border-cyan-400/30">
                     <div className="grid grid-cols-2 gap-3 md:gap-4">
                       <div
-                        onClick={() => alert('AAPL: $185.42 (+2.4%)\nMarket Cap: $2.9T\nSwipes: 1,247 today\nAnalyst Rating: STRONG BUY')}
-                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer hover:bg-white/20"
+                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4"
                       >
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
