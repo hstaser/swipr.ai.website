@@ -202,6 +202,7 @@ export default function Index() {
     [key: number]: "left" | "right";
   }>({});
   const [portfolio, setPortfolio] = useState<typeof stockCards>([]);
+  const [portfolioCopied, setPortfolioCopied] = useState(false);
 
   // Chat and AI state
   const [chatMessages, setChatMessages] = useState([
