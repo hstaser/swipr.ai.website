@@ -208,6 +208,12 @@ class ApiClient {
 
   // Analytics methods
   async trackEvent(event: string, properties: Record<string, any> = {}, userId?: string): Promise<void> {
+    // Skip analytics if disabled
+    if (!this.analyticsEnabled) {
+      console.debug('Analytics disabled, skipping event:', event);
+      return;
+    }
+
     try {
       // Validate input data before sending
       if (!event || typeof event !== 'string') {
@@ -236,6 +242,12 @@ class ApiClient {
           message: error.message,
           stack: error.stack?.substring(0, 200)
         });
+      }
+
+      // If analytics keep failing, auto-disable them for this session
+      if (error instanceof Error && error.message.includes('analytics')) {
+        console.warn('Disabling analytics for this session due to repeated failures');
+        this.analyticsEnabled = false;
       }
     }
   }
