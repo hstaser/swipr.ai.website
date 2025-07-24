@@ -123,6 +123,7 @@ class ApiClient {
 
       return data;
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error('API request failed:', error);
 
       // Handle different types of network errors
