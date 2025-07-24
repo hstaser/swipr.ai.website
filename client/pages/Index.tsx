@@ -2795,55 +2795,15 @@ export default function Index() {
                     </div>
                   </div>
 
-                  {/* Stock Comparison Controls */}
-                  <div className="mb-6">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <h4 className="text-white font-semibold">
-                        Compare Stocks:
-                      </h4>
-                      <div className="flex items-center space-x-2">
-                        {["AAPL", "NVDA", "TSLA", "MSFT"].map((ticker) => (
-                          <button
-                            key={ticker}
-                            className={`px-3 py-1 rounded text-sm font-medium transition-all duration-200 ${
-                              comparedStocks.includes(ticker)
-                                ? "bg-emerald-500 text-white"
-                                : "bg-white/10 text-white/70 hover:bg-white/20"
-                            }`}
-                            onClick={() => {
-                              setComparedStocks(
-                                (prev) =>
-                                  prev.includes(ticker)
-                                    ? prev.filter((s) => s !== ticker)
-                                    : [...prev, ticker].slice(0, 3), // Max 3 stocks
-                              );
-                            }}
-                          >
-                            {ticker}
-                          </button>
-                        ))}
-                      </div>
+                  {/* Performance Comparison Legend */}
+                  <div className="flex items-center space-x-6 mb-6">
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-2"></div>
+                      <span className="text-white/80">Your Portfolio</span>
                     </div>
-                    <div className="flex items-center space-x-4 text-sm">
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mr-2"></div>
-                        <span className="text-white/80">Portfolio</span>
-                      </div>
-                      {comparedStocks.map((ticker, index) => (
-                        <div key={ticker} className="flex items-center">
-                          <div
-                            className={`w-3 h-3 rounded-full mr-2`}
-                            style={{
-                              backgroundColor: [
-                                "#10B981",
-                                "#8B5CF6",
-                                "#F59E0B",
-                              ][index],
-                            }}
-                          ></div>
-                          <span className="text-white/80">{ticker}</span>
-                        </div>
-                      ))}
+                    <div className="flex items-center">
+                      <div className="w-3 h-3 bg-orange-400 rounded-full mr-2"></div>
+                      <span className="text-white/80">S&P 500</span>
                     </div>
                   </div>
 
