@@ -2570,7 +2570,7 @@ export default function Index() {
                   investments safe.
                 </p>
 
-                <Link to="/apply?position=quantitative-analyst">
+                <Link to="/apply?position=quantitative-analyst" onClick={() => window.scrollTo(0, 0)}>
                   <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
                     <div className="ml-2">
