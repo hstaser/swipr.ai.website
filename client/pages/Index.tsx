@@ -1723,17 +1723,18 @@ export default function Index() {
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <div className="h-80">
+                      <div className="h-96">
                         <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
+                          <PieChart margin={{ top: 40, right: 40, bottom: 40, left: 40 }}>
                             <Pie
                               data={pieData}
                               cx="50%"
                               cy="50%"
-                              outerRadius={120}
+                              outerRadius={100}
                               fill="#8884d8"
                               dataKey="value"
                               label={(entry) => `${entry.name} ${entry.value}%`}
+                              labelLine={false}
                             >
                               {pieData.map((entry, index) => (
                                 <Cell
