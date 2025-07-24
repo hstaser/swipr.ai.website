@@ -1566,7 +1566,7 @@ export default function Index() {
                         AI Portfolio Optimization
                       </h3>
                       <p className="text-white/80">
-                        Watch as our AI optimizes your selections
+                        Our AI creates your perfect portfolio balance
                       </p>
                     </div>
                     <div className="w-20"></div>
