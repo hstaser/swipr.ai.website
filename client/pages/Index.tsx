@@ -2542,7 +2542,7 @@ export default function Index() {
                   data simple and actionable.
                 </p>
 
-                <Link to="/apply?position=ai-developer">
+                <Link to="/apply?position=ai-developer" onClick={() => window.scrollTo(0, 0)}>
                   <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-transform duration-200 rounded-xl h-12">
                     Join Us
                     <Zap className="ml-2 h-4 w-4" />
