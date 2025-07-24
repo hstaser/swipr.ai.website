@@ -1957,7 +1957,11 @@ export default function Index() {
                       </div>
                       <div className="flex gap-3">
                         <Button
-                          className="flex-1 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white rounded-xl"
+                          className={`flex-1 ${portfolioCopied
+                            ? 'bg-gradient-to-r from-green-600 to-emerald-600'
+                            : 'bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700'
+                          } text-white rounded-xl transition-all duration-300`}
+                          disabled={portfolioCopied}
                           onClick={async () => {
                             try {
                               // Simulate copying a featured user's portfolio
@@ -1973,10 +1977,16 @@ export default function Index() {
                                 amount: 10000
                               });
 
+                              setPortfolioCopied(true);
                               setSuccessMessages(prev => ({
                                 ...prev,
                                 portfolio: 'Portfolio copied successfully!'
                               }));
+
+                              // Reset the button after 3 seconds
+                              setTimeout(() => {
+                                setPortfolioCopied(false);
+                              }, 3000);
                             } catch (error) {
                               setErrors(prev => ({
                                 ...prev,
@@ -1985,8 +1995,17 @@ export default function Index() {
                             }
                           }}
                         >
-                          <Plus className="mr-2 h-5 w-5" />
-                          Copy Portfolio
+                          {portfolioCopied ? (
+                            <>
+                              <Check className="mr-2 h-5 w-5" />
+                              Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Plus className="mr-2 h-5 w-5" />
+                              Copy Portfolio
+                            </>
+                          )}
                         </Button>
                         <Button
                           variant="outline"
