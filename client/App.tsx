@@ -11,7 +11,7 @@ import Index from "./pages/Index";
 import LearnMore from "./pages/LearnMore";
 import Apply from "./pages/Apply";
 import Privacy from "./pages/Privacy";
-
+import Mission from "./pages/Mission";
 import AdminRouter from "./pages/AdminRouter";
 import NotFound from "./pages/NotFound";
 
