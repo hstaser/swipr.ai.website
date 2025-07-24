@@ -1,8 +1,8 @@
 // Comprehensive Vercel serverless function for swipr.ai backend
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import validator from 'validator';
-import { v4 as uuidv4 } from 'uuid';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const validator = require('validator');
+const { v4: uuidv4 } = require('uuid');
 
 // In-memory storage (replace with real database in production)
 const users = new Map();
