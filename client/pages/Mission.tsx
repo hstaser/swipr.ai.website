@@ -60,25 +60,24 @@ export default function Mission() {
           <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 rounded-3xl mb-12">
             <CardHeader className="text-center pb-6">
               <CardTitle className="text-3xl text-white font-bold">
-                Democratizing Professional Investment Intelligence
+                Making Smart Investing Accessible to Everyone
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-lg text-slate-200 leading-relaxed space-y-6">
                 <p>
-                  At swipr.ai, we believe that sophisticated investment strategies and AI-powered 
-                  portfolio optimization should not be exclusive privileges of Wall Street institutions 
-                  and high-net-worth individuals.
+                  We believe smart investing shouldn't be reserved for Wall Street insiders.
+                  Advanced investment strategies and AI-powered portfolio optimization should be
+                  available to everyone, not just institutions and the ultra-wealthy.
                 </p>
                 <p>
-                  Our mission is to democratize access to professional-grade investment intelligence, 
-                  making advanced portfolio management tools available to every investor regardless 
-                  of their account size or financial background.
+                  Our mission is simple: give every investor access to intelligent investment tools,
+                  regardless of how much money they're starting with or their financial background.
                 </p>
                 <p>
-                  We are committed to eliminating the complexity, high fees, and barriers that have 
-                  traditionally separated ordinary investors from institutional-quality investment 
-                  strategies, creating a more equitable financial future for all.
+                  We're breaking down the complexity, high fees, and barriers that have kept
+                  sophisticated investing out of reach, building a platform where everyone can
+                  invest with confidence.
                 </p>
               </div>
             </CardContent>
@@ -91,12 +90,12 @@ export default function Mission() {
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-xl text-white">Intelligence</CardTitle>
+                <CardTitle className="text-xl text-white">Smart Technology</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-slate-200 text-center">
-                  Leveraging cutting-edge AI and machine learning to provide 
-                  data-driven investment recommendations and portfolio optimization.
+                  We use advanced AI and machine learning to give you
+                  data-driven investment recommendations and automatic portfolio optimization.
                 </p>
               </CardContent>
             </Card>
@@ -110,8 +109,8 @@ export default function Mission() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-200 text-center">
-                  Maintaining complete transparency in our algorithms, fees, 
-                  and recommendations while prioritizing security and regulatory compliance.
+                  We're completely transparent about our algorithms, fees,
+                  and recommendations while keeping your investments secure and compliant.
                 </p>
               </CardContent>
             </Card>
@@ -125,8 +124,8 @@ export default function Mission() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-200 text-center">
-                  Making professional investment tools accessible to everyone, 
-                  with intuitive interfaces and no minimum investment requirements.
+                  We make sophisticated investment tools easy to use for everyone,
+                  with simple interfaces and no minimum investment requirements.
                 </p>
               </CardContent>
             </Card>
@@ -141,11 +140,10 @@ export default function Mission() {
             </CardHeader>
             <CardContent>
               <p className="text-lg text-slate-200 leading-relaxed text-center">
-                We envision a world where every individual has access to the same level of 
-                investment intelligence and portfolio optimization that was once reserved for 
-                institutional investors. Through technology, transparency, and innovation, 
-                we are building the foundation for a more democratized and equitable 
-                financial ecosystem.
+                We're building a world where everyone has access to the same smart
+                investment tools that were once only available to big institutions.
+                Through technology, transparency, and innovation, we're creating a more
+                fair and accessible financial future for all.
               </p>
             </CardContent>
           </Card>
