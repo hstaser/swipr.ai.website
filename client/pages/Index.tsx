@@ -2888,30 +2888,17 @@ export default function Index() {
                           name="Portfolio"
                         />
 
-                        {/* Dynamic Stock Comparison Lines */}
-                        {comparedStocks.map((ticker, index) => {
-                          const colors = ["#10B981", "#8B5CF6", "#F59E0B"];
-                          const stockData = portfolioData.map((item, i) => ({
-                            ...item,
-                            [`${ticker}_value`]:
-                              item.value * (0.8 + Math.random() * 0.4), // Simulate different stock performance
-                          }));
-
-                          return (
-                            <Line
-                              key={ticker}
-                              type="monotone"
-                              dataKey={`${ticker}_value`}
-                              stroke={colors[index]}
-                              strokeWidth={2}
-                              strokeDasharray="5 5"
-                              dot={false}
-                              activeDot={{ r: 4, fill: colors[index] }}
-                              name={ticker}
-                              data={stockData}
-                            />
-                          );
-                        })}
+                        {/* S&P 500 Comparison Line */}
+                        <Line
+                          type="monotone"
+                          dataKey="sp500"
+                          stroke="#FB923C"
+                          strokeWidth={2}
+                          strokeDasharray="5 5"
+                          dot={false}
+                          activeDot={{ r: 5, fill: "#FB923C", stroke: "#ffffff", strokeWidth: 2 }}
+                          name="S&P 500"
+                        />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
