@@ -250,5 +250,40 @@ export function createServer() {
     });
   });
 
+  // Social features endpoints
+  app.post("/api/social/follow", (req, res) => {
+    const { targetUserId } = req.body;
+
+    if (!targetUserId) {
+      return res.status(400).json({ error: 'Target user ID required' });
+    }
+
+    res.json({
+      message: 'User followed successfully',
+      data: {
+        isFollowing: true,
+        targetUserId,
+        followedAt: new Date().toISOString()
+      }
+    });
+  });
+
+  app.post("/api/social/unfollow", (req, res) => {
+    const { targetUserId } = req.body;
+
+    if (!targetUserId) {
+      return res.status(400).json({ error: 'Target user ID required' });
+    }
+
+    res.json({
+      message: 'User unfollowed successfully',
+      data: {
+        isFollowing: false,
+        targetUserId,
+        unfollowedAt: new Date().toISOString()
+      }
+    });
+  });
+
   return app;
 }
