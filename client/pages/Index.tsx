@@ -433,25 +433,7 @@ export default function Index() {
     setPortfolioData(generatePortfolioData(riskValue));
   }, [riskLevel]);
 
-  // Live chart updates - simulate real-time data
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPortfolioData(prevData =>
-        prevData.map(item => {
-          const currentValue = typeof item.value === 'number' ? item.value : 10000;
-          const randomChange = (Math.random() - 0.5) * 50;
-          const newValue = Math.max(currentValue + randomChange, currentValue * 0.95);
-
-          return {
-            ...item,
-            value: Math.round(isNaN(newValue) ? currentValue : newValue)
-          };
-        })
-      );
-    }, 3000); // Update every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  // Portfolio data remains static - no fake real-time updates
 
   // Initialize backend data on component mount
   useEffect(() => {
