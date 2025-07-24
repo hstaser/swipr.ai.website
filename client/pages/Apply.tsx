@@ -161,63 +161,67 @@ export default function Apply() {
     setSubmitMessage("");
 
     try {
-      const applicationData: JobApplicationRequest = {
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
+      // Create comprehensive cover letter
+      const coverLetter = `I am applying for the ${position?.title} position at swipr.ai.
+
+Name: ${formData.firstName.trim()} ${formData.lastName.trim()}
+Email: ${formData.email.trim()}
+Phone: ${formData.phone.trim()}
+LinkedIn: ${formData.linkedinUrl.trim() || 'Not provided'}
+Portfolio: ${formData.portfolioUrl.trim() || 'Not provided'}
+Available Start Date: ${formData.startDate || 'Flexible'}
+
+Relevant Skills and Experience:
+${position?.skills.map(skill => `• ${skill}`).join('\n') || ''}
+
+I am excited to contribute to swipr.ai's mission of democratizing intelligent investing through innovative technology and look forward to discussing how my skills can help build the future of investment platforms.`;
+
+      const applicationData = {
+        position: formData.position,
+        name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
         email: formData.email.trim(),
         phone: formData.phone.trim(),
-        position: formData.position,
-        linkedinUrl: formData.linkedinUrl.trim() || undefined,
-        portfolioUrl: formData.portfolioUrl.trim() || undefined,
-        startDate: formData.startDate,
+        coverLetter,
+        resumeUrl: formData.linkedinUrl.trim() || formData.portfolioUrl.trim() || ''
       };
 
-      const formDataToSend = new FormData();
-      Object.entries(applicationData).forEach(([key, value]) => {
-        if (value !== undefined) {
-          formDataToSend.append(key, value);
-        }
+      const result = await apiClient.submitJobApplication(applicationData);
+
+      setSubmitSuccess(true);
+      setSubmitMessage("Application submitted successfully! We'll be in touch soon.");
+
+      // Track application submission
+      await apiClient.trackEvent('job_application_submitted', {
+        position: formData.position,
+        applicationId: result.applicationId,
+        hasLinkedIn: !!formData.linkedinUrl.trim(),
+        hasPortfolio: !!formData.portfolioUrl.trim()
       });
 
-      if (resume) {
-        formDataToSend.append("resume", resume);
-      }
-
-      const response = await fetch("/api/jobs/apply", {
-        method: "POST",
-        body: formDataToSend,
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        position: "",
+        linkedinUrl: "",
+        portfolioUrl: "",
+        startDate: "",
       });
+      setResume(null);
 
-      const result: JobApplicationResponse = await response.json();
-
-      if (response.ok && result.success) {
-        setSubmitSuccess(true);
-        setSubmitMessage(
-          result.message ||
-            "Application submitted successfully! We'll be in touch soon.",
-        );
-        // Reset form
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          position: "",
-          linkedinUrl: "",
-          portfolioUrl: "",
-          startDate: "",
-        });
-        setResume(null);
-      } else {
-        setSubmitMessage(
-          result.message || "Something went wrong. Please try again.",
-        );
-      }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Application submission error:", error);
       setSubmitMessage(
-        "Network error. Please check your connection and try again.",
+        error.message || "Network error. Please check your connection and try again.",
       );
+
+      // Track failed submission
+      await apiClient.trackEvent('job_application_failed', {
+        position: formData.position,
+        error: error.message
+      });
     } finally {
       setIsSubmitting(false);
     }
