@@ -32,8 +32,8 @@ class Analytics {
     this.startTime = Date.now();
 
     // Wait for page to be fully loaded before initializing analytics
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
         this.checkAnalyticsAvailability();
         this.initializeTracking();
       });
@@ -61,7 +61,9 @@ class Analytics {
       this.isEnabled = response.ok || response.status === 404; // 404 is ok for OPTIONS
     } catch (error) {
       // Start with analytics disabled and enable on first successful request
-      console.debug("Analytics endpoint check failed, starting with limited tracking");
+      console.debug(
+        "Analytics endpoint check failed, starting with limited tracking",
+      );
       this.isEnabled = false;
 
       // Try to enable analytics after a delay by testing with a minimal request
@@ -76,7 +78,7 @@ class Analytics {
       const testPayload = {
         event: "health_check",
         properties: { test: true },
-        userId: "test"
+        userId: "test",
       };
 
       const response = await fetch("/api/analytics/track", {

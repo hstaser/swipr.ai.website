@@ -108,7 +108,7 @@ export default function Apply() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   // Get today's date for min date validation
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   // Handle scroll for sticky navbar
   useEffect(() => {
@@ -179,12 +179,12 @@ export default function Apply() {
 Name: ${formData.firstName.trim()} ${formData.lastName.trim()}
 Email: ${formData.email.trim()}
 Phone: ${formData.phone.trim()}
-LinkedIn: ${formData.linkedinUrl.trim() || 'Not provided'}
-Portfolio: ${formData.portfolioUrl.trim() || 'Not provided'}
-Available Start Date: ${formData.startDate || 'Flexible'}
+LinkedIn: ${formData.linkedinUrl.trim() || "Not provided"}
+Portfolio: ${formData.portfolioUrl.trim() || "Not provided"}
+Available Start Date: ${formData.startDate || "Flexible"}
 
 Relevant Skills and Experience:
-${selectedPosition?.skills.map(skill => `• ${skill}`).join('\n') || ''}
+${selectedPosition?.skills.map((skill) => `• ${skill}`).join("\n") || ""}
 
 I am excited to contribute to swipr.ai's mission of democratizing intelligent investing through innovative technology and look forward to discussing how my skills can help build the future of investment platforms.`;
 
@@ -195,20 +195,23 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
         phone: formData.phone.trim(),
         position: formData.position,
         coverLetter,
-        resumeUrl: formData.linkedinUrl.trim() || formData.portfolioUrl.trim() || ''
+        resumeUrl:
+          formData.linkedinUrl.trim() || formData.portfolioUrl.trim() || "",
       };
 
       const result = await apiClient.submitJobApplication(applicationData);
 
       setSubmitSuccess(true);
-      setSubmitMessage("Application submitted successfully! We'll be in touch soon.");
+      setSubmitMessage(
+        "Application submitted successfully! We'll be in touch soon.",
+      );
 
       // Track application submission
-      await apiClient.trackEvent('job_application_submitted', {
+      await apiClient.trackEvent("job_application_submitted", {
         position: formData.position,
         applicationId: result.applicationId,
         hasLinkedIn: !!formData.linkedinUrl.trim(),
-        hasPortfolio: !!formData.portfolioUrl.trim()
+        hasPortfolio: !!formData.portfolioUrl.trim(),
       });
 
       // Reset form
@@ -223,17 +226,17 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
         startDate: "",
       });
       setResume(null);
-
     } catch (error: any) {
       console.error("Application submission error:", error);
       setSubmitMessage(
-        error.message || "Network error. Please check your connection and try again.",
+        error.message ||
+          "Network error. Please check your connection and try again.",
       );
 
       // Track failed submission
-      await apiClient.trackEvent('job_application_failed', {
+      await apiClient.trackEvent("job_application_failed", {
         position: formData.position,
-        error: error.message
+        error: error.message,
       });
     } finally {
       setIsSubmitting(false);
@@ -306,23 +309,38 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
           {!submitSuccess && (
             <div className="mb-12">
               <div className="flex justify-center items-center space-x-4 mb-4">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition-all duration-300 ${
-                  currentStep >= 1 ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white' : 'bg-slate-600 text-slate-400'
-                }`}>
+                <div
+                  className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition-all duration-300 ${
+                    currentStep >= 1
+                      ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white"
+                      : "bg-slate-600 text-slate-400"
+                  }`}
+                >
                   1
                 </div>
-                <div className={`w-16 h-1 transition-all duration-300 ${
-                  currentStep >= 2 ? 'bg-gradient-to-r from-blue-500 to-teal-500' : 'bg-slate-600'
-                }`}></div>
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition-all duration-300 ${
-                  currentStep >= 2 ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white' : 'bg-slate-600 text-slate-400'
-                }`}>
+                <div
+                  className={`w-16 h-1 transition-all duration-300 ${
+                    currentStep >= 2
+                      ? "bg-gradient-to-r from-blue-500 to-teal-500"
+                      : "bg-slate-600"
+                  }`}
+                ></div>
+                <div
+                  className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm transition-all duration-300 ${
+                    currentStep >= 2
+                      ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white"
+                      : "bg-slate-600 text-slate-400"
+                  }`}
+                >
                   2
                 </div>
               </div>
               <div className="text-center">
                 <p className="text-slate-300 text-sm">
-                  Step {currentStep} of 2: {currentStep === 1 ? 'Application Details' : 'Review & Submit'}
+                  Step {currentStep} of 2:{" "}
+                  {currentStep === 1
+                    ? "Application Details"
+                    : "Review & Submit"}
                 </p>
               </div>
             </div>
@@ -628,39 +646,67 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                   Application Submitted!
                 </h2>
                 <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
-                  Thank you for your interest in joining swipr.ai. We've received your application and will review it carefully.
+                  Thank you for your interest in joining swipr.ai. We've
+                  received your application and will review it carefully.
                 </p>
               </div>
 
               <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl p-8 max-w-2xl mx-auto mb-8">
-                <h3 className="text-2xl font-bold text-white mb-6">What's Next?</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  What's Next?
+                </h3>
                 <div className="space-y-4 text-left">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">1</div>
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">
+                      1
+                    </div>
                     <div>
-                      <div className="text-white font-semibold">Application Review</div>
-                      <div className="text-slate-300 text-sm">Our team will review your application within 3-5 business days</div>
+                      <div className="text-white font-semibold">
+                        Application Review
+                      </div>
+                      <div className="text-slate-300 text-sm">
+                        Our team will review your application within 3-5
+                        business days
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">2</div>
+                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">
+                      2
+                    </div>
                     <div>
-                      <div className="text-white font-semibold">Initial Interview</div>
-                      <div className="text-slate-300 text-sm">If selected, we'll schedule a 30-minute video call</div>
+                      <div className="text-white font-semibold">
+                        Initial Interview
+                      </div>
+                      <div className="text-slate-300 text-sm">
+                        If selected, we'll schedule a 30-minute video call
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">3</div>
+                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">
+                      3
+                    </div>
                     <div>
-                      <div className="text-white font-semibold">Technical Assessment</div>
-                      <div className="text-slate-300 text-sm">A brief project or technical discussion</div>
+                      <div className="text-white font-semibold">
+                        Technical Assessment
+                      </div>
+                      <div className="text-slate-300 text-sm">
+                        A brief project or technical discussion
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">4</div>
+                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 text-white font-bold text-sm">
+                      4
+                    </div>
                     <div>
-                      <div className="text-white font-semibold">Final Decision</div>
-                      <div className="text-slate-300 text-sm">We'll make our final decision and extend an offer</div>
+                      <div className="text-white font-semibold">
+                        Final Decision
+                      </div>
+                      <div className="text-slate-300 text-sm">
+                        We'll make our final decision and extend an offer
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -702,10 +748,14 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
               <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-lg border border-slate-600 rounded-3xl">
                 <CardHeader>
                   <CardTitle className="text-3xl text-white dark:text-white font-bold">
-                    {currentStep === 1 ? 'Application Form' : 'Review Your Application'}
+                    {currentStep === 1
+                      ? "Application Form"
+                      : "Review Your Application"}
                   </CardTitle>
                   <CardDescription className="text-lg text-slate-200">
-                    {currentStep === 1 ? 'Tell us about yourself and why you\'d be a great fit' : 'Please review your information before submitting'}
+                    {currentStep === 1
+                      ? "Tell us about yourself and why you'd be a great fit"
+                      : "Please review your information before submitting"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -791,18 +841,23 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                             required
                             className="w-full bg-slate-800/60 border border-slate-600 text-slate-100 h-14 rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                           >
-                            <option value="" className="bg-white text-slate-900">
+                            <option
+                              value=""
+                              className="bg-white text-slate-900"
+                            >
                               Select a position
                             </option>
-                            {Object.entries(POSITIONS).map(([key, position]) => (
-                              <option
-                                key={key}
-                                value={key}
-                                className="bg-white text-slate-900"
-                              >
-                                {position.title}
-                              </option>
-                            ))}
+                            {Object.entries(POSITIONS).map(
+                              ([key, position]) => (
+                                <option
+                                  key={key}
+                                  value={key}
+                                  className="bg-white text-slate-900"
+                                >
+                                  {position.title}
+                                </option>
+                              ),
+                            )}
                           </select>
                         </div>
 
@@ -870,27 +925,53 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                       /* Step 2: Review */
                       <>
                         <div className="bg-slate-800/50 rounded-xl p-6 space-y-4">
-                          <h3 className="text-xl font-bold text-white mb-4">Review Your Information</h3>
+                          <h3 className="text-xl font-bold text-white mb-4">
+                            Review Your Information
+                          </h3>
                           <div className="grid md:grid-cols-2 gap-4">
                             <div>
-                              <span className="text-slate-400 text-sm">Name:</span>
-                              <div className="text-white font-medium">{formData.firstName} {formData.lastName}</div>
+                              <span className="text-slate-400 text-sm">
+                                Name:
+                              </span>
+                              <div className="text-white font-medium">
+                                {formData.firstName} {formData.lastName}
+                              </div>
                             </div>
                             <div>
-                              <span className="text-slate-400 text-sm">Email:</span>
-                              <div className="text-white font-medium">{formData.email}</div>
+                              <span className="text-slate-400 text-sm">
+                                Email:
+                              </span>
+                              <div className="text-white font-medium">
+                                {formData.email}
+                              </div>
                             </div>
                             <div>
-                              <span className="text-slate-400 text-sm">Phone:</span>
-                              <div className="text-white font-medium">{formData.phone}</div>
+                              <span className="text-slate-400 text-sm">
+                                Phone:
+                              </span>
+                              <div className="text-white font-medium">
+                                {formData.phone}
+                              </div>
                             </div>
                             <div>
-                              <span className="text-slate-400 text-sm">Position:</span>
-                              <div className="text-white font-medium">{POSITIONS[formData.position as keyof typeof POSITIONS]?.title}</div>
+                              <span className="text-slate-400 text-sm">
+                                Position:
+                              </span>
+                              <div className="text-white font-medium">
+                                {
+                                  POSITIONS[
+                                    formData.position as keyof typeof POSITIONS
+                                  ]?.title
+                                }
+                              </div>
                             </div>
                             <div>
-                              <span className="text-slate-400 text-sm">Start Date:</span>
-                              <div className="text-white font-medium">{formData.startDate}</div>
+                              <span className="text-slate-400 text-sm">
+                                Start Date:
+                              </span>
+                              <div className="text-white font-medium">
+                                {formData.startDate}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -954,8 +1035,8 @@ I am excited to contribute to swipr.ai's mission of democratizing intelligent in
                 <Alert className="border-cyan-500/50 bg-cyan-500/10 rounded-xl max-w-2xl mx-auto">
                   <Info className="h-5 w-5 text-cyan-400" />
                   <AlertDescription className="text-cyan-200">
-                    We review all applications carefully and will get back to you
-                    within 5-7 business days. Questions? Email us at{" "}
+                    We review all applications carefully and will get back to
+                    you within 5-7 business days. Questions? Email us at{" "}
                     <a
                       href="mailto:team@swipr.ai"
                       className="text-cyan-300 hover:text-cyan-200 underline"

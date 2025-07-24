@@ -91,29 +91,59 @@ export function createServer() {
 
   // Stock data endpoints - adding missing endpoints
   const stockPrices = {
-    AAPL: { symbol: 'AAPL', price: 185.42, change: 2.4, volume: 45289000, marketCap: '$2.9T' },
-    NVDA: { symbol: 'NVDA', price: 432.81, change: 3.2, volume: 52134000, marketCap: '$1.1T' },
-    TSLA: { symbol: 'TSLA', price: 248.73, change: -1.8, volume: 78456000, marketCap: '$792B' },
-    GOOGL: { symbol: 'GOOGL', price: 141.52, change: 1.1, volume: 31245000, marketCap: '$1.8T' },
-    MSFT: { symbol: 'MSFT', price: 414.31, change: 0.8, volume: 29876000, marketCap: '$3.1T' }
+    AAPL: {
+      symbol: "AAPL",
+      price: 185.42,
+      change: 2.4,
+      volume: 45289000,
+      marketCap: "$2.9T",
+    },
+    NVDA: {
+      symbol: "NVDA",
+      price: 432.81,
+      change: 3.2,
+      volume: 52134000,
+      marketCap: "$1.1T",
+    },
+    TSLA: {
+      symbol: "TSLA",
+      price: 248.73,
+      change: -1.8,
+      volume: 78456000,
+      marketCap: "$792B",
+    },
+    GOOGL: {
+      symbol: "GOOGL",
+      price: 141.52,
+      change: 1.1,
+      volume: 31245000,
+      marketCap: "$1.8T",
+    },
+    MSFT: {
+      symbol: "MSFT",
+      price: 414.31,
+      change: 0.8,
+      volume: 29876000,
+      marketCap: "$3.1T",
+    },
   };
 
   app.get("/api/stocks/prices", (_req, res) => {
     res.json({
-      message: 'Stock prices retrieved successfully',
+      message: "Stock prices retrieved successfully",
       data: stockPrices,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   });
 
   app.get("/api/stocks/:symbol", (req, res) => {
     const symbol = req.params.symbol?.toUpperCase();
     if (!symbol || !stockPrices[symbol]) {
-      return res.status(404).json({ error: 'Stock not found' });
+      return res.status(404).json({ error: "Stock not found" });
     }
     res.json({
-      message: 'Stock data retrieved successfully',
-      data: stockPrices[symbol]
+      message: "Stock data retrieved successfully",
+      data: stockPrices[symbol],
     });
   });
 
@@ -122,40 +152,44 @@ export function createServer() {
     const { riskLevel, amount, preferences } = req.body;
 
     if (!riskLevel || !amount) {
-      return res.status(400).json({ error: 'Risk level and amount required' });
+      return res.status(400).json({ error: "Risk level and amount required" });
     }
 
     const allocations = {
       conservative: { stocks: 0.3, bonds: 0.6, cash: 0.1 },
       moderate: { stocks: 0.6, bonds: 0.3, cash: 0.1 },
-      aggressive: { stocks: 0.8, bonds: 0.15, cash: 0.05 }
+      aggressive: { stocks: 0.8, bonds: 0.15, cash: 0.05 },
     };
 
     const allocation = allocations[riskLevel] || allocations.moderate;
     const safeAmount = Math.max(Number(amount) || 100, 100);
 
-    const stocks = ['AAPL', 'NVDA', 'TSLA', 'GOOGL', 'MSFT'];
-    const portfolio = stocks.map(symbol => ({
+    const stocks = ["AAPL", "NVDA", "TSLA", "GOOGL", "MSFT"];
+    const portfolio = stocks.map((symbol) => ({
       symbol,
-      allocation: (allocation.stocks / stocks.length * 100).toFixed(1),
+      allocation: ((allocation.stocks / stocks.length) * 100).toFixed(1),
       amount: ((allocation.stocks / stocks.length) * safeAmount).toFixed(2),
       currentPrice: stockPrices[symbol]?.price || 185.42,
-      expectedReturn: (Math.random() * 20 + 5).toFixed(1) + '%'
+      expectedReturn: (Math.random() * 20 + 5).toFixed(1) + "%",
     }));
 
-    const expectedReturnValue = (allocation.stocks * 12 + allocation.bonds * 4 + allocation.cash * 1);
+    const expectedReturnValue =
+      allocation.stocks * 12 + allocation.bonds * 4 + allocation.cash * 1;
 
     res.json({
-      message: 'Portfolio optimized successfully',
+      message: "Portfolio optimized successfully",
       data: {
         totalValue: safeAmount,
-        expectedReturn: (expectedReturnValue || 10).toFixed(1) + '%',
-        riskScore: riskLevel === 'conservative' ? 3 : riskLevel === 'moderate' ? 6 : 9,
+        expectedReturn: (expectedReturnValue || 10).toFixed(1) + "%",
+        riskScore:
+          riskLevel === "conservative" ? 3 : riskLevel === "moderate" ? 6 : 9,
         allocations: allocation,
         recommendations: portfolio,
-        rebalanceDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
-        diversificationScore: 8.5
-      }
+        rebalanceDate: new Date(
+          Date.now() + 90 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+        diversificationScore: 8.5,
+      },
     });
   });
 
@@ -164,22 +198,25 @@ export function createServer() {
     const { symbol, direction, userId } = req.body;
 
     if (!symbol || !direction) {
-      return res.status(400).json({ error: 'Symbol and direction required' });
+      return res.status(400).json({ error: "Symbol and direction required" });
     }
 
     res.json({
-      message: 'Stock swipe recorded successfully',
+      message: "Stock swipe recorded successfully",
       data: {
         symbol,
         direction,
-        userId: userId || 'anonymous',
+        userId: userId || "anonymous",
         timestamp: new Date().toISOString(),
-        portfolioUpdate: direction === 'right' ? {
-          symbol,
-          allocation: '5%',
-          addedAt: new Date().toISOString()
-        } : null
-      }
+        portfolioUpdate:
+          direction === "right"
+            ? {
+                symbol,
+                allocation: "5%",
+                addedAt: new Date().toISOString(),
+              }
+            : null,
+      },
     });
   });
 
@@ -188,17 +225,21 @@ export function createServer() {
     const { message, sessionId } = req.body;
 
     if (!message) {
-      return res.status(400).json({ error: 'Message required' });
+      return res.status(400).json({ error: "Message required" });
     }
 
     const responses = {
-      'tech stock': "Based on current analysis, NVDA shows strong fundamentals with AI tailwinds.",
-      'diversify': "I recommend diversifying across sectors: 30% tech, 25% healthcare, 20% finance, 15% consumer goods, 10% bonds/cash.",
-      'expected return': "With your current allocation, expected annual return is 8-12%. Tech heavy weighting increases potential but adds volatility.",
-      'AAPL': "AAPL is currently trading at $185.50 (+2.4%). Strong buy signals: iOS 18 adoption, services growth, China recovery."
+      "tech stock":
+        "Based on current analysis, NVDA shows strong fundamentals with AI tailwinds.",
+      diversify:
+        "I recommend diversifying across sectors: 30% tech, 25% healthcare, 20% finance, 15% consumer goods, 10% bonds/cash.",
+      "expected return":
+        "With your current allocation, expected annual return is 8-12%. Tech heavy weighting increases potential but adds volatility.",
+      AAPL: "AAPL is currently trading at $185.50 (+2.4%). Strong buy signals: iOS 18 adoption, services growth, China recovery.",
     };
 
-    let response = "I'm here to help with investment decisions! Ask me about portfolio allocation, stock analysis, or market trends.";
+    let response =
+      "I'm here to help with investment decisions! Ask me about portfolio allocation, stock analysis, or market trends.";
 
     for (const [key, defaultResponse] of Object.entries(responses)) {
       if (message.toLowerCase().includes(key.toLowerCase())) {
@@ -208,11 +249,11 @@ export function createServer() {
     }
 
     res.json({
-      message: 'Chat response generated',
+      message: "Chat response generated",
       data: {
         response,
-        sessionId: sessionId || `session_${Date.now()}`
-      }
+        sessionId: sessionId || `session_${Date.now()}`,
+      },
     });
   });
 
@@ -221,7 +262,7 @@ export function createServer() {
     const { allocation, timeframe = 12 } = req.body;
 
     if (!allocation) {
-      return res.status(400).json({ error: 'Portfolio allocation required' });
+      return res.status(400).json({ error: "Portfolio allocation required" });
     }
 
     const monthlyData = [];
@@ -229,24 +270,24 @@ export function createServer() {
 
     for (let i = 0; i <= timeframe; i++) {
       const monthlyReturn = (Math.random() - 0.5) * 0.04 + 0.008; // -2% to +2% monthly, avg 0.8%
-      currentValue *= (1 + monthlyReturn);
+      currentValue *= 1 + monthlyReturn;
 
       monthlyData.push({
         month: i,
         value: Math.round(currentValue),
-        return: ((currentValue - 10000) / 10000 * 100).toFixed(2)
+        return: (((currentValue - 10000) / 10000) * 100).toFixed(2),
       });
     }
 
     res.json({
-      message: 'Portfolio simulation completed',
+      message: "Portfolio simulation completed",
       data: {
         simulation: monthlyData,
         finalValue: currentValue,
-        totalReturn: ((currentValue - 10000) / 10000 * 100).toFixed(2),
+        totalReturn: (((currentValue - 10000) / 10000) * 100).toFixed(2),
         volatility: (Math.random() * 15 + 10).toFixed(1),
-        sharpeRatio: (Math.random() * 2 + 0.5).toFixed(2)
-      }
+        sharpeRatio: (Math.random() * 2 + 0.5).toFixed(2),
+      },
     });
   });
 
@@ -255,16 +296,16 @@ export function createServer() {
     const { targetUserId } = req.body;
 
     if (!targetUserId) {
-      return res.status(400).json({ error: 'Target user ID required' });
+      return res.status(400).json({ error: "Target user ID required" });
     }
 
     res.json({
-      message: 'User followed successfully',
+      message: "User followed successfully",
       data: {
         isFollowing: true,
         targetUserId,
-        followedAt: new Date().toISOString()
-      }
+        followedAt: new Date().toISOString(),
+      },
     });
   });
 
@@ -272,16 +313,16 @@ export function createServer() {
     const { targetUserId } = req.body;
 
     if (!targetUserId) {
-      return res.status(400).json({ error: 'Target user ID required' });
+      return res.status(400).json({ error: "Target user ID required" });
     }
 
     res.json({
-      message: 'User unfollowed successfully',
+      message: "User unfollowed successfully",
       data: {
         isFollowing: false,
         targetUserId,
-        unfollowedAt: new Date().toISOString()
-      }
+        unfollowedAt: new Date().toISOString(),
+      },
     });
   });
 

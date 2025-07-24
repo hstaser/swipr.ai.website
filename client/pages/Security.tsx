@@ -38,7 +38,8 @@ export default function Security() {
               Security & Trust
             </h1>
             <p className="text-xl text-blue-100 leading-relaxed mb-8 max-w-3xl mx-auto">
-              Bank-grade security protecting your investments, data, and financial information with enterprise-level safeguards
+              Bank-grade security protecting your investments, data, and
+              financial information with enterprise-level safeguards
             </p>
             <div className="flex items-center justify-center space-x-6 text-blue-200">
               <div className="flex items-center space-x-2">
@@ -76,23 +77,36 @@ export default function Security() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-700 leading-relaxed mb-4 text-lg">
-                  At swipr.ai, we understand that trust is earned through actions, not words. That's why we've implemented the same level of security used by major financial institutions to protect your sensitive information and investments.
+                  At swipr.ai, we understand that trust is earned through
+                  actions, not words. That's why we've implemented the same
+                  level of security used by major financial institutions to
+                  protect your sensitive information and investments.
                 </p>
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-white rounded-lg">
                     <Lock className="h-8 w-8 text-emerald-600 mx-auto mb-2" />
-                    <div className="font-semibold text-slate-800">Encrypted</div>
-                    <div className="text-sm text-slate-600">End-to-end encryption</div>
+                    <div className="font-semibold text-slate-800">
+                      Encrypted
+                    </div>
+                    <div className="text-sm text-slate-600">
+                      End-to-end encryption
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg">
                     <Eye className="h-8 w-8 text-emerald-600 mx-auto mb-2" />
-                    <div className="font-semibold text-slate-800">Monitored</div>
-                    <div className="text-sm text-slate-600">24/7 threat detection</div>
+                    <div className="font-semibold text-slate-800">
+                      Monitored
+                    </div>
+                    <div className="text-sm text-slate-600">
+                      24/7 threat detection
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-white rounded-lg">
                     <FileCheck className="h-8 w-8 text-emerald-600 mx-auto mb-2" />
                     <div className="font-semibold text-slate-800">Audited</div>
-                    <div className="text-sm text-slate-600">Regular security audits</div>
+                    <div className="text-sm text-slate-600">
+                      Regular security audits
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -111,29 +125,49 @@ export default function Security() {
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-emerald-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-semibold text-slate-800">AES-256 Encryption</p>
-                      <p className="text-slate-600 text-sm">All data is encrypted using industry-standard 256-bit encryption both in transit and at rest</p>
+                      <p className="font-semibold text-slate-800">
+                        AES-256 Encryption
+                      </p>
+                      <p className="text-slate-600 text-sm">
+                        All data is encrypted using industry-standard 256-bit
+                        encryption both in transit and at rest
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-emerald-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-semibold text-slate-800">TLS 1.3 Connections</p>
-                      <p className="text-slate-600 text-sm">All communications between your device and our servers use the latest TLS encryption</p>
+                      <p className="font-semibold text-slate-800">
+                        TLS 1.3 Connections
+                      </p>
+                      <p className="text-slate-600 text-sm">
+                        All communications between your device and our servers
+                        use the latest TLS encryption
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-emerald-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-semibold text-slate-800">Zero-Knowledge Architecture</p>
-                      <p className="text-slate-600 text-sm">Sensitive financial data is encrypted with keys that only you control</p>
+                      <p className="font-semibold text-slate-800">
+                        Zero-Knowledge Architecture
+                      </p>
+                      <p className="text-slate-600 text-sm">
+                        Sensitive financial data is encrypted with keys that
+                        only you control
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-emerald-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-semibold text-slate-800">Secure Key Management</p>
-                      <p className="text-slate-600 text-sm">Encryption keys are managed using hardware security modules (HSMs)</p>
+                      <p className="font-semibold text-slate-800">
+                        Secure Key Management
+                      </p>
+                      <p className="text-slate-600 text-sm">
+                        Encryption keys are managed using hardware security
+                        modules (HSMs)
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -151,7 +185,9 @@ export default function Security() {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold text-slate-800 mb-3">Cloud Security</h4>
+                    <h4 className="font-semibold text-slate-800 mb-3">
+                      Cloud Security
+                    </h4>
                     <ul className="space-y-2 text-slate-600 text-sm">
                       <li>• AWS/Azure enterprise-grade infrastructure</li>
                       <li>• Multi-region data replication and backup</li>
@@ -161,7 +197,9 @@ export default function Security() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800 mb-3">Access Controls</h4>
+                    <h4 className="font-semibold text-slate-800 mb-3">
+                      Access Controls
+                    </h4>
                     <ul className="space-y-2 text-slate-600 text-sm">
                       <li>• Multi-factor authentication (MFA)</li>
                       <li>• Role-based access permissions</li>
@@ -189,14 +227,18 @@ export default function Security() {
                       <CheckCircle className="h-6 w-6 text-emerald-500" />
                       <div>
                         <div className="font-semibold">SOC 2 Type II</div>
-                        <div className="text-sm text-slate-600">Independently audited security controls</div>
+                        <div className="text-sm text-slate-600">
+                          Independently audited security controls
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
                       <CheckCircle className="h-6 w-6 text-emerald-500" />
                       <div>
                         <div className="font-semibold">PCI DSS Compliant</div>
-                        <div className="text-sm text-slate-600">Payment card data security standards</div>
+                        <div className="text-sm text-slate-600">
+                          Payment card data security standards
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -205,14 +247,18 @@ export default function Security() {
                       <CheckCircle className="h-6 w-6 text-emerald-500" />
                       <div>
                         <div className="font-semibold">GDPR Compliant</div>
-                        <div className="text-sm text-slate-600">European data protection standards</div>
+                        <div className="text-sm text-slate-600">
+                          European data protection standards
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
                       <CheckCircle className="h-6 w-6 text-emerald-500" />
                       <div>
                         <div className="font-semibold">ISO 27001</div>
-                        <div className="text-sm text-slate-600">Information security management</div>
+                        <div className="text-sm text-slate-600">
+                          Information security management
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -233,10 +279,14 @@ export default function Security() {
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <div className="flex items-center space-x-3 mb-3">
                       <Clock className="h-5 w-5 text-blue-600" />
-                      <span className="font-semibold text-blue-800">Real-time Threat Detection</span>
+                      <span className="font-semibold text-blue-800">
+                        Real-time Threat Detection
+                      </span>
                     </div>
                     <p className="text-blue-700 text-sm">
-                      Our security operations center monitors all systems 24/7 using AI-powered threat detection and automated response systems.
+                      Our security operations center monitors all systems 24/7
+                      using AI-powered threat detection and automated response
+                      systems.
                     </p>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -267,7 +317,8 @@ export default function Security() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-700 mb-4">
-                  Security is a shared responsibility. Here's how you can help protect your account:
+                  Security is a shared responsibility. Here's how you can help
+                  protect your account:
                 </p>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -312,22 +363,36 @@ export default function Security() {
               </CardHeader>
               <CardContent>
                 <p className="text-slate-700 mb-4">
-                  If you discover a security vulnerability or have security concerns, please contact our security team immediately:
+                  If you discover a security vulnerability or have security
+                  concerns, please contact our security team immediately:
                 </p>
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
                   <div className="flex items-center space-x-3 mb-2">
                     <AlertTriangle className="h-5 w-5 text-red-600" />
-                    <span className="font-semibold text-red-800">Security Emergency</span>
+                    <span className="font-semibold text-red-800">
+                      Security Emergency
+                    </span>
                   </div>
                   <p className="text-red-700 text-sm">
-                    For urgent security issues, please email us immediately. Do not post security vulnerabilities publicly.
+                    For urgent security issues, please email us immediately. Do
+                    not post security vulnerabilities publicly.
                   </p>
                 </div>
                 <div className="bg-slate-50 rounded-lg p-4 space-y-2 mb-4">
-                  <p><strong>Email:</strong> security@swipr.ai</p>
-                  <p><strong>Subject Line:</strong> [SECURITY] Brief description</p>
-                  <p><strong>Response Time:</strong> Within 2 hours for critical issues</p>
-                  <p><strong>Bug Bounty:</strong> We reward responsible disclosure</p>
+                  <p>
+                    <strong>Email:</strong> security@swipr.ai
+                  </p>
+                  <p>
+                    <strong>Subject Line:</strong> [SECURITY] Brief description
+                  </p>
+                  <p>
+                    <strong>Response Time:</strong> Within 2 hours for critical
+                    issues
+                  </p>
+                  <p>
+                    <strong>Bug Bounty:</strong> We reward responsible
+                    disclosure
+                  </p>
                 </div>
 
                 <div className="flex justify-center">
