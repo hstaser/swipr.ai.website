@@ -115,11 +115,22 @@ class ApiClient {
     } catch (error) {
       console.error('API request failed:', error);
 
-      // Provide more specific error messages for common issues
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        throw new Error('Network error. Please check your connection and try again.');
+      // Handle different types of network errors
+      if (error instanceof TypeError) {
+        if (error.message.includes('fetch') || error.message.includes('Failed to fetch')) {
+          throw new Error('Network error. Please check your connection and try again.');
+        }
+        if (error.message.includes('NetworkError')) {
+          throw new Error('Network error. Please check your connection and try again.');
+        }
       }
 
+      // Handle AbortError (request timeout)
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('Request timeout. Please try again.');
+      }
+
+      // Handle other fetch errors
       if (error instanceof Error && error.message.includes('Failed to fetch')) {
         throw new Error('Unable to connect to server. Please try again.');
       }
