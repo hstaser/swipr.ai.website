@@ -889,11 +889,36 @@ export default function Index() {
                     </li>
                   </ul>
                   <Button
-                    onClick={() =>
-                      document
-                        .getElementById("simulator")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
+                    onClick={async () => {
+                      try {
+                        // Start portfolio simulation
+                        await handlePortfolioOptimization();
+
+                        // Track simulator usage
+                        await apiClient.trackEvent('simulator_accessed', {
+                          source: 'features_section',
+                          riskLevel: riskLevel,
+                          amount: investmentAmount
+                        });
+
+                        // Navigate to simulator
+                        document
+                          .getElementById("simulator")
+                          ?.scrollIntoView({ behavior: "smooth" });
+
+                        setMvpStep(2); // Go to simulation step
+
+                        setSuccessMessages(prev => ({
+                          ...prev,
+                          simulator: 'Portfolio simulation started!'
+                        }));
+                      } catch (error) {
+                        setErrors(prev => ({
+                          ...prev,
+                          simulator: 'Failed to start simulation'
+                        }));
+                      }
+                    }}
                     className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
                   >
                     Try Simulator
