@@ -1186,7 +1186,7 @@ export default function Index() {
                           AAPL
                         </div>
                         <div className="text-green-400 text-xs md:text-sm">
-                          +2.4%
+                          +0.29%
                         </div>
                       </div>
                       <div
@@ -1206,8 +1206,8 @@ export default function Index() {
                         <div className="text-white font-semibold text-sm md:text-base">
                           TSLA
                         </div>
-                        <div className="text-green-400 text-xs md:text-sm">
-                          +5.7%
+                        <div className="text-red-400 text-xs md:text-sm">
+                          -8.58%
                         </div>
                       </div>
                       <div
@@ -1228,7 +1228,7 @@ export default function Index() {
                           NVDA
                         </div>
                         <div className="text-green-400 text-xs md:text-sm">
-                          +3.3%
+                          +0.88%
                         </div>
                       </div>
                     </div>
