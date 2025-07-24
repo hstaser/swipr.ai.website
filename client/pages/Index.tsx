@@ -1956,7 +1956,7 @@ export default function Index() {
 
                     <div className="text-center">
                       <Button
-                        onClick={() => setMvpStep(6)}
+                        onClick={() => setMvpStep(5)}
                         className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold"
                       >
                         Ready to Get Started?
