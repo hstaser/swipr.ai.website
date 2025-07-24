@@ -329,11 +329,12 @@ class ApiClient {
 
   // Job application methods
   async submitJobApplication(applicationData: {
-    position: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    phone?: string;
-    coverLetter: string;
+    phone: string;
+    position: string;
+    coverLetter?: string;
     resumeUrl?: string;
   }): Promise<{ applicationId: string }> {
     const response = await this.request<{ applicationId: string }>('/jobs/apply', {
