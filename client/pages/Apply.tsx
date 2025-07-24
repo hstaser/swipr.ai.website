@@ -161,6 +161,14 @@ export default function Apply() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Step 1: Move to review step
+    if (currentStep === 1) {
+      setCurrentStep(2);
+      return;
+    }
+
+    // Step 2: Submit application
     setIsSubmitting(true);
     setSubmitMessage("");
 
