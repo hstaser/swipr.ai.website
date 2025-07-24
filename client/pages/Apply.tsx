@@ -190,8 +190,7 @@ ${selectedPosition?.skills.map((skill) => `• ${skill}`).join("\n") || ""}
 I am excited to contribute to swipr.ai's mission of democratizing intelligent investing through innovative technology and look forward to discussing how my skills can help build the future of investment platforms.`;
 
       const applicationData = {
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
+        name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
         email: formData.email.trim(),
         phone: formData.phone.trim(),
         position: formData.position,
