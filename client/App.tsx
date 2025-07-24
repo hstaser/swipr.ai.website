@@ -10,8 +10,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import LearnMore from "./pages/LearnMore";
 import Apply from "./pages/Apply";
-
 import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Security from "./pages/Security";
 import AdminRouter from "./pages/AdminRouter";
 import NotFound from "./pages/NotFound";
 
