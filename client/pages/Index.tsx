@@ -2449,7 +2449,7 @@ export default function Index() {
                       <div>
                         <p className="font-semibold text-white">LinkedIn</p>
                         <a
-                          href="https://linkedin.com/company/swipr-ai"
+                          href="https://www.linkedin.com/company/swiprai/people/"
                           className="text-slate-200 hover:text-white transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
