@@ -206,16 +206,16 @@ const companyData = {
   NVDA: {
     name: "NVIDIA Corporation",
     ticker: "NVDA",
-    price: 432.81,
-    change: 13.65,
-    changePercent: 3.2,
+    price: 145.25,
+    change: 4.67,
+    changePercent: 3.3,
     logo: "https://logo.clearbit.com/nvidia.com",
     sector: "Technology",
     industry: "Semiconductors",
-    marketCap: "1.1T",
-    peRatio: 45.2,
-    dividendYield: 0.1,
-    yearPerformance: 234.5,
+    marketCap: "3.5T",
+    peRatio: 52.8,
+    dividendYield: 0.2,
+    yearPerformance: 178.5,
     description:
       "NVIDIA Corporation provides graphics, computing and networking solutions for gaming, professional markets, and data centers.",
     news: [
