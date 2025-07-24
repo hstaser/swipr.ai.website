@@ -243,17 +243,28 @@ class ApiClient {
       const eventType = eventTypeMap[event] || 'button_click';
 
       // Generate required fields for analytics schema
-      const analyticsData = {
+      const analyticsData: any = {
         eventType,
         page: properties.page || window.location.pathname || '/',
-        element: properties.element || event,
-        value: properties.value || properties.amount || properties.position || null,
         sessionId: properties.sessionId || `session_${Date.now()}`,
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
-        referrer: document.referrer || null,
         location: window.location.href
       };
+
+      // Only include optional fields if they have valid values
+      if (properties.element || event) {
+        analyticsData.element = properties.element || event;
+      }
+
+      const value = properties.value || properties.amount || properties.position;
+      if (value !== null && value !== undefined && value !== '') {
+        analyticsData.value = value;
+      }
+
+      if (document.referrer) {
+        analyticsData.referrer = document.referrer;
+      }
 
       await this.request('/analytics/track', {
         method: 'POST',
