@@ -2775,7 +2775,7 @@ export default function Index() {
               </p>
             </div>
 
-            <div className={`${comparedStocks.length > 1 ? 'w-full' : 'grid lg:grid-cols-2 gap-12 items-center'}`}>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Enhanced Interactive Chart */}
               <div className={`bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/20 ${comparedStocks.length > 1 ? 'w-full' : ''}`}>
                 <div className="mb-8">
