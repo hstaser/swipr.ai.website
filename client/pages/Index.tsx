@@ -502,9 +502,13 @@ export default function Index() {
   const getRiskMetrics = () => {
     const baseReturn = 13.5;
     const baseRisk = 12;
-    const expectedReturn = (baseReturn * (1 + riskLevel * 0.8)).toFixed(1);
-    const riskScore = (baseRisk * (1 + riskLevel * 0.6)).toFixed(1);
-    const diversification = (95 - riskLevel * 15).toFixed(0);
+
+    // Convert string risk level to number
+    const riskNumeric = riskLevel === 'conservative' ? 0.3 : riskLevel === 'moderate' ? 0.6 : 0.8;
+
+    const expectedReturn = (baseReturn * (1 + riskNumeric * 0.8)).toFixed(1);
+    const riskScore = (baseRisk * (1 + riskNumeric * 0.6)).toFixed(1);
+    const diversification = (95 - riskNumeric * 15).toFixed(0);
 
     return { expectedReturn, riskScore, diversification };
   };
