@@ -1528,8 +1528,13 @@ export default function Index() {
                           </Button>
                         </div>
                       </div>
-                      <div className="text-center mt-6 text-white/60">
-                        {currentStockIndex + 1} of {stockCards.length} stocks
+                      <div className="text-center mt-6 space-y-2">
+                        <div className="text-white/60 text-sm">
+                          {currentStockIndex + 1} of {stockCards.length} stocks
+                        </div>
+                        <div className="text-white/50 text-xs">
+                          💡 Tip: Choose stocks you'd actually want to invest in
+                        </div>
                       </div>
                     </div>
                   ) : (
