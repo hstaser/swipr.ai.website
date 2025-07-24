@@ -2164,33 +2164,85 @@ export default function Index() {
             {/* Portfolio Overview */}
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div className="bg-slate-800/50 rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-white mb-4">Portfolio Allocation</h3>
+                <h3 className="text-xl font-semibold text-white mb-4">Stock Allocation</h3>
                 <div className="space-y-4">
-                  {pieData.map((item, index) => (
+                  {stockAllocations.map((stock, index) => (
                     <div key={index} className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <div
-                          className="w-4 h-4 rounded-full"
-                          style={{ backgroundColor: item.color }}
-                        ></div>
-                        <span className="text-slate-200">{item.name}</span>
+                        {stock.logo ? (
+                          <div className="w-6 h-6 bg-white rounded flex items-center justify-center">
+                            <img src={stock.logo} alt={stock.ticker} className="w-4 h-4" />
+                          </div>
+                        ) : (
+                          <div
+                            className="w-6 h-6 rounded flex items-center justify-center text-xs font-bold text-white"
+                            style={{ backgroundColor: stock.color }}
+                          >
+                            $
+                          </div>
+                        )}
+                        <div>
+                          <div className="text-slate-200 font-medium">{stock.ticker}</div>
+                          {stock.ticker === "CASH" && (
+                            <div className="text-emerald-400 text-xs">Earn 4.8% overnight yield</div>
+                          )}
+                        </div>
                       </div>
                       <div className="flex items-center space-x-4">
-                        <span className="text-white font-semibold">{manualOverrides[item.name] ?? item.value}%</span>
+                        <span className="text-white font-semibold w-12 text-right">
+                          {manualOverrides[stock.ticker] ?? stock.value}%
+                        </span>
                         <input
                           type="range"
                           min="0"
                           max="100"
-                          value={manualOverrides[item.name] ?? item.value}
-                          onChange={(e) => setManualOverrides(prev => ({
-                            ...prev,
-                            [item.name]: parseInt(e.target.value)
-                          }))}
-                          className="w-20 h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer slider"
+                          value={manualOverrides[stock.ticker] ?? stock.value}
+                          onChange={(e) => {
+                            const newValue = parseInt(e.target.value);
+                            const currentTotal = stockAllocations.reduce((sum, s) =>
+                              sum + (manualOverrides[s.ticker] ?? s.value), 0
+                            );
+                            const currentStock = manualOverrides[stock.ticker] ?? stock.value;
+                            const newTotal = currentTotal - currentStock + newValue;
+
+                            if (newTotal <= 100) {
+                              setManualOverrides(prev => ({
+                                ...prev,
+                                [stock.ticker]: newValue
+                              }));
+                            }
+                          }}
+                          className="w-24 h-3 bg-slate-600 rounded-lg appearance-none cursor-pointer slider hover:bg-slate-500 transition-colors"
                         />
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Total Allocation Warning */}
+                <div className="mt-4 p-3 bg-slate-700/50 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-300">Total Allocation:</span>
+                    <span className={`font-bold text-lg ${
+                      (Object.keys(manualOverrides).length > 0
+                        ? stockAllocations.reduce((sum, stock) => sum + (manualOverrides[stock.ticker] ?? stock.value), 0)
+                        : stockAllocations.reduce((sum, stock) => sum + stock.value, 0)
+                      ) === 100 ? 'text-emerald-400' : 'text-orange-400'
+                    }`}>
+                      {Object.keys(manualOverrides).length > 0
+                        ? stockAllocations.reduce((sum, stock) => sum + (manualOverrides[stock.ticker] ?? stock.value), 0)
+                        : stockAllocations.reduce((sum, stock) => sum + stock.value, 0)
+                      }%
+                    </span>
+                  </div>
+                  {(Object.keys(manualOverrides).length > 0
+                    ? stockAllocations.reduce((sum, stock) => sum + (manualOverrides[stock.ticker] ?? stock.value), 0)
+                    : stockAllocations.reduce((sum, stock) => sum + stock.value, 0)
+                  ) !== 100 && (
+                    <div className="text-orange-400 text-sm mt-1">
+                      ⚠️ Portfolio must total 100% for optimal performance
+                    </div>
+                  )}
                 </div>
               </div>
 
