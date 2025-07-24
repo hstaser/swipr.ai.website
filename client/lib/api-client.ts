@@ -205,13 +205,34 @@ class ApiClient {
   // Analytics methods
   async trackEvent(event: string, properties: Record<string, any> = {}, userId?: string): Promise<void> {
     try {
+      // Validate input data before sending
+      if (!event || typeof event !== 'string') {
+        console.warn('Invalid event name for analytics:', event);
+        return;
+      }
+
+      // Sanitize properties to avoid serialization issues
+      const sanitizedProperties = JSON.parse(JSON.stringify(properties || {}));
+
       await this.request('/analytics/track', {
         method: 'POST',
-        body: JSON.stringify({ event, properties, userId }),
+        body: JSON.stringify({
+          event: event.trim(),
+          properties: sanitizedProperties,
+          userId: userId || undefined
+        }),
       });
     } catch (error) {
-      // Log analytics errors but don't throw them to avoid breaking user experience
-      console.warn('Analytics tracking failed:', error);
+      // Log detailed analytics errors but don't throw them
+      console.warn('Analytics tracking failed for event:', event, 'Error:', error);
+
+      // Try to provide more context about the error
+      if (error instanceof Error) {
+        console.warn('Error details:', {
+          message: error.message,
+          stack: error.stack?.substring(0, 200)
+        });
+      }
     }
   }
 
