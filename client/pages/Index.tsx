@@ -442,6 +442,17 @@ export default function Index() {
     };
 
     initializeData();
+
+    // Set up live stock price updates every 10 seconds
+    const stockUpdateInterval = setInterval(async () => {
+      try {
+        await loadStockPrices();
+      } catch (error) {
+        console.error('Failed to update stock prices:', error);
+      }
+    }, 10000);
+
+    return () => clearInterval(stockUpdateInterval);
   }, []);
 
   // Auto-optimize portfolio when in demo mode
