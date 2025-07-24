@@ -36,6 +36,7 @@ export const handleWaitlistSignup: RequestHandler = async (req, res) => {
       id: `WAITLIST-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       email: validatedData.email.toLowerCase(),
       name: validatedData.name || "",
+      interests: validatedData.interests || [],
       joinedAt: new Date().toISOString(),
     };
 
