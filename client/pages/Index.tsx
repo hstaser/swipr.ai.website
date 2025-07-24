@@ -557,7 +557,6 @@ export default function Index() {
     "Swipe Stocks",
     "Optimization",
     "Portfolio",
-    "Chat Bot",
     "Social",
     "Sign Up",
   ];
