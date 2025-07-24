@@ -80,12 +80,20 @@ class ApiClient {
 
     try {
       const response = await fetch(url, config);
+
+      // Check if response is actually JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        throw new Error(`Expected JSON but received ${contentType || 'unknown content type'}. Response: ${text.substring(0, 100)}...`);
+      }
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || `HTTP error! status: ${response.status}`);
       }
-      
+
       return data;
     } catch (error) {
       console.error('API request failed:', error);
