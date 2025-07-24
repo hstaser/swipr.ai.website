@@ -203,6 +203,8 @@ export default function Index() {
   }>({});
   const [portfolio, setPortfolio] = useState<typeof stockCards>([]);
   const [portfolioCopied, setPortfolioCopied] = useState(false);
+  const [showExecutionScreen, setShowExecutionScreen] = useState(false);
+  const [manualOverrides, setManualOverrides] = useState<Record<string, number>>({});
 
   // Chat and AI state
   const [chatMessages, setChatMessages] = useState([
