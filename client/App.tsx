@@ -11,8 +11,7 @@ import Index from "./pages/Index";
 import LearnMore from "./pages/LearnMore";
 import Apply from "./pages/Apply";
 import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Security from "./pages/Security";
+
 import AdminRouter from "./pages/AdminRouter";
 import NotFound from "./pages/NotFound";
 
@@ -29,8 +28,7 @@ const App = () => (
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/security" element={<Security />} />
+
           <Route path="/admin/*" element={<AdminRouter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
