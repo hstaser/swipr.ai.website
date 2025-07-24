@@ -302,6 +302,26 @@ const companyData = {
       },
     ],
   },
+  AMZN: {
+    name: "Amazon.com, Inc.",
+    ticker: "AMZN",
+    price: 158.72,
+    change: 2.35,
+    changePercent: 1.5,
+    logo: "https://logo.clearbit.com/amazon.com",
+    sector: "Consumer Discretionary",
+    industry: "Internet Retail",
+    marketCap: "1.7T",
+    peRatio: 38.4,
+    dividendYield: 0.0,
+    yearPerformance: 42.8,
+    description: "Amazon.com, Inc. engages in the retail sale of consumer products and subscriptions through online and physical stores.",
+    news: [
+      { title: "AWS Revenue Growth Accelerates", summary: "Cloud division shows strong enterprise adoption", time: "3 hours ago" },
+      { title: "Prime Day Records Broken", summary: "Biggest shopping event in company history", time: "1 day ago" },
+      { title: "Logistics Network Expansion", summary: "Opening 50 new fulfillment centers globally", time: "1 week ago" }
+    ]
+  }
 };
 
 // Reduced to 3 stocks for faster optimization
