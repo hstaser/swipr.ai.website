@@ -3019,7 +3019,7 @@ export default function Index() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 group cursor-pointer rounded-3xl">
+            <Card className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-lg border border-slate-600 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20 group cursor-pointer rounded-3xl h-full flex flex-col">
               <CardHeader>
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-blue-500/25">
                   <Briefcase className="h-8 w-8 text-white" />
@@ -3031,8 +3031,8 @@ export default function Index() {
                   Part-time • Remote
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-slate-200 mb-4 leading-relaxed">
+              <CardContent className="flex-1 flex flex-col">
+                <p className="text-slate-200 mb-4 leading-relaxed flex-1">
                   Help build scalable, high-performance systems that power our
                   investment platform. Use cutting-edge technology to help users
                   make better investment decisions.
