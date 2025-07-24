@@ -94,7 +94,7 @@ const generatePortfolioData = (riskLevel: number, timeframe: string = "1M") => {
         { month: "12PM", value: 10045, growth: 0.45 },
         { month: "1PM", value: 10035, growth: 0.35 },
         { month: "2PM", value: 10055, growth: 0.55 },
-        { month: "3PM", value: 10040, growth: 0.40 },
+        { month: "3PM", value: 10040, growth: 0.4 },
         { month: "4PM", value: 10065, growth: 0.65 },
       ];
       break;
@@ -3702,8 +3702,6 @@ export default function Index() {
                           ))}
                         </div>
                       </div>
-
-
                     </div>
                   );
                 })()}
