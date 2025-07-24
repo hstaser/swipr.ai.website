@@ -939,7 +939,35 @@ export default function Index() {
                       </span>
                     </li>
                   </ul>
-                  <Button className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105">
+                  <Button
+                    className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105"
+                    onClick={async () => {
+                      try {
+                        // Simulate fetching real analytics data
+                        await loadStockPrices();
+
+                        // Track analytics view
+                        await apiClient.trackEvent('analytics_viewed', {
+                          source: 'features_section',
+                          portfolioValue: portfolioValue || 11350
+                        });
+
+                        // Scroll to analytics section in demo
+                        document.getElementById('mvp-demo')?.scrollIntoView({ behavior: 'smooth' });
+                        setMvpStep(5); // Go to analytics demo step
+
+                        setSuccessMessages(prev => ({
+                          ...prev,
+                          analytics: 'Loading real-time analytics...'
+                        }));
+                      } catch (error) {
+                        setErrors(prev => ({
+                          ...prev,
+                          analytics: 'Failed to load analytics'
+                        }));
+                      }
+                    }}
+                  >
                     View Analytics
                     <div className="ml-2">
                       <Logo variant="transparent" size="sm" showText={false} />
