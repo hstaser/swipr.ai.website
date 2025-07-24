@@ -857,8 +857,7 @@ export default function Index() {
                         </div>
                       </div>
                       <div
-                        onClick={() => alert('TSLA: $248.73 (-1.8%)\nMarket Cap: $792B\nSwipes: 892 today\nAnalyst Rating: HOLD')}
-                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4 hover:scale-105 transition-transform cursor-pointer hover:bg-white/20"
+                        className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-4"
                       >
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-white rounded mb-2 flex items-center justify-center">
                           <img
