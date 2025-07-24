@@ -1882,7 +1882,7 @@ export default function Index() {
                   <div className="max-w-2xl mx-auto space-y-6">
                     <div className="bg-white/10 rounded-xl p-6">
                       <h4 className="text-xl font-semibold text-white mb-4">
-                        Friend's Portfolio
+                        Featured Investor
                       </h4>
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
