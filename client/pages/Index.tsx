@@ -420,13 +420,15 @@ export default function Index() {
         console.error('Failed to load stock prices:', error);
       }
 
-      // Track page view (non-blocking)
+      // Track page view (non-blocking) - temporarily disabled for debugging
       try {
         const token = localStorage.getItem('swipr_token');
-        await apiClient.trackEvent('page_viewed', {
-          page: 'home',
-          authenticated: !!token
-        });
+        // Disable analytics temporarily to test if it's causing issues
+        // await apiClient.trackEvent('page_viewed', {
+        //   page: 'home',
+        //   authenticated: !!token
+        // });
+        console.log('Analytics tracking skipped for debugging');
       } catch (error) {
         console.error('Failed to track page view:', error);
         // Don't show error to user for analytics failures
