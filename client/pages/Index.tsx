@@ -485,7 +485,7 @@ export default function Index() {
 
   // Portfolio and trading state
   const [portfolioData, setPortfolioData] = useState(
-    generatePortfolioData(0.5),
+    generatePortfolioData(0.5, "1M"),
   );
   const [userPortfolio, setUserPortfolio] = useState<any[]>([]);
   const [portfolioValue, setPortfolioValue] = useState(0);
