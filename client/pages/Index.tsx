@@ -1860,13 +1860,24 @@ export default function Index() {
               {/* Step 4: Social Features */}
               {mvpStep === 4 && (
                 <div className="flex-1 p-8">
-                  <div className="text-center mb-8">
-                    <h3 className="text-3xl font-bold text-white mb-4">
-                      Social Trading
-                    </h3>
-                    <p className="text-white/80">
-                      See what your network is investing in
-                    </p>
+                  <div className="flex items-center justify-between mb-8">
+                    <Button
+                      onClick={() => setMvpStep(3)}
+                      variant="outline"
+                      className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500"
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Back
+                    </Button>
+                    <div className="text-center flex-1">
+                      <h3 className="text-3xl font-bold text-white mb-4">
+                        Social Trading
+                      </h3>
+                      <p className="text-white/80">
+                        See what your network is investing in
+                      </p>
+                    </div>
+                    <div className="w-20"></div>
                   </div>
                   <div className="max-w-2xl mx-auto space-y-6">
                     <div className="bg-white/10 rounded-xl p-6">
