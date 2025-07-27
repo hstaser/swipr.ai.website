@@ -704,10 +704,14 @@ export default function Index() {
 
     // Only show suggestion occasionally (30% chance) to avoid being aggressive
     if (Math.random() < 0.3) {
+      let actionText = "optimize";
+      if (suggestionType === "research") actionText = "explore";
+      if (suggestionType === "cloning") actionText = "clone";
+
       setAiSuggestion({
         type: suggestionType,
         message,
-        action: suggestionType === "research" ? "explore" : "optimize",
+        action: actionText,
         visible: true,
       });
 
