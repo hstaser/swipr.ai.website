@@ -1763,8 +1763,15 @@ export default function Index() {
               </div>
               <div className="order-2">
                 <div className="relative">
+                  {!chatDemoActive && (
+                    <div className="absolute -top-2 -right-2 z-10">
+                      <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                        Click to try!
+                      </div>
+                    </div>
+                  )}
                   <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md">
-                    <div className="space-y-3 max-h-48 overflow-y-auto">
+                    <div className="space-y-3 max-h-96 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
