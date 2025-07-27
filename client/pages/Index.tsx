@@ -668,6 +668,12 @@ export default function Index() {
         "I notice you prefer tech stocks. Should I suggest some defensive plays?",
         "Your selections show good momentum focus. Consider some value adds?",
       ],
+      cloning: [
+        "Want to clone Nancy Pelosi's tech-heavy portfolio? It's up 47% YTD",
+        "Buffett's latest picks are available to clone - interested in value investing?",
+        "ARK Innovation portfolio clone available - perfect for growth focus",
+        "Michael Burry's contrarian plays - want to see his latest positions?",
+      ],
     };
 
     // Intelligent suggestion selection based on user behavior
