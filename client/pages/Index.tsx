@@ -1795,9 +1795,9 @@ export default function Index() {
                       </div>
                       <div className="flex justify-end">
                         <div
-                          className={`bg-blue-600 rounded-lg p-2 max-w-xs cursor-pointer transition-all duration-300 ${
+                          className={`relative cursor-pointer transition-all duration-300 ${
                             !chatDemoActive
-                              ? "hover:bg-blue-700 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-blue-400/50 ring-opacity-0 hover:ring-opacity-100"
+                              ? "transform hover:scale-110 animate-pulse"
                               : "opacity-75"
                           }`}
                           onClick={() => {
@@ -1808,9 +1808,32 @@ export default function Index() {
                             }
                           }}
                         >
-                          <div className="text-white text-sm">
-                            Clone Nancy Pelosi's portfolio into a queue
-                            {!chatDemoActive && <span className="ml-1 opacity-70">👆</span>}
+                          {!chatDemoActive && (
+                            <>
+                              {/* Massive glowing effect */}
+                              <div className="absolute -inset-3 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-2xl opacity-75 animate-ping"></div>
+                              <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl opacity-50 animate-pulse"></div>
+
+                              {/* Multiple sparkle effects */}
+                              <div className="absolute -top-2 -left-2 text-2xl animate-spin">✨</div>
+                              <div className="absolute -top-2 -right-2 text-2xl animate-bounce">🔥</div>
+                              <div className="absolute -bottom-2 -left-2 text-2xl animate-pulse">⭐</div>
+                              <div className="absolute -bottom-2 -right-2 text-2xl animate-ping">💫</div>
+                            </>
+                          )}
+
+                          <div className={`bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 max-w-xs relative z-10 border-2 ${
+                            !chatDemoActive ? "border-cyan-400 shadow-2xl shadow-blue-500/50" : "border-blue-400"
+                          }`}>
+                            <div className={`text-white font-bold ${!chatDemoActive ? "text-lg" : "text-sm"}`}>
+                              {!chatDemoActive && <span className="text-2xl mr-2">🚀</span>}
+                              Clone Nancy Pelosi's portfolio into a queue
+                              {!chatDemoActive && (
+                                <div className="text-cyan-300 text-sm mt-2 animate-bounce">
+                                  ← CLICK HERE TO TRY! →
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
