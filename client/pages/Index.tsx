@@ -1766,14 +1766,12 @@ export default function Index() {
                   {!chatDemoActive && (
                     <div className="absolute -top-2 -right-2 z-10">
                       <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                        Try the demo!
+                        Click to try!
                       </div>
                     </div>
                   )}
                   <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md">
-
-                    {/* Chat Messages */}
-                    <div className="space-y-3 max-h-60 overflow-y-auto mb-4">
+                    <div className="space-y-3 max-h-96 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
@@ -1781,16 +1779,27 @@ export default function Index() {
                           </div>
                         </div>
                       </div>
-
-                      {chatDemoActive && (
-                        <div className="flex justify-end">
-                          <div className="bg-blue-600 rounded-lg p-2 max-w-xs">
-                            <div className="text-white text-sm">
-                              Clone Nancy Pelosi's portfolio into a queue
-                            </div>
+                      <div className="flex justify-end">
+                        <div
+                          className={`bg-blue-600 rounded-lg p-2 max-w-xs cursor-pointer transition-all duration-300 ${
+                            !chatDemoActive
+                              ? "hover:bg-blue-700 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-blue-400/50 ring-opacity-0 hover:ring-opacity-100"
+                              : "opacity-75"
+                          }`}
+                          onClick={() => {
+                            if (!chatDemoActive) {
+                              setChatDemoActive(true);
+                              setClonedPortfolios(prev => [...prev, "Nancy Pelosi"]);
+                              setTimeout(() => setShowPortfolioCloner(true), 1000);
+                            }
+                          }}
+                        >
+                          <div className="text-white text-sm">
+                            Clone Nancy Pelosi's portfolio into a queue
+                            {!chatDemoActive && <span className="ml-1 opacity-70">👆</span>}
                           </div>
                         </div>
-                      )}
+                      </div>
 
                       {chatDemoActive && (
                         <div className="flex justify-start">
@@ -1919,9 +1928,9 @@ export default function Index() {
                   </ul>
                   <Button
                     onClick={() => {
-                      // Just show social features section - no need to go to demo
+                      setMvpStep(5);
                       document
-                        .getElementById("social-features")
+                        .getElementById("mvp-demo")
                         ?.scrollIntoView({ behavior: "smooth" });
                     }}
                     className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 hover:scale-105"
