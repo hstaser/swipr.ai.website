@@ -1766,7 +1766,7 @@ export default function Index() {
                   {!chatDemoActive && (
                     <div className="absolute -top-2 -right-2 z-10">
                       <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                        Click to try!
+                        Click the blue message!
                       </div>
                     </div>
                   )}
