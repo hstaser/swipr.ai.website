@@ -59,7 +59,8 @@ class ApiClient {
   private token: string | null = null;
 
   constructor() {
-    this.baseUrl = "/api";
+    // Python FastAPI backend - 100% Python, no JavaScript/Node.js
+    this.baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
     this.token = localStorage.getItem("swipr_token");
   }
 
