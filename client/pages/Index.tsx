@@ -1764,13 +1764,27 @@ export default function Index() {
               <div className="order-2">
                 <div className="relative">
                   {!chatDemoActive && (
-                    <div className="absolute -top-2 -right-2 z-10">
-                      <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                        Click the blue message!
+                    <>
+                      {/* Massive attention-grabbing overlay */}
+                      <div className="absolute inset-0 z-20 bg-gradient-to-r from-purple-600/30 via-blue-600/30 to-cyan-600/30 rounded-2xl border-4 border-cyan-400 animate-pulse shadow-2xl shadow-cyan-400/50">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-ping"></div>
                       </div>
-                    </div>
+
+                      {/* Giant flashing arrow and text */}
+                      <div className="absolute -top-16 -right-8 z-30 animate-bounce">
+                        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-2xl font-bold text-lg shadow-2xl border-2 border-white/50 animate-pulse">
+                          👆 CLICK THE BLUE MESSAGE! 👆
+                        </div>
+                        <div className="text-6xl absolute -bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
+                          ⬇️
+                        </div>
+                      </div>
+
+                      {/* Glowing border effect */}
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-3xl opacity-75 animate-pulse blur-sm"></div>
+                    </>
                   )}
-                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md">
+                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md relative z-10">
                     <div className="space-y-3 max-h-96 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
