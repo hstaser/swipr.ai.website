@@ -679,6 +679,21 @@ export default function Index() {
         step: currentStockIndex + 1,
       });
 
+      // Update user context for AI suggestions
+      setUserPortfolioContext((prev) => ({
+        ...prev,
+        swipeHistory: [...prev.swipeHistory, {
+          symbol: currentStock.symbol,
+          direction,
+          timestamp: Date.now(),
+        }],
+      }));
+
+      // Generate intelligent AI suggestions based on user behavior
+      setTimeout(() => {
+        generateAgenticSuggestion(currentStock, direction);
+      }, 1000);
+
       // Brief delay to show feedback before moving to next stock
       setTimeout(() => {
         setCurrentStockIndex((prev) => prev + 1);
