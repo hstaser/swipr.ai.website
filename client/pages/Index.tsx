@@ -1762,39 +1762,15 @@ export default function Index() {
                 </div>
               </div>
               <div className="order-2">
-                {!chatDemoActive && (
-                  <div className="mb-6 text-center">
-                    <div className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 text-white px-8 py-4 rounded-2xl font-bold text-xl shadow-2xl border-2 border-white/50 animate-pulse transform hover:scale-105 transition-all">
-                      🎯 TRY THE LIVE DEMO BELOW! 🎯
-                    </div>
-                    <div className="text-white mt-2 font-medium animate-bounce">
-                      Click the blue chat message to see portfolio cloning in action!
-                    </div>
-                  </div>
-                )}
                 <div className="relative">
                   {!chatDemoActive && (
-                    <>
-                      {/* Massive attention-grabbing overlay */}
-                      <div className="absolute inset-0 z-20 bg-gradient-to-r from-purple-600/30 via-blue-600/30 to-cyan-600/30 rounded-2xl border-4 border-cyan-400 animate-pulse shadow-2xl shadow-cyan-400/50">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-ping"></div>
+                    <div className="absolute -top-2 -right-2 z-10">
+                      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm px-3 py-1 rounded-full animate-pulse">
+                        Try the demo! Click below ↓
                       </div>
-
-                      {/* Giant flashing arrow and text */}
-                      <div className="absolute -top-16 -right-8 z-30 animate-bounce">
-                        <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-2xl font-bold text-lg shadow-2xl border-2 border-white/50 animate-pulse">
-                          👆 CLICK THE BLUE MESSAGE! 👆
-                        </div>
-                        <div className="text-6xl absolute -bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
-                          ⬇️
-                        </div>
-                      </div>
-
-                      {/* Glowing border effect */}
-                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-3xl opacity-75 animate-pulse blur-sm"></div>
-                    </>
+                    </div>
                   )}
-                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-8 backdrop-blur-sm border border-orange-400/30 max-w-lg relative z-10 transform scale-110">
+                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md">
                     <div className="space-y-3 max-h-96 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
@@ -1826,7 +1802,7 @@ export default function Index() {
 
                               {/* Multiple sparkle effects */}
                               <div className="absolute -top-2 -left-2 text-2xl animate-spin">✨</div>
-                              <div className="absolute -top-2 -right-2 text-2xl animate-bounce">🔥</div>
+                              <div className="absolute -top-2 -right-2 text-2xl animate-bounce">��</div>
                               <div className="absolute -bottom-2 -left-2 text-2xl animate-pulse">⭐</div>
                               <div className="absolute -bottom-2 -right-2 text-2xl animate-ping">💫</div>
                             </>
@@ -3950,7 +3926,7 @@ export default function Index() {
                         </div>
                         <div className="text-slate-400 text-sm">
                           Market Cap: {company.marketCap} �� P/E:{" "}
-                          {company.peRatio} ��� Div Yield: {company.dividendYield}
+                          {company.peRatio} • Div Yield: {company.dividendYield}
                           %
                         </div>
                       </div>
