@@ -26,12 +26,14 @@ Modern FastAPI backend replacing the Node.js version with improved performance a
 ### Manual Setup
 
 1. **Create virtual environment:**
+
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 2. **Install dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -56,6 +58,7 @@ docker run -p 8000:8000 swipr-api
 ## API Documentation
 
 Once running, visit:
+
 - **API Docs**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 - **Health Check**: http://localhost:8000/api/health
@@ -67,38 +70,48 @@ Once running, visit:
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
 
 ### Waitlist
+
 - `POST /api/waitlist` - Add user to waitlist
 
 ### Portfolio
+
 - `POST /api/portfolio/optimize` - Generate portfolio optimization
 - `POST /api/portfolio/simulate` - Simulate portfolio performance
 
 ### Stocks
+
 - `GET /api/stocks/prices` - Get all stock prices
 - `GET /api/stocks/{symbol}` - Get specific stock data
 - `POST /api/stocks/swipe` - Record stock swipe action
 
 ### Social
+
 - `POST /api/social/follow` - Follow a user
 - `POST /api/social/unfollow` - Unfollow a user
 
 ### Chat
+
 - `POST /api/chat` - AI chat interaction
 
 ### Analytics
+
 - `POST /api/analytics/track` - Track user events
 
 ### Contact
+
 - `POST /api/contact` - Send contact message
 
 ### Jobs
+
 - `POST /api/jobs/apply` - Submit job application
 
 ### General
+
 - `GET /api/health` - Health check
 - `GET /api/test` - Test endpoint
 
@@ -116,6 +129,7 @@ Once running, visit:
 The Python backend maintains 100% API compatibility with the original Node.js version. All endpoints, request/response formats, and functionality remain identical.
 
 To switch from Node.js to Python backend:
+
 1. Start this Python server on port 8000
 2. Update your frontend API client to point to the new server
 3. No frontend code changes required
