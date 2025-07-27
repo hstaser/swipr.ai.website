@@ -59,8 +59,21 @@ class ApiClient {
   private token: string | null = null;
 
   constructor() {
-    // Python FastAPI backend - 100% Python, no JavaScript/Node.js
-    this.baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+    // Detect embedded environment (Builder.io, iframe, etc.)
+    const isEmbedded = window.top !== window.self ||
+                      window.location.href.includes("reload=") ||
+                      !!window.FS;
+
+    if (isEmbedded) {
+      // In embedded environment, use relative API paths (fallback to demo data)
+      this.baseUrl = "/api";
+      console.debug("Embedded environment detected - using fallback API");
+    } else {
+      // In normal environment, use Python FastAPI backend
+      this.baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+      console.debug("Normal environment - using Python backend");
+    }
+
     this.token = localStorage.getItem("swipr_token");
   }
 
