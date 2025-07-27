@@ -1755,15 +1755,15 @@ export default function Index() {
                       <div className="flex justify-end">
                         <div className="bg-blue-600 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
-                            Create a queue of Apple competitors
+                            Clone Nancy Pelosi's portfolio into a queue
                           </div>
                         </div>
                       </div>
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
-                            ✅ Built "AAPL Competitors" queue: MSFT, GOOGL, AMZN, META, NFLX.
-                            Ready for swiping!
+                            🔥 Cloned "Pelosi Portfolio": NVDA, AAPL, GOOGL, MSFT, CRM.
+                            +47% YTD performance. Ready to swipe!
                           </div>
                         </div>
                       </div>
