@@ -1762,6 +1762,16 @@ export default function Index() {
                 </div>
               </div>
               <div className="order-2">
+                {!chatDemoActive && (
+                  <div className="mb-6 text-center">
+                    <div className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 text-white px-8 py-4 rounded-2xl font-bold text-xl shadow-2xl border-2 border-white/50 animate-pulse transform hover:scale-105 transition-all">
+                      🎯 TRY THE LIVE DEMO BELOW! 🎯
+                    </div>
+                    <div className="text-white mt-2 font-medium animate-bounce">
+                      Click the blue chat message to see portfolio cloning in action!
+                    </div>
+                  </div>
+                )}
                 <div className="relative">
                   {!chatDemoActive && (
                     <>
@@ -3940,7 +3950,7 @@ export default function Index() {
                         </div>
                         <div className="text-slate-400 text-sm">
                           Market Cap: {company.marketCap} �� P/E:{" "}
-                          {company.peRatio} • Div Yield: {company.dividendYield}
+                          {company.peRatio} ��� Div Yield: {company.dividendYield}
                           %
                         </div>
                       </div>
