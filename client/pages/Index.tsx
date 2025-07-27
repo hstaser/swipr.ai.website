@@ -1781,15 +1781,22 @@ export default function Index() {
                       </div>
                       <div className="flex justify-end">
                         <div
-                          className="bg-blue-600 rounded-lg p-2 max-w-xs cursor-pointer hover:bg-blue-700 transition-colors"
+                          className={`bg-blue-600 rounded-lg p-2 max-w-xs cursor-pointer transition-all duration-300 ${
+                            !chatDemoActive
+                              ? "hover:bg-blue-700 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-blue-400/50 ring-opacity-0 hover:ring-opacity-100"
+                              : "opacity-75"
+                          }`}
                           onClick={() => {
-                            setChatDemoActive(true);
-                            setClonedPortfolios(prev => [...prev, "Nancy Pelosi"]);
-                            setTimeout(() => setShowPortfolioCloner(true), 1000);
+                            if (!chatDemoActive) {
+                              setChatDemoActive(true);
+                              setClonedPortfolios(prev => [...prev, "Nancy Pelosi"]);
+                              setTimeout(() => setShowPortfolioCloner(true), 1000);
+                            }
                           }}
                         >
                           <div className="text-white text-sm">
                             Clone Nancy Pelosi's portfolio into a queue
+                            {!chatDemoActive && <span className="ml-1 opacity-70">👆</span>}
                           </div>
                         </div>
                       </div>
