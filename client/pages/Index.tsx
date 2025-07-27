@@ -1928,9 +1928,9 @@ export default function Index() {
                   </ul>
                   <Button
                     onClick={() => {
-                      setMvpStep(5);
+                      // Just show social features section - no need to go to demo
                       document
-                        .getElementById("mvp-demo")
+                        .getElementById("social-features")
                         ?.scrollIntoView({ behavior: "smooth" });
                     }}
                     className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 hover:scale-105"
