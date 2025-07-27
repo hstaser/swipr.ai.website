@@ -1749,22 +1749,22 @@ export default function Index() {
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
-                            Hi! I'm AlphaCue. Ask me about the market!
+                            Hi! I can research, build queues, and optimize your portfolio. What can I help with?
                           </div>
                         </div>
                       </div>
                       <div className="flex justify-end">
                         <div className="bg-blue-600 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
-                            What's the best tech stock right now?
+                            Create a queue of Apple competitors
                           </div>
                         </div>
                       </div>
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
-                            Based on current data, NVDA shows strong momentum
-                            with AI tailwinds.
+                            ✅ Built "AAPL Competitors" queue: MSFT, GOOGL, AMZN, META, NFLX.
+                            Ready for swiping!
                           </div>
                         </div>
                       </div>
