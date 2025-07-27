@@ -1773,20 +1773,87 @@ export default function Index() {
                         </div>
                       </div>
                       <div className="flex justify-end">
-                        <div className="bg-blue-600 rounded-lg p-2 max-w-xs">
+                        <div
+                          className="bg-blue-600 rounded-lg p-2 max-w-xs cursor-pointer hover:bg-blue-700 transition-colors"
+                          onClick={() => {
+                            setChatDemoActive(true);
+                            setClonedPortfolios(prev => [...prev, "Nancy Pelosi"]);
+                            setTimeout(() => setShowPortfolioCloner(true), 1000);
+                          }}
+                        >
                           <div className="text-white text-sm">
                             Clone Nancy Pelosi's portfolio into a queue
                           </div>
                         </div>
                       </div>
-                      <div className="flex justify-start">
-                        <div className="bg-white/20 rounded-lg p-2 max-w-xs">
-                          <div className="text-white text-sm">
-                            🔥 Cloned "Pelosi Portfolio": NVDA, AAPL, GOOGL, MSFT, CRM.
-                            +47% YTD performance. Ready to swipe!
+
+                      {chatDemoActive && (
+                        <div className="flex justify-start">
+                          <div className="bg-white/20 rounded-lg p-2 max-w-xs">
+                            <div className="text-white text-sm">
+                              🔥 Cloned "Pelosi Portfolio": NVDA, AAPL, GOOGL, MSFT, CRM.
+                              +47% YTD performance. Ready to swipe!
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )}
+
+                      {showPortfolioCloner && (
+                        <div className="mt-4 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg border border-purple-400/30">
+                          <div className="text-white text-sm font-medium mb-3">
+                            🚀 More portfolios to clone:
+                          </div>
+                          <div className="space-y-2">
+                            {[
+                              { name: "Warren Buffett", performance: "+12.3% YTD", focus: "Value", stocks: "BRK.B, AAPL, BAC, KO" },
+                              { name: "ARK Innovation", performance: "+28.9% YTD", focus: "Growth", stocks: "TSLA, COIN, ROKU, SQ" },
+                              { name: "Michael Burry", performance: "+15.7% YTD", focus: "Contrarian", stocks: "GEO, SCCO, CVX, BP" },
+                              { name: "Cathie Wood", performance: "+31.2% YTD", focus: "Disruptive", stocks: "NVDA, AMD, PLTR, RBLX" }
+                            ].map((portfolio) => (
+                              <div
+                                key={portfolio.name}
+                                className={`flex items-center justify-between p-2 rounded cursor-pointer transition-colors ${
+                                  clonedPortfolios.includes(portfolio.name)
+                                    ? "bg-green-600/30 border border-green-400/50"
+                                    : "bg-white/10 hover:bg-white/20"
+                                }`}
+                                onClick={() => {
+                                  if (!clonedPortfolios.includes(portfolio.name)) {
+                                    setClonedPortfolios(prev => [...prev, portfolio.name]);
+                                  }
+                                }}
+                              >
+                                <div className="flex-1">
+                                  <div className="text-white text-xs font-medium">{portfolio.name}</div>
+                                  <div className="text-white/60 text-xs">{portfolio.stocks}</div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="text-green-400 text-xs">{portfolio.performance}</div>
+                                  <div className="text-white/60 text-xs">{portfolio.focus}</div>
+                                </div>
+                                {clonedPortfolios.includes(portfolio.name) ? (
+                                  <div className="ml-2">
+                                    <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                                      <Check className="w-2 h-2 text-white" />
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="ml-2">
+                                    <div className="w-4 h-4 border border-white/40 rounded-full"></div>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                          {clonedPortfolios.length > 1 && (
+                            <div className="mt-3 text-center">
+                              <div className="text-cyan-300 text-xs">
+                                ✅ {clonedPortfolios.length} portfolios cloned! All queues ready for swiping.
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="mt-3 flex items-center p-2 bg-white/10 rounded-lg">
                       <input
