@@ -1845,13 +1845,23 @@ export default function Index() {
                               </div>
                             ))}
                           </div>
-                          {clonedPortfolios.length > 1 && (
-                            <div className="mt-3 text-center">
+                          <div className="mt-3 flex justify-between items-center">
+                            {clonedPortfolios.length > 1 && (
                               <div className="text-cyan-300 text-xs">
                                 ✅ {clonedPortfolios.length} portfolios cloned! All queues ready for swiping.
                               </div>
-                            </div>
-                          )}
+                            )}
+                            <button
+                              onClick={() => {
+                                setShowPortfolioCloner(false);
+                                setClonedPortfolios([]);
+                                setChatDemoActive(false);
+                              }}
+                              className="text-white/60 hover:text-white text-xs underline ml-auto"
+                            >
+                              Reset demo
+                            </button>
+                          </div>
                         </div>
                       )}
                     </div>
