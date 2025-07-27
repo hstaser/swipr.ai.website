@@ -2171,15 +2171,23 @@ export default function Index() {
                                 {aiSuggestion.action && (
                                   <button
                                     onClick={() => {
-                                      // Scroll to chat section for research requests
+                                      // Handle different action types
                                       if (aiSuggestion.action === "explore") {
                                         document.getElementById("social-features")?.scrollIntoView({ behavior: "smooth" });
+                                      } else if (aiSuggestion.action === "clone") {
+                                        // Simulate cloning a portfolio
+                                        setSuccessMessages(prev => ({
+                                          ...prev,
+                                          swipe: "🔥 Portfolio cloned! New queue ready for swiping"
+                                        }));
                                       }
                                       setAiSuggestion(prev => prev ? { ...prev, visible: false } : null);
                                     }}
                                     className="text-cyan-400 text-xs underline mt-1 hover:text-cyan-300 transition-colors"
                                   >
-                                    {aiSuggestion.action === "explore" ? "Let's explore →" : "Optimize my queue →"}
+                                    {aiSuggestion.action === "explore" ? "Let's explore →" :
+                                     aiSuggestion.action === "clone" ? "Clone portfolio →" :
+                                     "Optimize my queue →"}
                                   </button>
                                 )}
                               </div>
