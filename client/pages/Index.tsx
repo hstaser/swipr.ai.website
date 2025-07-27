@@ -1707,30 +1707,37 @@ export default function Index() {
                       <Brain className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="text-3xl font-bold text-white">
-                      AlphaCue (Coming Soon)
+                      Your AI Investment Copilot
                     </h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    Ask our AI any market question. Built on real-time data and
-                    LLM intelligence to provide instant, accurate investment
-                    insights.
+                    Your personal investing assistant that doesn't just inform—it acts.
+                    Get research, build custom queues, and receive proactive portfolio guidance.
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
                       <span className="text-slate-200">
-                        Real-time market data
+                        Creates custom watchlists & research queues
                       </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
                       <span className="text-slate-200">
-                        Personalized recommendations
+                        Smart portfolio rebalancing suggestions
                       </span>
                     </li>
                     <li className="flex items-center">
                       <Check className="h-5 w-5 text-emerald-400 mr-3" />
-                      <span className="text-slate-200">24/7 availability</span>
+                      <span className="text-slate-200">
+                        Risk analysis & stress testing
+                      </span>
+                    </li>
+                    <li className="flex items-center">
+                      <Check className="h-5 w-5 text-emerald-400 mr-3" />
+                      <span className="text-slate-200">
+                        Clone famous investor portfolios
+                      </span>
                     </li>
                   </ul>
                 </div>
