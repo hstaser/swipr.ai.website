@@ -1,5 +1,5 @@
 {
-  "name": "swipr-frontend-only",
+  "name": "swipr-python-backend",
   "private": true,
   "type": "module",
   "engines": {

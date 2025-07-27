@@ -137,6 +137,8 @@ class ApiClient {
         );
       }
 
+      // Python backend returns data directly, but some endpoints might wrap it in data property
+      // Return the data directly for Python backend compatibility
       return data;
     } catch (error) {
       clearTimeout(timeoutId);
@@ -309,7 +311,8 @@ class ApiClient {
     try {
       const response =
         await this.request<Record<string, StockData>>("/stocks/prices");
-      return response.data!;
+      // Python backend returns data directly, not wrapped in data property
+      return (response as any).data || response;
     } catch (error) {
       console.warn(
         "Failed to fetch stock prices from API, using fallback data:",
@@ -371,7 +374,8 @@ class ApiClient {
         method: "POST",
         body: JSON.stringify({ symbol, direction, userId }),
       });
-      return response.data!;
+      // Python backend returns data directly, not wrapped in data property
+      return response;
     } catch (error) {
       console.debug("Using fallback stock swipe response");
       // Fallback response for embedded environments
