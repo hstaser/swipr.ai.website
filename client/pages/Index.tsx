@@ -505,7 +505,11 @@ export default function Index() {
   const [userPortfolioContext, setUserPortfolioContext] = useState({
     riskTolerance: "moderate",
     sectorExposure: { tech: 0.4, healthcare: 0.2, finance: 0.2, other: 0.2 },
-    swipeHistory: [] as Array<{ symbol: string; direction: string; timestamp: number }>,
+    swipeHistory: [] as Array<{
+      symbol: string;
+      direction: string;
+      timestamp: number;
+    }>,
   });
 
   // Portfolio Cloning Interface States
@@ -651,7 +655,10 @@ export default function Index() {
   };
 
   // Agentic AI Suggestion Generator - Works behind the scenes
-  const generateAgenticSuggestion = (stock: any, direction: "left" | "right") => {
+  const generateAgenticSuggestion = (
+    stock: any,
+    direction: "left" | "right",
+  ) => {
     const suggestions = {
       rebalancing: [
         "Your tech exposure is getting high. Consider adding defensive stocks?",
@@ -683,7 +690,9 @@ export default function Index() {
 
     // Intelligent suggestion selection based on user behavior
     const recentSwipes = userPortfolioContext.swipeHistory.slice(-3);
-    const rightSwipes = recentSwipes.filter(s => s.direction === "right").length;
+    const rightSwipes = recentSwipes.filter(
+      (s) => s.direction === "right",
+    ).length;
     const totalSwipes = userPortfolioContext.swipeHistory.length;
 
     let suggestionType: keyof typeof suggestions;
@@ -692,19 +701,34 @@ export default function Index() {
     // Introduce cloning suggestions when user has swiped on several stocks
     if (totalSwipes >= 5 && Math.random() < 0.4) {
       suggestionType = "cloning";
-      message = suggestions.cloning[Math.floor(Math.random() * suggestions.cloning.length)];
+      message =
+        suggestions.cloning[
+          Math.floor(Math.random() * suggestions.cloning.length)
+        ];
     } else if (direction === "right" && rightSwipes >= 2) {
       suggestionType = "rebalancing";
-      message = suggestions.rebalancing[Math.floor(Math.random() * suggestions.rebalancing.length)];
+      message =
+        suggestions.rebalancing[
+          Math.floor(Math.random() * suggestions.rebalancing.length)
+        ];
     } else if (direction === "right") {
       suggestionType = "complementary";
-      message = suggestions.complementary[Math.floor(Math.random() * suggestions.complementary.length)];
+      message =
+        suggestions.complementary[
+          Math.floor(Math.random() * suggestions.complementary.length)
+        ];
     } else if (rightSwipes === 0 && recentSwipes.length >= 2) {
       suggestionType = "research";
-      message = suggestions.research[Math.floor(Math.random() * suggestions.research.length)];
+      message =
+        suggestions.research[
+          Math.floor(Math.random() * suggestions.research.length)
+        ];
     } else {
       suggestionType = "optimization";
-      message = suggestions.optimization[Math.floor(Math.random() * suggestions.optimization.length)];
+      message =
+        suggestions.optimization[
+          Math.floor(Math.random() * suggestions.optimization.length)
+        ];
     }
 
     // Only show suggestion occasionally (30% chance) to avoid being aggressive
@@ -722,7 +746,7 @@ export default function Index() {
 
       // Auto-hide after 4 seconds
       setTimeout(() => {
-        setAiSuggestion(prev => prev ? { ...prev, visible: false } : null);
+        setAiSuggestion((prev) => (prev ? { ...prev, visible: false } : null));
       }, 4000);
     }
   };
@@ -764,11 +788,14 @@ export default function Index() {
       // Update user context for AI suggestions
       setUserPortfolioContext((prev) => ({
         ...prev,
-        swipeHistory: [...prev.swipeHistory, {
-          symbol: currentStock.symbol,
-          direction,
-          timestamp: Date.now(),
-        }],
+        swipeHistory: [
+          ...prev.swipeHistory,
+          {
+            symbol: currentStock.symbol,
+            direction,
+            timestamp: Date.now(),
+          },
+        ],
       }));
 
       // Generate intelligent AI suggestions based on user behavior
@@ -1184,7 +1211,9 @@ export default function Index() {
               Swipe. Optimize. Grow.
             </p>
             <p className="text-xl md:text-2xl mb-12 text-slate-200 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
-              Smart investing made simple. Swipe to choose investments with confidence—your AI copilot handles optimization, research, and personalized guidance.
+              Smart investing made simple. Swipe to choose investments with
+              confidence—your AI copilot handles optimization, research, and
+              personalized guidance.
             </p>
 
             {/* Interactive Preview */}
@@ -1725,13 +1754,12 @@ export default function Index() {
                     <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-500 shadow-lg shadow-orange-500/25">
                       <Brain className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white">
-                      AlphaCue
-                    </h3>
+                    <h3 className="text-3xl font-bold text-white">AlphaCue</h3>
                   </div>
                   <p className="text-lg text-slate-200 leading-relaxed mb-6">
-                    Your personal investing assistant that doesn't just inform—it acts.
-                    Clone portfolios, build custom queues, and get intelligent guidance that moves with the market.
+                    Your personal investing assistant that doesn't just
+                    inform—it acts. Clone portfolios, build custom queues, and
+                    get intelligent guidance that moves with the market.
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-center">
@@ -1775,7 +1803,8 @@ export default function Index() {
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                           <div className="text-white text-sm">
-                            Hi! I can research, build queues, and optimize your portfolio. What can I help with?
+                            Hi! I can research, build queues, and optimize your
+                            portfolio. What can I help with?
                           </div>
                         </div>
                       </div>
@@ -1789,14 +1818,24 @@ export default function Index() {
                           onClick={() => {
                             if (!chatDemoActive) {
                               setChatDemoActive(true);
-                              setClonedPortfolios(prev => [...prev, "Nancy Pelosi"]);
-                              setTimeout(() => setShowPortfolioCloner(true), 1000);
+                              setClonedPortfolios((prev) => [
+                                ...prev,
+                                "Nancy Pelosi",
+                              ]);
+                              setTimeout(
+                                () => setShowPortfolioCloner(true),
+                                1000,
+                              );
                             }
                           }}
                         >
-                          <div className={`bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-3 max-w-xs border ${
-                            !chatDemoActive ? "border-cyan-400/70 shadow-lg shadow-blue-500/25" : "border-blue-400"
-                          }`}>
+                          <div
+                            className={`bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-3 max-w-xs border ${
+                              !chatDemoActive
+                                ? "border-cyan-400/70 shadow-lg shadow-blue-500/25"
+                                : "border-blue-400"
+                            }`}
+                          >
                             <div className="text-white text-sm">
                               Clone Nancy Pelosi's portfolio into a queue
                               {!chatDemoActive && (
@@ -1813,8 +1852,8 @@ export default function Index() {
                         <div className="flex justify-start">
                           <div className="bg-white/20 rounded-lg p-2 max-w-xs">
                             <div className="text-white text-sm">
-                              🔥 Cloned "Pelosi Portfolio": NVDA, AAPL, GOOGL, MSFT, CRM.
-                              +47% YTD performance. Ready to swipe!
+                              🔥 Cloned "Pelosi Portfolio": NVDA, AAPL, GOOGL,
+                              MSFT, CRM. +47% YTD performance. Ready to swipe!
                             </div>
                           </div>
                         </div>
@@ -1827,10 +1866,30 @@ export default function Index() {
                           </div>
                           <div className="space-y-2">
                             {[
-                              { name: "Warren Buffett", performance: "+12.3% YTD", focus: "Value", stocks: "BRK.B, AAPL, BAC, KO" },
-                              { name: "ARK Innovation", performance: "+28.9% YTD", focus: "Growth", stocks: "TSLA, COIN, ROKU, SQ" },
-                              { name: "Michael Burry", performance: "+15.7% YTD", focus: "Contrarian", stocks: "GEO, SCCO, CVX, BP" },
-                              { name: "Cathie Wood", performance: "+31.2% YTD", focus: "Disruptive", stocks: "NVDA, AMD, PLTR, RBLX" }
+                              {
+                                name: "Warren Buffett",
+                                performance: "+12.3% YTD",
+                                focus: "Value",
+                                stocks: "BRK.B, AAPL, BAC, KO",
+                              },
+                              {
+                                name: "ARK Innovation",
+                                performance: "+28.9% YTD",
+                                focus: "Growth",
+                                stocks: "TSLA, COIN, ROKU, SQ",
+                              },
+                              {
+                                name: "Michael Burry",
+                                performance: "+15.7% YTD",
+                                focus: "Contrarian",
+                                stocks: "GEO, SCCO, CVX, BP",
+                              },
+                              {
+                                name: "Cathie Wood",
+                                performance: "+31.2% YTD",
+                                focus: "Disruptive",
+                                stocks: "NVDA, AMD, PLTR, RBLX",
+                              },
                             ].map((portfolio) => (
                               <div
                                 key={portfolio.name}
@@ -1840,18 +1899,31 @@ export default function Index() {
                                     : "bg-white/10 hover:bg-white/20"
                                 }`}
                                 onClick={() => {
-                                  if (!clonedPortfolios.includes(portfolio.name)) {
-                                    setClonedPortfolios(prev => [...prev, portfolio.name]);
+                                  if (
+                                    !clonedPortfolios.includes(portfolio.name)
+                                  ) {
+                                    setClonedPortfolios((prev) => [
+                                      ...prev,
+                                      portfolio.name,
+                                    ]);
                                   }
                                 }}
                               >
                                 <div className="flex-1">
-                                  <div className="text-white text-xs font-medium">{portfolio.name}</div>
-                                  <div className="text-white/60 text-xs">{portfolio.stocks}</div>
+                                  <div className="text-white text-xs font-medium">
+                                    {portfolio.name}
+                                  </div>
+                                  <div className="text-white/60 text-xs">
+                                    {portfolio.stocks}
+                                  </div>
                                 </div>
                                 <div className="text-right">
-                                  <div className="text-green-400 text-xs">{portfolio.performance}</div>
-                                  <div className="text-white/60 text-xs">{portfolio.focus}</div>
+                                  <div className="text-green-400 text-xs">
+                                    {portfolio.performance}
+                                  </div>
+                                  <div className="text-white/60 text-xs">
+                                    {portfolio.focus}
+                                  </div>
                                 </div>
                                 {clonedPortfolios.includes(portfolio.name) ? (
                                   <div className="ml-2">
@@ -1870,7 +1942,8 @@ export default function Index() {
                           <div className="mt-3 flex justify-between items-center">
                             {clonedPortfolios.length > 1 && (
                               <div className="text-cyan-300 text-xs">
-                                ✅ {clonedPortfolios.length} portfolios cloned! All queues ready for swiping.
+                                ✅ {clonedPortfolios.length} portfolios cloned!
+                                All queues ready for swiping.
                               </div>
                             )}
                             <button
@@ -2263,12 +2336,18 @@ export default function Index() {
                           <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-cyan-400/30 rounded-lg p-3 mb-3 transition-all duration-500 ease-in-out">
                             <div className="flex items-start gap-2">
                               <div className="w-5 h-5 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center mt-0.5">
-                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <svg
+                                  className="w-3 h-3 text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
                                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                               </div>
                               <div className="flex-1">
-                                <p className="text-cyan-300 text-sm font-medium mb-1">AI Insight</p>
+                                <p className="text-cyan-300 text-sm font-medium mb-1">
+                                  AI Insight
+                                </p>
                                 <p className="text-white/90 text-xs leading-relaxed">
                                   {aiSuggestion.message}
                                 </p>
@@ -2277,26 +2356,43 @@ export default function Index() {
                                     onClick={() => {
                                       // Handle different action types
                                       if (aiSuggestion.action === "explore") {
-                                        document.getElementById("social-features")?.scrollIntoView({ behavior: "smooth" });
-                                      } else if (aiSuggestion.action === "clone") {
+                                        document
+                                          .getElementById("social-features")
+                                          ?.scrollIntoView({
+                                            behavior: "smooth",
+                                          });
+                                      } else if (
+                                        aiSuggestion.action === "clone"
+                                      ) {
                                         // Simulate cloning a portfolio
-                                        setSuccessMessages(prev => ({
+                                        setSuccessMessages((prev) => ({
                                           ...prev,
-                                          swipe: "🔥 Portfolio cloned! New queue ready for swiping"
+                                          swipe:
+                                            "🔥 Portfolio cloned! New queue ready for swiping",
                                         }));
                                       }
-                                      setAiSuggestion(prev => prev ? { ...prev, visible: false } : null);
+                                      setAiSuggestion((prev) =>
+                                        prev
+                                          ? { ...prev, visible: false }
+                                          : null,
+                                      );
                                     }}
                                     className="text-cyan-400 text-xs underline mt-1 hover:text-cyan-300 transition-colors"
                                   >
-                                    {aiSuggestion.action === "explore" ? "Let's explore →" :
-                                     aiSuggestion.action === "clone" ? "Clone portfolio →" :
-                                     "Optimize my queue →"}
+                                    {aiSuggestion.action === "explore"
+                                      ? "Let's explore →"
+                                      : aiSuggestion.action === "clone"
+                                        ? "Clone portfolio →"
+                                        : "Optimize my queue →"}
                                   </button>
                                 )}
                               </div>
                               <button
-                                onClick={() => setAiSuggestion(prev => prev ? { ...prev, visible: false } : null)}
+                                onClick={() =>
+                                  setAiSuggestion((prev) =>
+                                    prev ? { ...prev, visible: false } : null,
+                                  )
+                                }
                                 className="text-white/40 hover:text-white/60 transition-colors"
                               >
                                 <X className="w-4 h-4" />
