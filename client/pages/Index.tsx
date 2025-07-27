@@ -494,6 +494,19 @@ export default function Index() {
   // MVP Demo States
   const [mvpStep, setMvpStep] = useState(0);
   const [currentStockIndex, setCurrentStockIndex] = useState(0);
+
+  // Agentic AI States - Subtle background intelligence
+  const [aiSuggestion, setAiSuggestion] = useState<{
+    type: string;
+    message: string;
+    action?: string;
+    visible: boolean;
+  } | null>(null);
+  const [userPortfolioContext, setUserPortfolioContext] = useState({
+    riskTolerance: "moderate",
+    sectorExposure: { tech: 0.4, healthcare: 0.2, finance: 0.2, other: 0.2 },
+    swipeHistory: [] as Array<{ symbol: string; direction: string; timestamp: number }>,
+  });
   const [optimizationProgress, setOptimizationProgress] = useState(0);
   const [swipedStocks, setSwipedStocks] = useState<{
     [key: number]: "left" | "right";
@@ -3647,7 +3660,7 @@ export default function Index() {
                           </span>
                         </div>
                         <div className="text-slate-400 text-sm">
-                          Market Cap: {company.marketCap} • P/E:{" "}
+                          Market Cap: {company.marketCap} �� P/E:{" "}
                           {company.peRatio} • Div Yield: {company.dividendYield}
                           %
                         </div>
