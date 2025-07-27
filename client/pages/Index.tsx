@@ -507,6 +507,11 @@ export default function Index() {
     sectorExposure: { tech: 0.4, healthcare: 0.2, finance: 0.2, other: 0.2 },
     swipeHistory: [] as Array<{ symbol: string; direction: string; timestamp: number }>,
   });
+
+  // Portfolio Cloning Interface States
+  const [showPortfolioCloner, setShowPortfolioCloner] = useState(false);
+  const [clonedPortfolios, setClonedPortfolios] = useState<string[]>([]);
+  const [chatDemoActive, setChatDemoActive] = useState(false);
   const [optimizationProgress, setOptimizationProgress] = useState(0);
   const [swipedStocks, setSwipedStocks] = useState<{
     [key: number]: "left" | "right";
