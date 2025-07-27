@@ -24,6 +24,7 @@ chmod +x start.sh
 ```
 
 The backend will start on `http://localhost:8000` with:
+
 - **API Documentation**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/api/health
 - **Test Endpoint**: http://localhost:8000/api/test
@@ -53,7 +54,7 @@ The frontend will start on `http://localhost:5173` and automatically connect to 
 ✅ **All API Endpoints** - Same URLs and functionality  
 ✅ **Request/Response Formats** - No frontend changes needed  
 ✅ **Authentication Flow** - JWT tokens work identically  
-✅ **Frontend Code** - React app unchanged  
+✅ **Frontend Code** - React app unchanged
 
 ## 📁 Directory Structure
 
@@ -76,6 +77,7 @@ swipr.ai/
 ## 🛠 Backend Features (100% Python)
 
 ### Core Framework
+
 - **FastAPI**: Modern, fast Python web framework
 - **Pydantic**: Type validation and serialization
 - **Uvicorn**: ASGI server for high performance
@@ -87,36 +89,45 @@ swipr.ai/
 All endpoints maintain the same API contract as the original Node.js version:
 
 #### Authentication
+
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User authentication
 
 #### Waitlist Management
+
 - `POST /api/waitlist` - Add user to waitlist
 
 #### Portfolio Services
+
 - `POST /api/portfolio/optimize` - Generate optimal portfolio
 - `POST /api/portfolio/simulate` - Simulate portfolio performance
 
 #### Stock Data
+
 - `GET /api/stocks/prices` - Real-time stock prices
 - `GET /api/stocks/{symbol}` - Individual stock analysis
 - `POST /api/stocks/swipe` - Record stock selection
 
 #### Social Features
+
 - `POST /api/social/follow` - Follow users
 - `POST /api/social/unfollow` - Unfollow users
 
 #### AI Chat
+
 - `POST /api/chat` - AI investment advisor
 
 #### Analytics
+
 - `POST /api/analytics/track` - User behavior tracking
 
 #### Contact & Jobs
+
 - `POST /api/contact` - Contact form submissions
 - `POST /api/jobs/apply` - Job applications
 
 #### Utilities
+
 - `GET /api/health` - Health check
 - `GET /api/test` - Test connectivity
 - `GET /api/ping` - Simple ping endpoint
@@ -154,11 +165,13 @@ npm run build
 ## 🚀 Deployment Options
 
 ### 1. Local Development
+
 ```bash
 cd api && ./start.sh
 ```
 
 ### 2. Docker Deployment
+
 ```bash
 cd api
 docker build -t swipr-api .
@@ -166,6 +179,7 @@ docker run -p 8000:8000 swipr-api
 ```
 
 ### 3. Production Deployment
+
 ```bash
 # Install dependencies
 pip install -r api/requirements.txt
@@ -238,7 +252,7 @@ curl http://localhost:5173  # Frontend should proxy to Python backend
 🎉 **The entire backend is now 100% Python!**
 
 - ❌ No more Node.js server code
-- ❌ No more JavaScript backend files  
+- ❌ No more JavaScript backend files
 - ❌ No more Express.js dependencies
 - ✅ Pure Python FastAPI implementation
 - ✅ All functionality preserved

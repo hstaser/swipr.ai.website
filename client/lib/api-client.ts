@@ -60,9 +60,10 @@ class ApiClient {
 
   constructor() {
     // Detect embedded environment (Builder.io, iframe, etc.)
-    const isEmbedded = window.top !== window.self ||
-                      window.location.href.includes("reload=") ||
-                      !!window.FS;
+    const isEmbedded =
+      window.top !== window.self ||
+      window.location.href.includes("reload=") ||
+      !!window.FS;
 
     if (isEmbedded) {
       // In embedded environment, use relative API paths (fallback to demo data)
@@ -70,7 +71,8 @@ class ApiClient {
       console.debug("Embedded environment detected - using fallback API");
     } else {
       // In normal environment, use Python FastAPI backend
-      this.baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+      this.baseUrl =
+        import.meta.env.VITE_API_URL || "http://localhost:8000/api";
       console.debug("Normal environment - using Python backend");
     }
 
@@ -251,8 +253,14 @@ class ApiClient {
 
       return {
         totalValue: safeAmount,
-        expectedReturn: riskLevel === "conservative" ? "8.5%" : riskLevel === "moderate" ? "11.2%" : "14.8%",
-        riskScore: riskLevel === "conservative" ? 3 : riskLevel === "moderate" ? 6 : 9,
+        expectedReturn:
+          riskLevel === "conservative"
+            ? "8.5%"
+            : riskLevel === "moderate"
+              ? "11.2%"
+              : "14.8%",
+        riskScore:
+          riskLevel === "conservative" ? 3 : riskLevel === "moderate" ? 6 : 9,
         allocations: allocation,
         recommendations: [
           {
@@ -275,9 +283,11 @@ class ApiClient {
             amount: (safeAmount * 0.2).toFixed(2),
             currentPrice: 302.28,
             expectedReturn: "18.7%",
-          }
+          },
         ],
-        rebalanceDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+        rebalanceDate: new Date(
+          Date.now() + 90 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
         diversificationScore: 8.5,
       };
     }
@@ -376,12 +386,15 @@ class ApiClient {
           timestamp: new Date().toISOString(),
           action: direction === "right" ? "invest" : "pass",
         },
-        portfolioUpdate: direction === "right" ? {
-          symbol,
-          shares: 5,
-          amount: 1000,
-          price: 200,
-        } : null,
+        portfolioUpdate:
+          direction === "right"
+            ? {
+                symbol,
+                shares: 5,
+                amount: 1000,
+                price: 200,
+              }
+            : null,
       };
     }
   }
