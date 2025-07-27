@@ -679,11 +679,16 @@ export default function Index() {
     // Intelligent suggestion selection based on user behavior
     const recentSwipes = userPortfolioContext.swipeHistory.slice(-3);
     const rightSwipes = recentSwipes.filter(s => s.direction === "right").length;
+    const totalSwipes = userPortfolioContext.swipeHistory.length;
 
     let suggestionType: keyof typeof suggestions;
     let message: string;
 
-    if (direction === "right" && rightSwipes >= 2) {
+    // Introduce cloning suggestions when user has swiped on several stocks
+    if (totalSwipes >= 5 && Math.random() < 0.4) {
+      suggestionType = "cloning";
+      message = suggestions.cloning[Math.floor(Math.random() * suggestions.cloning.length)];
+    } else if (direction === "right" && rightSwipes >= 2) {
       suggestionType = "rebalancing";
       message = suggestions.rebalancing[Math.floor(Math.random() * suggestions.rebalancing.length)];
     } else if (direction === "right") {
