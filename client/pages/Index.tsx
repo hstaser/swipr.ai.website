@@ -1784,7 +1784,7 @@ export default function Index() {
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-3xl opacity-75 animate-pulse blur-sm"></div>
                     </>
                   )}
-                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-6 backdrop-blur-sm border border-orange-400/30 max-w-md relative z-10">
+                  <div className="bg-gradient-to-br from-orange-500/20 to-red-600/20 rounded-2xl p-8 backdrop-blur-sm border border-orange-400/30 max-w-lg relative z-10 transform scale-110">
                     <div className="space-y-3 max-h-96 overflow-y-auto">
                       <div className="flex justify-start">
                         <div className="bg-white/20 rounded-lg p-2 max-w-xs">
