@@ -1164,8 +1164,7 @@ export default function Index() {
               Swipe. Optimize. Grow.
             </p>
             <p className="text-xl md:text-2xl mb-12 text-slate-200 max-w-4xl mx-auto leading-relaxed animate-fade-in-slow">
-              Smart investing made simple. Choose investments with confidence
-              and let AI handle the optimization for you.
+              Smart investing made simple. Swipe to choose investments with confidence—your AI copilot handles optimization, research, and personalized guidance.
             </p>
 
             {/* Interactive Preview */}
