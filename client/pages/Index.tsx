@@ -645,6 +645,68 @@ export default function Index() {
     }
   };
 
+  // Agentic AI Suggestion Generator - Works behind the scenes
+  const generateAgenticSuggestion = (stock: any, direction: "left" | "right") => {
+    const suggestions = {
+      rebalancing: [
+        "Your tech exposure is getting high. Consider adding defensive stocks?",
+        "Great diversification move! Your portfolio balance is improving.",
+        "This sector is weighted heavily in your queue. Want to explore other opportunities?",
+      ],
+      complementary: [
+        `Since you invested in ${stock.symbol}, you might like its sector peers`,
+        `${stock.symbol} is high-beta. Consider pairing with something defensive?`,
+        `Nice pick! This complements your existing ${stock.sector} positions`,
+      ],
+      research: [
+        `Want me to find similar companies to ${stock.symbol}?`,
+        `I can create a watchlist of ${stock.sector} competitors`,
+        `${stock.symbol} has upcoming earnings - should I track similar plays?`,
+      ],
+      optimization: [
+        "Your queue has strong growth potential. Want to stress-test it?",
+        "I notice you prefer tech stocks. Should I suggest some defensive plays?",
+        "Your selections show good momentum focus. Consider some value adds?",
+      ],
+    };
+
+    // Intelligent suggestion selection based on user behavior
+    const recentSwipes = userPortfolioContext.swipeHistory.slice(-3);
+    const rightSwipes = recentSwipes.filter(s => s.direction === "right").length;
+
+    let suggestionType: keyof typeof suggestions;
+    let message: string;
+
+    if (direction === "right" && rightSwipes >= 2) {
+      suggestionType = "rebalancing";
+      message = suggestions.rebalancing[Math.floor(Math.random() * suggestions.rebalancing.length)];
+    } else if (direction === "right") {
+      suggestionType = "complementary";
+      message = suggestions.complementary[Math.floor(Math.random() * suggestions.complementary.length)];
+    } else if (rightSwipes === 0 && recentSwipes.length >= 2) {
+      suggestionType = "research";
+      message = suggestions.research[Math.floor(Math.random() * suggestions.research.length)];
+    } else {
+      suggestionType = "optimization";
+      message = suggestions.optimization[Math.floor(Math.random() * suggestions.optimization.length)];
+    }
+
+    // Only show suggestion occasionally (30% chance) to avoid being aggressive
+    if (Math.random() < 0.3) {
+      setAiSuggestion({
+        type: suggestionType,
+        message,
+        action: suggestionType === "research" ? "explore" : "optimize",
+        visible: true,
+      });
+
+      // Auto-hide after 4 seconds
+      setTimeout(() => {
+        setAiSuggestion(prev => prev ? { ...prev, visible: false } : null);
+      }, 4000);
+    }
+  };
+
   const handleStockSwipe = async (direction: "left" | "right") => {
     const currentStock = stockCards[currentStockIndex];
     if (!currentStock) return;
