@@ -63,7 +63,7 @@ class ApiClient {
     const isEmbedded =
       window.top !== window.self ||
       window.location.href.includes("reload=") ||
-      !!window.FS;
+      !!(window as any).FS;
 
     if (isEmbedded) {
       // In embedded environment, use relative API paths (fallback to demo data)
@@ -452,7 +452,7 @@ class ApiClient {
       const isEmbedded =
         window.top !== window.self ||
         window.location.href.includes("reload=") ||
-        !!window.FS;
+        !!(window as any).FS;
 
       if (isEmbedded) {
         console.debug(
@@ -573,7 +573,7 @@ class ApiClient {
       method: "POST",
       body: JSON.stringify({ password }),
     });
-    return response;
+    return response.data!;
   }
 }
 
