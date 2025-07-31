@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
+import { apiClient } from "../lib/api-client";
 
 interface AdminLoginProps {
   onLogin: (token: string) => void;
@@ -28,17 +29,13 @@ export default function AdminLogin({
     e.preventDefault();
     setIsLoading(true);
     setError("");
-
-    // Simple authentication - in production, this would be more secure
-    const validPasswords = ["henry2025", "swipr-admin", "admin-swipr-2025"];
-
-    if (validPasswords.includes(password)) {
-      localStorage.setItem("adminToken", "admin-swipr-2025");
-      onLogin("admin-swipr-2025");
-    } else {
-      setError("Invalid admin password. Please try again.");
+    try {
+      const data = await apiClient.adminLogin(password);
+      localStorage.setItem("adminToken", data.token);
+      onLogin(data.token);
+    } catch (err: any) {
+      setError(err.message || "Login failed");
     }
-
     setIsLoading(false);
   };
 

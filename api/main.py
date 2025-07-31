@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Any
 import json
 import re
 
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, HTTPException, Depends, status, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, EmailStr, validator
@@ -41,6 +41,7 @@ security = HTTPBearer()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 JWT_SECRET = os.getenv("JWT_SECRET", "your-secret-key-here")
 JWT_ALGORITHM = "HS256"
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "change-this-in-production")
 
 # In-memory storage (replace with real database in production)
 users: Dict[str, Dict] = {}
@@ -309,6 +310,13 @@ async def login(user_data: UserLogin):
         "token": token,
         "user": {"id": user["id"], "email": user["email"], "name": user["name"]},
     }
+
+@app.post("/api/admin/login")
+async def admin_login(password: str = Body(..., embed=True)):
+    if password != ADMIN_PASSWORD:
+        raise HTTPException(status_code=401, detail="Invalid admin password")
+    token = create_jwt_token({"role": "admin"})
+    return {"token": token}
 
 # ==================== WAITLIST ENDPOINTS ====================
 

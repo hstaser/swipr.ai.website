@@ -566,6 +566,15 @@ class ApiClient {
     const response = await this.request("/health");
     return response.data!;
   }
+
+  // Admin authentication
+  async adminLogin(password: string): Promise<{ token: string }> {
+    const response = await this.request<{ token: string }>("/admin/login", {
+      method: "POST",
+      body: JSON.stringify({ password }),
+    });
+    return response;
+  }
 }
 
 // Create singleton instance
