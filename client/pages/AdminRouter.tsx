@@ -8,7 +8,8 @@ export default function AdminRouter() {
 
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
-    setIsAuthenticated(token === "admin-swipr-2025");
+    // If a token exists, consider the user authenticated; backend will perform full validation
+    setIsAuthenticated(!!token);
   }, []);
 
   const handleLogin = (token: string) => {

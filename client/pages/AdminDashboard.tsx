@@ -136,7 +136,8 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Check authentication
     const token = localStorage.getItem("adminToken");
-    if (token === "admin-swipr-2025") {
+    // If a token exists, mark as authenticated; backend validation will confirm permissions
+    if (token) {
       setIsAuthenticated(true);
     }
   }, []);

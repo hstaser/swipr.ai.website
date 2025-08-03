@@ -223,7 +223,7 @@ class ApiClient {
       method: "POST",
       body: JSON.stringify({ email, name, interests }),
     });
-    return response.data!;
+    return (response as any).data || response;
   }
 
   // Portfolio methods

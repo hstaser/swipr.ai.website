@@ -906,7 +906,7 @@ export default function Index() {
       });
       trackWaitlistSignup();
     } catch (error: any) {
-      if (error.message?.includes("already on our waitlist")) {
+      if (error.message?.includes("409")) {
         setWaitlistMessage("You're already on the waitlist!");
       } else {
         setErrors((prev) => ({
