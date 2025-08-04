@@ -27,3 +27,4 @@ __pycache__/
 
 .config/
 api/service-account.json
+api/service-account.json
