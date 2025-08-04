@@ -25,3 +25,4 @@ dist-ssr
 __pycache__/
 
 .config/
+api/service-account.json
