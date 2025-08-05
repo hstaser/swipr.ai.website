@@ -265,6 +265,80 @@ async def startup_event():
 async def root():
     return {"message": "Welcome to swipr.ai API", "version": "2.0.0"}
 
+@app.get("/test_sync.html")
+async def test_sync_page():
+    """Serve the test sync HTML page"""
+    html_content = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Google Sheets Sync</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        #result { margin: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Test Google Sheets Sync</h1>
+    
+    <button onclick="testSync()">Test Sync to Google Sheets</button>
+    <button onclick="testDatabase()">Test Database Stats</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        async function testSync() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '🔄 Testing sync...';
+            
+            try {
+                const response = await fetch('/api/admin/sync-sheets', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `✅ Success: ${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultDiv.innerHTML = `❌ Error: ${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
+            }
+        }
+        
+        async function testDatabase() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '🔄 Testing database...';
+            
+            try {
+                const response = await fetch('/api/admin/stats', {
+                    method: 'GET'
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `📊 Database Stats: ${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultDiv.innerHTML = `❌ Error: ${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
+    """
+    from fastapi.responses import HTMLResponse
+    return HTMLResponse(content=html_content)
+
 @app.get("/api/ping")
 async def ping():
     return {"message": "Hello from Python FastAPI server v2.0!", "timestamp": get_current_timestamp()}
@@ -366,7 +440,13 @@ async def add_to_waitlist(entry: WaitlistEntry):
     
     # Sync to Google Sheets only in production
     if os.getenv("ENVIRONMENT") == "production":
+        print(f"🔄 Attempting to sync waitlist to Google Sheets...")
+        print(f"📊 Environment: {os.getenv('ENVIRONMENT')}")
+        print(f"📄 Service Account: {'Set' if os.getenv('GOOGLE_SERVICE_ACCOUNT_JSON') else 'Not set'}")
+        print(f"📊 Spreadsheet ID: {os.getenv('GOOGLE_SPREADSHEET_ID', 'Not set')}")
         asyncio.create_task(sheets_manager.sync_waitlist())
+    else:
+        print(f"⏭️ Skipping Google Sheets sync (ENVIRONMENT={os.getenv('ENVIRONMENT', 'not set')})")
     
     return {
         "message": "Successfully added to waitlist",
@@ -601,6 +681,7 @@ async def send_contact_message(contact: ContactMessage):
     
     # Sync to Google Sheets only in production
     if os.getenv("ENVIRONMENT") == "production":
+        print(f"🔄 Attempting to sync contact message to Google Sheets...")
         asyncio.create_task(sheets_manager.sync_contact_messages())
     
     return {
@@ -633,6 +714,7 @@ async def submit_job_application(application: JobApplication):
     
     # Sync to Google Sheets only in production
     if os.getenv("ENVIRONMENT") == "production":
+        print(f"🔄 Attempting to sync job application to Google Sheets...")
         asyncio.create_task(sheets_manager.sync_job_applications())
     
     return {
@@ -749,6 +831,9 @@ async def sync_to_google_sheets():
         else:
             raise HTTPException(status_code=500, detail="Failed to sync data to Google Sheets")
     except Exception as e:
+        print(f"❌ Sync error details: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Sync failed: {str(e)}")
 
 # ==================== HEALTH CHECK ENDPOINTS ====================

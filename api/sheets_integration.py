@@ -16,7 +16,6 @@ from database import (
 
 # Google Sheets configuration
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "service-account.json")
 SPREADSHEET_ID = os.getenv("GOOGLE_SPREADSHEET_ID")
 
 class GoogleSheetsManager:
@@ -28,23 +27,34 @@ class GoogleSheetsManager:
     async def authenticate(self):
         """Authenticate with Google Sheets API"""
         try:
-            if os.path.exists(SERVICE_ACCOUNT_FILE):
-                self.creds = Credentials.from_service_account_file(
-                    SERVICE_ACCOUNT_FILE, scopes=SCOPES
-                )
-            else:
-                # Try to use environment variable for service account JSON
-                service_account_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
-                if service_account_json:
-                    service_account_info = json.loads(service_account_json)
-                    self.creds = Credentials.from_service_account_info(
-                        service_account_info, scopes=SCOPES
-                    )
-                else:
-                    print("⚠️ No Google service account credentials found")
-                    return False
+            print("🔐 Attempting Google Sheets authentication...")
             
+            # Only use environment variable (no file fallback)
+            service_account_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+            if not service_account_json:
+                print("❌ GOOGLE_SERVICE_ACCOUNT_JSON environment variable not found")
+                print("💡 Set GOOGLE_SERVICE_ACCOUNT_JSON environment variable with your service account JSON")
+                return False
+                
+            print(f"✅ Found service account JSON ({len(service_account_json)} characters)")
+            
+            try:
+                service_account_info = json.loads(service_account_json)
+                print(f"✅ JSON parsed successfully")
+                print(f"   - Project ID: {service_account_info.get('project_id')}")
+                print(f"   - Client Email: {service_account_info.get('client_email')}")
+            except json.JSONDecodeError as e:
+                print(f"❌ Failed to parse service account JSON: {e}")
+                return False
+            
+            self.creds = Credentials.from_service_account_info(
+                service_account_info, scopes=SCOPES
+            )
+            print("✅ Credentials created successfully")
+            
+            print("🔐 Building Google Sheets service...")
             self.service = build('sheets', 'v4', credentials=self.creds)
+            print("✅ Google Sheets authentication successful")
             return True
         except Exception as e:
             print(f"❌ Google Sheets authentication failed: {e}")
@@ -133,7 +143,13 @@ class GoogleSheetsManager:
     async def sync_waitlist(self):
         """Sync waitlist data to Google Sheets"""
         if not self.spreadsheet_id or not self.service:
-            return False
+            print("❌ No spreadsheet ID or service available, attempting authentication...")
+            if not await self.authenticate():
+                print("❌ Authentication failed")
+                return False
+            if not self.spreadsheet_id:
+                print("❌ No spreadsheet ID available")
+                return False
             
         try:
             # Get all waitlist entries from MongoDB
@@ -143,9 +159,10 @@ class GoogleSheetsManager:
                 return False
                 
             cursor = waitlist_collection.find({})
-            waitlist_data = await cursor.to_list(length=None)
+            waitlist_data = await cursor.to_list(length=1000)  # Limit to 1000 entries to prevent timeout
             
             if not waitlist_data:
+                print("ℹ️ No waitlist data to sync")
                 return True
                 
             # Prepare data for sheets
@@ -164,12 +181,16 @@ class GoogleSheetsManager:
             range_name = 'Waitlist!A2:F1000'
             body = {'values': values}
             
-            self.service.spreadsheets().values().update(
-                spreadsheetId=self.spreadsheet_id,
-                range=range_name,
-                valueInputOption='RAW',
-                body=body
-            ).execute()
+            try:
+                self.service.spreadsheets().values().update(
+                    spreadsheetId=self.spreadsheet_id,
+                    range=range_name,
+                    valueInputOption='RAW',
+                    body=body
+                ).execute()
+            except HttpError as e:
+                print(f"❌ Google Sheets API error: {e}")
+                return False
             
             print(f"✅ Synced {len(values)} waitlist entries to Google Sheets")
             return True
@@ -180,7 +201,13 @@ class GoogleSheetsManager:
     async def sync_contact_messages(self):
         """Sync contact messages to Google Sheets"""
         if not self.spreadsheet_id or not self.service:
-            return False
+            print("❌ No spreadsheet ID or service available, attempting authentication...")
+            if not await self.authenticate():
+                print("❌ Authentication failed")
+                return False
+            if not self.spreadsheet_id:
+                print("❌ No spreadsheet ID available")
+                return False
             
         try:
             # Get all contact messages from MongoDB
@@ -190,9 +217,10 @@ class GoogleSheetsManager:
                 return False
                 
             cursor = contact_messages_collection.find({})
-            messages_data = await cursor.to_list(length=None)
+            messages_data = await cursor.to_list(length=1000)  # Limit to 1000 entries to prevent timeout
             
             if not messages_data:
+                print("ℹ️ No contact messages to sync")
                 return True
                 
             # Prepare data for sheets
@@ -210,12 +238,16 @@ class GoogleSheetsManager:
             range_name = 'Contact Messages!A2:E1000'
             body = {'values': values}
             
-            self.service.spreadsheets().values().update(
-                spreadsheetId=self.spreadsheet_id,
-                range=range_name,
-                valueInputOption='RAW',
-                body=body
-            ).execute()
+            try:
+                self.service.spreadsheets().values().update(
+                    spreadsheetId=self.spreadsheet_id,
+                    range=range_name,
+                    valueInputOption='RAW',
+                    body=body
+                ).execute()
+            except HttpError as e:
+                print(f"❌ Google Sheets API error: {e}")
+                return False
             
             print(f"✅ Synced {len(values)} contact messages to Google Sheets")
             return True
@@ -226,7 +258,13 @@ class GoogleSheetsManager:
     async def sync_job_applications(self):
         """Sync job applications to Google Sheets"""
         if not self.spreadsheet_id or not self.service:
-            return False
+            print("❌ No spreadsheet ID or service available, attempting authentication...")
+            if not await self.authenticate():
+                print("❌ Authentication failed")
+                return False
+            if not self.spreadsheet_id:
+                print("❌ No spreadsheet ID available")
+                return False
             
         try:
             # Get all job applications from MongoDB
@@ -236,9 +274,10 @@ class GoogleSheetsManager:
                 return False
                 
             cursor = job_applications_collection.find({})
-            applications_data = await cursor.to_list(length=None)
+            applications_data = await cursor.to_list(length=1000)  # Limit to 1000 entries to prevent timeout
             
             if not applications_data:
+                print("ℹ️ No job applications to sync")
                 return True
                 
             # Prepare data for sheets
@@ -259,12 +298,16 @@ class GoogleSheetsManager:
             range_name = 'Job Applications!A2:H1000'
             body = {'values': values}
             
-            self.service.spreadsheets().values().update(
-                spreadsheetId=self.spreadsheet_id,
-                range=range_name,
-                valueInputOption='RAW',
-                body=body
-            ).execute()
+            try:
+                self.service.spreadsheets().values().update(
+                    spreadsheetId=self.spreadsheet_id,
+                    range=range_name,
+                    valueInputOption='RAW',
+                    body=body
+                ).execute()
+            except HttpError as e:
+                print(f"❌ Google Sheets API error: {e}")
+                return False
             
             print(f"✅ Synced {len(values)} job applications to Google Sheets")
             return True
@@ -274,7 +317,17 @@ class GoogleSheetsManager:
 
     async def sync_all_data(self):
         """Sync all data to Google Sheets"""
+        print("🔄 Starting Google Sheets sync...")
+        
+        # Check if we have credentials
+        if not self.service:
+            print("🔐 No service available, attempting authentication...")
+            if not await self.authenticate():
+                print("❌ Authentication failed")
+                return False
+        
         if not self.spreadsheet_id:
+            print("📊 No spreadsheet ID, attempting to create new spreadsheet...")
             # Try to create a new spreadsheet
             await self.create_spreadsheet()
             
@@ -282,9 +335,14 @@ class GoogleSheetsManager:
             print("❌ No spreadsheet ID available")
             return False
             
+        print(f"📊 Using spreadsheet ID: {self.spreadsheet_id}")
+        
         success = True
+        print("🔄 Syncing waitlist...")
         success &= await self.sync_waitlist()
+        print("🔄 Syncing contact messages...")
         success &= await self.sync_contact_messages()
+        print("🔄 Syncing job applications...")
         success &= await self.sync_job_applications()
         
         if success:
